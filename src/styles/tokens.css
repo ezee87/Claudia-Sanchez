@@ -1,0 +1,47 @@
+:root {
+  /* Base palette */
+  --ivory: rgb(244, 242, 237);
+  --ink-base: rgb(22, 22, 22);
+  --olive: rgb(101, 112, 91);
+
+  /* Tokens contextuales: los capítulos oscuros los redefinen localmente */
+  --bg: rgb(244, 242, 237);
+  --ink: rgb(22, 22, 22);
+  --ink-soft: rgb(85, 85, 79);
+  --line: rgba(22, 22, 22, 0.16);
+  --line-strong: rgba(22, 22, 22, 0.4);
+  --accent: rgb(101, 112, 91);
+  --dark: rgb(20, 21, 18);
+
+  /* Type */
+  --font-display: 'Instrument Serif', 'Times New Roman', serif;
+  --font-sans: 'Instrument Sans Variable', 'Helvetica Neue', Arial, sans-serif;
+
+  /* Escala tipográfica compartida: seis roles, sin escalas locales arbitrarias. */
+  --fs-label: 0.6875rem;
+  --fs-small: 0.8125rem;
+  --fs-body: clamp(0.9375rem, 0.91rem + 0.14vw, 1.0625rem);
+  --fs-lead: clamp(1.0625rem, 0.99rem + 0.36vw, 1.25rem);
+  --fs-h3: clamp(1.2rem, 1.08rem + 0.55vw, 1.5625rem);
+  --fs-h2: clamp(1.9rem, 1.42rem + 2.35vw, 3.65rem);
+
+  /* Layout */
+  --gutter: clamp(20px, 5vw, 72px);
+  --max: 1440px;
+  --section-pad: clamp(40px, 4.5vw, 68px);
+  --head-gap: clamp(24px, 3vw, 40px);
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-io: cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+/* Capítulos oscuros: corte directo de superficie, sin degradados */
+[data-atmosphere='dark'],
+[data-theme='dark'] {
+  --bg: var(--dark);
+  --ink: rgb(241, 238, 230);
+  --ink-soft: rgb(169, 167, 158);
+  --line: rgba(241, 238, 230, 0.16);
+  --line-strong: rgba(241, 238, 230, 0.4);
+  --accent: rgb(163, 174, 150);
+  color: var(--ink);
+}

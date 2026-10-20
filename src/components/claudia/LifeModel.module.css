@@ -1,0 +1,116 @@
+.section {
+  background: var(--white);
+}
+
+.layout {
+  display: grid;
+  gap: clamp(28px, 4vw, 48px);
+}
+
+.copy {
+  display: grid;
+  align-content: start;
+  gap: clamp(22px, 2.4vw, 34px);
+}
+
+.head {
+  display: grid;
+  gap: 16px;
+}
+
+.support {
+  font-family: var(--c-serif);
+  font-size: clamp(1.3rem, 1.12rem + 0.55vw, 1.6rem);
+  font-style: italic;
+  font-weight: 500;
+  line-height: 1.25;
+  color: var(--navy);
+}
+
+.panel {
+  min-height: 10rem;
+  padding-top: 22px;
+  border-top: 1px solid var(--rule);
+}
+
+.instruction {
+  margin-bottom: 14px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  line-height: 1.45;
+  text-transform: uppercase;
+  color: var(--gold-deep);
+}
+
+.panelTitle {
+  margin-bottom: 14px;
+  font-family: var(--c-serif);
+  font-size: clamp(1.7rem, 1.3rem + 1.2vw, 2.35rem);
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  line-height: 1.05;
+  color: var(--navy);
+}
+
+.panelText {
+  max-width: 36ch;
+  font-family: var(--c-serif);
+  font-size: clamp(1.3rem, 1.12rem + 0.5vw, 1.6rem);
+  font-weight: 500;
+  line-height: 1.25;
+  color: var(--navy);
+}
+
+.panelSupport {
+  max-width: 30ch;
+  font-family: var(--c-serif);
+  font-size: clamp(1.3rem, 1.12rem + 0.5vw, 1.6rem);
+  font-style: italic;
+  font-weight: 500;
+  line-height: 1.25;
+  color: var(--violet);
+}
+
+.closing {
+  max-width: 100%;
+  margin-top: clamp(32px, 4vw, 56px);
+  padding-left: 22px;
+  border-left: 2px solid var(--gold);
+  font-family: var(--c-serif);
+  font-size: clamp(1.45rem, 1.12rem + 1.1vw, 2.05rem);
+  font-style: italic;
+  font-weight: 500;
+  line-height: 1.12;
+  color: var(--navy);
+  text-wrap: balance;
+}
+
+.desktopBreak {
+  display: none;
+}
+
+.action {
+  margin-top: clamp(24px, 3vw, 36px);
+}
+
+@media (min-width: 960px) {
+  .desktopBreak {
+    display: initial;
+  }
+
+  .closing {
+    font-size: clamp(1.45rem, 1.05rem + 0.9vw, 1.85rem);
+  }
+  .section {
+    min-height: calc(100svh - var(--c-header));
+    display: grid;
+    align-items: center;
+  }
+
+  .layout {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+    align-items: center;
+    gap: clamp(36px, 5vw, 84px);
+  }
+}

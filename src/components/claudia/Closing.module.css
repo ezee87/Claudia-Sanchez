@@ -1,0 +1,71 @@
+.section {
+  position: relative;
+  isolation: isolate;
+  overflow: clip;
+  background: var(--navy);
+}
+
+.curve {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  fill: none;
+  pointer-events: none;
+}
+
+.curve path {
+  stroke: var(--gold);
+  stroke-width: 1.25px;
+  stroke-opacity: 0.7;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 0;
+}
+
+.inner {
+  display: grid;
+  justify-items: start;
+  gap: clamp(20px, 2.5vw, 30px);
+}
+
+.head {
+  display: grid;
+  gap: 16px;
+}
+
+.head h2 {
+  max-width: 20ch;
+}
+
+.text {
+  max-width: 52ch;
+}
+
+.action {
+  width: 100%;
+}
+
+@media (min-width: 480px) {
+  .action {
+    width: auto;
+  }
+}
+
+@media (max-width: 599.98px) {
+  .section { padding-block: clamp(84px, 19vw, 108px); }
+  .inner { gap: 24px; }
+  .head { gap: 20px; }
+  .action { margin-top: 10px; }
+  .curve {
+    left: 32%;
+    width: 175%;
+    opacity: 0.55;
+  }
+}
+
+@media print {
+  .curve {
+    display: none;
+  }
+}

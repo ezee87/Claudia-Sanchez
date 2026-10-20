@@ -1,0 +1,116 @@
+/* Tokens y base de la experiencia de Claudia. Todo vive bajo .claudia-root para no filtrarse a otras propuestas. */
+@import '@fontsource-variable/cormorant-garamond/wght.css';
+@import '@fontsource-variable/cormorant-garamond/wght-italic.css';
+@import '@fontsource-variable/manrope/wght.css';
+
+.claudia-root {
+  --navy: #1b1a44;
+  --navy-deep: #12112f;
+  --gold: #d5a64a;
+  --gold-deep: #85601d;
+  --violet: #5d5c86;
+  --lavender: #e9e5f0;
+  --ivory: #f7f5f0;
+  --white: #fbfaf7;
+
+  --c-serif: 'Cormorant Garamond Variable', 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+  --c-sans: 'Manrope Variable', 'Manrope', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  --c-gutter: clamp(18px, 4vw, 56px);
+  --c-max: 1240px;
+  --c-pad: clamp(56px, 7vw, 104px);
+  --c-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --c-header: 56px;
+  --c-concept-offset: 0px;
+  --hero-nav-height: 68px;
+  --c-hero-title: clamp(3.35rem, 6.5vw, 6.75rem);
+  --c-section-title: clamp(2.25rem, 1.35rem + 2.65vw, 3.75rem);
+  --c-subsection-title: clamp(1.5rem, 1.15rem + 1vw, 2.25rem);
+  --c-intro: clamp(1rem, 0.96rem + 0.2vw, 1.1875rem);
+  --c-body: clamp(0.98rem, 0.95rem + 0.12vw, 1.0625rem);
+  --c-eyebrow: 0.7rem;
+  --c-quote: clamp(1.45rem, 1.1rem + 1.05vw, 2rem);
+  --c-meta: 0.75rem;
+
+  /* Contexto claro por defecto */
+  --fg: var(--navy);
+  --fg-soft: #4a4973;
+  --rule: rgba(27, 26, 68, 0.18);
+  --eyebrow: var(--gold-deep);
+  --accent: var(--navy);
+  --bg: var(--ivory);
+
+  min-height: 100svh;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--c-sans);
+  font-size: var(--c-body);
+  line-height: 1.6;
+  overflow-x: clip;
+}
+
+.claudia-root:has(.skip-link + [data-print='hide']) {
+  --c-concept-offset: 45px;
+}
+
+.claudia-root [data-tone='dark'] {
+  --fg: var(--ivory);
+  --fg-soft: rgba(247, 245, 240, 0.8);
+  --rule: rgba(247, 245, 240, 0.2);
+  --eyebrow: var(--gold);
+  --accent: var(--gold);
+  --bg: var(--navy);
+  background: var(--navy);
+  color: var(--fg);
+}
+
+.claudia-root [data-tone='white'] {
+  --bg: var(--white);
+  background: var(--white);
+}
+
+.claudia-root ::selection {
+  background: var(--gold);
+  color: var(--navy);
+}
+
+.claudia-root :focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+
+.claudia-root .skip-link {
+  background: var(--gold);
+  color: var(--navy);
+}
+
+@media (max-width: 959.98px) {
+  .claudia-root {
+    --c-header: 58px;
+    --hero-nav-height: 60px;
+  }
+}
+
+html:has(.claudia-root) {
+  scroll-padding-top: 80px;
+}
+
+@media (max-width: 959.98px) {
+  html:has(.claudia-root) {
+    scroll-padding-top: 80px;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html:has(.claudia-root) {
+    scroll-behavior: smooth;
+  }
+}
+
+@media print {
+  .claudia-root [data-tone='dark'] {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+}

@@ -1,0 +1,50 @@
+.frame {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  aspect-ratio: var(--ar, 4 / 5);
+  overflow: hidden;
+  background: #24235a;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 18%;
+}
+
+.placeholder {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(120% 80% at 70% 10%, rgba(213, 166, 74, 0.16), transparent 55%),
+    linear-gradient(165deg, #2c2b68 0%, #1b1a44 62%, #14133a 100%);
+}
+
+.arch {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  fill: rgba(247, 245, 240, 0.045);
+  stroke: rgba(213, 166, 74, 0.3);
+  stroke-width: 1px;
+}
+
+.arch * {
+  vector-effect: non-scaling-stroke;
+}
+.tag {
+  position: absolute;
+  left: clamp(16px, 3vw, 32px);
+  bottom: clamp(16px, 3vw, 32px);
+  padding: 8px 12px;
+  border: 1px dashed rgba(213, 166, 74, 0.7);
+  font-family: var(--c-sans);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  color: var(--gold);
+}

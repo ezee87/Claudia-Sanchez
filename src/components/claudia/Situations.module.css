@@ -1,0 +1,158 @@
+.section {
+  background: var(--ivory);
+  padding-block: clamp(64px, 8vw, 84px);
+}
+
+.head {
+  display: grid;
+  gap: clamp(16px, 2vw, 24px);
+  max-width: 900px;
+}
+
+.headMain {
+  display: grid;
+  gap: 16px;
+}
+
+.intro {
+  max-width: 68ch;
+}
+
+.listWrap {
+  position: relative;
+  margin-top: clamp(24px, 3vw, 36px);
+}
+
+.list {
+  display: grid;
+  gap: 0;
+  border-top: 1px solid var(--rule);
+}
+
+/* Línea conectora dorada (M03): solo en desktop; sin JS queda la regla estática. */
+.rail {
+  display: none;
+}
+
+.item {
+  position: relative;
+  display: grid;
+  gap: 10px;
+  padding: 22px 0 24px;
+  border-bottom: 1px solid var(--rule);
+}
+
+.number {
+  font-family: var(--c-serif);
+  font-size: clamp(2.75rem, 2.35rem + 1.5vw, 4.1rem);
+  font-weight: 500;
+  line-height: 0.9;
+  font-variant-numeric: lining-nums;
+  color: var(--gold);
+}
+
+.label {
+  margin-top: 2px;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  line-height: 1.4;
+  color: var(--navy);
+}
+
+.text {
+  max-width: 30ch;
+  font-family: var(--c-serif);
+  font-size: clamp(1.3rem, 1.15rem + 0.55vw, 1.65rem);
+  font-weight: 500;
+  line-height: 1.22;
+  color: var(--navy);
+  text-wrap: pretty;
+}
+
+.conclusion {
+  display: grid;
+  justify-items: start;
+  gap: clamp(16px, 1.6vw, 22px);
+  margin-top: clamp(22px, 2.6vw, 32px);
+}
+
+.closing {
+  max-width: none;
+  padding-left: 22px;
+  border-left: 2px solid var(--gold);
+  font-family: var(--c-serif);
+  font-size: var(--c-quote);
+  font-style: italic;
+  font-weight: 500;
+  line-height: 1.12;
+  color: var(--navy);
+  text-wrap: balance;
+}
+
+@media (max-width: 959.98px) {
+  .conclusion {
+    gap: 24px;
+    margin-top: 32px;
+  }
+}
+
+@media (min-width: 960px) {
+  .section {
+    min-height: calc(100svh - var(--c-header));
+    display: grid;
+    align-items: center;
+    padding-block: clamp(100px, 8vw, 116px);
+  }
+
+  .head {
+    gap: clamp(14px, 2vw, 24px);
+  }
+
+  .headMain h2 {
+    max-width: 27ch;
+  }
+
+  .list {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(20px, 3vw, 48px);
+  }
+
+  .rail {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: var(--gold);
+  }
+
+  .item {
+    padding: 18px 0 0;
+    border-bottom: 0;
+  }
+
+  .text {
+    max-width: 32ch;
+    font-size: clamp(1.02rem, 0.9rem + 0.42vw, 1.3rem);
+    line-height: 1.28;
+  }
+
+  .closing {
+    font-size: clamp(1.45rem, 1.05rem + 1vw, 1.8rem);
+    text-wrap: nowrap;
+  }
+
+  .item::before {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: 0;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--gold);
+  }
+}
+

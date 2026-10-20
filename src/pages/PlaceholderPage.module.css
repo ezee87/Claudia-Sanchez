@@ -1,0 +1,19 @@
+.page {
+  min-height: 100svh;
+  display: grid;
+  place-content: center;
+  gap: 12px;
+  padding: 24px;
+  text-align: center;
+}
+
+.page h1 {
+  font-family: var(--font-display);
+  font-size: var(--fs-h2);
+  font-weight: 400;
+  line-height: 1;
+}
+
+.page p {
+  color: var(--ink-soft);
+}
