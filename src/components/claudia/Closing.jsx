@@ -1,13 +1,18 @@
 import { useRef } from 'react';
 import { gsap, useGSAP, MQ } from '../../utils/gsap.js';
+import { BOOKING_LABEL, BOOKING_URL } from '../../data/claudia/booking.js';
+import { ClaudiaEditable, useClaudiaCmsSection } from '../../integration/eze-cms/ClaudiaCms.jsx';
+import { resolveCmsLink } from '../../integration/eze-cms/cmsLink.js';
 import BookingCTA from './BookingCTA.jsx';
 import SectionHead from './SectionHead.jsx';
 import type from './type.module.css';
 import styles from './Closing.module.css';
 
 /** 06 · Conversión. M01 editorial; una curva dorada fina que se dibuja una sola vez (eco del hero). */
-export default function Closing({ content }) {
+export default function Closing({ content: fallback }) {
   const root = useRef(null);
+  const { content } = useClaudiaCmsSection('closing', { ...fallback, ctaLabel: BOOKING_LABEL, ctaLink: null });
+  const ctaLink = resolveCmsLink(content.ctaLink, { label: content.ctaLabel, href: BOOKING_URL });
 
   useGSAP(
     () => {
@@ -39,12 +44,10 @@ export default function Closing({ content }) {
       </svg>
 
       <div className={`${type.container} ${styles.inner}`}>
-        <SectionHead eyebrow={content.eyebrow} title={content.title} id="reservar-title" className={styles.head} />
-        <p className={`${type.lead} ${styles.text}`} data-rv="fade">
-          {content.text}
-        </p>
+        <SectionHead eyebrow={content.eyebrow} title={content.title} id="reservar-title" className={styles.head} cmsSection="closing" />
+        <ClaudiaEditable sectionKey="closing" fieldPath="text"><p className={`${type.lead} ${styles.text}`} data-rv="fade">{content.text}</p></ClaudiaEditable>
         <div data-rv="fade" className={styles.action}>
-          <BookingCTA variant="ivory" size="lg" />
+          <ClaudiaEditable sectionKey="closing" fieldPath="ctaLink"><BookingCTA variant="ivory" size="lg" label={ctaLink.label} href={ctaLink.href} /></ClaudiaEditable>
         </div>
       </div>
     </section>

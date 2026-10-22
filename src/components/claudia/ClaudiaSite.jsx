@@ -1,12 +1,11 @@
-﻿import { useEffect } from 'react';
+import { useEffect } from 'react';
 import { ScrollTrigger } from '../../utils/gsap.js';
 import { usePrivateDocument } from '../../utils/usePrivateDocument.js';
 import { site } from '../../data/claudia/site.js';
-import { testimonials } from '../../data/claudia/testimonials.js';
 import SiteHeader from './SiteHeader.jsx';
 import Hero from './Hero.jsx';
 import Situations from './Situations.jsx';
-import Testimonials from './Testimonials.jsx';
+import Impact from './Impact.jsx';
 import Approach from './Approach.jsx';
 import LifeModel from './LifeModel.jsx';
 import About from './About.jsx';
@@ -32,7 +31,7 @@ function setMeta(name, content) {
 }
 
 /**
- * Landing independiente de Claudia Sánchez: /disena-tu-futuro.
+ * Landing independiente de Claudia Sanchez Urencio: /diseno-de-carrera.
  */
 export default function ClaudiaSite() {
   usePrivateDocument(site.meta.title);
@@ -74,7 +73,7 @@ export default function ClaudiaSite() {
       <main id="contenido">
         <Hero hero={site.hero} portrait={site.portrait} />
         <Situations content={site.situations} />
-        <Testimonials content={testimonials} />
+        <Impact content={site.impact} />
         <Approach content={site.approach} />
         <LifeModel content={site.life} />
         <About content={site.about} portrait={site.portrait} />

@@ -1,0 +1,61 @@
+{
+  "version": 1,
+  "site": { "key": "example-site", "name": "Sitio de ejemplo" },
+  "globals": [
+    {
+      "key": "navbar",
+      "name": "Navegación principal",
+      "published": true,
+      "initialContent": {
+        "brand": "Estudio Ejemplo",
+        "home": { "label": "Inicio", "href": "/" },
+        "services": { "label": "Servicios", "href": "/servicios" },
+        "booking": { "label": "Reservar", "href": "https://example.com/reservas" }
+      },
+      "fields": [
+        { "key": "brand", "path": "brand", "label": "Marca", "type": "string", "required": true },
+        { "key": "home", "path": "home", "label": "Inicio", "type": "link", "required": true },
+        { "key": "services", "path": "services", "label": "Servicios", "type": "link", "required": true },
+        { "key": "booking", "path": "booking", "label": "Reserva", "type": "link", "required": true }
+      ]
+    },
+    {
+      "key": "footer",
+      "name": "Pie de página",
+      "published": true,
+      "initialContent": {
+        "copyright": "© Estudio Ejemplo",
+        "email": { "label": "hola@example.com", "href": "mailto:hola@example.com" },
+        "phone": { "label": "+591 70000000", "href": "tel:+59170000000" }
+      },
+      "fields": [
+        { "key": "copyright", "path": "copyright", "label": "Copyright", "type": "string" },
+        { "key": "email", "path": "email", "label": "Correo", "type": "link", "required": true },
+        { "key": "phone", "path": "phone", "label": "Teléfono", "type": "link", "required": true }
+      ]
+    }
+  ],
+  "pages": [
+    {
+      "key": "services",
+      "name": "Servicios",
+      "route": "/servicios",
+      "slug": "servicios",
+      "sections": [
+        {
+          "key": "hero",
+          "name": "Presentación",
+          "type": "hero",
+          "initialContent": {
+            "title": "Página local",
+            "description": "El hero pertenece únicamente a esta página."
+          },
+          "fields": [
+            { "key": "title", "path": "title", "label": "Título", "type": "string" },
+            { "key": "description", "path": "description", "label": "Descripción", "type": "string", "multiline": true }
+          ]
+        }
+      ]
+    }
+  ]
+}

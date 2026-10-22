@@ -1,0 +1,78 @@
+{
+  "version": 1,
+  "site": { "key": "example-site", "name": "Sitio de ejemplo" },
+  "pages": [
+    {
+      "key": "home",
+      "name": "Inicio",
+      "route": "/",
+      "slug": "inicio",
+      "sections": [
+        {
+          "key": "navbar",
+          "name": "Navegación",
+          "type": "navbar",
+          "initialContent": {
+            "brand": "Estudio Ejemplo",
+            "services": { "label": "Servicios", "href": "/servicios" },
+            "contact": { "label": "Contacto", "href": "#contacto" }
+          },
+          "fields": [
+            { "key": "brand", "path": "brand", "label": "Marca", "type": "string" },
+            { "key": "services", "path": "services", "label": "Enlace a servicios", "type": "link", "required": true },
+            { "key": "contact", "path": "contact", "label": "Enlace de contacto", "type": "link", "required": true }
+          ]
+        },
+        {
+          "key": "hero",
+          "name": "Presentación",
+          "type": "hero",
+          "initialContent": {
+            "image": "/images/hero-local.webp",
+            "title": "Una propuesta clara desde el primer día",
+            "description": "Este contenido local permanece disponible durante la carga o ante un error remoto.",
+            "yearsOfExperience": 12,
+            "primaryCta": { "label": "Conocer servicios", "href": "/servicios" }
+          },
+          "fields": [
+            { "key": "image", "path": "image", "label": "Imagen principal", "type": "image", "required": true },
+            { "key": "title", "path": "title", "label": "Título", "type": "string" },
+            { "key": "description", "path": "description", "label": "Descripción", "type": "string", "multiline": true },
+            { "key": "years", "path": "yearsOfExperience", "label": "Años de experiencia", "type": "number" },
+            { "key": "primary-cta", "path": "primaryCta", "label": "Botón principal", "type": "link", "required": true }
+          ]
+        },
+        {
+          "key": "social-proof",
+          "name": "Prueba social",
+          "type": "testimonials",
+          "initialContent": {
+            "testimonials": [
+              {
+                "_id": "testimonial-inicial",
+                "name": "María",
+                "quote": "Una experiencia excelente.",
+                "photo": "/images/testimonial-local.webp"
+              }
+            ]
+          },
+          "fields": [
+            {
+              "key": "testimonials",
+              "path": "testimonials",
+              "label": "Testimonios",
+              "type": "collection",
+              "minItems": 1,
+              "maxItems": 12,
+              "itemFields": [
+                { "key": "name", "path": "name", "label": "Nombre", "type": "string", "required": true },
+                { "key": "quote", "path": "quote", "label": "Testimonio", "type": "string", "multiline": true, "required": true },
+                { "key": "photo", "path": "photo", "label": "Fotografía", "type": "image" }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

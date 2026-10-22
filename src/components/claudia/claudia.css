@@ -18,18 +18,19 @@
 
   --c-gutter: clamp(18px, 4vw, 56px);
   --c-max: 1240px;
-  --c-pad: clamp(56px, 7vw, 104px);
+  --c-content-max: 1160px;
+  --c-pad: clamp(50px, 4.5vw, 68px);
   --c-ease: cubic-bezier(0.22, 1, 0.36, 1);
   --c-header: 56px;
   --c-concept-offset: 0px;
   --hero-nav-height: 68px;
   --c-hero-title: clamp(3.35rem, 6.5vw, 6.75rem);
-  --c-section-title: clamp(2.25rem, 1.35rem + 2.65vw, 3.75rem);
-  --c-subsection-title: clamp(1.5rem, 1.15rem + 1vw, 2.25rem);
-  --c-intro: clamp(1rem, 0.96rem + 0.2vw, 1.1875rem);
-  --c-body: clamp(0.98rem, 0.95rem + 0.12vw, 1.0625rem);
+  --c-section-title: clamp(2.15rem, 2.75vw, 3rem);
+  --c-subsection-title: clamp(1.4rem, 1.4vw, 1.75rem);
+  --c-intro: clamp(1rem, .97rem + .14vw, 1.125rem);
+  --c-body: clamp(.96rem, .94rem + .1vw, 1.025rem);
   --c-eyebrow: 0.7rem;
-  --c-quote: clamp(1.45rem, 1.1rem + 1.05vw, 2rem);
+  --c-quote: clamp(1.4rem, 1.15rem + .75vw, 1.8rem);
   --c-meta: 0.75rem;
 
   /* Contexto claro por defecto */

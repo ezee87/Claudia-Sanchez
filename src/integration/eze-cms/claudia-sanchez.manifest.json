@@ -1,0 +1,3759 @@
+{
+  "version": 1,
+  "site": {
+    "key": "claudia-sanchez",
+    "name": "Claudia Sanchez Urencio"
+  },
+  "globals": [
+    {
+      "key": "institutional-navbar",
+      "name": "Navegación institucional",
+      "published": true,
+      "initialContent": {
+        "brand": {
+          "label": "Claudia Sanchez Urencio",
+          "href": "/"
+        },
+        "home": {
+          "label": "Inicio",
+          "href": "/"
+        },
+        "about": {
+          "label": "Sobre mí",
+          "href": "/#sobre-mi"
+        },
+        "servicesLabel": "Servicios",
+        "people": {
+          "label": "Personas",
+          "href": "/personas"
+        },
+        "business": {
+          "label": "Empresas",
+          "href": "/empresas"
+        },
+        "community": {
+          "label": "Comunidad y Experiencias",
+          "href": "/comunidad-y-experiencias"
+        },
+        "articles": {
+          "label": "Artículos",
+          "href": "/articulos"
+        },
+        "contact": {
+          "label": "Contacto",
+          "href": "/contacto"
+        },
+        "openLabel": "Abrir menú",
+        "closeLabel": "Cerrar menú",
+        "skipLabel": "Saltar al contenido"
+      },
+      "fields": [
+        {
+          "key": "brand",
+          "path": "brand",
+          "label": "brand",
+          "type": "link"
+        },
+        {
+          "key": "home",
+          "path": "home",
+          "label": "home",
+          "type": "link"
+        },
+        {
+          "key": "about",
+          "path": "about",
+          "label": "about",
+          "type": "link"
+        },
+        {
+          "key": "servicesLabel",
+          "path": "servicesLabel",
+          "label": "servicesLabel",
+          "type": "string",
+          "multiline": true
+        },
+        {
+          "key": "people",
+          "path": "people",
+          "label": "people",
+          "type": "link"
+        },
+        {
+          "key": "business",
+          "path": "business",
+          "label": "business",
+          "type": "link"
+        },
+        {
+          "key": "community",
+          "path": "community",
+          "label": "community",
+          "type": "link"
+        },
+        {
+          "key": "articles",
+          "path": "articles",
+          "label": "articles",
+          "type": "link"
+        },
+        {
+          "key": "contact",
+          "path": "contact",
+          "label": "contact",
+          "type": "link"
+        },
+        {
+          "key": "openLabel",
+          "path": "openLabel",
+          "label": "openLabel",
+          "type": "string",
+          "multiline": true
+        },
+        {
+          "key": "closeLabel",
+          "path": "closeLabel",
+          "label": "closeLabel",
+          "type": "string",
+          "multiline": true
+        },
+        {
+          "key": "skipLabel",
+          "path": "skipLabel",
+          "label": "skipLabel",
+          "type": "string",
+          "multiline": true
+        }
+      ]
+    },
+    {
+      "key": "institutional-footer",
+      "name": "Pie institucional",
+      "published": true,
+      "initialContent": {
+        "brand": "Claudia Sanchez Urencio",
+        "line": "Coaching ejecutivo, desarrollo de liderazgo y estrategia de carrera.",
+        "linkedin": {
+          "label": "LinkedIn",
+          "href": "https://www.linkedin.com/in/careertransitioncoachclau/"
+        }
+      },
+      "fields": [
+        {
+          "key": "brand",
+          "path": "brand",
+          "label": "Marca",
+          "type": "string",
+          "required": true
+        },
+        {
+          "key": "line",
+          "path": "line",
+          "label": "Descripción",
+          "type": "string",
+          "required": true
+        },
+        {
+          "key": "linkedin",
+          "path": "linkedin",
+          "label": "LinkedIn",
+          "type": "link",
+          "required": true
+        }
+      ]
+    }
+  ],
+  "pages": [
+    {
+      "key": "inicio",
+      "name": "Career Longevity",
+      "route": "/",
+      "slug": "inicio",
+      "sections": [
+        {
+          "key": "hero",
+          "name": "hero",
+          "type": "hero",
+          "initialContent": {
+            "eyebrow": "Claudia Sanchez Urencio",
+            "title": "Coaching ejecutivo, desarrollo de liderazgo y estrategia de carrera.",
+            "paragraph1": "Acompaño a líderes, ejecutivos y organizaciones en momentos de desarrollo, transformación y cambio.",
+            "paragraph2": "Combino más de 20 años de experiencia corporativa con una mirada estratégica y humana para ayudar a las personas y a las organizaciones a reconocer posibilidades, tomar mejores decisiones y avanzar con claridad.",
+            "cta": {
+              "label": "Conoce mi trabajo",
+              "href": "#servicios"
+            },
+            "image": "/assets/claudia-sanchez/claudia-bg-hero.png",
+            "alt": "Claudia Sanchez Urencio"
+          },
+          "fields": [
+            {
+              "key": "eyebrow",
+              "path": "eyebrow",
+              "label": "eyebrow",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "title",
+              "path": "title",
+              "label": "title",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "paragraph1",
+              "path": "paragraph1",
+              "label": "paragraph1",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "paragraph2",
+              "path": "paragraph2",
+              "label": "paragraph2",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "cta",
+              "path": "cta",
+              "label": "cta",
+              "type": "link"
+            },
+            {
+              "key": "image",
+              "path": "image",
+              "label": "image",
+              "type": "image"
+            },
+            {
+              "key": "alt",
+              "path": "alt",
+              "label": "alt",
+              "type": "string",
+              "multiline": true
+            }
+          ]
+        },
+        {
+          "key": "sobre-mi",
+          "name": "sobre-mi",
+          "type": "sobre-mi",
+          "initialContent": {
+            "title": "Una trayectoria construida desde el liderazgo, las personas y la transformación.",
+            "paragraph1": "Soy Claudia Sanchez Urencio, coach ejecutiva y especialista en desarrollo de liderazgo y estrategia de carrera.",
+            "paragraph2": "Mi trayectoria profesional comenzó dentro de grandes organizaciones, donde durante más de 20 años trabajé de cerca con líderes, equipos y áreas de negocio, acompañando decisiones relacionadas con talento, desarrollo organizacional y transformación.",
+            "paragraph3": "Ocupé posiciones de liderazgo en Recursos Humanos en compañías internacionales como Diageo y Kraft Foods, con responsabilidades regionales en América Latina.",
+            "paragraph4": "Esa experiencia me permitió conocer de primera mano los desafíos que enfrentan quienes lideran organizaciones, desarrollan equipos o atraviesan decisiones importantes en su carrera.",
+            "paragraph5": "Hoy combino esa perspectiva corporativa con mi formación en coaching para acompañar tanto a ejecutivos que buscan construir su siguiente etapa como a empresas que quieren fortalecer su liderazgo y desarrollar su talento.",
+            "credentials": [
+              {
+                "_id": "item-1",
+                "visible": 0,
+                "title": "Psicología Organizacional — Universidad Iberoamericana",
+                "status": "pendiente"
+              },
+              {
+                "_id": "item-2",
+                "visible": 0,
+                "title": "ACC — International Coaching Federation (ICF)",
+                "status": "pendiente"
+              },
+              {
+                "_id": "item-3",
+                "visible": 0,
+                "title": "Certified Master of Career Services — NCDA",
+                "status": "pendiente"
+              },
+              {
+                "_id": "item-4",
+                "visible": 0,
+                "title": "Transition Certified Coach — Coaching.com",
+                "status": "pendiente"
+              },
+              {
+                "_id": "item-5",
+                "visible": 0,
+                "title": "Máster en Diversidad Generacional — LUXONOMY",
+                "status": "pendiente"
+              }
+            ]
+          },
+          "fields": [
+            {
+              "key": "title",
+              "path": "title",
+              "label": "title",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "paragraph1",
+              "path": "paragraph1",
+              "label": "paragraph1",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "paragraph2",
+              "path": "paragraph2",
+              "label": "paragraph2",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "paragraph3",
+              "path": "paragraph3",
+              "label": "paragraph3",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "paragraph4",
+              "path": "paragraph4",
+              "label": "paragraph4",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "paragraph5",
+              "path": "paragraph5",
+              "label": "paragraph5",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "credentials",
+              "path": "credentials",
+              "label": "credentials",
+              "type": "collection",
+              "minItems": 0,
+              "maxItems": 200,
+              "itemFields": [
+                {
+                  "key": "visible",
+                  "path": "visible",
+                  "label": "visible",
+                  "type": "number"
+                },
+                {
+                  "key": "title",
+                  "path": "title",
+                  "label": "title",
+                  "type": "string",
+                  "multiline": true
+                },
+                {
+                  "key": "status",
+                  "path": "status",
+                  "label": "status",
+                  "type": "string",
+                  "multiline": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "servicios",
+          "name": "servicios",
+          "type": "servicios",
+          "initialContent": {
+            "title": "Tres formas de construir la siguiente etapa con estrategia.",
+            "items": [
+              {
+                "_id": "personas",
+                "visible": 1,
+                "eyebrow": "Personas",
+                "title": "Decisiones de carrera con perspectiva de largo plazo.",
+                "description": "Programas para transitar, anticipar o consolidar una nueva etapa profesional.",
+                "href": "/personas"
+              },
+              {
+                "_id": "empresas",
+                "visible": 1,
+                "eyebrow": "Empresas",
+                "title": "Continuidad, liderazgo y equipos que avanzan.",
+                "description": "Intervenciones para reducir fricción y acompañar transiciones de líderes senior.",
+                "href": "/empresas"
+              },
+              {
+                "_id": "comunidad",
+                "visible": 1,
+                "eyebrow": "Comunidad y Experiencias",
+                "title": "Perspectiva compartida para decisiones relevantes.",
+                "description": "Espacios de encuentro y experiencias grupales para ejecutivos y líderes que buscan ampliar su perspectiva, reflexionar sobre su siguiente etapa y explorar nuevas posibilidades. A través de conversaciones, aprendizaje compartido y experiencias inmersivas, propongo salir de la dinámica cotidiana para conectar con nuevas ideas, fortalecer relaciones y tomar decisiones con mayor claridad.",
+                "href": "/comunidad-y-experiencias"
+              }
+            ],
+            "cta": {
+              "label": "Conversemos sobre tus necesidades",
+              "href": "/contacto"
+            }
+          },
+          "fields": [
+            {
+              "key": "title",
+              "path": "title",
+              "label": "title",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "items",
+              "path": "items",
+              "label": "items",
+              "type": "collection",
+              "minItems": 0,
+              "maxItems": 200,
+              "itemFields": [
+                {
+                  "key": "visible",
+                  "path": "visible",
+                  "label": "visible",
+                  "type": "number"
+                },
+                {
+                  "key": "eyebrow",
+                  "path": "eyebrow",
+                  "label": "eyebrow",
+                  "type": "string",
+                  "multiline": true
+                },
+                {
+                  "key": "title",
+                  "path": "title",
+                  "label": "title",
+                  "type": "string",
+                  "multiline": true
+                },
+                {
+                  "key": "description",
+                  "path": "description",
+                  "label": "description",
+                  "type": "string",
+                  "multiline": true
+                },
+                {
+                  "key": "href",
+                  "path": "href",
+                  "label": "href",
+                  "type": "string",
+                  "multiline": true
+                }
+              ]
+            },
+            {
+              "key": "cta",
+              "path": "cta",
+              "label": "cta",
+              "type": "link"
+            }
+          ]
+        },
+        {
+          "key": "enfoque",
+          "name": "enfoque",
+          "type": "enfoque",
+          "initialContent": {
+            "title": "Anticipar. Diseñar. Ejecutar.",
+            "paragraph1": "Career Longevity parte de una idea sencilla: las decisiones importantes de carrera no deberían comenzar cuando las opciones ya se redujeron.",
+            "paragraph2": "Trabajamos con claridad, escenarios de futuro y un ecosistema de especialistas para construir una One-Page Strategy y un plan de ejecución.",
+            "steps": [
+              {
+                "_id": "anticipacion",
+                "visible": 1,
+                "title": "Anticipación",
+                "description": "Leer el contexto, identificar tendencias y abrir nuevas posibilidades."
+              },
+              {
+                "_id": "estrategia",
+                "visible": 1,
+                "title": "Estrategia",
+                "description": "Transformar la reflexión en dirección y planes concretos."
+              },
+              {
+                "_id": "ecosistema",
+                "visible": 1,
+                "title": "Ecosistema",
+                "description": "Conectar personas, ideas y recursos para potenciar el impacto."
+              }
+            ],
+            "highlight": "No se trata de improvisar el siguiente movimiento, sino de prepararlo con perspectiva y método."
+          },
+          "fields": [
+            {
+              "key": "title",
+              "path": "title",
+              "label": "title",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "paragraph1",
+              "path": "paragraph1",
+              "label": "paragraph1",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "paragraph2",
+              "path": "paragraph2",
+              "label": "paragraph2",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "steps",
+              "path": "steps",
+              "label": "steps",
+              "type": "collection",
+              "minItems": 0,
+              "maxItems": 200,
+              "itemFields": [
+                {
+                  "key": "visible",
+                  "path": "visible",
+                  "label": "visible",
+                  "type": "number"
+                },
+                {
+                  "key": "title",
+                  "path": "title",
+                  "label": "title",
+                  "type": "string",
+                  "multiline": true
+                },
+                {
+                  "key": "description",
+                  "path": "description",
+                  "label": "description",
+                  "type": "string",
+                  "multiline": true
+                }
+              ]
+            },
+            {
+              "key": "highlight",
+              "path": "highlight",
+              "label": "highlight",
+              "type": "string",
+              "multiline": true
+            }
+          ]
+        },
+        {
+          "key": "testimonios",
+          "name": "testimonios",
+          "type": "testimonios",
+          "initialContent": {
+            "title": "La experiencia de quienes han trabajado conmigo",
+            "paragraph1": "Cada proceso tiene sus propios desafíos. Estas son algunas de las experiencias de profesionales y organizaciones a los que he acompañado.",
+            "closingEyebrow": "MÁS EXPERIENCIAS COMPARTIDAS",
+            "closingTitle": "Más de 50 recomendaciones públicas en LinkedIn.",
+            "closingDescription": "Conoce otras experiencias de profesionales que han trabajado conmigo.",
+            "closingLink": {
+              "label": "Ver todas las recomendaciones ↗",
+              "href": "https://www.linkedin.com/in/claudiasanchezurencio/details/recommendations/?detailScreenTabIndex=0"
+            },
+            "items": [
+              {
+                "_id": "item-1",
+                "visible": 1,
+                "author": "Lucía López Sarre",
+                "role": "Marketing Director.",
+                "quote": "Su metodología también marca una diferencia: es clara, profunda y totalmente accionable. No se queda en la teoría; te impulsa, te estructura y te hace avanzar.",
+                "image": "/assets/claudia-sanchez/testimonials/lucia-lopez.jpg",
+                "alt": "Lucía López Sarre",
+                "sourceLabel": "Recomendación pública en LinkedIn",
+                "linkedinUrl": "https://www.linkedin.com/in/claudiasanchezurencio/details/recommendations/?detailScreenTabIndex=0"
+              },
+              {
+                "_id": "item-2",
+                "visible": 1,
+                "author": "Fabián Fuentes",
+                "role": "",
+                "quote": "Lo que distingue a Claudia no es solo su experiencia en desarrollo de talento y liderazgo — que es amplia — sino su capacidad de hacer las preguntas correctas en el momento correcto, y de acompañar sin imponer.",
+                "image": "/assets/claudia-sanchez/testimonials/fabian-fuentes.jpg",
+                "alt": "Fabián Fuentes",
+                "sourceLabel": "Recomendación pública en LinkedIn",
+                "linkedinUrl": "https://www.linkedin.com/in/claudiasanchezurencio/details/recommendations/?detailScreenTabIndex=0"
+              },
+              {
+                "_id": "item-3",
+                "visible": 1,
+                "author": "Pedro Fondevila",
+                "role": "",
+                "quote": "Claudia me ha ayudado, aprovechando su experiencia profesional, a transformar mi equipo en un equipo de alto rendimiento.",
+                "image": "/assets/claudia-sanchez/testimonials/pedro-fondevila.jpg",
+                "alt": "Pedro Fondevila",
+                "sourceLabel": "Recomendación pública en LinkedIn",
+                "linkedinUrl": "https://www.linkedin.com/in/claudiasanchezurencio/details/recommendations/?detailScreenTabIndex=0"
+              }
+            ]
+          },
+          "fields": [
+            {
+              "key": "title",
+              "path": "title",
+              "label": "title",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "paragraph1",
+              "path": "paragraph1",
+              "label": "paragraph1",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "closingEyebrow",
+              "path": "closingEyebrow",
+              "label": "closingEyebrow",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "closingTitle",
+              "path": "closingTitle",
+              "label": "closingTitle",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "closingDescription",
+              "path": "closingDescription",
+              "label": "closingDescription",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "closingLink",
+              "path": "closingLink",
+              "label": "closingLink",
+              "type": "link"
+            },
+            {
+              "key": "items",
+              "path": "items",
+              "label": "items",
+              "type": "collection",
+              "minItems": 0,
+              "maxItems": 200,
+              "itemFields": [
+                {
+                  "key": "visible",
+                  "path": "visible",
+                  "label": "visible",
+                  "type": "number"
+                },
+                {
+                  "key": "author",
+                  "path": "author",
+                  "label": "author",
+                  "type": "string",
+                  "multiline": true
+                },
+                {
+                  "key": "role",
+                  "path": "role",
+                  "label": "role",
+                  "type": "string",
+                  "multiline": true
+                },
+                {
+                  "key": "quote",
+                  "path": "quote",
+                  "label": "quote",
+                  "type": "string",
+                  "multiline": true
+                },
+                {
+                  "key": "image",
+                  "path": "image",
+                  "label": "image",
+                  "type": "image"
+                },
+                {
+                  "key": "alt",
+                  "path": "alt",
+                  "label": "alt",
+                  "type": "string",
+                  "multiline": true
+                },
+                {
+                  "key": "sourceLabel",
+                  "path": "sourceLabel",
+                  "label": "sourceLabel",
+                  "type": "string",
+                  "multiline": true
+                },
+                {
+                  "key": "linkedinUrl",
+                  "path": "linkedinUrl",
+                  "label": "linkedinUrl",
+                  "type": "string",
+                  "multiline": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "articulos",
+          "name": "articulos",
+          "type": "articulos",
+          "initialContent": {
+            "title": "Reflexiones sobre liderazgo, carrera y transformación.",
+            "paragraph1": "Comparto ideas, experiencias y perspectivas sobre los desafíos que enfrentan los líderes, las organizaciones y los profesionales a lo largo de su trayectoria.",
+            "paragraph2": "Un espacio para explorar nuevas formas de pensar el desarrollo profesional, el liderazgo y el futuro del trabajo.",
+            "cta": {
+              "label": "Ver todos los artículos",
+              "href": "/articulos"
+            }
+          },
+          "fields": [
+            {
+              "key": "title",
+              "path": "title",
+              "label": "title",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "paragraph1",
+              "path": "paragraph1",
+              "label": "paragraph1",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "paragraph2",
+              "path": "paragraph2",
+              "label": "paragraph2",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "cta",
+              "path": "cta",
+              "label": "cta",
+              "type": "link"
+            }
+          ]
+        },
+        {
+          "key": "contacto",
+          "name": "contacto",
+          "type": "contacto",
+          "initialContent": {
+            "eyebrow": "Comencemos",
+            "image": "/assets/claudia-sanchez/claudia-bg-contacto.png",
+            "title": "Toda transformación comienza con una conversación.",
+            "paragraph1": "Ya sea que estés explorando nuevas posibilidades para tu carrera o buscando fortalecer el liderazgo dentro de tu organización, podemos comenzar por entender tus desafíos y objetivos.",
+            "paragraph2": "Cuéntame qué necesitas y exploremos cómo puedo acompañarte.",
+            "cta": {
+              "label": "Hablemos",
+              "href": "/contacto"
+            }
+          },
+          "fields": [
+            {
+              "key": "eyebrow",
+              "path": "eyebrow",
+              "label": "eyebrow",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "image",
+              "path": "image",
+              "label": "image",
+              "type": "image"
+            },
+            {
+              "key": "title",
+              "path": "title",
+              "label": "title",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "paragraph1",
+              "path": "paragraph1",
+              "label": "paragraph1",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "paragraph2",
+              "path": "paragraph2",
+              "label": "paragraph2",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "cta",
+              "path": "cta",
+              "label": "cta",
+              "type": "link"
+            }
+          ]
+        },
+        {
+          "key": "navbar",
+          "name": "navbar",
+          "type": "navbar",
+          "initialContent": {
+            "brand": {
+              "label": "Claudia Sanchez Urencio",
+              "href": "/"
+            },
+            "home": {
+              "label": "Inicio",
+              "href": "/"
+            },
+            "about": {
+              "label": "Sobre mí",
+              "href": "/#sobre-mi"
+            },
+            "servicesLabel": "Servicios",
+            "people": {
+              "label": "Personas",
+              "href": "/personas"
+            },
+            "business": {
+              "label": "Empresas",
+              "href": "/empresas"
+            },
+            "community": {
+              "label": "Comunidad y Experiencias",
+              "href": "/comunidad-y-experiencias"
+            },
+            "articles": {
+              "label": "Artículos",
+              "href": "/articulos"
+            },
+            "contact": {
+              "label": "Contacto",
+              "href": "/contacto"
+            },
+            "openLabel": "Abrir menú",
+            "closeLabel": "Cerrar menú",
+            "skipLabel": "Saltar al contenido"
+          },
+          "fields": [
+            {
+              "key": "brand",
+              "path": "brand",
+              "label": "brand",
+              "type": "link"
+            },
+            {
+              "key": "home",
+              "path": "home",
+              "label": "home",
+              "type": "link"
+            },
+            {
+              "key": "about",
+              "path": "about",
+              "label": "about",
+              "type": "link"
+            },
+            {
+              "key": "servicesLabel",
+              "path": "servicesLabel",
+              "label": "servicesLabel",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "people",
+              "path": "people",
+              "label": "people",
+              "type": "link"
+            },
+            {
+              "key": "business",
+              "path": "business",
+              "label": "business",
+              "type": "link"
+            },
+            {
+              "key": "community",
+              "path": "community",
+              "label": "community",
+              "type": "link"
+            },
+            {
+              "key": "articles",
+              "path": "articles",
+              "label": "articles",
+              "type": "link"
+            },
+            {
+              "key": "contact",
+              "path": "contact",
+              "label": "contact",
+              "type": "link"
+            },
+            {
+              "key": "openLabel",
+              "path": "openLabel",
+              "label": "openLabel",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "closeLabel",
+              "path": "closeLabel",
+              "label": "closeLabel",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "skipLabel",
+              "path": "skipLabel",
+              "label": "skipLabel",
+              "type": "string",
+              "multiline": true
+            }
+          ]
+        },
+        {
+          "key": "footer",
+          "name": "footer",
+          "type": "footer",
+          "initialContent": {
+            "brand": "Claudia Sanchez Urencio",
+            "line": "Coaching ejecutivo, desarrollo de liderazgo y estrategia de carrera.",
+            "linkedin": {
+              "label": "LinkedIn",
+              "href": "https://www.linkedin.com/in/careertransitioncoachclau/"
+            }
+          },
+          "fields": [
+            {
+              "key": "brand",
+              "path": "brand",
+              "label": "brand",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "line",
+              "path": "line",
+              "label": "line",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "linkedin",
+              "path": "linkedin",
+              "label": "linkedin",
+              "type": "link"
+            }
+          ]
+        },
+        {
+          "key": "seo",
+          "name": "seo",
+          "type": "seo",
+          "initialContent": {
+            "title": "Career Longevity | Claudia Sanchez Urencio",
+            "description": "Estrategia de carrera para líderes senior que quieren anticipar y diseñar su siguiente etapa."
+          },
+          "fields": [
+            {
+              "key": "title",
+              "path": "title",
+              "label": "title",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "description",
+              "path": "description",
+              "label": "description",
+              "type": "string",
+              "multiline": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "personas",
+      "name": "Programas para personas",
+      "route": "/personas",
+      "slug": "personas",
+      "sections": [
+        {
+          "key": "hero",
+          "name": "hero",
+          "type": "hero",
+          "initialContent": {
+            "eyebrow": "Personas",
+            "title": "Tu siguiente etapa merece una estrategia propia.",
+            "paragraph1": "Programas para profesionales senior que quieren tomar decisiones con claridad, anticipar escenarios y ejecutar su siguiente movimiento con método.",
+            "paragraph2": "Identifica tu situación y elige el acompañamiento que corresponde a lo que necesitas construir hoy.",
+            "cta": {
+              "label": "Explora los programas",
+              "href": "#servicios"
+            }
+          },
+          "fields": [
+            {
+              "key": "eyebrow",
+              "path": "eyebrow",
+              "label": "eyebrow",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "title",
+              "path": "title",
+              "label": "title",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "paragraph1",
+              "path": "paragraph1",
+              "label": "paragraph1",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "paragraph2",
+              "path": "paragraph2",
+              "label": "paragraph2",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "cta",
+              "path": "cta",
+              "label": "cta",
+              "type": "link"
+            }
+          ]
+        },
+        {
+          "key": "situaciones",
+          "name": "situaciones",
+          "type": "situaciones",
+          "initialContent": {
+            "title": "¿En qué momento de tu carrera te encuentras?",
+            "paragraph1": "Una transición, una promoción o la planeación de los próximos años requieren preguntas y herramientas distintas.",
+            "items": [
+              {
+                "_id": "transicion",
+                "visible": 1,
+                "title": "Enfrentas una transición",
+                "description": "Una salida corporativa, reestructura, nueva oportunidad o reubicación exige claridad y una búsqueda estructurada."
+              },
+              {
+                "_id": "anticipacion",
+                "visible": 1,
+                "title": "Quieres anticipar tu siguiente etapa",
+                "description": "Buscas planear tus próximos años antes de que una transición sea obligada."
+              },
+              {
+                "_id": "liderazgo",
+                "visible": 1,
+                "title": "Estás listo para el siguiente nivel",
+                "description": "Quieres posicionarte para una promoción o consolidarte en una nueva responsabilidad de liderazgo."
+              }
+            ]
+          },
+          "fields": [
+            {
+              "key": "title",
+              "path": "title",
+              "label": "title",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "paragraph1",
+              "path": "paragraph1",
+              "label": "paragraph1",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "items",
+              "path": "items",
+              "label": "items",
+              "type": "collection",
+              "minItems": 0,
+              "maxItems": 200,
+              "itemFields": [
+                {
+                  "key": "visible",
+                  "path": "visible",
+                  "label": "visible",
+                  "type": "number"
+                },
+                {
+                  "key": "title",
+                  "path": "title",
+                  "label": "title",
+                  "type": "string",
+                  "multiline": true
+                },
+                {
+                  "key": "description",
+                  "path": "description",
+                  "label": "description",
+                  "type": "string",
+                  "multiline": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "servicios",
+          "name": "servicios",
+          "type": "servicios",
+          "initialContent": {
+            "title": "Elige el programa que corresponde a tu momento profesional",
+            "items": [
+              {
+                "_id": "transicion-de-carrera",
+                "visible": 1,
+                "title": "Transición de Carrera",
+                "subtitle": "Tu siguiente movimiento, decidido con estrategia y ejecutado con método.",
+                "description": "Para profesionales senior ante una salida corporativa, reestructura, nueva oportunidad o reubicación.\n\nIncluye de 6 a 8 sesiones de coaching y mentoría; 2 sesiones con Head Hunter internacional; Gallup CliftonStrengths interpretado por especialista; identidad profesional, narrativa y propuesta de valor; CV, LinkedIn y preparación de entrevistas; empresas objetivo, activación de contactos, estrategia de búsqueda de 90 días y One-Page Strategy.",
+                "href": "/contacto?servicio=transicion-de-carrera",
+                "label": "Solicitar información"
+              },
+              {
+                "_id": "diseno-de-carrera",
+                "visible": 1,
+                "title": "Diseño de Carrera",
+                "subtitle": "Planeación estratégica de carrera para anticipar tus próximos años.",
+                "description": "Para profesionales que desean planear su siguiente etapa antes de enfrentar una transición obligada.\n\nIncluye un mínimo de 8 sesiones; Head Hunter internacional; asesoría financiera; coaching de bienestar; mentoría de emprendimiento; metodología LIFE y seis esferas: identidad, salud, finanzas, relaciones, carrera y legado; escenarios de futuro y One-Page Strategy.",
+                "href": "/diseno-de-carrera",
+                "label": "Conoce Diseño de Carrera"
+              },
+              {
+                "_id": "next-level-leader",
+                "visible": 1,
+                "title": "Next Level Leader",
+                "subtitle": "Eleva tu carrera: posiciónate para el siguiente nivel, o consolídate en él.",
+                "description": "Para ejecutivos que buscan una promoción, nuevas responsabilidades o consolidarse en un puesto de liderazgo. Puede contratarlo una persona o una empresa.\n\nIncluye un mínimo de 6 sesiones de mentoría y formación individual; evaluación 360 Leadership Circle Profile; New Leader Assimilation; posicionamiento ejecutivo; comunicación y gestión de stakeholders; plan de desarrollo y consolidación de 90 días.",
+                "href": "/contacto?servicio=next-level-leader",
+                "label": "Solicitar información"
+              }
+            ]
+          },
+          "fields": [
+            {
+              "key": "title",
+              "path": "title",
+              "label": "title",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "items",
+              "path": "items",
+              "label": "items",
+              "type": "collection",
+              "minItems": 0,
+              "maxItems": 200,
+              "itemFields": [
+                {
+                  "key": "visible",
+                  "path": "visible",
+                  "label": "visible",
+                  "type": "number"
+                },
+                {
+                  "key": "title",
+                  "path": "title",
+                  "label": "title",
+                  "type": "string",
+                  "multiline": true
+                },
+                {
+                  "key": "subtitle",
+                  "path": "subtitle",
+                  "label": "subtitle",
+                  "type": "string",
+                  "multiline": true
+                },
+                {
+                  "key": "description",
+                  "path": "description",
+                  "label": "description",
+                  "type": "string",
+                  "multiline": true
+                },
+                {
+                  "key": "href",
+                  "path": "href",
+                  "label": "href",
+                  "type": "string",
+                  "multiline": true
+                },
+                {
+                  "key": "label",
+                  "path": "label",
+                  "label": "label",
+                  "type": "string",
+                  "multiline": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "enfoque",
+          "name": "enfoque",
+          "type": "enfoque",
+          "initialContent": {
+            "title": "Un proceso que parte de ti y se convierte en acción",
+            "paragraph1": "No existen dos trayectorias iguales. Por eso, el acompañamiento comienza por comprender tu situación, tus desafíos y aquello que quieres lograr.",
+            "paragraph2": "A partir de esa conversación, trabajamos para identificar fortalezas, explorar nuevas perspectivas y construir una estrategia que puedas llevar a la práctica.",
+            "paragraph3": "Mi enfoque combina experiencia corporativa, escucha, reflexión y herramientas de desarrollo profesional.",
+            "paragraph4": "El objetivo no es darte respuestas predeterminadas, sino ayudarte a tomar decisiones más conscientes y avanzar con mayor seguridad."
+          },
+          "fields": [
+            {
+              "key": "title",
+              "path": "title",
+              "label": "title",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "paragraph1",
+              "path": "paragraph1",
+              "label": "paragraph1",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "paragraph2",
+              "path": "paragraph2",
+              "label": "paragraph2",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "paragraph3",
+              "path": "paragraph3",
+              "label": "paragraph3",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "paragraph4",
+              "path": "paragraph4",
+              "label": "paragraph4",
+              "type": "string",
+              "multiline": true
+            }
+          ]
+        },
+        {
+          "key": "testimonios",
+          "name": "testimonios",
+          "type": "testimonios",
+          "initialContent": {
+            "title": "Testimonios pendientes de verificación",
+            "paragraph1": "Dulce Cano, José Herrera y Eduardo Díaz Cortazar se publicarán cuando estén disponibles sus textos completos y cargos verificados.",
+            "items": []
+          },
+          "fields": [
+            {
+              "key": "title",
+              "path": "title",
+              "label": "title",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "paragraph1",
+              "path": "paragraph1",
+              "label": "paragraph1",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "items",
+              "path": "items",
+              "label": "items",
+              "type": "collection",
+              "minItems": 0,
+              "maxItems": 200,
+              "itemFields": [
+                {
+                  "key": "slug",
+                  "path": "slug",
+                  "label": "slug",
+                  "type": "string",
+                  "multiline": true
+                },
+                {
+                  "key": "title",
+                  "path": "title",
+                  "label": "title",
+                  "type": "string",
+                  "multiline": true
+                },
+                {
+                  "key": "publishedAt",
+                  "path": "publishedAt",
+                  "label": "publishedAt",
+                  "type": "string",
+                  "multiline": true
+                },
+                {
+                  "key": "cover",
+                  "path": "cover",
+                  "label": "cover",
+                  "type": "image"
+                },
+                {
+                  "key": "alt",
+                  "path": "alt",
+                  "label": "alt",
+                  "type": "string",
+                  "multiline": true
+                },
+                {
+                  "key": "body",
+                  "path": "body",
+                  "label": "body",
+                  "type": "string",
+                  "multiline": true
+                },
+                {
+                  "key": "status",
+                  "path": "status",
+                  "label": "status",
+                  "type": "string",
+                  "multiline": true
+                },
+                {
+                  "key": "visible",
+                  "path": "visible",
+                  "label": "visible",
+                  "type": "number"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "contacto",
+          "name": "contacto",
+          "type": "contacto",
+          "initialContent": {
+            "title": "Conversemos sobre tu siguiente etapa.",
+            "paragraph1": "Cuéntame en qué momento te encuentras para identificar el acompañamiento más adecuado.",
+            "cta": {
+              "label": "Solicitar información",
+              "href": "/contacto"
+            }
+          },
+          "fields": [
+            {
+              "key": "title",
+              "path": "title",
+              "label": "title",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "paragraph1",
+              "path": "paragraph1",
+              "label": "paragraph1",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "cta",
+              "path": "cta",
+              "label": "cta",
+              "type": "link"
+            }
+          ]
+        },
+        {
+          "key": "seo",
+          "name": "seo",
+          "type": "seo",
+          "initialContent": {
+            "title": "Programas para personas | Claudia Sanchez Urencio",
+            "description": "Transición de Carrera, Diseño de Carrera y Next Level Leader para profesionales y líderes senior."
+          },
+          "fields": [
+            {
+              "key": "title",
+              "path": "title",
+              "label": "title",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "description",
+              "path": "description",
+              "label": "description",
+              "type": "string",
+              "multiline": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "empresas",
+      "name": "Soluciones para empresas",
+      "route": "/empresas",
+      "slug": "empresas",
+      "sections": [
+        {
+          "key": "hero",
+          "name": "hero",
+          "type": "hero",
+          "initialContent": {
+            "eyebrow": "Empresas",
+            "title": "Cuidar a las personas también protege la continuidad de la organización.",
+            "paragraph1": "Acompaño a equipos y líderes senior durante reorganizaciones, cambios de liderazgo y transiciones profesionales.",
+            "paragraph2": "Intervenciones claras, confidenciales y alineadas con el contexto de la organización.",
+            "cta": {
+              "label": "Explora las soluciones",
+              "href": "#servicios"
+            }
+          },
+          "fields": [
+            {
+              "key": "eyebrow",
+              "path": "eyebrow",
+              "label": "eyebrow",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "title",
+              "path": "title",
+              "label": "title",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "paragraph1",
+              "path": "paragraph1",
+              "label": "paragraph1",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "paragraph2",
+              "path": "paragraph2",
+              "label": "paragraph2",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "cta",
+              "path": "cta",
+              "label": "cta",
+              "type": "link"
+            }
+          ]
+        },
+        {
+          "key": "desafios",
+          "name": "desafios",
+          "type": "desafios",
+          "initialContent": {
+            "title": "Momentos que requieren una intervención con método.",
+            "paragraph1": "La fricción entre equipos y la salida de un líder senior afectan relaciones, conocimiento y reputación.",
+            "items": [
+              {
+                "_id": "friccion",
+                "visible": 1,
+                "title": "Reorganizaciones y cambios de liderazgo",
+                "description": "Equipos directivos, gerenciales o multifuncionales necesitan reconocerse, destrabar conversaciones y converger."
+              },
+              {
+                "_id": "salida",
+                "visible": 1,
+                "title": "Salida, retiro o transición de líderes senior",
+                "description": "La organización necesita cuidar al ejecutivo, transferir conocimiento y sostener la continuidad."
+              }
+            ]
+          },
+          "fields": [
+            {
+              "key": "title",
+              "path": "title",
+              "label": "title",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "paragraph1",
+              "path": "paragraph1",
+              "label": "paragraph1",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "items",
+              "path": "items",
+              "label": "items",
+              "type": "collection",
+              "minItems": 0,
+              "maxItems": 200,
+              "itemFields": [
+                {
+                  "key": "visible",
+                  "path": "visible",
+                  "label": "visible",
+                  "type": "number"
+                },
+                {
+                  "key": "title",
+                  "path": "title",
+                  "label": "title",
+                  "type": "string",
+                  "multiline": true
+                },
+                {
+                  "key": "description",
+                  "path": "description",
+                  "label": "description",
+                  "type": "string",
+                  "multiline": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "servicios",
+          "name": "servicios",
+          "type": "servicios",
+          "initialContent": {
+            "title": "Soluciones para equipos y transiciones ejecutivas",
+            "items": [
+              {
+                "_id": "equipos-culturas",
+                "visible": 1,
+                "title": "Equipos y Culturas Fascinantes",
+                "subtitle": "Resolvemos la fricción y la convertimos en comunicación.",
+                "description": "Para equipos directivos, gerenciales y multifuncionales durante reorganizaciones, fusiones, crecimiento acelerado o cambios de liderazgo.\n\nIncluye Assessment How to Fascinate individual y de equipo; off-site de 4 u 8 horas; las fases Reconocernos, Destrabar y Converger; autoconocimiento, comunicación, feedback y relaciones; acuerdos y mecanismos de responsabilidad. Coaching ejecutivo opcional.",
+                "href": "/contacto?servicio=equipos-y-culturas-fascinantes",
+                "label": "Solicitar información"
+              },
+              {
+                "_id": "executive-longevity",
+                "visible": 1,
+                "title": "Executive Longevity Program",
+                "subtitle": "Outplacement integral: un rediseño, no una salida.",
+                "description": "Para organizaciones que acompañan la salida, retiro o transición de líderes senior.\n\nIncluye transición e identidad profesional; alternativas laborales o profesionales; CV, LinkedIn, narrativa y red de contactos; asesoría financiera; protocolo de Recursos Humanos y confidencialidad; transferencia de conocimiento; acompañamiento opcional a equipos; plan de 90 días y One-Page Strategy.",
+                "href": "/contacto?servicio=executive-longevity-program",
+                "label": "Solicitar información"
+              }
+            ]
+          },
+          "fields": [
+            {
+              "key": "title",
+              "path": "title",
+              "label": "title",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "items",
+              "path": "items",
+              "label": "items",
+              "type": "collection",
+              "minItems": 0,
+              "maxItems": 200,
+              "itemFields": [
+                {
+                  "key": "visible",
+                  "path": "visible",
+                  "label": "visible",
+                  "type": "number"
+                },
+                {
+                  "key": "title",
+                  "path": "title",
+                  "label": "title",
+                  "type": "string",
+                  "multiline": true
+                },
+                {
+                  "key": "subtitle",
+                  "path": "subtitle",
+                  "label": "subtitle",
+                  "type": "string",
+                  "multiline": true
+                },
+                {
+                  "key": "description",
+                  "path": "description",
+                  "label": "description",
+                  "type": "string",
+                  "multiline": true
+                },
+                {
+                  "key": "href",
+                  "path": "href",
+                  "label": "href",
+                  "type": "string",
+                  "multiline": true
+                },
+                {
+                  "key": "label",
+                  "path": "label",
+                  "label": "label",
+                  "type": "string",
+                  "multiline": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "experiencia",
+          "name": "experiencia",
+          "type": "experiencia",
+          "initialContent": {
+            "title": "Experiencia dentro de las organizaciones. Perspectiva para acompañarlas.",
+            "paragraph1": "Antes de dedicarme al coaching ejecutivo, desarrollé una extensa trayectoria en Recursos Humanos y desarrollo organizacional, ocupando posiciones de liderazgo en compañías internacionales como Diageo y Kraft Foods.",
+            "paragraph2": "Trabajar de cerca con líderes, equipos y áreas de negocio me permitió comprender cómo se conectan las decisiones sobre talento, cultura y desarrollo con los objetivos de una organización.",
+            "paragraph3": "Hoy llevo esa experiencia a cada proceso de acompañamiento, combinando conocimiento del entorno corporativo, herramientas de coaching y una mirada humana del liderazgo.",
+            "highlight": "Porque desarrollar personas también implica comprender el negocio en el que trabajan."
+          },
+          "fields": [
+            {
+              "key": "title",
+              "path": "title",
+              "label": "title",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "paragraph1",
+              "path": "paragraph1",
+              "label": "paragraph1",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "paragraph2",
+              "path": "paragraph2",
+              "label": "paragraph2",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "paragraph3",
+              "path": "paragraph3",
+              "label": "paragraph3",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "highlight",
+              "path": "highlight",
+              "label": "highlight",
+              "type": "string",
+              "multiline": true
+            }
+          ]
+        },
+        {
+          "key": "proceso",
+          "name": "proceso",
+          "type": "proceso",
+          "initialContent": {
+            "title": "Cada organización tiene desafíos propios. El acompañamiento también debe serlo.",
+            "items": [
+              {
+                "_id": "item-1",
+                "visible": 1,
+                "title": "Comprender el contexto",
+                "description": "Escuchar las necesidades de la organización, conocer sus desafíos e identificar los objetivos del proceso."
+              },
+              {
+                "_id": "item-2",
+                "visible": 1,
+                "title": "Definir el enfoque",
+                "description": "Construir una propuesta de acompañamiento que considere las características de los líderes, los equipos y el entorno de trabajo."
+              },
+              {
+                "_id": "item-3",
+                "visible": 1,
+                "title": "Llevarlo a la práctica",
+                "description": "Trabajar mediante conversaciones, herramientas y experiencias de desarrollo que permitan trasladar los aprendizajes a situaciones reales."
+              },
+              {
+                "_id": "item-4",
+                "visible": 1,
+                "title": "Revisar los avances",
+                "description": "Generar espacios de reflexión y seguimiento para identificar aprendizajes, reconocer avances y ajustar el camino cuando sea necesario."
+              }
+            ]
+          },
+          "fields": [
+            {
+              "key": "title",
+              "path": "title",
+              "label": "title",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "items",
+              "path": "items",
+              "label": "items",
+              "type": "collection",
+              "minItems": 0,
+              "maxItems": 200,
+              "itemFields": [
+                {
+                  "key": "visible",
+                  "path": "visible",
+                  "label": "visible",
+                  "type": "number"
+                },
+                {
+                  "key": "title",
+                  "path": "title",
+                  "label": "title",
+                  "type": "string",
+                  "multiline": true
+                },
+                {
+                  "key": "description",
+                  "path": "description",
+                  "label": "description",
+                  "type": "string",
+                  "multiline": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "testimonios",
+          "name": "testimonios",
+          "type": "testimonios",
+          "initialContent": {
+            "title": "Testimonios pendientes de verificación",
+            "paragraph1": "Pedro Fondevila, Ana Cristina del Ángel Nájera y Ricardo Schmidt se publicarán cuando estén disponibles sus textos completos y cargos verificados.",
+            "items": []
+          },
+          "fields": [
+            {
+              "key": "title",
+              "path": "title",
+              "label": "title",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "paragraph1",
+              "path": "paragraph1",
+              "label": "paragraph1",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "items",
+              "path": "items",
+              "label": "items",
+              "type": "collection",
+              "minItems": 0,
+              "maxItems": 200,
+              "itemFields": [
+                {
+                  "key": "slug",
+                  "path": "slug",
+                  "label": "slug",
+                  "type": "string",
+                  "multiline": true
+                },
+                {
+                  "key": "title",
+                  "path": "title",
+                  "label": "title",
+                  "type": "string",
+                  "multiline": true
+                },
+                {
+                  "key": "publishedAt",
+                  "path": "publishedAt",
+                  "label": "publishedAt",
+                  "type": "string",
+                  "multiline": true
+                },
+                {
+                  "key": "cover",
+                  "path": "cover",
+                  "label": "cover",
+                  "type": "image"
+                },
+                {
+                  "key": "alt",
+                  "path": "alt",
+                  "label": "alt",
+                  "type": "string",
+                  "multiline": true
+                },
+                {
+                  "key": "body",
+                  "path": "body",
+                  "label": "body",
+                  "type": "string",
+                  "multiline": true
+                },
+                {
+                  "key": "status",
+                  "path": "status",
+                  "label": "status",
+                  "type": "string",
+                  "multiline": true
+                },
+                {
+                  "key": "visible",
+                  "path": "visible",
+                  "label": "visible",
+                  "type": "number"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "contacto",
+          "name": "contacto",
+          "type": "contacto",
+          "initialContent": {
+            "title": "Diseñemos una intervención acorde con tu organización.",
+            "paragraph1": "Comparte el contexto y el momento que necesitan acompañar.",
+            "cta": {
+              "label": "Solicitar información",
+              "href": "/contacto"
+            }
+          },
+          "fields": [
+            {
+              "key": "title",
+              "path": "title",
+              "label": "title",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "paragraph1",
+              "path": "paragraph1",
+              "label": "paragraph1",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "cta",
+              "path": "cta",
+              "label": "cta",
+              "type": "link"
+            }
+          ]
+        },
+        {
+          "key": "seo",
+          "name": "seo",
+          "type": "seo",
+          "initialContent": {
+            "title": "Soluciones para empresas | Claudia Sanchez Urencio",
+            "description": "Equipos y Culturas Fascinantes y Executive Longevity Program para organizaciones y líderes senior."
+          },
+          "fields": [
+            {
+              "key": "title",
+              "path": "title",
+              "label": "title",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "description",
+              "path": "description",
+              "label": "description",
+              "type": "string",
+              "multiline": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "contacto",
+      "name": "Contacto",
+      "route": "/contacto",
+      "slug": "contacto",
+      "sections": [
+        {
+          "key": "intro",
+          "name": "intro",
+          "type": "intro",
+          "initialContent": {
+            "title": "Conversemos sobre lo que necesitas.",
+            "paragraph1": "Cada persona y cada organización enfrenta desafíos diferentes. Me gustaría conocer tu situación y explorar cómo puedo acompañarte.",
+            "paragraph2": "Completa el formulario y cuéntame brevemente qué estás buscando. Me pondré en contacto contigo para continuar la conversación."
+          },
+          "fields": [
+            {
+              "key": "title",
+              "path": "title",
+              "label": "title",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "paragraph1",
+              "path": "paragraph1",
+              "label": "paragraph1",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "paragraph2",
+              "path": "paragraph2",
+              "label": "paragraph2",
+              "type": "string",
+              "multiline": true
+            }
+          ]
+        },
+        {
+          "key": "formulario",
+          "name": "formulario",
+          "type": "formulario",
+          "initialContent": {
+            "nameLabel": "Nombre completo *",
+            "namePlaceholder": "Tu nombre",
+            "emailLabel": "Correo electrónico *",
+            "emailPlaceholder": "nombre@correo.com",
+            "typeLabel": "¿Qué tipo de consulta deseas realizar? *",
+            "personLabel": "Servicios para personas",
+            "companyLabel": "Servicios para empresas",
+            "otherLabel": "Otra consulta",
+            "companyFieldLabel": "Empresa",
+            "companyPlaceholder": "Nombre de la organización",
+            "messageLabel": "¿En qué puedo ayudarte? *",
+            "messagePlaceholder": "Cuéntame brevemente qué necesitas...",
+            "submitLabel": "Enviar consulta",
+            "pending": "El formulario todavía no está operativo. Puedes contactarme a través de LinkedIn.",
+            "error": "No fue posible enviar tu mensaje. Inténtalo nuevamente en unos momentos.",
+            "loading": "Enviando consulta…",
+            "successTitle": "¡Gracias por escribirme!",
+            "successText": "Recibí tu mensaje. Me pondré en contacto contigo lo antes posible."
+          },
+          "fields": [
+            {
+              "key": "nameLabel",
+              "path": "nameLabel",
+              "label": "nameLabel",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "namePlaceholder",
+              "path": "namePlaceholder",
+              "label": "namePlaceholder",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "emailLabel",
+              "path": "emailLabel",
+              "label": "emailLabel",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "emailPlaceholder",
+              "path": "emailPlaceholder",
+              "label": "emailPlaceholder",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "typeLabel",
+              "path": "typeLabel",
+              "label": "typeLabel",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "personLabel",
+              "path": "personLabel",
+              "label": "personLabel",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "companyLabel",
+              "path": "companyLabel",
+              "label": "companyLabel",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "otherLabel",
+              "path": "otherLabel",
+              "label": "otherLabel",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "companyFieldLabel",
+              "path": "companyFieldLabel",
+              "label": "companyFieldLabel",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "companyPlaceholder",
+              "path": "companyPlaceholder",
+              "label": "companyPlaceholder",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "messageLabel",
+              "path": "messageLabel",
+              "label": "messageLabel",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "messagePlaceholder",
+              "path": "messagePlaceholder",
+              "label": "messagePlaceholder",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "submitLabel",
+              "path": "submitLabel",
+              "label": "submitLabel",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "pending",
+              "path": "pending",
+              "label": "pending",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "error",
+              "path": "error",
+              "label": "error",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "loading",
+              "path": "loading",
+              "label": "loading",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "successTitle",
+              "path": "successTitle",
+              "label": "successTitle",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "successText",
+              "path": "successText",
+              "label": "successText",
+              "type": "string",
+              "multiline": true
+            }
+          ]
+        },
+        {
+          "key": "contacto-directo",
+          "name": "contacto-directo",
+          "type": "contacto-directo",
+          "initialContent": {
+            "title": "¿Prefieres escribir directamente?",
+            "paragraph1": "También puedes contactarme por correo electrónico o WhatsApp.",
+            "email": {
+              "label": "clausurencio@gmail.com",
+              "href": "mailto:clausurencio@gmail.com"
+            },
+            "whatsapp": {
+              "label": "WhatsApp: +1 689 230 6889",
+              "href": "https://wa.me/16892306889"
+            },
+            "linkedin": {
+              "label": "LinkedIn",
+              "href": "https://www.linkedin.com/in/careertransitioncoachclau/"
+            }
+          },
+          "fields": [
+            {
+              "key": "title",
+              "path": "title",
+              "label": "title",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "paragraph1",
+              "path": "paragraph1",
+              "label": "paragraph1",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "email",
+              "path": "email",
+              "label": "email",
+              "type": "link"
+            },
+            {
+              "key": "whatsapp",
+              "path": "whatsapp",
+              "label": "whatsapp",
+              "type": "link"
+            },
+            {
+              "key": "linkedin",
+              "path": "linkedin",
+              "label": "linkedin",
+              "type": "link"
+            }
+          ]
+        },
+        {
+          "key": "seo",
+          "name": "seo",
+          "type": "seo",
+          "initialContent": {
+            "title": "Contacto | Claudia Sanchez Urencio",
+            "description": "Contacta a Claudia Sanchez Urencio por formulario, correo electrónico o WhatsApp."
+          },
+          "fields": [
+            {
+              "key": "title",
+              "path": "title",
+              "label": "title",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "description",
+              "path": "description",
+              "label": "description",
+              "type": "string",
+              "multiline": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "diseno-de-carrera",
+      "name": "Diseño de Carrera",
+      "route": "/diseno-de-carrera",
+      "slug": "disena-tu-futuro",
+      "sections": [
+        {
+          "key": "hero",
+          "name": "Hero",
+          "type": "hero",
+          "position": 0,
+          "visible": true,
+          "lockedPosition": false,
+          "initialContent": {
+            "eyebrow": "Claudia Sanchez Urencio · EXECUTIVE CAREER COACH & ADVISOR",
+            "titleLines": [
+              "Diseño de",
+              "Carrera.",
+              "Anticipa lo",
+              "que sigue."
+            ],
+            "accentFrom": 2,
+            "subtitle": "Planeación estratégica para profesionales que quieren anticipar su siguiente etapa antes de enfrentar una transición obligada.",
+            "complement": "Career Longevity · Estrategia de carrera ejecutiva"
+          },
+          "fields": [
+            {
+              "key": "eyebrow",
+              "path": "eyebrow",
+              "label": "eyebrow",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "titleLines-0",
+              "path": "titleLines.0",
+              "label": "titleLines 1",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "titleLines-1",
+              "path": "titleLines.1",
+              "label": "titleLines 2",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "titleLines-2",
+              "path": "titleLines.2",
+              "label": "titleLines 3",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "titleLines-3",
+              "path": "titleLines.3",
+              "label": "titleLines 4",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "accentFrom",
+              "path": "accentFrom",
+              "label": "accentFrom",
+              "type": "number"
+            },
+            {
+              "key": "subtitle",
+              "path": "subtitle",
+              "label": "subtitle",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "complement",
+              "path": "complement",
+              "label": "complement",
+              "type": "string",
+              "multiline": true
+            }
+          ]
+        },
+        {
+          "key": "situations",
+          "name": "El siguiente movimiento",
+          "type": "content",
+          "position": 1,
+          "visible": true,
+          "lockedPosition": false,
+          "initialContent": {
+            "eyebrow": "EL SIGUIENTE MOVIMIENTO",
+            "title": "Has construido una carrera. ¿Qué quieres construir ahora?",
+            "intro": "Después de años construyendo tu trayectoria, el siguiente movimiento no siempre significa subir otro escalón. Puede significar crecer, cambiar de dirección o abrir nuevas posibilidades con la experiencia que ya tienes.",
+            "items": [
+              {
+                "_id": "seguir-creciendo",
+                "number": "01",
+                "label": "SEGUIR CRECIENDO",
+                "text": "Quieres asumir nuevos desafíos dentro del mundo corporativo, con una dirección más clara."
+              },
+              {
+                "_id": "preparar-transicion",
+                "number": "02",
+                "label": "PREPARAR UNA TRANSICIÓN",
+                "text": "Estás considerando un cambio de empresa, rol, industria o país y necesitas ordenar tus opciones."
+              },
+              {
+                "_id": "ampliar-opciones",
+                "number": "03",
+                "label": "AMPLIAR TUS OPCIONES",
+                "text": "Quieres explorar consultoría, advisory o nuevas formas de aportar valor desde tu experiencia."
+              }
+            ],
+            "closing": "No necesitas esperar una transición para empezar a diseñar lo que sigue."
+          },
+          "fields": [
+            {
+              "key": "eyebrow",
+              "path": "eyebrow",
+              "label": "eyebrow",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "title",
+              "path": "title",
+              "label": "title",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "intro",
+              "path": "intro",
+              "label": "intro",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "items",
+              "path": "items",
+              "label": "items",
+              "type": "collection",
+              "minItems": 0,
+              "maxItems": 200,
+              "itemFields": [
+                {
+                  "key": "number",
+                  "path": "number",
+                  "label": "number",
+                  "type": "string",
+                  "multiline": true
+                },
+                {
+                  "key": "label",
+                  "path": "label",
+                  "label": "label",
+                  "type": "string",
+                  "multiline": true
+                },
+                {
+                  "key": "text",
+                  "path": "text",
+                  "label": "text",
+                  "type": "string",
+                  "multiline": true
+                }
+              ]
+            },
+            {
+              "key": "closing",
+              "path": "closing",
+              "label": "closing",
+              "type": "string",
+              "multiline": true
+            }
+          ]
+        },
+        {
+          "key": "impact",
+          "name": "Impacto",
+          "type": "impact",
+          "initialContent": {
+            "eyebrow": "IMPACTO DEL PROGRAMA",
+            "title": "Resultados autodeclarados por quienes completaron el programa.",
+            "items": [
+              {
+                "_id": "recommend",
+                "value": "100 %",
+                "label": "recomendaría el programa (35/35)"
+              },
+              {
+                "_id": "five",
+                "value": "80 %",
+                "label": "lo calificó con 5/5 (28/35)"
+              },
+              {
+                "_id": "clarity",
+                "value": "77 %",
+                "label": "reportó mayor claridad sobre su propósito profesional (27/35)"
+              },
+              {
+                "_id": "confidence",
+                "value": "60 %",
+                "label": "reportó mayor autoconfianza (21/35)"
+              }
+            ],
+            "note": "Resultados autodeclarados por 35 participantes en una encuesta voluntaria realizada en mayo de 2026. Los resultados individuales pueden variar."
+          },
+          "fields": [
+            {
+              "key": "eyebrow",
+              "path": "eyebrow",
+              "label": "eyebrow",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "title",
+              "path": "title",
+              "label": "title",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "items",
+              "path": "items",
+              "label": "items",
+              "type": "collection",
+              "minItems": 0,
+              "maxItems": 200,
+              "itemFields": [
+                {
+                  "key": "value",
+                  "path": "value",
+                  "label": "value",
+                  "type": "string",
+                  "multiline": true
+                },
+                {
+                  "key": "label",
+                  "path": "label",
+                  "label": "label",
+                  "type": "string",
+                  "multiline": true
+                }
+              ]
+            },
+            {
+              "key": "note",
+              "path": "note",
+              "label": "note",
+              "type": "string",
+              "multiline": true
+            }
+          ]
+        },
+        {
+          "key": "approach",
+          "name": "Como trabajo",
+          "type": "process",
+          "position": 3,
+          "visible": true,
+          "lockedPosition": false,
+          "initialContent": {
+            "eyebrow": "CÓMO TRABAJO",
+            "title": "Primero claridad. Después, una estrategia para avanzar.",
+            "intro": "Antes del CV, LinkedIn o la búsqueda de oportunidades, trabajamos sobre tu experiencia, tus fortalezas y lo que quieres construir. Con esa dirección, las herramientas dejan de ser el punto de partida y pasan a servir a una estrategia.",
+            "steps": [
+              {
+                "_id": "claridad",
+                "number": "01",
+                "label": "CLARIDAD",
+                "text": "Reconocer tu trayectoria, tus prioridades y aquello que quieres para los próximos años."
+              },
+              {
+                "_id": "estrategia",
+                "number": "02",
+                "label": "ESTRATEGIA",
+                "text": "Explorar opciones, definir tu posicionamiento y tomar decisiones con criterio."
+              },
+              {
+                "_id": "movimiento",
+                "number": "03",
+                "label": "MOVIMIENTO",
+                "text": "Convertir la dirección elegida en conversaciones, herramientas y próximos pasos concretos."
+              }
+            ]
+          },
+          "fields": [
+            {
+              "key": "eyebrow",
+              "path": "eyebrow",
+              "label": "eyebrow",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "title",
+              "path": "title",
+              "label": "title",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "intro",
+              "path": "intro",
+              "label": "intro",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "steps",
+              "path": "steps",
+              "label": "steps",
+              "type": "collection",
+              "minItems": 0,
+              "maxItems": 200,
+              "itemFields": [
+                {
+                  "key": "number",
+                  "path": "number",
+                  "label": "number",
+                  "type": "string",
+                  "multiline": true
+                },
+                {
+                  "key": "label",
+                  "path": "label",
+                  "label": "label",
+                  "type": "string",
+                  "multiline": true
+                },
+                {
+                  "key": "text",
+                  "path": "text",
+                  "label": "text",
+                  "type": "string",
+                  "multiline": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "life",
+          "name": "Modelo L.I.F.E.",
+          "type": "method",
+          "position": 4,
+          "visible": true,
+          "lockedPosition": false,
+          "initialContent": {
+            "eyebrow": "MODELO L.I.F.E.",
+            "title": "Una carrera sostenible necesita más que un buen puesto.",
+            "intro": "Tu siguiente etapa no se decide de manera aislada. Las decisiones profesionales conviven con tu identidad, tu bienestar, tus recursos, tus relaciones y aquello que quieres dejar construido.",
+            "support": "Seis dimensiones para mirar la carrera con mayor perspectiva.",
+            "dimensions": [
+              {
+                "_id": "identidad",
+                "id": "identidad",
+                "label": "IDENTIDAD",
+                "text": "Quién eres más allá de un cargo y cómo quieres definir esta etapa."
+              },
+              {
+                "_id": "salud",
+                "id": "salud",
+                "label": "SALUD",
+                "text": "Tu energía y bienestar al pensar decisiones sostenibles."
+              },
+              {
+                "_id": "finanzas",
+                "id": "finanzas",
+                "label": "FINANZAS",
+                "text": "Los recursos y condiciones que influyen en tus opciones."
+              },
+              {
+                "_id": "relaciones",
+                "id": "relaciones",
+                "label": "RELACIONES",
+                "text": "Las personas y conexiones que forman parte de tus próximos movimientos."
+              },
+              {
+                "_id": "carrera",
+                "id": "carrera",
+                "label": "CARRERA",
+                "text": "Tu experiencia, posicionamiento y oportunidades posibles."
+              },
+              {
+                "_id": "legado",
+                "id": "legado",
+                "label": "LEGADO",
+                "text": "Lo que quieres aportar y construir con los años que vienen."
+              }
+            ],
+            "closing": "No se trata solo de llegar al siguiente rol. Se trata de decidir cómo quieres vivir y sostener tu carrera."
+          },
+          "fields": [
+            {
+              "key": "eyebrow",
+              "path": "eyebrow",
+              "label": "eyebrow",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "title",
+              "path": "title",
+              "label": "title",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "intro",
+              "path": "intro",
+              "label": "intro",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "support",
+              "path": "support",
+              "label": "support",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "dimensions",
+              "path": "dimensions",
+              "label": "dimensions",
+              "type": "collection",
+              "minItems": 0,
+              "maxItems": 200,
+              "itemFields": [
+                {
+                  "key": "id",
+                  "path": "id",
+                  "label": "id",
+                  "type": "string",
+                  "multiline": true
+                },
+                {
+                  "key": "label",
+                  "path": "label",
+                  "label": "label",
+                  "type": "string",
+                  "multiline": true
+                },
+                {
+                  "key": "text",
+                  "path": "text",
+                  "label": "text",
+                  "type": "string",
+                  "multiline": true
+                }
+              ]
+            },
+            {
+              "key": "closing",
+              "path": "closing",
+              "label": "closing",
+              "type": "string",
+              "multiline": true
+            }
+          ]
+        },
+        {
+          "key": "about",
+          "name": "Sobre mi",
+          "type": "about",
+          "position": 5,
+          "visible": true,
+          "lockedPosition": false,
+          "initialContent": {
+            "eyebrow": "SOBRE MÍ",
+            "title": "Conozco el mundo corporativo. También lo que viene después.",
+            "paragraphs": [
+              "Soy Claudia Sanchez Urencio. Durante más de 20 años he trabajado con organizaciones y líderes en procesos de cambio y transformación.",
+              "Mi trayectoria incluye liderazgo en Recursos Humanos en compañías como Diageo y Kraft Foods, responsabilidades regionales en Latinoamérica y experiencias profesionales en distintos países.",
+              "También he rediseñado mi propia carrera. Hoy acompaño a ejecutivos senior a tomar decisiones sobre lo que sigue, combinando experiencia corporativa, coaching y una mirada práctica y humana."
+            ],
+            "facts": [
+              {
+                "_id": "trayectoria",
+                "value": "20+",
+                "label": "años de trayectoria profesional"
+              }
+            ]
+          },
+          "fields": [
+            {
+              "key": "eyebrow",
+              "path": "eyebrow",
+              "label": "eyebrow",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "title",
+              "path": "title",
+              "label": "title",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "paragraphs-0",
+              "path": "paragraphs.0",
+              "label": "paragraphs 1",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "paragraphs-1",
+              "path": "paragraphs.1",
+              "label": "paragraphs 2",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "paragraphs-2",
+              "path": "paragraphs.2",
+              "label": "paragraphs 3",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "facts",
+              "path": "facts",
+              "label": "facts",
+              "type": "collection",
+              "minItems": 0,
+              "maxItems": 200,
+              "itemFields": [
+                {
+                  "key": "value",
+                  "path": "value",
+                  "label": "value",
+                  "type": "string",
+                  "multiline": true
+                },
+                {
+                  "key": "label",
+                  "path": "label",
+                  "label": "label",
+                  "type": "string",
+                  "multiline": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "closing",
+          "name": "Cierre y reserva",
+          "type": "cta",
+          "position": 6,
+          "visible": true,
+          "lockedPosition": false,
+          "initialContent": {
+            "eyebrow": "TU SIGUIENTE MOVIMIENTO",
+            "title": "¿Qué quieres construir con los próximos años de tu carrera?",
+            "text": "Si estás evaluando un cambio, explorando nuevas opciones o buscando mayor claridad sobre tu siguiente etapa, podemos comenzar con una conversación."
+          },
+          "fields": [
+            {
+              "key": "eyebrow",
+              "path": "eyebrow",
+              "label": "eyebrow",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "title",
+              "path": "title",
+              "label": "title",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "text",
+              "path": "text",
+              "label": "text",
+              "type": "string",
+              "multiline": true
+            }
+          ]
+        },
+        {
+          "key": "site-header",
+          "name": "Navegacion principal",
+          "type": "header",
+          "position": 7,
+          "visible": true,
+          "lockedPosition": false,
+          "initialContent": {
+            "brandLink": {
+              "label": "Claudia Sanchez Urencio",
+              "href": "#inicio"
+            },
+            "nav": [
+              {
+                "id": "enfoque",
+                "label": "Enfoque"
+              },
+              {
+                "id": "testimonios",
+                "label": "Testimonios"
+              },
+              {
+                "id": "life",
+                "label": "Modelo L.I.F.E."
+              },
+              {
+                "id": "sobre-mi",
+                "label": "Sobre mí"
+              }
+            ],
+            "ctaLabel": "Reservar",
+            "ctaLink": {
+              "label": "Reservar",
+              "href": "https://calendly.com/claudiasanchezurencio/45min"
+            },
+            "navLink0": {
+              "label": "Enfoque",
+              "href": "#enfoque"
+            },
+            "navLink1": {
+              "label": "Testimonios",
+              "href": "#testimonios"
+            },
+            "navLink2": {
+              "label": "Modelo L.I.F.E.",
+              "href": "#life"
+            },
+            "navLink3": {
+              "label": "Sobre mí",
+              "href": "#sobre-mi"
+            }
+          },
+          "fields": [
+            {
+              "key": "brand-link",
+              "path": "brandLink",
+              "label": "Marca",
+              "type": "link",
+              "required": true
+            },
+            {
+              "key": "nav-0",
+              "path": "navLink0",
+              "label": "Enlace 1",
+              "type": "link",
+              "required": true
+            },
+            {
+              "key": "nav-1",
+              "path": "navLink1",
+              "label": "Enlace 2",
+              "type": "link",
+              "required": true
+            },
+            {
+              "key": "nav-2",
+              "path": "navLink2",
+              "label": "Enlace 3",
+              "type": "link",
+              "required": true
+            },
+            {
+              "key": "nav-3",
+              "path": "navLink3",
+              "label": "Enlace 4",
+              "type": "link",
+              "required": true
+            },
+            {
+              "key": "cta-link",
+              "path": "ctaLink",
+              "label": "Boton de reserva",
+              "type": "link",
+              "required": true
+            }
+          ]
+        },
+        {
+          "key": "site-footer",
+          "name": "Pie de pagina",
+          "type": "footer",
+          "position": 8,
+          "visible": true,
+          "lockedPosition": false,
+          "initialContent": {
+            "brand": "Claudia Sanchez Urencio",
+            "line": "Executive Career Coach & Advisor",
+            "description": "Hoy acompaño a ejecutivos senior a tomar decisiones sobre lo que sigue, combinando experiencia corporativa, coaching y una mirada práctica y humana.",
+            "copyright": "© 2026",
+            "nav": [
+              {
+                "id": "enfoque",
+                "label": "Enfoque"
+              },
+              {
+                "id": "testimonios",
+                "label": "Testimonios"
+              },
+              {
+                "id": "life",
+                "label": "Modelo L.I.F.E."
+              },
+              {
+                "id": "sobre-mi",
+                "label": "Sobre mí"
+              }
+            ],
+            "exploreHeading": "Explorar",
+            "connectHeading": "Conectar",
+            "linkedinLabel": "LinkedIn",
+            "calendlyLabel": "Calendly",
+            "navLink0": {
+              "label": "Enfoque",
+              "href": "#enfoque"
+            },
+            "navLink1": {
+              "label": "Testimonios",
+              "href": "#testimonios"
+            },
+            "navLink2": {
+              "label": "Modelo L.I.F.E.",
+              "href": "#life"
+            },
+            "navLink3": {
+              "label": "Sobre mí",
+              "href": "#sobre-mi"
+            },
+            "linkedinLink": {
+              "label": "LinkedIn",
+              "href": "https://www.linkedin.com/in/careertransitioncoachclau/"
+            },
+            "calendlyLink": {
+              "label": "Calendly",
+              "href": "https://calendly.com/claudiasanchezurencio/45min"
+            }
+          },
+          "fields": [
+            {
+              "key": "brand",
+              "path": "brand",
+              "label": "Marca",
+              "type": "string"
+            },
+            {
+              "key": "line",
+              "path": "line",
+              "label": "Especialidad",
+              "type": "string"
+            },
+            {
+              "key": "description",
+              "path": "description",
+              "label": "Descripcion",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "copyright",
+              "path": "copyright",
+              "label": "Copyright",
+              "type": "string"
+            },
+            {
+              "key": "exploreHeading",
+              "path": "exploreHeading",
+              "label": "Titulo de navegacion",
+              "type": "string"
+            },
+            {
+              "key": "nav-0",
+              "path": "navLink0",
+              "label": "Enlace 1",
+              "type": "link",
+              "required": true
+            },
+            {
+              "key": "nav-1",
+              "path": "navLink1",
+              "label": "Enlace 2",
+              "type": "link",
+              "required": true
+            },
+            {
+              "key": "nav-2",
+              "path": "navLink2",
+              "label": "Enlace 3",
+              "type": "link",
+              "required": true
+            },
+            {
+              "key": "nav-3",
+              "path": "navLink3",
+              "label": "Enlace 4",
+              "type": "link",
+              "required": true
+            },
+            {
+              "key": "connectHeading",
+              "path": "connectHeading",
+              "label": "Titulo de contacto",
+              "type": "string"
+            },
+            {
+              "key": "linkedin-link",
+              "path": "linkedinLink",
+              "label": "LinkedIn",
+              "type": "link",
+              "required": true
+            },
+            {
+              "key": "calendly-link",
+              "path": "calendlyLink",
+              "label": "Calendly",
+              "type": "link",
+              "required": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "gracias",
+      "name": "Gracias",
+      "route": "/gracias",
+      "slug": "gracias",
+      "sections": [
+        {
+          "key": "neutral",
+          "name": "neutral",
+          "type": "neutral",
+          "initialContent": {
+            "title": "Tu próxima conversación",
+            "paragraph1": "Esta página aparece después de completar una reserva. Si todavía no has agendado, puedes regresar al programa.",
+            "cta": {
+              "label": "Volver a Diseño de Carrera",
+              "href": "/diseno-de-carrera"
+            }
+          },
+          "fields": [
+            {
+              "key": "title",
+              "path": "title",
+              "label": "title",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "paragraph1",
+              "path": "paragraph1",
+              "label": "paragraph1",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "cta",
+              "path": "cta",
+              "label": "cta",
+              "type": "link"
+            }
+          ]
+        },
+        {
+          "key": "confirmacion",
+          "name": "confirmacion",
+          "type": "confirmacion",
+          "initialContent": {
+            "title": "¡Gracias por agendar tu conversación!",
+            "paragraph1": "Tu reserva se realizó correctamente.",
+            "paragraph2": "Este es el primer paso para explorar cómo quieres construir tu siguiente etapa profesional y personal.",
+            "paragraph3": "Durante nuestra conversación podremos conocer tu situación actual, hablar sobre tus objetivos y explorar cómo puedo acompañarte.",
+            "highlight": "Revisa tu correo electrónico: recibirás los detalles de la reunión y el enlace para conectarte.",
+            "paragraph4": "Nos vemos pronto.",
+            "signature": "Claudia Sanchez Urencio"
+          },
+          "fields": [
+            {
+              "key": "title",
+              "path": "title",
+              "label": "title",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "paragraph1",
+              "path": "paragraph1",
+              "label": "paragraph1",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "paragraph2",
+              "path": "paragraph2",
+              "label": "paragraph2",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "paragraph3",
+              "path": "paragraph3",
+              "label": "paragraph3",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "highlight",
+              "path": "highlight",
+              "label": "highlight",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "paragraph4",
+              "path": "paragraph4",
+              "label": "paragraph4",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "signature",
+              "path": "signature",
+              "label": "signature",
+              "type": "string",
+              "multiline": true
+            }
+          ]
+        },
+        {
+          "key": "proximos-pasos",
+          "name": "proximos-pasos",
+          "type": "proximos-pasos",
+          "initialContent": {
+            "items": [
+              {
+                "_id": "item-1",
+                "visible": 1,
+                "title": "Revisa tu correo",
+                "description": "Encontrarás la confirmación y los detalles de tu reunión."
+              },
+              {
+                "_id": "item-2",
+                "visible": 1,
+                "title": "Reserva un espacio en tu agenda",
+                "description": "Ten presente el día y la hora seleccionados para la conversación."
+              },
+              {
+                "_id": "item-3",
+                "visible": 1,
+                "title": "Piensa en lo que te gustaría conversar",
+                "description": "No necesitas preparar nada formal. Puedes llegar con tus preguntas, inquietudes o ideas."
+              }
+            ]
+          },
+          "fields": [
+            {
+              "key": "items",
+              "path": "items",
+              "label": "items",
+              "type": "collection",
+              "minItems": 0,
+              "maxItems": 200,
+              "itemFields": [
+                {
+                  "key": "visible",
+                  "path": "visible",
+                  "label": "visible",
+                  "type": "number"
+                },
+                {
+                  "key": "title",
+                  "path": "title",
+                  "label": "title",
+                  "type": "string",
+                  "multiline": true
+                },
+                {
+                  "key": "description",
+                  "path": "description",
+                  "label": "description",
+                  "type": "string",
+                  "multiline": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "volver",
+          "name": "volver",
+          "type": "volver",
+          "initialContent": {
+            "cta": {
+              "label": "Volver al inicio",
+              "href": "/"
+            }
+          },
+          "fields": [
+            {
+              "key": "cta",
+              "path": "cta",
+              "label": "cta",
+              "type": "link"
+            }
+          ]
+        },
+        {
+          "key": "seo",
+          "name": "seo",
+          "type": "seo",
+          "initialContent": {
+            "title": "Gracias | Claudia Sanchez Urencio",
+            "description": "Esta página aparece después de completar una reserva. Si todavía no has agendado una conversación, puedes regresar al programa."
+          },
+          "fields": [
+            {
+              "key": "title",
+              "path": "title",
+              "label": "title",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "description",
+              "path": "description",
+              "label": "description",
+              "type": "string",
+              "multiline": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "articulos",
+      "name": "Artículos",
+      "route": "/articulos",
+      "slug": "articulos",
+      "sections": [
+        {
+          "key": "intro",
+          "name": "intro",
+          "type": "intro",
+          "initialContent": {
+            "title": "Artículos",
+            "eyebrow": "How to Thrive Beyond 40",
+            "subtitle": "Un newsletter para líderes que buscan evolucionar más allá de los éxitos convencionales.",
+            "paragraph1": "Reflexiones sobre liderazgo, desarrollo profesional, transiciones de carrera y las decisiones que nos permiten construir nuevas etapas con claridad y propósito."
+          },
+          "fields": [
+            {
+              "key": "title",
+              "path": "title",
+              "label": "title",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "eyebrow",
+              "path": "eyebrow",
+              "label": "eyebrow",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "subtitle",
+              "path": "subtitle",
+              "label": "subtitle",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "paragraph1",
+              "path": "paragraph1",
+              "label": "paragraph1",
+              "type": "string",
+              "multiline": true
+            }
+          ]
+        },
+        {
+          "key": "listado",
+          "name": "listado",
+          "type": "listado",
+          "initialContent": {
+            "empty": "Los artículos estarán disponibles próximamente.",
+            "readLabel": "Leer artículo",
+            "items": []
+          },
+          "fields": [
+            {
+              "key": "empty",
+              "path": "empty",
+              "label": "empty",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "readLabel",
+              "path": "readLabel",
+              "label": "readLabel",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "items",
+              "path": "items",
+              "label": "items",
+              "type": "collection",
+              "minItems": 0,
+              "maxItems": 200,
+              "itemFields": [
+                {
+                  "key": "slug",
+                  "path": "slug",
+                  "label": "slug",
+                  "type": "string",
+                  "multiline": true
+                },
+                {
+                  "key": "title",
+                  "path": "title",
+                  "label": "title",
+                  "type": "string",
+                  "multiline": true
+                },
+                {
+                  "key": "publishedAt",
+                  "path": "publishedAt",
+                  "label": "publishedAt",
+                  "type": "string",
+                  "multiline": true
+                },
+                {
+                  "key": "cover",
+                  "path": "cover",
+                  "label": "cover",
+                  "type": "image"
+                },
+                {
+                  "key": "alt",
+                  "path": "alt",
+                  "label": "alt",
+                  "type": "string",
+                  "multiline": true
+                },
+                {
+                  "key": "body",
+                  "path": "body",
+                  "label": "body",
+                  "type": "string",
+                  "multiline": true
+                },
+                {
+                  "key": "status",
+                  "path": "status",
+                  "label": "status",
+                  "type": "string",
+                  "multiline": true
+                },
+                {
+                  "key": "visible",
+                  "path": "visible",
+                  "label": "visible",
+                  "type": "number"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "seo",
+          "name": "seo",
+          "type": "seo",
+          "initialContent": {
+            "title": "Artículos | Claudia Sanchez Urencio",
+            "description": "Reflexiones sobre liderazgo, desarrollo profesional, transiciones de carrera y las decisiones que nos permiten construir nuevas etapas con claridad y propósito."
+          },
+          "fields": [
+            {
+              "key": "title",
+              "path": "title",
+              "label": "title",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "description",
+              "path": "description",
+              "label": "description",
+              "type": "string",
+              "multiline": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "articulo",
+      "name": "Artículo",
+      "route": "/articulos/:slug",
+      "slug": "articulo",
+      "sections": [
+        {
+          "key": "encabezado",
+          "name": "encabezado",
+          "type": "encabezado",
+          "initialContent": {
+            "collection": "How to Thrive Beyond 40"
+          },
+          "fields": [
+            {
+              "key": "collection",
+              "path": "collection",
+              "label": "collection",
+              "type": "string",
+              "multiline": true
+            }
+          ]
+        },
+        {
+          "key": "contenido",
+          "name": "contenido",
+          "type": "contenido",
+          "initialContent": {
+            "unavailable": "Este artículo todavía no está disponible."
+          },
+          "fields": [
+            {
+              "key": "unavailable",
+              "path": "unavailable",
+              "label": "unavailable",
+              "type": "string",
+              "multiline": true
+            }
+          ]
+        },
+        {
+          "key": "pie-articulo",
+          "name": "pie-articulo",
+          "type": "pie-articulo",
+          "initialContent": {
+            "signature": "Por Claudia Sanchez Urencio",
+            "back": {
+              "label": "Volver a Artículos",
+              "href": "/articulos"
+            }
+          },
+          "fields": [
+            {
+              "key": "signature",
+              "path": "signature",
+              "label": "signature",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "back",
+              "path": "back",
+              "label": "back",
+              "type": "link"
+            }
+          ]
+        },
+        {
+          "key": "seo",
+          "name": "seo",
+          "type": "seo",
+          "initialContent": {
+            "title": "Artículo | Claudia Sanchez Urencio",
+            "description": ""
+          },
+          "fields": [
+            {
+              "key": "title",
+              "path": "title",
+              "label": "title",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "description",
+              "path": "description",
+              "label": "description",
+              "type": "string",
+              "multiline": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "404",
+      "name": "Página no encontrada",
+      "route": "/404",
+      "slug": "404",
+      "sections": [
+        {
+          "key": "intro",
+          "name": "intro",
+          "type": "intro",
+          "initialContent": {
+            "eyebrow": "404",
+            "title": "No encontramos esta página.",
+            "paragraph1": "Puedes volver al inicio para continuar explorando.",
+            "cta": {
+              "label": "Volver al inicio",
+              "href": "/"
+            }
+          },
+          "fields": [
+            {
+              "key": "eyebrow",
+              "path": "eyebrow",
+              "label": "eyebrow",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "title",
+              "path": "title",
+              "label": "title",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "paragraph1",
+              "path": "paragraph1",
+              "label": "paragraph1",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "cta",
+              "path": "cta",
+              "label": "cta",
+              "type": "link"
+            }
+          ]
+        },
+        {
+          "key": "seo",
+          "name": "seo",
+          "type": "seo",
+          "initialContent": {
+            "title": "Página no encontrada | Claudia Sanchez Urencio",
+            "description": "Puedes volver al inicio para continuar explorando."
+          },
+          "fields": [
+            {
+              "key": "title",
+              "path": "title",
+              "label": "title",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "description",
+              "path": "description",
+              "label": "description",
+              "type": "string",
+              "multiline": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "comunidad-y-experiencias",
+      "name": "Comunidad y Experiencias",
+      "route": "/comunidad-y-experiencias",
+      "slug": "comunidad-y-experiencias",
+      "sections": [
+        {
+          "key": "hero",
+          "name": "hero",
+          "type": "hero",
+          "initialContent": {
+            "eyebrow": "Comunidad y Experiencias",
+            "title": "Perspectiva, conversación y espacio para decidir lo que sigue.",
+            "paragraph1": "Experiencias grupales e inmersivas para ejecutivos, líderes y equipos directivos.",
+            "paragraph2": "La comunidad aporta preguntas, contraste y acompañamiento sin sustituir la estrategia personal.",
+            "cta": {
+              "label": "Conoce las experiencias",
+              "href": "#experiencias"
+            }
+          },
+          "fields": [
+            {
+              "key": "eyebrow",
+              "path": "eyebrow",
+              "label": "eyebrow",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "title",
+              "path": "title",
+              "label": "title",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "paragraph1",
+              "path": "paragraph1",
+              "label": "paragraph1",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "paragraph2",
+              "path": "paragraph2",
+              "label": "paragraph2",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "cta",
+              "path": "cta",
+              "label": "cta",
+              "type": "link"
+            }
+          ]
+        },
+        {
+          "key": "experiencias",
+          "name": "experiencias",
+          "type": "experiencias",
+          "initialContent": {
+            "title": "Dos experiencias para salir de la inercia",
+            "items": [
+              {
+                "_id": "lifeplacement",
+                "visible": 1,
+                "title": "LifePlacement",
+                "subtitle": "Tu carrera a largo plazo, decidida en comunidad.",
+                "description": "Para ejecutivos que quieren definir su siguiente etapa acompañados por pares.\n\nCohorte virtual: 6 encuentros grupales en vivo, sesión individual con Strategic Advisor, assessments, encuentro presencial de cierre y membresía permanente.\n\nOff-site de 3 días: 3 encuentros virtuales, inmersión presencial y encuentro de cierre.\n\nBusca aportar claridad sobre identidad, salud, patrimonio, relaciones y próximos pasos profesionales.",
+                "href": "/contacto?experiencia=lifeplacement",
+                "label": "Solicitar información"
+              },
+              {
+                "_id": "conscious-leadership",
+                "visible": 1,
+                "title": "Retiro Conscious Leadership",
+                "subtitle": "Sal de la operación para rediseñar cómo lideras.",
+                "description": "Experiencia inmersiva presencial para líderes y equipos directivos. Trabaja autoconocimiento, impacto del liderazgo en los demás, comunicación y responsabilidad, adaptación al cambio y prácticas aplicables a la organización.",
+                "href": "/contacto?experiencia=conscious-leadership",
+                "label": "Solicitar información"
+              }
+            ]
+          },
+          "fields": [
+            {
+              "key": "title",
+              "path": "title",
+              "label": "title",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "items",
+              "path": "items",
+              "label": "items",
+              "type": "collection",
+              "minItems": 0,
+              "maxItems": 200,
+              "itemFields": [
+                {
+                  "key": "visible",
+                  "path": "visible",
+                  "label": "visible",
+                  "type": "number"
+                },
+                {
+                  "key": "title",
+                  "path": "title",
+                  "label": "title",
+                  "type": "string",
+                  "multiline": true
+                },
+                {
+                  "key": "subtitle",
+                  "path": "subtitle",
+                  "label": "subtitle",
+                  "type": "string",
+                  "multiline": true
+                },
+                {
+                  "key": "description",
+                  "path": "description",
+                  "label": "description",
+                  "type": "string",
+                  "multiline": true
+                },
+                {
+                  "key": "href",
+                  "path": "href",
+                  "label": "href",
+                  "type": "string",
+                  "multiline": true
+                },
+                {
+                  "key": "label",
+                  "path": "label",
+                  "label": "label",
+                  "type": "string",
+                  "multiline": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "contacto",
+          "name": "contacto",
+          "type": "contacto",
+          "initialContent": {
+            "title": "Conoce cuál experiencia corresponde a tu momento.",
+            "paragraph1": "Las fechas, sedes, cupos y disponibilidad se comunicarán cuando estén confirmados.",
+            "cta": {
+              "label": "Solicitar información",
+              "href": "/contacto"
+            }
+          },
+          "fields": [
+            {
+              "key": "title",
+              "path": "title",
+              "label": "title",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "paragraph1",
+              "path": "paragraph1",
+              "label": "paragraph1",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "cta",
+              "path": "cta",
+              "label": "cta",
+              "type": "link"
+            }
+          ]
+        },
+        {
+          "key": "seo",
+          "name": "seo",
+          "type": "seo",
+          "initialContent": {
+            "title": "Comunidad y Experiencias | Claudia Sanchez Urencio",
+            "description": "LifePlacement y Retiro Conscious Leadership para ejecutivos, líderes y equipos directivos."
+          },
+          "fields": [
+            {
+              "key": "title",
+              "path": "title",
+              "label": "title",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "description",
+              "path": "description",
+              "label": "description",
+              "type": "string",
+              "multiline": true
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

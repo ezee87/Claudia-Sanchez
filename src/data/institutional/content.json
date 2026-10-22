@@ -1,0 +1,638 @@
+{
+  "/": {
+    "hero": {
+      "title": "Coaching ejecutivo, desarrollo de liderazgo y estrategia de carrera.",
+      "paragraph1": "Acompaño a líderes, ejecutivos y organizaciones en momentos de desarrollo, transformación y cambio.",
+      "paragraph2": "Combino más de 20 años de experiencia corporativa con una mirada estratégica y humana para ayudar a las personas y a las organizaciones a reconocer posibilidades, tomar mejores decisiones y avanzar con claridad.",
+      "eyebrow": "Claudia Sanchez Urencio",
+      "cta": {
+        "label": "Conoce mi trabajo",
+        "href": "#servicios"
+      },
+      "image": "/assets/claudia-sanchez/claudia-bg-hero.png",
+      "alt": "Claudia Sanchez Urencio"
+    },
+    "sobre-mi": {
+      "title": "Una trayectoria construida desde el liderazgo, las personas y la transformación.",
+      "paragraph1": "Soy Claudia Sanchez Urencio, coach ejecutiva y especialista en desarrollo de liderazgo y estrategia de carrera.",
+      "paragraph2": "Mi trayectoria profesional comenzó dentro de grandes organizaciones, donde durante más de 20 años trabajé de cerca con líderes, equipos y áreas de negocio, acompañando decisiones relacionadas con talento, desarrollo organizacional y transformación.",
+      "paragraph3": "Ocupé posiciones de liderazgo en Recursos Humanos en compañías internacionales como Diageo y Kraft Foods, con responsabilidades regionales en América Latina.",
+      "paragraph4": "Esa experiencia me permitió conocer de primera mano los desafíos que enfrentan quienes lideran organizaciones, desarrollan equipos o atraviesan decisiones importantes en su carrera.",
+      "paragraph5": "Hoy combino esa perspectiva corporativa con mi formación en coaching para acompañar tanto a ejecutivos que buscan construir su siguiente etapa como a empresas que quieren fortalecer su liderazgo y desarrollar su talento.",
+      "credentials": [
+        {
+          "_id": "item-1",
+          "visible": 0,
+          "title": "Psicología Organizacional — Universidad Iberoamericana",
+          "status": "pendiente"
+        },
+        {
+          "_id": "item-2",
+          "visible": 0,
+          "title": "ACC — International Coaching Federation (ICF)",
+          "status": "pendiente"
+        },
+        {
+          "_id": "item-3",
+          "visible": 0,
+          "title": "Certified Master of Career Services — NCDA",
+          "status": "pendiente"
+        },
+        {
+          "_id": "item-4",
+          "visible": 0,
+          "title": "Transition Certified Coach — Coaching.com",
+          "status": "pendiente"
+        },
+        {
+          "_id": "item-5",
+          "visible": 0,
+          "title": "Máster en Diversidad Generacional — LUXONOMY",
+          "status": "pendiente"
+        }
+      ]
+    },
+    "servicios": {
+      "title": "Tres formas de construir la siguiente etapa con estrategia.",
+      "items": [
+        {
+          "_id": "item-1",
+          "visible": 1,
+          "eyebrow": "Para personas",
+          "title": "Construir una carrera con dirección, propósito y nuevas posibilidades.",
+          "description": "Acompaño a ejecutivos y profesionales con experiencia que buscan fortalecer su liderazgo, prepararse para una transición o diseñar estratégicamente la siguiente etapa de su trayectoria. El trabajo combina reflexión, claridad, herramientas prácticas y acciones concretas para avanzar hacia sus objetivos.",
+          "href": "/personas"
+        },
+        {
+          "_id": "item-2",
+          "visible": 1,
+          "eyebrow": "Para empresas",
+          "title": "Fortalecer el liderazgo y acompañar el cambio organizacional.",
+          "description": "Trabajo con organizaciones que buscan desarrollar a sus líderes, potenciar el desempeño de sus equipos y acompañar procesos de transformación y transición profesional. A través del coaching ejecutivo, la facilitación y programas de desarrollo, contribuyo a conectar el crecimiento de las personas con los desafíos del negocio.",
+          "href": "/empresas"
+        },
+        {
+          "_id": "comunidad",
+          "visible": 1,
+          "eyebrow": "Comunidad y Experiencias",
+          "title": "Perspectiva compartida para decisiones relevantes.",
+          "description": "Espacios de encuentro y experiencias grupales para ejecutivos y líderes que buscan ampliar su perspectiva, reflexionar sobre su siguiente etapa y explorar nuevas posibilidades. A través de conversaciones, aprendizaje compartido y experiencias inmersivas, propongo salir de la dinámica cotidiana para conectar con nuevas ideas, fortalecer relaciones y tomar decisiones con mayor claridad.",
+          "href": "/comunidad-y-experiencias"
+        }
+      ],
+      "cta": {
+        "label": "Conversemos sobre tus necesidades",
+        "href": "/contacto"
+      }
+    },
+    "enfoque": {
+      "title": "Comprender el contexto. Encontrar claridad. Transformarla en acción.",
+      "paragraph1": "Cada persona, equipo y organización tiene una historia, desafíos y objetivos diferentes.",
+      "paragraph2": "Por eso, mi enfoque comienza por escuchar y comprender el contexto antes de proponer soluciones.",
+      "paragraph3": "Combino una mirada sistémica con experiencia corporativa y herramientas de coaching para identificar oportunidades, cuestionar perspectivas y construir estrategias que puedan llevarse a la práctica.",
+      "paragraph4": "Creo en un acompañamiento cercano, que desafía cuando es necesario y que permite a las personas encontrar sus propias respuestas.",
+      "steps": [
+        { "_id": "anticipacion", "visible": 1, "title": "Anticipación", "description": "Leer el contexto, identificar tendencias y abrir nuevas posibilidades." },
+        { "_id": "estrategia", "visible": 1, "title": "Estrategia", "description": "Transformar la reflexión en dirección y planes concretos." },
+        { "_id": "ecosistema", "visible": 1, "title": "Ecosistema", "description": "Conectar personas, ideas y recursos para potenciar el impacto." }
+      ],
+      "highlight": "Porque el desarrollo y la transformación requieren algo más que buenas ideas: necesitan claridad, compromiso y acción."
+    },
+    "testimonios": {
+      "title": "La experiencia de quienes han trabajado conmigo",
+      "paragraph1": "Cada proceso tiene sus propios desafíos. Estas son algunas de las experiencias de profesionales y organizaciones a los que he acompañado.",
+      "closingEyebrow": "MÁS EXPERIENCIAS COMPARTIDAS",
+      "closingTitle": "Más de 50 recomendaciones públicas en LinkedIn.",
+      "closingDescription": "Conoce otras experiencias de profesionales que han trabajado conmigo.",
+      "closingLink": {
+        "label": "Ver todas las recomendaciones ↗",
+        "href": "https://www.linkedin.com/in/claudiasanchezurencio/details/recommendations/?detailScreenTabIndex=0"
+      },
+      "items": [
+        {
+          "_id": "item-1",
+          "visible": 1,
+          "author": "Lucía López Sarre",
+          "role": "Marketing Director.",
+          "quote": "Su metodología también marca una diferencia: es clara, profunda y totalmente accionable. No se queda en la teoría; te impulsa, te estructura y te hace avanzar.",
+          "image": "/assets/claudia-sanchez/testimonials/lucia-lopez.jpg",
+          "alt": "Lucía López Sarre",
+          "sourceLabel": "Recomendación pública en LinkedIn",
+          "linkedinUrl": "https://www.linkedin.com/in/claudiasanchezurencio/details/recommendations/?detailScreenTabIndex=0"
+        },
+        {
+          "_id": "item-2",
+          "visible": 1,
+          "author": "Fabián Fuentes",
+          "role": "",
+          "quote": "Lo que distingue a Claudia no es solo su experiencia en desarrollo de talento y liderazgo — que es amplia — sino su capacidad de hacer las preguntas correctas en el momento correcto, y de acompañar sin imponer.",
+          "image": "/assets/claudia-sanchez/testimonials/fabian-fuentes.jpg",
+          "alt": "Fabián Fuentes",
+          "sourceLabel": "Recomendación pública en LinkedIn",
+          "linkedinUrl": "https://www.linkedin.com/in/claudiasanchezurencio/details/recommendations/?detailScreenTabIndex=0"
+        },
+        {
+          "_id": "item-3",
+          "visible": 1,
+          "author": "Pedro Fondevila",
+          "role": "",
+          "quote": "Claudia me ha ayudado, aprovechando su experiencia profesional, a transformar mi equipo en un equipo de alto rendimiento.",
+          "image": "/assets/claudia-sanchez/testimonials/pedro-fondevila.jpg",
+          "alt": "Pedro Fondevila",
+          "sourceLabel": "Recomendación pública en LinkedIn",
+          "linkedinUrl": "https://www.linkedin.com/in/claudiasanchezurencio/details/recommendations/?detailScreenTabIndex=0"
+        }
+      ]
+    },
+    "articulos": {
+      "title": "Reflexiones sobre liderazgo, carrera y transformación.",
+      "paragraph1": "Comparto ideas, experiencias y perspectivas sobre los desafíos que enfrentan los líderes, las organizaciones y los profesionales a lo largo de su trayectoria.",
+      "paragraph2": "Un espacio para explorar nuevas formas de pensar el desarrollo profesional, el liderazgo y el futuro del trabajo.",
+      "cta": {
+        "label": "Ver todos los artículos",
+        "href": "/articulos"
+      }
+    },
+    "contacto": {
+      "eyebrow": "Comencemos",
+      "image": "/assets/claudia-sanchez/claudia-bg-contacto.png",
+      "title": "Toda transformación comienza con una conversación.",
+      "paragraph1": "Ya sea que estés explorando nuevas posibilidades para tu carrera o buscando fortalecer el liderazgo dentro de tu organización, podemos comenzar por entender tus desafíos y objetivos.",
+      "paragraph2": "Cuéntame qué necesitas y exploremos cómo puedo acompañarte.",
+      "cta": {
+        "label": "Hablemos",
+        "href": "/contacto"
+      }
+    },
+    "navbar": {
+      "brand": {
+        "label": "Claudia Sanchez Urencio",
+        "href": "/"
+      },
+      "home": {
+        "label": "Inicio",
+        "href": "/"
+      },
+      "about": {
+        "label": "Sobre mí",
+        "href": "/#sobre-mi"
+      },
+      "servicesLabel": "Servicios",
+      "people": {
+        "label": "Para personas",
+        "href": "/personas"
+      },
+      "business": {
+        "label": "Para empresas",
+        "href": "/empresas"
+      },
+      "articles": {
+        "label": "Artículos",
+        "href": "/articulos"
+      },
+      "contact": {
+        "label": "Contacto",
+        "href": "/contacto"
+      },
+      "openLabel": "Abrir menú",
+      "closeLabel": "Cerrar menú",
+      "skipLabel": "Saltar al contenido"
+    },
+    "footer": {
+      "brand": "Claudia Sanchez Urencio",
+      "line": "Coaching ejecutivo, desarrollo de liderazgo y estrategia de carrera.",
+      "linkedin": {
+        "label": "LinkedIn",
+        "href": "https://www.linkedin.com/in/careertransitioncoachclau/"
+      }
+    },
+    "seo": {
+      "title": "Inicio | Claudia Sanchez Urencio",
+      "description": "Acompaño a líderes, ejecutivos y organizaciones en momentos de desarrollo, transformación y cambio."
+    }
+  },
+  "/personas": {
+    "hero": {
+      "title": "Tu carrera puede seguir evolucionando. Hazlo con claridad y estrategia.",
+      "paragraph1": "Cada etapa profesional trae nuevos desafíos, decisiones y oportunidades.",
+      "paragraph2": "Acompaño a ejecutivos y profesionales con experiencia a fortalecer su liderazgo, explorar nuevas posibilidades y construir una trayectoria alineada con sus objetivos y prioridades.",
+      "eyebrow": "Para personas",
+      "cta": {
+        "label": "Conoce mis servicios",
+        "href": "#servicios"
+      }
+    },
+    "situaciones": {
+      "title": "¿En qué momento de tu carrera te encuentras?",
+      "paragraph1": "No todas las decisiones profesionales comienzan con la búsqueda de un nuevo empleo. A veces, el desafío está en crecer dentro de una organización, redefinir prioridades o descubrir qué queremos construir a partir de ahora.",
+      "items": [
+        {
+          "_id": "item-1",
+          "visible": 1,
+          "title": "Estás considerando un cambio profesional",
+          "description": "Quieres explorar nuevas oportunidades, cambiar de dirección o prepararte para una transición después de una trayectoria consolidada."
+        },
+        {
+          "_id": "item-2",
+          "visible": 1,
+          "title": "Quieres fortalecer tu liderazgo",
+          "description": "Buscas desarrollar nuevas capacidades, ganar perspectiva y afrontar con mayor seguridad los desafíos de tu rol."
+        },
+        {
+          "_id": "item-3",
+          "visible": 1,
+          "title": "Necesitas claridad para tomar decisiones",
+          "description": "Te encuentras frente a diferentes posibilidades y quieres evaluar tus opciones con una mirada estratégica."
+        },
+        {
+          "_id": "item-4",
+          "visible": 1,
+          "title": "Estás pensando en tu siguiente etapa",
+          "description": "Has construido una carrera importante y quieres definir cómo seguir creciendo, contribuyendo y disfrutando los próximos años."
+        }
+      ]
+    },
+    "servicios": {
+      "title": "Un acompañamiento adaptado a tu momento profesional",
+      "items": [
+        {
+          "_id": "item-1",
+          "visible": 1,
+          "title": "Coaching ejecutivo y desarrollo de liderazgo",
+          "description": "Un espacio de acompañamiento para líderes que buscan ampliar su perspectiva, fortalecer sus capacidades y afrontar con mayor claridad los desafíos de su posición.\n\nEl proceso puede abordar la toma de decisiones, el desarrollo de habilidades de liderazgo, la comunicación y el crecimiento profesional.",
+          "subtitle": "",
+          "label": "Consultar por coaching ejecutivo",
+          "href": "/contacto?tipo=persona&servicio=coaching-ejecutivo"
+        },
+        {
+          "_id": "item-2",
+          "visible": 1,
+          "title": "Transición y estrategia de carrera",
+          "description": "Acompañamiento para profesionales que están evaluando un cambio, explorando nuevas oportunidades o preparándose para una transición laboral.\n\nEl objetivo es reconocer fortalezas, definir una dirección profesional y desarrollar una estrategia que permita avanzar con mayor claridad y confianza.",
+          "subtitle": "",
+          "label": "Consultar por este servicio",
+          "href": "/contacto?tipo=persona&servicio=transicion-carrera"
+        },
+        {
+          "_id": "item-3",
+          "visible": 1,
+          "title": "Diseña tu futuro",
+          "description": "Un programa orientado a ejecutivos con experiencia que buscan diseñar los próximos años de su vida y carrera, integrando sus prioridades personales, motivaciones, estrategia profesional y posicionamiento.\n\nA través de la metodología L.I.F.E., el proceso propone una mirada integral para construir una nueva etapa con mayor claridad y propósito.",
+          "subtitle": "Tu siguiente etapa profesional merece una estrategia propia.",
+          "label": "Descubre Diseña tu futuro",
+          "href": "/disena-tu-futuro"
+        }
+      ]
+    },
+    "enfoque": {
+      "title": "Un proceso que parte de ti y se convierte en acción",
+      "paragraph1": "No existen dos trayectorias iguales. Por eso, el acompañamiento comienza por comprender tu situación, tus desafíos y aquello que quieres lograr.",
+      "paragraph2": "A partir de esa conversación, trabajamos para identificar fortalezas, explorar nuevas perspectivas y construir una estrategia que puedas llevar a la práctica.",
+      "paragraph3": "Mi enfoque combina experiencia corporativa, escucha, reflexión y herramientas de desarrollo profesional.",
+      "paragraph4": "El objetivo no es darte respuestas predeterminadas, sino ayudarte a tomar decisiones más conscientes y avanzar con mayor seguridad."
+    },
+    "testimonios": {
+      "title": "Experiencias de quienes han dado el siguiente paso",
+      "paragraph1": "Cada trayectoria es diferente. Conoce cómo otros profesionales han encontrado claridad, fortalecido sus capacidades y avanzado hacia sus objetivos.",
+      "items": [
+        {
+          "_id": "item-1",
+          "visible": 1,
+          "author": "Santiago Porrero",
+          "role": "Independent Consultant & Investor at EAP",
+          "quote": "El proceso me ayudó no solo a fortalecer mi CV, sino también a tener mayor claridad sobre lo que estoy buscando, cómo plantearlo y, sobre todo, cómo comunicar de manera efectiva mi experiencia y propuesta de valor.",
+          "image": "",
+          "alt": ""
+        },
+        {
+          "_id": "item-2",
+          "visible": 1,
+          "author": "Ovidio Uribe",
+          "role": "Sales Director / Trade Marketing / Operations Director",
+          "quote": "Gracias a su acompañamiento, recuperé la claridad, la confianza y la energía para reenfocar mis objetivos, fortalecer mis capacidades y reconectar con mi propósito.",
+          "image": "",
+          "alt": ""
+        },
+        {
+          "_id": "item-3",
+          "visible": 1,
+          "author": "Alejandra García Ruiz",
+          "role": "Strategic Revenue Management",
+          "quote": "El proceso con Claudia me ayudó a ordenar mis ideas, entender qué quería lograr, tener conversaciones valiosas dentro de la compañía.",
+          "image": "",
+          "alt": ""
+        }
+      ]
+    },
+    "contacto": {
+      "title": "¿Qué te gustaría construir en tu siguiente etapa?",
+      "paragraph1": "Ya sea que estés considerando un cambio, buscando crecer como líder o necesites claridad para tomar una decisión importante, podemos comenzar con una conversación.",
+      "paragraph2": "Cuéntame dónde estás y qué te gustaría lograr.",
+      "cta": {
+        "label": "Hablemos de tu carrera",
+        "href": "/contacto?tipo=persona"
+      }
+    },
+    "seo": {
+      "title": "Para personas | Claudia Sanchez Urencio",
+      "description": "Cada etapa profesional trae nuevos desafíos, decisiones y oportunidades."
+    }
+  },
+  "/empresas": {
+    "hero": {
+      "title": "El desarrollo de tus líderes impulsa la evolución de tu organización.",
+      "paragraph1": "Acompaño a empresas y equipos de liderazgo a fortalecer sus capacidades, afrontar procesos de cambio y transformar los desafíos del negocio en oportunidades de desarrollo.",
+      "paragraph2": "Combino experiencia corporativa, coaching ejecutivo y una mirada estratégica de las personas y las organizaciones.",
+      "eyebrow": "Para empresas",
+      "cta": {
+        "label": "Explora los servicios",
+        "href": "#servicios"
+      }
+    },
+    "desafios": {
+      "title": "Los desafíos del negocio también son desafíos de liderazgo.",
+      "paragraph1": "Las organizaciones evolucionan constantemente. Nuevas responsabilidades, cambios de dirección y equipos con distintas necesidades exigen líderes capaces de adaptarse, tomar decisiones y desarrollar a las personas.",
+      "items": [
+        {
+          "_id": "item-1",
+          "visible": 1,
+          "title": "Desarrollar líderes para nuevos desafíos",
+          "description": "Preparar a quienes asumen mayores responsabilidades o necesitan fortalecer sus capacidades de liderazgo."
+        },
+        {
+          "_id": "item-2",
+          "visible": 1,
+          "title": "Mejorar la colaboración y el desempeño de los equipos",
+          "description": "Construir relaciones de trabajo más efectivas, aprovechar las fortalezas individuales y alinear esfuerzos hacia objetivos compartidos."
+        },
+        {
+          "_id": "item-3",
+          "visible": 1,
+          "title": "Acompañar procesos de transformación",
+          "description": "Ayudar a líderes y equipos a gestionar cambios organizacionales con mayor claridad, compromiso y capacidad de adaptación."
+        },
+        {
+          "_id": "item-4",
+          "visible": 1,
+          "title": "Gestionar transiciones profesionales",
+          "description": "Acompañar a profesionales y organizaciones durante cambios de rol, reestructuraciones o nuevas etapas laborales."
+        }
+      ]
+    },
+    "servicios": {
+      "title": "Soluciones de desarrollo adaptadas a tu organización",
+      "items": [
+        {
+          "_id": "item-1",
+          "visible": 1,
+          "title": "Coaching ejecutivo para líderes",
+          "description": "Acompañamiento para directivos y profesionales con responsabilidades de liderazgo que buscan fortalecer sus capacidades, ampliar su perspectiva y afrontar desafíos de gestión y toma de decisiones.\n\nUn espacio de desarrollo individual que conecta el crecimiento del líder con las necesidades de su organización.",
+          "subtitle": "",
+          "label": "Consultar por coaching ejecutivo",
+          "href": "/contacto?tipo=empresa&servicio=coaching-ejecutivo"
+        },
+        {
+          "_id": "item-2",
+          "visible": 1,
+          "title": "Desarrollo de equipos y liderazgo",
+          "description": "Experiencias de aprendizaje y desarrollo orientadas a fortalecer las capacidades de liderazgo, la colaboración y el desempeño de los equipos.\n\nSegún las necesidades de la organización, el acompañamiento puede integrar talleres, sesiones de trabajo y procesos de coaching.",
+          "subtitle": "",
+          "label": "Consultar por desarrollo de equipos",
+          "href": "/contacto?tipo=empresa&servicio=desarrollo-equipos"
+        },
+        {
+          "_id": "item-3",
+          "visible": 1,
+          "title": "Acompañamiento en procesos de cambio y transición",
+          "description": "Apoyo a organizaciones y líderes que atraviesan transformaciones, cambios de responsabilidades o transiciones profesionales.\n\nEl trabajo se orienta a comprender el contexto, identificar prioridades y desarrollar herramientas para afrontar estos procesos de manera estratégica.",
+          "subtitle": "",
+          "label": "Consultar por este servicio",
+          "href": "/contacto?tipo=empresa&servicio=cambio-transicion"
+        }
+      ]
+    },
+    "experiencia": {
+      "title": "Experiencia dentro de las organizaciones. Perspectiva para acompañarlas.",
+      "paragraph1": "Antes de dedicarme al coaching ejecutivo, desarrollé una extensa trayectoria en Recursos Humanos y desarrollo organizacional, ocupando posiciones de liderazgo en compañías internacionales como Diageo y Kraft Foods.",
+      "paragraph2": "Trabajar de cerca con líderes, equipos y áreas de negocio me permitió comprender cómo se conectan las decisiones sobre talento, cultura y desarrollo con los objetivos de una organización.",
+      "paragraph3": "Hoy llevo esa experiencia a cada proceso de acompañamiento, combinando conocimiento del entorno corporativo, herramientas de coaching y una mirada humana del liderazgo.",
+      "highlight": "Porque desarrollar personas también implica comprender el negocio en el que trabajan."
+    },
+    "proceso": {
+      "title": "Cada organización tiene desafíos propios. El acompañamiento también debe serlo.",
+      "items": [
+        {
+          "_id": "item-1",
+          "visible": 1,
+          "title": "Comprender el contexto",
+          "description": "Escuchar las necesidades de la organización, conocer sus desafíos e identificar los objetivos del proceso."
+        },
+        {
+          "_id": "item-2",
+          "visible": 1,
+          "title": "Definir el enfoque",
+          "description": "Construir una propuesta de acompañamiento que considere las características de los líderes, los equipos y el entorno de trabajo."
+        },
+        {
+          "_id": "item-3",
+          "visible": 1,
+          "title": "Llevarlo a la práctica",
+          "description": "Trabajar mediante conversaciones, herramientas y experiencias de desarrollo que permitan trasladar los aprendizajes a situaciones reales."
+        },
+        {
+          "_id": "item-4",
+          "visible": 1,
+          "title": "Revisar los avances",
+          "description": "Generar espacios de reflexión y seguimiento para identificar aprendizajes, reconocer avances y ajustar el camino cuando sea necesario."
+        }
+      ]
+    },
+    "testimonios": {
+      "title": "Experiencias de liderazgo y transformación",
+      "paragraph1": "Conoce algunas experiencias de profesionales que han trabajado conmigo en el desarrollo de líderes, equipos y proyectos organizacionales.",
+      "items": [
+        {
+          "_id": "item-1",
+          "visible": 1,
+          "author": "Pedro Fondevila",
+          "role": "",
+          "quote": "Claudia me ha ayudado, aprovechando su experiencia profesional, a transformar mi equipo en un equipo de alto rendimiento.",
+          "image": "",
+          "alt": ""
+        },
+        {
+          "_id": "item-2",
+          "visible": 1,
+          "author": "Ana Cristina del Ángel Nájera",
+          "role": "Subdirectora Comercial en Softys",
+          "quote": "En Marzo 2025 tuvimos la oportunidad mi equipo y yo de tener un taller de Fascinated Groups liderado por Claudia, una experiencia única y 100% recomendable para equipos multifuncionales y diversos que requieren maximizar el talento de cada individuo y potenciar los resultados de los equipos.",
+          "image": "",
+          "alt": ""
+        },
+        {
+          "_id": "item-3",
+          "visible": 1,
+          "author": "Ricardo Schmidt",
+          "role": "Gerente General en DON SATUR SRL",
+          "quote": "Brinda soluciones muy profesionales, es muy prolija tanto en la planificación como en la ejecución, y realiza un seguimiento detallado durante los procesos en los que participa, y luego de los mismos para validar su correcta implementación.",
+          "image": "",
+          "alt": ""
+        }
+      ]
+    },
+    "contacto": {
+      "title": "Hablemos de los desafíos de tu organización.",
+      "paragraph1": "Si buscas fortalecer el liderazgo, desarrollar a tus equipos o acompañar un proceso de transformación, podemos comenzar por conocer las necesidades de tu empresa.",
+      "paragraph2": "Conversemos sobre los objetivos que quieres alcanzar y exploremos cómo puedo ayudarte.",
+      "cta": {
+        "label": "Conversemos",
+        "href": "/contacto?tipo=empresa"
+      }
+    },
+    "seo": {
+      "title": "Para empresas | Claudia Sanchez Urencio",
+      "description": "Acompaño a empresas y equipos de liderazgo a fortalecer sus capacidades, afrontar procesos de cambio y transformar los desafíos del negocio en oportunidades de desarrollo."
+    }
+  },
+  "/contacto": {
+    "intro": {
+      "title": "Conversemos sobre lo que necesitas.",
+      "paragraph1": "Cada persona y cada organización enfrenta desafíos diferentes. Me gustaría conocer tu situación y explorar cómo puedo acompañarte.",
+      "paragraph2": "Completa el formulario y cuéntame brevemente qué estás buscando. Me pondré en contacto contigo para continuar la conversación."
+    },
+    "formulario": {
+      "nameLabel": "Nombre completo *",
+      "namePlaceholder": "Tu nombre",
+      "emailLabel": "Correo electrónico *",
+      "emailPlaceholder": "nombre@correo.com",
+      "typeLabel": "¿Qué tipo de consulta deseas realizar? *",
+      "personLabel": "Servicios para personas",
+      "companyLabel": "Servicios para empresas",
+      "otherLabel": "Otra consulta",
+      "companyFieldLabel": "Empresa",
+      "companyPlaceholder": "Nombre de la organización",
+      "messageLabel": "¿En qué puedo ayudarte? *",
+      "messagePlaceholder": "Cuéntame brevemente qué necesitas...",
+      "submitLabel": "Enviar consulta",
+      "pending": "El formulario todavía no está operativo. Puedes contactarme a través de LinkedIn.",
+      "error": "No fue posible enviar tu mensaje. Inténtalo nuevamente en unos momentos.",
+      "loading": "Enviando consulta…",
+      "successTitle": "¡Gracias por escribirme!",
+      "successText": "Recibí tu mensaje. Me pondré en contacto contigo lo antes posible."
+    },
+    "contacto-directo": {
+      "title": "¿Prefieres escribir directamente?",
+      "paragraph1": "También puedes contactarme por correo electrónico.",
+      "linkedin": {
+        "label": "Claudia Sanchez Urencio",
+        "href": "https://www.linkedin.com/in/careertransitioncoachclau/"
+      }
+    },
+    "seo": {
+      "title": "Contacto | Claudia Sanchez Urencio",
+      "description": "Cada persona y cada organización enfrenta desafíos diferentes. Me gustaría conocer tu situación y explorar cómo puedo acompañarte."
+    }
+  },
+  "/gracias": {
+    "neutral": {
+      "title": "Tu próxima conversación",
+      "paragraph1": "Esta página aparece después de completar una reserva. Si todavía no has agendado una conversación, puedes regresar al programa.",
+      "cta": {
+        "label": "Volver al programa",
+        "href": "/disena-tu-futuro"
+      }
+    },
+    "confirmacion": {
+      "title": "¡Gracias por agendar tu conversación!",
+      "paragraph1": "Tu reserva se realizó correctamente.",
+      "paragraph2": "Este es el primer paso para explorar cómo quieres construir tu siguiente etapa profesional y personal.",
+      "paragraph3": "Durante nuestra conversación podremos conocer tu situación actual, hablar sobre tus objetivos y explorar cómo puedo acompañarte.",
+      "highlight": "Revisa tu correo electrónico: recibirás los detalles de la reunión y el enlace para conectarte.",
+      "paragraph4": "Nos vemos pronto.",
+      "signature": "Claudia Sanchez Urencio"
+    },
+    "proximos-pasos": {
+      "items": [
+        {
+          "_id": "item-1",
+          "visible": 1,
+          "title": "Revisa tu correo",
+          "description": "Encontrarás la confirmación y los detalles de tu reunión."
+        },
+        {
+          "_id": "item-2",
+          "visible": 1,
+          "title": "Reserva un espacio en tu agenda",
+          "description": "Ten presente el día y la hora seleccionados para la conversación."
+        },
+        {
+          "_id": "item-3",
+          "visible": 1,
+          "title": "Piensa en lo que te gustaría conversar",
+          "description": "No necesitas preparar nada formal. Puedes llegar con tus preguntas, inquietudes o ideas."
+        }
+      ]
+    },
+    "volver": {
+      "cta": {
+        "label": "Volver al inicio",
+        "href": "/"
+      }
+    },
+    "seo": {
+      "title": "Gracias | Claudia Sanchez Urencio",
+      "description": "Esta página aparece después de completar una reserva. Si todavía no has agendado una conversación, puedes regresar al programa."
+    }
+  },
+  "/articulos": {
+    "intro": {
+      "title": "Artículos",
+      "eyebrow": "How to Thrive Beyond 40",
+      "subtitle": "Un newsletter para líderes que buscan evolucionar más allá de los éxitos convencionales.",
+      "paragraph1": "Reflexiones sobre liderazgo, desarrollo profesional, transiciones de carrera y las decisiones que nos permiten construir nuevas etapas con claridad y propósito."
+    },
+    "listado": {
+      "empty": "Los artículos estarán disponibles próximamente.",
+      "readLabel": "Leer artículo",
+      "items": []
+    },
+    "seo": {
+      "title": "Artículos | Claudia Sanchez Urencio",
+      "description": "Reflexiones sobre liderazgo, desarrollo profesional, transiciones de carrera y las decisiones que nos permiten construir nuevas etapas con claridad y propósito."
+    }
+  },
+  "/articulos/:slug": {
+    "encabezado": {
+      "collection": "How to Thrive Beyond 40"
+    },
+    "contenido": {
+      "unavailable": "Este artículo todavía no está disponible."
+    },
+    "pie-articulo": {
+      "signature": "Por Claudia Sanchez Urencio",
+      "back": {
+        "label": "Volver a Artículos",
+        "href": "/articulos"
+      }
+    },
+    "seo": {
+      "title": "Artículo | Claudia Sanchez Urencio",
+      "description": ""
+    }
+  },
+  "/404": {
+    "intro": {
+      "eyebrow": "404",
+      "title": "No encontramos esta página.",
+      "paragraph1": "Puedes volver al inicio para continuar explorando.",
+      "cta": {
+        "label": "Volver al inicio",
+        "href": "/"
+      }
+    },
+    "seo": {
+      "title": "Página no encontrada | Claudia Sanchez Urencio",
+      "description": "Puedes volver al inicio para continuar explorando."
+    }
+  }
+}

@@ -10,6 +10,7 @@ export const testimonials = {
   disclaimer: 'Testimonios ilustrativos · Personas y experiencias ficticias creadas para esta demo.',
   items: [
     {
+      _id: 'alejandro-r',
       name: 'Alejandro R.',
       role: 'Director Comercial · 52 años',
       image: `${BASE}/Alejandro.png`,
@@ -17,6 +18,7 @@ export const testimonials = {
         '«Después de 25 años en el mundo corporativo, sabía que quería un cambio, pero no tenía claro hacia dónde. Lo más valioso fue dejar de pensar únicamente en mi próximo puesto y empezar a construir una estrategia para los siguientes años de mi carrera».',
     },
     {
+      _id: 'mariana-g',
       name: 'Mariana G.',
       role: 'VP de Recursos Humanos · 47 años',
       image: `${BASE}/Mariana.png`,
@@ -24,6 +26,7 @@ export const testimonials = {
         '«Tenía una trayectoria sólida, pero me costaba identificar qué quería para mi siguiente etapa. El proceso me ayudó a ordenar mis prioridades, reconocer nuevas posibilidades y tomar decisiones con mucha más claridad».',
     },
     {
+      _id: 'ricardo-m',
       name: 'Ricardo M.',
       role: 'Exdirector General · 58 años',
       image: `${BASE}/Ricardo.png`,
@@ -31,6 +34,7 @@ export const testimonials = {
         '«Salir de una posición ejecutiva después de tantos años cambia mucho más que tu situación laboral. Necesitaba volver a reconocer mi valor profesional fuera de un cargo y encontrar una nueva forma de aprovechar mi experiencia».',
     },
     {
+      _id: 'patricia-l',
       name: 'Patricia L.',
       role: 'Directora de Finanzas · 49 años',
       image: `${BASE}/Patricia.png`,
@@ -38,6 +42,7 @@ export const testimonials = {
         '«No estaba buscando cambiar de empleo inmediatamente. Quería prepararme para tener opciones. Hoy tengo una visión mucho más clara de los caminos que puedo explorar y de las decisiones que necesito tomar».',
     },
     {
+      _id: 'fernando-c',
       name: 'Fernando C.',
       role: 'Ejecutivo de Operaciones · 54 años',
       image: `${BASE}/Fernando.png`,
@@ -45,6 +50,7 @@ export const testimonials = {
         '«Había pasado meses concentrado en actualizar mi CV y contactar reclutadores. Lo que realmente necesitaba era definir qué buscaba, cómo posicionarme y dónde tenía sentido enfocar mis esfuerzos».',
     },
     {
+      _id: 'gabriela-t',
       name: 'Gabriela T.',
       role: 'Consultora y exdirectiva · 56 años',
       image: `${BASE}/Gabriela.png`,

@@ -1,0 +1,38 @@
+{
+  "version": 1,
+  "site": {
+    "key": "claudia-sanchez",
+    "name": "Claudia Sánchez"
+  },
+  "pages": [
+    {
+      "key": "inicio",
+      "name": "Inicio",
+      "route": "/",
+      "slug": "inicio",
+      "sections": [
+        {
+          "key": "hero",
+          "name": "Presentación",
+          "type": "hero",
+          "position": 0,
+          "visible": true,
+          "lockedPosition": false,
+          "initialContent": {
+            "title": "Impulsá tu próximo paso profesional",
+            "description": "Acompañamiento para tomar decisiones con claridad y confianza.",
+            "cta": {
+              "label": "Conocé mis servicios",
+              "href": "/personas"
+            }
+          },
+          "fields": [
+            { "key": "title", "path": "title", "label": "Título", "type": "string" },
+            { "key": "description", "path": "description", "label": "Descripción", "type": "string", "multiline": true },
+            { "key": "cta-label", "path": "cta.label", "label": "Texto del botón", "type": "string" }
+          ]
+        }
+      ]
+    }
+  ]
+}

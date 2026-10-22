@@ -1,11 +1,21 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'motion/react';
 import { useMediaQuery } from '../../utils/useMediaQuery.js';
+import { ClaudiaEditable, useClaudiaCmsSection } from '../../integration/eze-cms/ClaudiaCms.jsx';
+import { resolveCmsLink } from '../../integration/eze-cms/cmsLink.js';
+import { BOOKING_URL } from '../../data/claudia/booking.js';
 import BookingCTA from './BookingCTA.jsx';
 import styles from './SiteHeader.module.css';
 
 /** Header: marca + anclas + CTA único. Menú mobile accesible (aria-expanded, Escape, foco). */
 export default function SiteHeader({ brand, nav }) {
+  const { content } = useClaudiaCmsSection('site-header', { brandLink: { label: brand, href: '#inicio' }, ctaLink: null });
+  const brandLink = resolveCmsLink(content.brandLink, { label: brand, href: '#inicio' });
+  const ctaLink = resolveCmsLink(content.ctaLink, { label: 'Reservar', href: BOOKING_URL });
+  const navLinks = useMemo(() => nav.map((item, index) => ({
+    id: item.id,
+    ...resolveCmsLink(content[`navLink${index}`], { label: item.label, href: `#${item.id}` }),
+  })), [content, nav]);
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState('');
   const [scrolled, setScrolled] = useState(false);
@@ -29,7 +39,7 @@ export default function SiteHeader({ brand, nav }) {
   }, [open]);
 
   useEffect(() => {
-    const targets = nav.map(({ id }) => document.getElementById(id)).filter(Boolean);
+    const targets = navLinks.map(({ id }) => document.getElementById(id)).filter(Boolean);
     const visible = new Map();
     const observer = new IntersectionObserver(
       (entries) => {
@@ -41,7 +51,7 @@ export default function SiteHeader({ brand, nav }) {
     );
     targets.forEach((target) => observer.observe(target));
     return () => observer.disconnect();
-  }, [nav]);
+  }, [navLinks]);
 
   useEffect(() => {
     const update = () => setScrolled(window.scrollY > 24);
@@ -58,24 +68,22 @@ export default function SiteHeader({ brand, nav }) {
       data-scrolled={scrolled ? '' : undefined}
     >
       <div className={styles.bar}>
-        <a className={styles.brand} href="#inicio" onClick={close} aria-label={`${brand}, ir al inicio`}>
-          {brand}
-        </a>
+        <ClaudiaEditable sectionKey="site-header" fieldPath="brandLink"><a className={styles.brand} href={brandLink.href} onClick={close} aria-label={`${brandLink.label}, ir al inicio`}>{brandLink.label}</a></ClaudiaEditable>
 
         <nav className={styles.nav} aria-label="Principal">
           <ul>
-            {nav.map(({ id, label }) => (
-              <li key={id}>
-                <a href={`#${id}`} aria-current={active === id ? 'true' : undefined}>
-                  {label}
-                </a>
+            {navLinks.map((link, index) => {
+              return <li key={link.id}>
+                <ClaudiaEditable sectionKey="site-header" fieldPath={`navLink${index}`}>
+                  <a href={link.href} aria-current={active === link.id ? 'true' : undefined}>{link.label}</a>
+                </ClaudiaEditable>
               </li>
-            ))}
+            })}
           </ul>
         </nav>
 
         <div className={styles.cta}>
-          <BookingCTA variant="outline" label="Reservar" className={styles.compactCta} />
+          <ClaudiaEditable sectionKey="site-header" fieldPath="ctaLink"><BookingCTA variant="outline" label={ctaLink.label} href={ctaLink.href} className={styles.compactCta} /></ClaudiaEditable>
         </div>
 
         <button
@@ -103,16 +111,14 @@ export default function SiteHeader({ brand, nav }) {
           >
             <nav aria-label="Menú móvil">
               <ul>
-                {nav.map(({ id, label }) => (
-                  <li key={id}>
-                    <a href={`#${id}`} onClick={close} aria-current={active === id ? 'true' : undefined}>
-                      {label}
-                    </a>
+                {navLinks.map((link, index) => {
+                  return <li key={link.id}>
+                    <ClaudiaEditable sectionKey="site-header" fieldPath={`navLink${index}`}><a href={link.href} onClick={close} aria-current={active === link.id ? 'true' : undefined}>{link.label}</a></ClaudiaEditable>
                   </li>
-                ))}
+                })}
               </ul>
             </nav>
-            <BookingCTA variant="gold" label="Reservar" onClick={close} />
+            <ClaudiaEditable sectionKey="site-header" fieldPath="ctaLink"><BookingCTA variant="gold" label={ctaLink.label} href={ctaLink.href} onClick={close} /></ClaudiaEditable>
           </motion.div>
         )}
       </AnimatePresence>

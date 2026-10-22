@@ -1,5 +1,6 @@
 import { useRef } from 'react';
 import { gsap, ScrollTrigger, useGSAP, MQ } from '../../utils/gsap.js';
+import { ClaudiaEditable, useClaudiaCmsSection } from '../../integration/eze-cms/ClaudiaCms.jsx';
 import SectionHead from './SectionHead.jsx';
 import type from './type.module.css';
 import styles from './Approach.module.css';
@@ -10,8 +11,9 @@ const NODE_THRESHOLDS = [1 / 6, 1 / 2, 5 / 6];
  * 03 · Enfoque. M03 Drawn Journey: un trazo SVG que se dibuja con el scroll (scrub, sin pin) y activa tres hitos.
  * Mobile: riel vertical. Sin movimiento (o sin JS) el trazo y los tres hitos se ven completos.
  */
-export default function Approach({ content }) {
+export default function Approach({ content: fallback }) {
   const root = useRef(null);
+  const { content } = useClaudiaCmsSection('approach', fallback);
 
   useGSAP(
     () => {
@@ -92,10 +94,8 @@ export default function Approach({ content }) {
     <section id="enfoque" className={`${type.section} ${styles.section}`} aria-labelledby="enfoque-title" data-tone="dark" ref={root}>
       <div className={type.container}>
         <div className={styles.head}>
-          <SectionHead eyebrow={content.eyebrow} title={content.title} id="enfoque-title" className={styles.headMain} />
-          <p className={`${type.lead} ${styles.intro}`} data-rv="intro">
-            {content.intro}
-          </p>
+          <SectionHead eyebrow={content.eyebrow} title={content.title} id="enfoque-title" className={styles.headMain} cmsSection="approach" />
+          <ClaudiaEditable sectionKey="approach" fieldPath="intro"><p className={`${type.lead} ${styles.intro}`} data-rv="intro">{content.intro}</p></ClaudiaEditable>
         </div>
 
         <div className={styles.track} data-rv="track">
@@ -110,14 +110,14 @@ export default function Approach({ content }) {
           </svg>
           <span className={styles.rail} data-rv="rail" aria-hidden="true" />
           <ol className={styles.steps}>
-            {content.steps.map((step) => (
+            {content.steps.map((step, index) => (
               <li className={styles.step} key={step.number} data-step>
                 <span className={styles.node} aria-hidden="true" />
                 <span className={styles.number} aria-hidden="true">
                   {step.number}
                 </span>
-                <h3 className={styles.label}>{step.label}</h3>
-                <p className={styles.text}>{step.text}</p>
+                <ClaudiaEditable sectionKey="approach" fieldPath={`steps.${index}.label`}><h3 className={styles.label}>{step.label}</h3></ClaudiaEditable>
+                <ClaudiaEditable sectionKey="approach" fieldPath={`steps.${index}.text`}><p className={styles.text}>{step.text}</p></ClaudiaEditable>
               </li>
             ))}
           </ol>

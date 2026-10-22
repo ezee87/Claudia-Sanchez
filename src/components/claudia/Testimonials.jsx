@@ -1,6 +1,9 @@
-import { useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { motion, useReducedMotion } from 'motion/react';
 import { gsap, useGSAP, MQ } from '../../utils/gsap.js';
+import { BOOKING_LABEL, BOOKING_URL } from '../../data/claudia/booking.js';
+import { ClaudiaEditable, ClaudiaEditableCollection, useClaudiaCmsSection } from '../../integration/eze-cms/ClaudiaCms.jsx';
+import { resolveCmsLink } from '../../integration/eze-cms/cmsLink.js';
 import SectionHead from './SectionHead.jsx';
 import BookingCTA from './BookingCTA.jsx';
 import type from './type.module.css';
@@ -14,13 +17,34 @@ const pad = (n) => String(n).padStart(2, '0');
  * GSAP: revelado inicial por scroll. Motion: cambio de testimonio (opacity/y de cada panel).
  * El panel activo ocupa solo la altura de su propio contenido.
  */
-export default function Testimonials({ content }) {
+export default function Testimonials({ content: fallback }) {
   const root = useRef(null);
+  const { content } = useClaudiaCmsSection('testimonials', { ...fallback, ctaLabel: BOOKING_LABEL, ctaLink: null });
+  const ctaLink = resolveCmsLink(content.ctaLink, { label: content.ctaLabel, href: BOOKING_URL });
   const tablist = useRef(null);
   const tabs = useRef([]);
-  const [active, setActive] = useState(0);
+  const [activeId, setActiveId] = useState(null);
   const reduce = useReducedMotion();
-  const total = content.items.length;
+  const fallbackIds = useMemo(() => new Map(fallback.items.map((item) => [item.name, item._id])), [fallback.items]);
+  const items = useMemo(
+    () => (Array.isArray(content.items) ? content.items : []).map((item) => ({
+      ...item,
+      // Compatibilidad temporal con la coleccion publicada antes de incorporar _id.
+      _id: item._id || fallbackIds.get(item.name),
+    })).filter((item) => item._id),
+    [content.items, fallbackIds],
+  );
+  const total = items.length;
+  const active = Math.max(0, items.findIndex((item) => item._id === activeId));
+  const activeItem = items[active];
+
+  useEffect(() => {
+    if (!total) {
+      if (activeId !== null) setActiveId(null);
+      return;
+    }
+    if (!items.some((item) => item._id === activeId)) setActiveId(items[0]._id);
+  }, [activeId, items, total]);
   const [disclaimerLead, disclaimerDetail] = content.disclaimer.split(' · ');
 
   useGSAP(
@@ -49,8 +73,9 @@ export default function Testimonials({ content }) {
   );
 
   const select = (index, focus = false) => {
+    if (!total) return;
     const next = (index + total) % total;
-    setActive(next);
+    setActiveId(items[next]._id);
     const list = tablist.current;
     const tab = tabs.current[next];
     if (list && tab) {
@@ -77,56 +102,66 @@ export default function Testimonials({ content }) {
   };
 
   const transition = { duration: reduce ? 0 : 0.32, ease: EASE };
+  const activePhoto = activeItem && (
+    <img
+      className={styles.photo}
+      src={activeItem.image}
+      alt={`Retrato ilustrativo de ${activeItem.name}`}
+      width="1254"
+      height="1254"
+      loading={active === 0 ? 'eager' : 'lazy'}
+      decoding="async"
+    />
+  );
 
   return (
     <section id="testimonios" className={`${type.section} ${styles.section}`} aria-labelledby="testimonios-title" data-tone="white">
       <div className={type.container} ref={root}>
         <div className={styles.head}>
-          <SectionHead eyebrow={content.eyebrow} title={content.title} id="testimonios-title" className={styles.headMain} />
+          <SectionHead eyebrow={content.eyebrow} title={content.title} id="testimonios-title" className={styles.headMain} cmsSection="testimonials" />
         </div>
 
         <div className={styles.body}>
           <div className={styles.strip}>
           <p className={styles.stat} data-rv="stat">
-            <span className={styles.statValue}>{content.stat.value}</span>
-            <span className={styles.statLabel}>{content.stat.label}</span>
+            <ClaudiaEditable sectionKey="testimonials" fieldPath="stat.value"><span className={styles.statValue}>{content.stat.value}</span></ClaudiaEditable>
+            <ClaudiaEditable sectionKey="testimonials" fieldPath="stat.label"><span className={styles.statLabel}>{content.stat.label}</span></ClaudiaEditable>
           </p>
-          <div
-            ref={tablist}
-            className={styles.tablist}
-            role="tablist"
-            aria-label="Elegir testimonio"
-            aria-orientation="horizontal"
-            data-rv="tablist"
-            onKeyDown={onKeyDown}
-          >
-            {content.items.map((item, i) => (
-              <button
-                key={item.name}
-                ref={(el) => {
-                  tabs.current[i] = el;
-                }}
-                type="button"
-                role="tab"
-                id={`testimonio-tab-${i}`}
-                aria-selected={i === active}
-                aria-controls={`testimonio-panel-${i}`}
-                tabIndex={i === active ? 0 : -1}
-                className={styles.tab}
-                data-rv="tab"
-                onClick={() => select(i)}
-              >
-                <img className={styles.thumb} src={item.image} alt="" width="1254" height="1254" loading="lazy" decoding="async" />
-                <span className={styles.tabText}>
-                  <span className={styles.tabName}>{item.name}</span>
-                  <span className={styles.tabRole}>{item.role}</span>
-                </span>
-              </button>
+          <ClaudiaEditableCollection sectionKey="testimonials" collectionPath="items"><div
+              ref={tablist}
+              className={styles.tablist}
+              role="tablist"
+              aria-label="Elegir testimonio"
+              aria-orientation="horizontal"
+              data-rv="tablist"
+              onKeyDown={onKeyDown}
+            >
+            {items.map((item, i) => (
+              <ClaudiaEditableCollection key={item._id} sectionKey="testimonials" collectionPath="items" itemId={item._id}><button
+                  ref={(el) => {
+                    tabs.current[i] = el;
+                  }}
+                  type="button"
+                  role="tab"
+                  id={`testimonio-tab-${i}`}
+                  aria-selected={i === active}
+                  aria-controls={`testimonio-panel-${i}`}
+                  tabIndex={i === active ? 0 : -1}
+                  className={styles.tab}
+                  data-rv="tab"
+                  onClick={() => select(i)}
+                >
+                  <img className={styles.thumb} src={item.image} alt="" width="1254" height="1254" loading="lazy" decoding="async" />
+                  <span className={styles.tabText}>
+                    <span className={styles.tabName}>{item.name}</span>
+                    <span className={styles.tabRole}>{item.role}</span>
+                  </span>
+                </button></ClaudiaEditableCollection>
             ))}
-          </div>
+            </div></ClaudiaEditableCollection>
           </div>
 
-          <div className={styles.stage} data-rv="stage">
+          {activeItem && <div className={styles.stage} data-rv="stage">
             <div className={styles.stageTop}>
               <p className={styles.counter} aria-live="polite" aria-atomic="true">
                 <span className={styles.counterNow}>{pad(active + 1)}</span> / {pad(total)}
@@ -141,44 +176,33 @@ export default function Testimonials({ content }) {
               </div>
             </div>
             <div className={styles.panels}>
-              <motion.figure
-                key={content.items[active].name}
-                className={styles.panel}
-                id={`testimonio-panel-${active}`}
-                role="tabpanel"
-                aria-labelledby={`testimonio-tab-${active}`}
-                initial={reduce ? false : { opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={transition}
-              >
-                <figcaption className={styles.caption}>
-                  <span className={styles.name}>{content.items[active].name}</span>
-                  <span className={styles.role}>{content.items[active].role}</span>
-                </figcaption>
-                <img
-                  className={styles.photo}
-                  src={content.items[active].image}
-                  alt={`Retrato ilustrativo de ${content.items[active].name}`}
-                  width="1254"
-                  height="1254"
-                  loading={active === 0 ? 'eager' : 'lazy'}
-                  decoding="async"
-                />
-                <blockquote className={styles.quote}><p>{content.items[active].quote}</p></blockquote>
-                <div className={styles.action}><BookingCTA /></div>
-              </motion.figure>
-              {content.items.map((item, i) => i === active ? null : (
-                <div key={item.name} id={`testimonio-panel-${i}`} role="tabpanel" aria-labelledby={`testimonio-tab-${i}`} hidden />
+              <ClaudiaEditableCollection key={activeItem._id} sectionKey="testimonials" collectionPath="items" itemId={activeItem._id}><motion.figure
+                  className={styles.panel}
+                  id={`testimonio-panel-${active}`}
+                  role="tabpanel"
+                  aria-labelledby={`testimonio-tab-${active}`}
+                  initial={reduce ? false : { opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={transition}
+                >
+                  <figcaption className={styles.caption}>
+                    <span className={styles.name}>{activeItem.name}</span>
+                    <span className={styles.role}>{activeItem.role}</span>
+                  </figcaption>
+                  {activePhoto}
+                  <blockquote className={styles.quote}><p>{activeItem.quote}</p></blockquote>
+                  <div className={styles.action}><ClaudiaEditable sectionKey="testimonials" fieldPath="ctaLink"><BookingCTA label={ctaLink.label} href={ctaLink.href} /></ClaudiaEditable></div>
+                </motion.figure></ClaudiaEditableCollection>
+              {items.map((item, i) => i === active ? null : (
+                <div key={item._id} id={`testimonio-panel-${i}`} role="tabpanel" aria-labelledby={`testimonio-tab-${i}`} hidden />
               ))}
             </div>
-          </div>
+          </div>}
 
         </div>
 
         <div className={styles.after} data-rv="note">
-          <p className={styles.note}>
-            {disclaimerLead}.<br />{disclaimerDetail}
-          </p>
+          <ClaudiaEditable sectionKey="testimonials" fieldPath="disclaimer"><p className={styles.note}>{disclaimerLead}.<br />{disclaimerDetail}</p></ClaudiaEditable>
         </div>
       </div>
     </section>

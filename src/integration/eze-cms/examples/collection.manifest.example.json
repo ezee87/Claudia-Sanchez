@@ -1,0 +1,44 @@
+{
+  "version": 1,
+  "site": { "key": "example-site", "name": "Sitio de ejemplo" },
+  "pages": [
+    {
+      "key": "home",
+      "name": "Inicio",
+      "route": "/",
+      "slug": "inicio",
+      "sections": [
+        {
+          "key": "social-proof",
+          "name": "Prueba social",
+          "type": "testimonials",
+          "initialContent": {
+            "testimonials": [
+              {
+                "_id": "testimonial-maria",
+                "name": "María",
+                "quote": "Texto editorial",
+                "photo": "https://example.com/maria.webp"
+              }
+            ]
+          },
+          "fields": [
+            {
+              "key": "testimonials",
+              "path": "testimonials",
+              "label": "Testimonios",
+              "type": "collection",
+              "minItems": 1,
+              "maxItems": 12,
+              "itemFields": [
+                { "key": "name", "path": "name", "label": "Nombre", "type": "string", "required": true },
+                { "key": "quote", "path": "quote", "label": "Testimonio", "type": "string", "multiline": true, "required": true },
+                { "key": "photo", "path": "photo", "label": "Fotografía", "type": "image" }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -2,6 +2,9 @@ import { useRef, useState } from 'react';
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 import { gsap, useGSAP, MQ } from '../../utils/gsap.js';
 import { useMediaQuery } from '../../utils/useMediaQuery.js';
+import { BOOKING_LABEL, BOOKING_URL } from '../../data/claudia/booking.js';
+import { ClaudiaEditable, useClaudiaCmsSection } from '../../integration/eze-cms/ClaudiaCms.jsx';
+import { resolveCmsLink } from '../../integration/eze-cms/cmsLink.js';
 import SectionHead from './SectionHead.jsx';
 import LifeDiagram from './LifeDiagram.jsx';
 import LifeAccordion from './LifeAccordion.jsx';
@@ -16,8 +19,10 @@ const PANEL_ID = 'life-panel';
  * Desktop: diagrama SVG + seis botones DOM y un panel de texto estable. Mobile/tablet: acordeón.
  * GSAP dibuja las líneas al entrar (M03); Motion gestiona solo el estado de selección (M11).
  */
-export default function LifeModel({ content }) {
+export default function LifeModel({ content: fallback }) {
   const root = useRef(null);
+  const { content } = useClaudiaCmsSection('life', { ...fallback, instruction: 'Selecciona una dimensión para explorarla', hubLabel: 'L.I.F.E.', ctaLabel: BOOKING_LABEL, ctaLink: null });
+  const ctaLink = resolveCmsLink(content.ctaLink, { label: content.ctaLabel, href: BOOKING_URL });
   const [selected, setSelected] = useState(null);
   const reduceMotion = useReducedMotion();
   const isDiagram = useMediaQuery('(min-width: 960px)');
@@ -60,13 +65,13 @@ export default function LifeModel({ content }) {
       <div className={type.container}>
         <div className={styles.layout} onKeyDown={onKeyDown}>
           <div className={styles.copy}>
-            <SectionHead eyebrow={content.eyebrow} title={content.title} id="life-title" className={styles.head}>
-              <p className={type.lead}>{content.intro}</p>
+            <SectionHead eyebrow={content.eyebrow} title={content.title} id="life-title" className={styles.head} cmsSection="life">
+              <ClaudiaEditable sectionKey="life" fieldPath="intro"><p className={type.lead}>{content.intro}</p></ClaudiaEditable>
             </SectionHead>
 
             {isDiagram ? (
               <div className={styles.panel} id={PANEL_ID} aria-live="polite">
-                <p className={styles.instruction}>Selecciona una dimensión para explorarla</p>
+                <ClaudiaEditable sectionKey="life" fieldPath="instruction"><p className={styles.instruction}>{content.instruction}</p></ClaudiaEditable>
                 <AnimatePresence mode="wait" initial={false}>
                   <motion.div
                     key={current ? current.id : 'support'}
@@ -77,36 +82,32 @@ export default function LifeModel({ content }) {
                   >
                     {current ? (
                       <>
-                        <h3 className={styles.panelTitle}>{current.label}</h3>
-                        <p className={styles.panelText}>{current.text}</p>
+                        <ClaudiaEditable sectionKey="life" fieldPath={`dimensions.${content.dimensions.indexOf(current)}.label`}><h3 className={styles.panelTitle}>{current.label}</h3></ClaudiaEditable>
+                        <ClaudiaEditable sectionKey="life" fieldPath={`dimensions.${content.dimensions.indexOf(current)}.text`}><p className={styles.panelText}>{current.text}</p></ClaudiaEditable>
                       </>
                     ) : (
-                      <p className={styles.panelSupport}>{content.support}</p>
+                      <ClaudiaEditable sectionKey="life" fieldPath="support"><p className={styles.panelSupport}>{content.support}</p></ClaudiaEditable>
                     )}
                   </motion.div>
                 </AnimatePresence>
               </div>
             ) : (
-              <p className={styles.support}>{content.support}</p>
+              <ClaudiaEditable sectionKey="life" fieldPath="support"><p className={styles.support}>{content.support}</p></ClaudiaEditable>
             )}
           </div>
 
           <div className={styles.stage}>
             {isDiagram ? (
-              <LifeDiagram dimensions={content.dimensions} selected={selected} onSelect={setSelected} panelId={PANEL_ID} />
+              <LifeDiagram dimensions={content.dimensions} selected={selected} onSelect={setSelected} panelId={PANEL_ID} cmsSection="life" hubLabel={content.hubLabel} />
             ) : (
-              <LifeAccordion dimensions={content.dimensions} selected={selected} onSelect={setSelected} />
+              <LifeAccordion dimensions={content.dimensions} selected={selected} onSelect={setSelected} cmsSection="life" />
             )}
           </div>
         </div>
 
-        <p className={styles.closing}>
-          {closingFirst}.
-          <br className={styles.desktopBreak} />{' '}
-          {closingSecond}
-        </p>
+        <ClaudiaEditable sectionKey="life" fieldPath="closing"><p className={styles.closing}>{closingFirst}.<br className={styles.desktopBreak} />{' '}{closingSecond}</p></ClaudiaEditable>
         <div className={styles.action}>
-          <BookingCTA />
+          <ClaudiaEditable sectionKey="life" fieldPath="ctaLink"><BookingCTA label={ctaLink.label} href={ctaLink.href} /></ClaudiaEditable>
         </div>
       </div>
     </section>

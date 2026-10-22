@@ -14,11 +14,12 @@ const arrow = {
  * centrales; solo el header puede pasar una etiqueta visual breve.
  * variant: 'gold' | 'ivory' | 'outline' · size: 'md' | 'lg'
  */
-export default function BookingCTA({ variant = 'gold', size = 'md', className = '', label = BOOKING_LABEL, onClick, ...rest }) {
+export default function BookingCTA({ variant = 'gold', size = 'md', className = '', label = BOOKING_LABEL, href = BOOKING_URL, onClick, ...rest }) {
   const { openBooking } = useBookingModal();
   const handleClick = (event) => {
     onClick?.(event);
     if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+    if (href !== BOOKING_URL) return;
     openBooking(event);
   };
   const descriptionId = useId();
@@ -27,7 +28,7 @@ export default function BookingCTA({ variant = 'gold', size = 'md', className = 
     <>
       <motion.a
         className={`${styles.button} ${styles[variant]} ${styles[size]} ${className}`}
-        href={BOOKING_URL}
+        href={href}
         target="_blank"
         rel="noopener noreferrer"
         aria-describedby={descriptionId}

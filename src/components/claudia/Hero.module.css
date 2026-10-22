@@ -152,6 +152,9 @@
   object-position: right bottom;
 }
 
+/* CmsEditable agrega este atributo solo dentro del preview autorizado. */
+.portrait[data-eze-cms-editable] { pointer-events: auto; }
+
 @media (min-width: 960px) and (max-width: 1100px) {
   .media { width: 50%; }
 }

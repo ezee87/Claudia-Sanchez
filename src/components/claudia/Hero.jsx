@@ -1,13 +1,38 @@
 import { useRef } from 'react';
 import { gsap, useGSAP, MQ } from '../../utils/gsap.js';
+import { BOOKING_LABEL, BOOKING_URL } from '../../data/claudia/booking.js';
+import { resolveCmsLink } from '../../integration/eze-cms/cmsLink.js';
+import { CmsEditable } from '../../integration/eze-cms/CmsEditable';
+import { cmsRuntimeConfig, readCmsSection } from '../../integration/eze-cms/cmsRuntime';
+import { useCmsSection } from '../../integration/eze-cms/useCmsSection';
 import BookingCTA from './BookingCTA.jsx';
 import styles from './Hero.module.css';
+
+const PAGE_ROUTE = '/diseno-de-carrera';
+const SECTION_KEY = 'hero';
 
 /** Portada editorial de la demo; usa el recorte transparente original de Claudia. */
 export default function Hero({ hero, portrait }) {
   const root = useRef(null);
-  const introduction = hero.titleLines.slice(0, hero.accentFrom).join(' ');
-  const [accentLead, ...accentTail] = hero.titleLines.slice(hero.accentFrom).join(' ').split(' ');
+  const localContent = {
+    eyebrow: hero.eyebrow,
+    title: hero.titleLines.slice(0, hero.accentFrom).join(' '),
+    highlightedTitle: hero.titleLines.slice(hero.accentFrom).join(' '),
+    description: hero.subtitle,
+    ctaLabel: BOOKING_LABEL,
+    ctaLink: null,
+    complement: hero.complement,
+    portrait: portrait.src,
+  };
+  const { content } = useCmsSection({
+    config: cmsRuntimeConfig,
+    pageRoute: PAGE_ROUTE,
+    sectionKey: SECTION_KEY,
+    fallback: localContent,
+    readSection: readCmsSection,
+  });
+  const ctaLink = resolveCmsLink(content.ctaLink, { label: content.ctaLabel, href: BOOKING_URL });
+  const [accentLead, ...accentTail] = content.highlightedTitle.split(' ');
 
   useGSAP(
     () => {
@@ -36,31 +61,47 @@ export default function Hero({ hero, portrait }) {
       </svg>
 
       <div className={styles.copy}>
-        <p className={styles.eyebrow} data-hero="eyebrow">{hero.eyebrow}</p>
-        <p className={styles.introduction} data-hero="intro">{introduction}</p>
+        <CmsEditable config={cmsRuntimeConfig} pageRoute={PAGE_ROUTE} sectionKey={SECTION_KEY} fieldPath="eyebrow">
+          <p className={styles.eyebrow} data-hero="eyebrow">{content.eyebrow}</p>
+        </CmsEditable>
+        <CmsEditable config={cmsRuntimeConfig} pageRoute={PAGE_ROUTE} sectionKey={SECTION_KEY} fieldPath="title">
+          <p className={styles.introduction} data-hero="intro">{content.title}</p>
+        </CmsEditable>
 
-        <h1 className={styles.title} id="hero-title">
-          <span className={styles.titleLine} data-hero="title">
-            {accentLead}<span className={styles.titleTail}> {accentTail.join(' ')}</span>
-          </span>
-        </h1>
+        <CmsEditable config={cmsRuntimeConfig} pageRoute={PAGE_ROUTE} sectionKey={SECTION_KEY} fieldPath="highlightedTitle">
+          <h1 className={styles.title} id="hero-title">
+            <span className={styles.titleLine} data-hero="title">
+              {accentLead}<span className={styles.titleTail}> {accentTail.join(' ')}</span>
+            </span>
+          </h1>
+        </CmsEditable>
 
-        <p className={styles.subtitle} data-hero="description">{hero.subtitle}</p>
-        <div className={styles.action} data-hero="cta"><BookingCTA variant="gold" size="lg" /></div>
-        <p className={styles.complement} data-hero="descriptor">{hero.complement}</p>
+        <CmsEditable config={cmsRuntimeConfig} pageRoute={PAGE_ROUTE} sectionKey={SECTION_KEY} fieldPath="description">
+          <p className={styles.subtitle} data-hero="description">{content.description}</p>
+        </CmsEditable>
+        <div className={styles.action} data-hero="cta">
+          <CmsEditable config={cmsRuntimeConfig} pageRoute={PAGE_ROUTE} sectionKey={SECTION_KEY} fieldPath="ctaLink">
+            <BookingCTA variant="gold" size="lg" label={ctaLink.label} href={ctaLink.href} />
+          </CmsEditable>
+        </div>
+        <CmsEditable config={cmsRuntimeConfig} pageRoute={PAGE_ROUTE} sectionKey={SECTION_KEY} fieldPath="complement">
+          <p className={styles.complement} data-hero="descriptor">{content.complement}</p>
+        </CmsEditable>
       </div>
 
       <div className={styles.media} data-hero="portrait">
-        <img
-          className={styles.portrait}
-          src={portrait.src}
-          alt={portrait.alt}
-          width="1198"
-          height="1313"
-          decoding="async"
-          loading="eager"
-          fetchPriority="high"
-        />
+        <CmsEditable config={cmsRuntimeConfig} pageRoute={PAGE_ROUTE} sectionKey={SECTION_KEY} fieldPath="portrait">
+          <img
+            className={styles.portrait}
+            src={content.portrait}
+            alt={portrait.alt}
+            width="1198"
+            height="1313"
+            decoding="async"
+            loading="eager"
+            fetchPriority="high"
+          />
+        </CmsEditable>
       </div>
     </section>
   );

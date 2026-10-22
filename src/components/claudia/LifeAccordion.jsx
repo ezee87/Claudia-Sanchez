@@ -1,11 +1,12 @@
 import { AnimatePresence, motion } from 'motion/react';
+import { ClaudiaEditable } from '../../integration/eze-cms/ClaudiaCms.jsx';
 import styles from './LifeAccordion.module.css';
 
 /** Versión mobile/tablet de L.I.F.E.: acordeón vertical (un solo panel abierto), sin círculo comprimido. */
-export default function LifeAccordion({ dimensions, selected, onSelect }) {
+export default function LifeAccordion({ dimensions, selected, onSelect, cmsSection }) {
   return (
     <ul className={styles.list}>
-      {dimensions.map((dimension) => {
+      {dimensions.map((dimension, index) => {
         const open = selected === dimension.id;
         const buttonId = `life-btn-${dimension.id}`;
         const panelId = `life-acc-${dimension.id}`;
@@ -20,7 +21,7 @@ export default function LifeAccordion({ dimensions, selected, onSelect }) {
                 aria-controls={panelId}
                 onClick={() => onSelect(open ? null : dimension.id)}
               >
-                <span>{dimension.label}</span>
+                <ClaudiaEditable sectionKey={cmsSection} fieldPath={`dimensions.${index}.label`}><span>{dimension.label}</span></ClaudiaEditable>
                 <span className={styles.icon} aria-hidden="true" />
               </button>
             </h3>
@@ -36,7 +37,7 @@ export default function LifeAccordion({ dimensions, selected, onSelect }) {
                   exit={{ height: 0, opacity: 0 }}
                   transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
                 >
-                  <p>{dimension.text}</p>
+                  <ClaudiaEditable sectionKey={cmsSection} fieldPath={`dimensions.${index}.text`}><p>{dimension.text}</p></ClaudiaEditable>
                 </motion.div>
               )}
             </AnimatePresence>

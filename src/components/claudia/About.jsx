@@ -1,13 +1,17 @@
 import { useRef } from 'react';
 import { gsap, useGSAP, MQ } from '../../utils/gsap.js';
+import { ClaudiaEditable, useClaudiaCmsSection } from '../../integration/eze-cms/ClaudiaCms.jsx';
 import SectionHead from './SectionHead.jsx';
 import Portrait from './Portrait.jsx';
 import type from './type.module.css';
 import styles from './About.module.css';
 
 /** 05 · Sobre Claudia. M01 + revelado fotográfico M07 simplificado (clip-path del contenedor; el rostro nunca se deforma). */
-export default function About({ content, portrait }) {
+export default function About({ content: fallback, portrait }) {
   const root = useRef(null);
+  const { content } = useClaudiaCmsSection('about', fallback);
+  const { content: sharedImages } = useClaudiaCmsSection('hero', { portrait: portrait.src });
+  const cmsPortrait = { ...portrait, src: sharedImages.portrait };
 
   useGSAP(
     () => {
@@ -47,29 +51,29 @@ export default function About({ content, portrait }) {
       <div className={`${type.container} ${styles.layout}`}>
         <div className={styles.media}>
           <div className={styles.photo} data-rv="photo">
-            <div className={styles.photoInner} data-rv="photo-inner">
-              <Portrait portrait={portrait} />
-            </div>
+            <ClaudiaEditable sectionKey="hero" fieldPath="portrait">
+              <div className={styles.photoInner} data-rv="photo-inner">
+                <Portrait portrait={cmsPortrait} />
+              </div>
+            </ClaudiaEditable>
           </div>
 
         </div>
 
         <div className={styles.copy}>
-          <SectionHead eyebrow={content.eyebrow} title={content.title} id="sobre-title" className={styles.head} />
+          <SectionHead eyebrow={content.eyebrow} title={content.title} id="sobre-title" className={styles.head} cmsSection="about" />
 
           <div className={styles.paragraphs}>
-            {content.paragraphs.map((paragraph) => (
-              <p key={paragraph} data-rv="text">
-                {paragraph}
-              </p>
+            {content.paragraphs.map((paragraph, index) => (
+              <ClaudiaEditable key={index} sectionKey="about" fieldPath={`paragraphs.${index}`}><p data-rv="text">{paragraph}</p></ClaudiaEditable>
             ))}
           </div>
 
           <dl className={styles.facts} data-rv="text">
-            {content.facts.map((fact) => (
+            {content.facts.map((fact, index) => (
               <div key={fact.value}>
-                <dt>{fact.value}</dt>
-                <dd>{fact.label}</dd>
+                <ClaudiaEditable sectionKey="about" fieldPath={`facts.${index}.value`}><dt>{fact.value}</dt></ClaudiaEditable>
+                <ClaudiaEditable sectionKey="about" fieldPath={`facts.${index}.label`}><dd>{fact.label}</dd></ClaudiaEditable>
               </div>
             ))}
           </dl>

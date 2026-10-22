@@ -123,7 +123,7 @@ export default function BookingModalProvider({ children }) {
                 key={openCount}
                 className={styles.frame}
                 src={CALENDLY_URL}
-                title="Calendario para reservar con Claudia Sánchez"
+                title="Calendario para reservar con Claudia Sanchez Urencio"
                 allow="payment"
                 onLoad={() => setLoaded(true)}
               />

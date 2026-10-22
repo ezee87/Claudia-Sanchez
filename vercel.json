@@ -1,4 +1,7 @@
 {
+  "redirects": [
+    { "source": "/disena-tu-futuro", "destination": "/diseno-de-carrera", "permanent": true }
+  ],
   "rewrites": [
     { "source": "/(.*)", "destination": "/index.html" }
   ]

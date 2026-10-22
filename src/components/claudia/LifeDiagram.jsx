@@ -1,4 +1,5 @@
 import { motion } from 'motion/react';
+import { ClaudiaEditable } from '../../integration/eze-cms/ClaudiaCms.jsx';
 import styles from './LifeDiagram.module.css';
 
 const RADIUS = 36; // % del lado del diagrama
@@ -17,7 +18,7 @@ const NODE_ACTIVE = { scale: 1.07, backgroundColor: '#1b1a44', color: '#d5a64a',
  * Diagrama L.I.F.E.: composición SVG (líneas, dibujadas con GSAP) + seis botones DOM reales (estado con Motion).
  * Las dimensiones no son etapas: no hay numeración ni orden de lectura obligatorio.
  */
-export default function LifeDiagram({ dimensions, selected, onSelect, panelId }) {
+export default function LifeDiagram({ dimensions, selected, onSelect, panelId, cmsSection, hubLabel }) {
   const points = dimensions.map((_, index) => polar(index, dimensions.length));
   const hexagon = points.map(({ x, y }) => `${x.toFixed(2)},${y.toFixed(2)}`);
 
@@ -57,7 +58,7 @@ export default function LifeDiagram({ dimensions, selected, onSelect, panelId })
       </svg>
 
       <div className={styles.hub} data-life="hub">
-        <span>L.I.F.E.</span>
+        <ClaudiaEditable sectionKey={cmsSection} fieldPath="hubLabel"><span>{hubLabel}</span></ClaudiaEditable>
       </div>
 
       {dimensions.map((dimension, index) => {
@@ -82,7 +83,7 @@ export default function LifeDiagram({ dimensions, selected, onSelect, panelId })
               whileTap={{ scale: 0.97 }}
               transition={{ type: 'spring', stiffness: 380, damping: 30 }}
             >
-              {dimension.label}
+              <ClaudiaEditable sectionKey={cmsSection} fieldPath={`dimensions.${index}.label`}><span>{dimension.label}</span></ClaudiaEditable>
             </motion.button>
           </span>
         );
