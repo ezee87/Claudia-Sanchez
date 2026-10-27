@@ -1,4 +1,4 @@
-# Paquete de implementación — Claudia Sanchez Urencio
+# Paquete de implementación — Claudia Sánchez Urencio
 
 **Instrucción:** copiar esta carpeta completa dentro del proyecto React/Vite autónomo de Claudia, idealmente como `codex-spec/`. Abrir Codex en la raíz del proyecto y enviarle:
 

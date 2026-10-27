@@ -50,9 +50,15 @@ export function useCmsSection<T extends JsonObject>({
 }: UseCmsSectionOptions<T>): CmsSectionState<T> {
   const fallbackSignature = JSON.stringify(fallback)
   const stableFallback = useMemo(() => fallback, [fallbackSignature]) // eslint-disable-line react-hooks/exhaustive-deps
-  const [state, setState] = useState<CmsSectionState<T>>({ content: stableFallback, loading: true, error: null, source: 'local' })
+  const localOnly = import.meta.env.DEV
+  const [state, setState] = useState<CmsSectionState<T>>({ content: stableFallback, loading: !localOnly, error: null, source: 'local' })
 
   useEffect(() => {
+    if (localOnly) {
+      setState({ content: stableFallback, loading: false, error: null, source: 'local' })
+      return undefined
+    }
+
     let active = true
     let receivedUpdate = false
     const receiveCmsUpdate = (event: MessageEvent) => {
@@ -83,7 +89,7 @@ export function useCmsSection<T extends JsonObject>({
       active = false
       if (typeof window !== 'undefined') window.removeEventListener('message', receiveCmsUpdate)
     }
-  }, [config.siteSlug, pageRoute, sectionKey, readSection, stableFallback])
+  }, [config.siteSlug, localOnly, pageRoute, sectionKey, readSection, stableFallback])
 
   return state
 }

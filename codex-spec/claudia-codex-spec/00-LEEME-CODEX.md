@@ -1,4 +1,4 @@
-# Implementación web institucional — Claudia Sanchez Urencio
+# Implementación web institucional — Claudia Sánchez Urencio
 
 ## Tu tarea
 
@@ -19,7 +19,7 @@ Actuá como desarrollador frontend senior, diseñador web senior y especialista 
 
 ## Reglas de máxima prioridad
 
-- **Nombre público EXACTO:** `Claudia Sanchez Urencio` en toda la web (navegación, hero, biografía, firma, footer, metadatos, ALT, etc.). No usar `Claudia Sánchez` ni `Claudia Sanchez` como marca pública. Mantener sin cambio el slug técnico `claudia-sanchez` del CMS y los nombres internos necesarios para conservar compatibilidad.
+- **Nombre público EXACTO:** `Claudia Sánchez Urencio` en toda la web (navegación, hero, biografía, firma, footer, metadatos, ALT, etc.). No usar `Claudia Sánchez` ni `Claudia Sánchez` como marca pública. Mantener sin cambio el slug técnico `claudia-sanchez` del CMS y los nombres internos necesarios para conservar compatibilidad.
 - **No modificar el diseño ni el funcionamiento de la landing** `/disena-tu-futuro` salvo el nombre público de Claudia cuando aparezca incompleto, y ajustes estrictamente necesarios para navegación común, enlaces y CMS que no alteren su apariencia o flujo. No alterar la metodología L.I.F.E., Calendly, sus animaciones ni el contenido del programa.
 - **Todas las páginas y secciones nuevas deben ser editables desde Eze CMS** y declaradas en el manifiesto. Respetar la integración real existente y su API; no inventar firmas, eventos, hooks ni formatos. Usar fallback local con el copy exacto de estas especificaciones. Mantener el modo de selección del editor en iframe si existe.
 - No inventar testimonios, resultados, cargos, fechas, títulos de artículos, imágenes de artículos ni servicios confirmados. Los servicios marcados como provisionales son placeholders editoriales.

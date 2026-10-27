@@ -6,7 +6,7 @@
 .inner {
   max-width: var(--c-max);
   margin-inline: auto;
-  padding: clamp(42px, 5vw, 66px) var(--c-gutter) 20px;
+  padding: clamp(36px, 4vw, 52px) var(--c-gutter) 18px;
   color: #424064;
 }
 
@@ -76,7 +76,11 @@
 }
 
 .bottom {
-  margin-top: clamp(32px, 4vw, 52px);
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: clamp(26px, 3vw, 38px);
   padding-top: 16px;
   border-top: 1px solid #ccc5d8;
   font-size: 0.75rem;
@@ -90,15 +94,22 @@
 }
 
 @media (max-width: 719.98px) {
-  .inner { padding-top: 40px; }
+  .inner { padding: 32px var(--c-gutter) 14px; }
   .main {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     column-gap: clamp(20px, 6vw, 36px);
-    row-gap: 26px;
+    row-gap: 22px;
   }
   .identity { grid-column: 1 / -1; }
-  .description { margin-top: 12px; }
+  .line { margin-top: 6px; }
+  .description { margin-top: 8px; }
+  .heading { margin-bottom: 4px; }
+  .nav,
+  .contact { gap: 0; }
   .nav a,
-  .contact a { min-height: 40px; }
-  .bottom { margin-top: 28px; }
+  .contact a { min-height: 34px; }
+  .bottom {
+    margin-top: 20px;
+    padding-top: 12px;
+  }
 }

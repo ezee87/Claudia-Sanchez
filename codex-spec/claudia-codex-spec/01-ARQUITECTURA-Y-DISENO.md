@@ -18,7 +18,7 @@ Si existen rutas `/newsletter` y `/newsletter/:slug`, redirigir a las rutas nuev
 
 ## Menú global
 
-**Marca:** Claudia Sanchez Urencio.
+**Marca:** Claudia Sánchez Urencio.
 
 **Inicio** → `/`.
 **Sobre mí** → `/#sobre-mi` (desde cualquier ruta, navegar a Inicio y hacer scroll al anchor).

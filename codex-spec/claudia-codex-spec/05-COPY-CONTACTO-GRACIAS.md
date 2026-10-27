@@ -37,7 +37,7 @@ También puedes contactarme por correo electrónico.
 
 **Correo:** [PENDIENTE DE CONFIRMAR — no mostrar email falso].
 
-**LinkedIn:** Claudia Sanchez Urencio.
+**LinkedIn:** Claudia Sánchez Urencio.
 
 No publicar número de WhatsApp ni dirección sin confirmación. Si falta el correo, ocultar ese dato y mantener enlace real de LinkedIn si ya está disponible en el proyecto.
 
@@ -61,7 +61,7 @@ Durante nuestra conversación podremos conocer tu situación actual, hablar sobr
 
 Nos vemos pronto.
 
-**Firma:** Claudia Sanchez Urencio.
+**Firma:** Claudia Sánchez Urencio.
 
 **CONDICIÓN FUNCIONAL OBLIGATORIA:** mostrar las afirmaciones de reserva confirmada únicamente cuando exista señal verificable de confirmación de Calendly en el flujo real. Si alguien abre `/gracias` directamente sin confirmación, mostrar una vista neutral como `Esta página aparece después de completar una reserva. Si todavía no agendaste una conversación, podés regresar al programa.` (adaptar al tú en la UI) y botón a `/disena-tu-futuro`. Si no se puede verificar confirmación, no fingirla; reportar el pendiente técnico.
 

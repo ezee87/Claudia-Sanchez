@@ -1,19 +1,17 @@
 .section {
+  position: relative;
+}
+
+/* El contenido baja como conjunto: un poco más de aire arriba, compensado abajo. */
+.how {
   background: var(--navy);
+  padding-block: calc(var(--c-landing-pad) * 1.1) calc(var(--c-landing-pad) * 0.9);
 }
 
-@media (min-width: 960px) {
-  .section {
-    min-height: calc(100svh - var(--c-header));
-    display: grid;
-    align-items: center;
-    padding-block: clamp(52px, 6vw, 76px);
-  }
-}
-
+/* Explicación debajo del título, como en la demo original. */
 .head {
   display: grid;
-  gap: clamp(16px, 2vw, 24px);
+  gap: clamp(18px, 2vw, 26px);
   max-width: 900px;
 }
 
@@ -23,7 +21,14 @@
 }
 
 .intro {
-  max-width: 68ch;
+  display: grid;
+  gap: 1em;
+  max-width: 64ch;
+}
+
+/* Párrafos apilados con líneas equilibradas, sin últimas líneas cortas. */
+.intro p {
+  text-wrap: balance;
 }
 
 .track {
@@ -53,6 +58,7 @@
 .step {
   position: relative;
   display: grid;
+  align-content: start;
   gap: 8px;
   padding-left: 44px;
 }
@@ -108,12 +114,37 @@
   opacity: 0.42;
 }
 
+/* Mobile: algo más de aire arriba y abajo de la banda (la animación depende del track, no del padding). */
+@media (max-width: 599.98px) {
+  .how {
+    padding-block: 88px 80px;
+  }
+}
+
 @media (min-width: 960px) {
+  /*
+   * Recorrido bajo las tres etapas: el trazo termina cuando el final del track llega al 76 % del viewport
+   * (ver Approach.jsx), así que ~25vh de espacio inferior mantienen la banda en pantalla hasta entonces.
+   */
+  .how {
+    padding-block: clamp(var(--c-landing-pad), 15.5vh, 176px) clamp(var(--c-landing-pad), 25vh, 290px);
+  }
+
   .head {
-    gap: clamp(14px, 2vw, 24px);
+    gap: clamp(24px, 2.6vw, 34px);
+  }
+
+  /* Medida compartida, cercana al ancho visual del título: dos líneas equilibradas por párrafo. */
+  .intro {
+    max-width: none;
+  }
+
+  .intro p {
+    max-width: 62ch;
   }
 
   .track {
+    margin-top: clamp(48px, 5vw, 72px);
     padding-top: 48px;
   }
 
@@ -158,6 +189,12 @@
   .label {
     font-size: clamp(1.35rem, 0.9rem + 1.35vw, 2.25rem);
     letter-spacing: 0.07em;
+  }
+
+  /* Medida algo más estrecha y balanceada: las tres descripciones ocupan la misma cantidad de líneas. */
+  .text {
+    max-width: 28ch;
+    text-wrap: balance;
   }
 
   .node {

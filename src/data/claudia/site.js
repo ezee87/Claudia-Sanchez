@@ -1,55 +1,55 @@
-// Copy de la página de Claudia Sanchez Urencio (docs/claudia/01-COPY-WEB.md).
-// Texto propuesto, aún no aprobado por Claudia. Las definiciones L.I.F.E. y las cifras
-// de la sección "Sobre mí" deben validarse antes de una publicación final.
+// Copy de la landing /diseno-de-carrera (docs: rediseño integral de la landing, cinco secciones).
+// Los textos de varios párrafos se guardan en un único string separado por línea en blanco ("\n\n");
+// un "\n" simple es un salto de línea dentro del mismo párrafo.
 export const site = {
   meta: {
-    title: 'Diseño de Carrera | Claudia Sanchez Urencio',
+    title: 'Diseño de Carrera | Claudia Sánchez Urencio',
     description:
-      'Planeación estratégica de carrera para anticipar tus próximos años con claridad, especialistas y una One-Page Strategy.',
+      'Programa de acompañamiento estratégico para ejecutivos con experiencia que quieren definir su siguiente etapa profesional con claridad, dirección y un plan de acción.',
   },
 
-  brand: 'Claudia Sanchez Urencio',
+  brand: 'Claudia Sánchez Urencio',
 
+  // Orden definitivo de la navegación; cada id corresponde a una sección existente.
   nav: [
+    { id: 'situaciones', label: 'Tu siguiente movimiento' },
+    { id: 'testimonios', label: 'Testimonios' },
     { id: 'enfoque', label: 'Enfoque' },
-    { id: 'impacto', label: 'Impacto' },
-    { id: 'life', label: 'Modelo L.I.F.E.' },
     { id: 'sobre-mi', label: 'Sobre mí' },
   ],
 
   hero: {
-    eyebrow: 'Claudia Sanchez Urencio · EXECUTIVE CAREER COACH & ADVISOR',
-    // El H1 se compone por líneas para el reveal tipográfico; `accentFrom` marca desde qué línea se enfatiza.
-    titleLines: ['Diseño de', 'Carrera.', 'Anticipa lo', 'que sigue.'],
-    accentFrom: 2,
+    eyebrow: 'Claudia Sánchez Urencio · EXECUTIVE CAREER COACH & ADVISOR',
+    title: 'No solo diseñes tu carrera.',
+    highlightedTitle: 'Diseña lo que sigue.',
     subtitle:
-      'Planeación estratégica para profesionales que quieren anticipar su siguiente etapa antes de enfrentar una transición obligada.',
-    complement: 'Career Longevity · Estrategia de carrera ejecutiva',
+      'Anticipa tu siguiente etapa profesional con una estrategia que conecte tu experiencia, tus prioridades y las posibilidades que quieres construir para los próximos años.',
+    complement: 'CAREER LONGEVITY · ESTRATEGIA DE CARRERA EJECUTIVA',
   },
 
   situations: {
     eyebrow: 'EL SIGUIENTE MOVIMIENTO',
     title: 'Has construido una carrera. ¿Qué quieres construir ahora?',
     intro:
-      'Después de años construyendo tu trayectoria, el siguiente movimiento no siempre significa subir otro escalón. Puede significar crecer, cambiar de dirección o abrir nuevas posibilidades con la experiencia que ya tienes.',
+      'Una carrera exitosa también merece un plan para lo que viene.\nTal vez quieras seguir creciendo, replantear tu camino o abrir nuevas posibilidades antes de necesitar un cambio.',
     items: [
       {
-        _id: 'seguir-creciendo',
+        _id: 'anticipar-futuro',
         number: '01',
-        label: 'SEGUIR CRECIENDO',
-        text: 'Quieres asumir nuevos desafíos dentro del mundo corporativo, con una dirección más clara.',
+        label: 'ANTICIPAR TU FUTURO',
+        text: 'Tu carrera va bien, pero quieres anticipar tu siguiente etapa y tomar decisiones antes de que las circunstancias lo hagan por ti.',
       },
       {
-        _id: 'preparar-transicion',
+        _id: 'repensar-camino',
         number: '02',
-        label: 'PREPARAR UNA TRANSICIÓN',
-        text: 'Estás considerando un cambio de empresa, rol, industria o país y necesitas ordenar tus opciones.',
+        label: 'REPENSAR TU CAMINO',
+        text: 'Llevas años creciendo en una misma dirección y te preguntas si ese camino es el que quieres seguir durante los próximos años.',
       },
       {
         _id: 'ampliar-opciones',
         number: '03',
         label: 'AMPLIAR TUS OPCIONES',
-        text: 'Quieres explorar consultoría, advisory o nuevas formas de aportar valor desde tu experiencia.',
+        text: 'Quieres explorar una ruta paralela en consultoría, consejos, docencia o un proyecto propio, aprovechando la experiencia que ya tienes.',
       },
     ],
     closing: 'No necesitas esperar una transición para empezar a diseñar lo que sigue.',
@@ -59,48 +59,35 @@ export const site = {
     eyebrow: 'CÓMO TRABAJO',
     title: 'Primero claridad. Después, una estrategia para avanzar.',
     intro:
-      'Antes del CV, LinkedIn o la búsqueda de oportunidades, trabajamos sobre tu experiencia, tus fortalezas y lo que quieres construir. Con esa dirección, las herramientas dejan de ser el punto de partida y pasan a servir a una estrategia.',
+      'Diseño de Carrera te ayuda a mirar más allá de tu próximo puesto, explorar escenarios y elegir una dirección alineada con la vida que quieres construir.\n\nA través del coaching y la planificación estratégica, transformarás esa visión en una hoja de ruta concreta para tus próximos años.',
     steps: [
       {
         _id: 'claridad',
         number: '01',
         label: 'CLARIDAD',
-        text: 'Reconocer tu trayectoria, tus prioridades y aquello que quieres para los próximos años.',
+        text: 'Reconocer tus prioridades y definir qué quieres construir en tu siguiente etapa profesional.',
       },
       {
         _id: 'estrategia',
         number: '02',
         label: 'ESTRATEGIA',
-        text: 'Explorar opciones, definir tu posicionamiento y tomar decisiones con criterio.',
+        text: 'Evaluar escenarios y elegir una dirección que integre tu carrera y tu vida personal.',
       },
       {
         _id: 'movimiento',
         number: '03',
         label: 'MOVIMIENTO',
-        text: 'Convertir la dirección elegida en conversaciones, herramientas y próximos pasos concretos.',
+        text: 'Convertir esa dirección en una hoja de ruta con decisiones y próximos pasos concretos.',
       },
     ],
   },
 
-  impact: {
-    eyebrow: 'IMPACTO DEL PROGRAMA',
-    title: 'Resultados autodeclarados por quienes completaron el programa.',
-    items: [
-      { _id:'recommend', value:'100 %', label:'recomendaría el programa (35/35)' },
-      { _id:'five', value:'80 %', label:'lo calificó con 5/5 (28/35)' },
-      { _id:'clarity', value:'77 %', label:'reportó mayor claridad sobre su propósito profesional (27/35)' },
-      { _id:'confidence', value:'60 %', label:'reportó mayor autoconfianza (21/35)' },
-    ],
-    note: 'Resultados autodeclarados por 35 participantes en una encuesta voluntaria realizada en mayo de 2026. Los resultados individuales pueden variar.',
-  },
-
+  // Modelo L.I.F.E. integrado en «Mi enfoque» (bloque claro tras «Cómo trabajo»): `title` es el H3 y `intro` la descripción breve.
   life: {
-    eyebrow: 'MODELO L.I.F.E.',
-    title: 'Una carrera sostenible necesita más que un buen puesto.',
+    title: 'Una mirada integral a tu carrera.',
     intro:
-      'Tu siguiente etapa no se decide de manera aislada. Las decisiones profesionales conviven con tu identidad, tu bienestar, tus recursos, tus relaciones y aquello que quieres dejar construido.',
-    support: 'Seis dimensiones para mirar la carrera con mayor perspectiva.',
-    // Las dimensiones no son etapas ni una secuencia: sin numeración ni expansión del acrónimo.
+      'El Modelo L.I.F.E. integra seis dimensiones de tu vida: identidad, salud, finanzas, relaciones, carrera y legado. Porque planificar tu futuro profesional también implica decidir cómo quieres vivirlo.',
+    // Las dimensiones no son etapas ni una secuencia: sin numeración. El texto breve solo se muestra al seleccionar.
     dimensions: [
       { _id: 'identidad', id: 'identidad', label: 'IDENTIDAD', text: 'Quién eres más allá de un cargo y cómo quieres definir esta etapa.' },
       { _id: 'salud', id: 'salud', label: 'SALUD', text: 'Tu energía y bienestar al pensar decisiones sostenibles.' },
@@ -110,38 +97,41 @@ export const site = {
       { _id: 'legado', id: 'legado', label: 'LEGADO', text: 'Lo que quieres aportar y construir con los años que vienen.' },
     ],
     closing:
-      'No se trata solo de llegar al siguiente rol. Se trata de decidir cómo quieres vivir y sostener tu carrera.',
+      'No se trata solo del próximo puesto.\nSe trata de construir una etapa profesional que tenga sentido para ti.',
   },
 
   about: {
     eyebrow: 'SOBRE MÍ',
     title: 'Conozco el mundo corporativo. También lo que viene después.',
     paragraphs: [
-      'Soy Claudia Sanchez Urencio. Durante más de 20 años he trabajado con organizaciones y líderes en procesos de cambio y transformación.',
-      'Mi trayectoria incluye liderazgo en Recursos Humanos en compañías como Diageo y Kraft Foods, responsabilidades regionales en Latinoamérica y experiencias profesionales en distintos países.',
-      'También he rediseñado mi propia carrera. Hoy acompaño a ejecutivos senior a tomar decisiones sobre lo que sigue, combinando experiencia corporativa, coaching y una mirada práctica y humana.',
+      'Soy Claudia Sánchez Urencio. Durante más de 20 años he trabajado con organizaciones y líderes en procesos de cambio y transformación, ocupando posiciones de liderazgo en Recursos Humanos en compañías como Diageo y Kraft Foods.',
+      'Mi trayectoria incluye responsabilidades regionales y experiencia acompañando a ejecutivos en México, Latinoamérica, Estados Unidos y España. Conozco de cerca las decisiones, los desafíos y las oportunidades que aparecen en distintas etapas de una carrera ejecutiva.',
+      'También he rediseñado mi propia carrera. Hoy combino esa experiencia corporativa con el coaching y la planificación estratégica para ayudar a otros ejecutivos a anticipar su futuro y construir su siguiente etapa profesional.',
     ],
     facts: [
-      { _id: 'trayectoria', value: '20+', label: 'años de trayectoria profesional' },
+      { _id: 'trayectoria', value: '20+', label: 'AÑOS DE TRAYECTORIA PROFESIONAL' },
+      // Cifra que Claudia comunica públicamente (ver src/data/claudia/testimonials.js y la demo original).
+      { _id: 'ejecutivos', value: '500+', label: 'EJECUTIVOS ACOMPAÑADOS' },
     ],
   },
 
+  // Bloque de reserva integrado al final de «Sobre mí».
   closing: {
     eyebrow: 'TU SIGUIENTE MOVIMIENTO',
-    title: '¿Qué quieres construir con los próximos años de tu carrera?',
-    text: 'Si estás evaluando un cambio, explorando nuevas opciones o buscando mayor claridad sobre tu siguiente etapa, podemos comenzar con una conversación.',
+    title: 'Tu siguiente etapa comienza con una conversación.',
+    text: 'Conversemos sobre el momento profesional que estás viviendo y las posibilidades que quieres explorar para tu futuro.',
   },
 
   footer: {
-    line: 'Claudia Sanchez Urencio · Executive Career Coach & Advisor',
-    description: 'Hoy acompaño a ejecutivos senior a tomar decisiones sobre lo que sigue, combinando experiencia corporativa, coaching y una mirada práctica y humana.',
+    line: 'Executive Career Coach & Advisor',
+    description: 'Acompaño a ejecutivos con experiencia a diseñar su siguiente etapa profesional con claridad y estrategia.',
     copyright: '© 2026',
   },
 
   // Retrato proporcionado para el concepto. Reemplazar solo con un asset autorizado para publicación.
   portrait: {
     src: '/assets/claudia-sanchez/claudia-hero.png',
-    alt: 'Retrato de Claudia Sanchez Urencio',
+    alt: 'Retrato de Claudia Sánchez Urencio',
     width: 960,
     height: 1200,
     placeholderLabel: 'FOTOGRAFÍA A INCORPORAR',

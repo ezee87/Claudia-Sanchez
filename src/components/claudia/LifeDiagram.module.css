@@ -2,7 +2,7 @@
   position: relative;
   container-type: inline-size;
   width: 100%;
-  max-width: 560px;
+  max-width: 460px;
   margin-inline: auto;
   aspect-ratio: 1;
 }
@@ -94,6 +94,7 @@
   font-size: max(0.65rem, 2.05cqw);
   font-weight: 800;
   letter-spacing: 0.05em;
+  touch-action: manipulation;
   color: var(--navy);
   cursor: pointer;
   transition:
@@ -101,13 +102,27 @@
     filter 0.25s var(--c-ease);
 }
 
-.node:hover {
-  box-shadow: 0 0 0 7px rgba(213, 166, 74, 0.16);
+/* Solo con puntero real: en pantallas táctiles :hover queda pegado al último nodo tocado. */
+@media (hover: hover) {
+  .node:hover {
+    box-shadow: 0 0 0 7px rgba(213, 166, 74, 0.16);
+  }
+}
+
+@media (hover: none) {
+  .node {
+    -webkit-tap-highlight-color: transparent;
+  }
 }
 
 .node:focus-visible {
   outline: 2px solid var(--navy);
   outline-offset: 5px;
+}
+
+.diagram[data-compact] .node {
+  font-size: clamp(0.6rem, 2.75cqw, 0.85rem);
+  letter-spacing: 0.02em;
 }
 
 @media (prefers-reduced-motion: reduce) {

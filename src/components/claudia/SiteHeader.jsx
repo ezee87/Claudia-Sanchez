@@ -1,15 +1,34 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { AnimatePresence, motion } from 'motion/react';
+import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 import { useMediaQuery } from '../../utils/useMediaQuery.js';
 import { ClaudiaEditable, useClaudiaCmsSection } from '../../integration/eze-cms/ClaudiaCms.jsx';
 import { resolveCmsLink } from '../../integration/eze-cms/cmsLink.js';
 import { BOOKING_URL } from '../../data/claudia/booking.js';
 import BookingCTA from './BookingCTA.jsx';
+import { scrollToTop } from '../ui/BackToTop.jsx';
 import styles from './SiteHeader.module.css';
 
+const EASE = [0.22, 1, 0.36, 1];
+
 /** Header: marca + anclas + CTA único. Menú mobile accesible (aria-expanded, Escape, foco). */
-export default function SiteHeader({ brand, nav }) {
+export default function SiteHeader({ brand, nav, tagline }) {
   const { content } = useClaudiaCmsSection('site-header', { brandLink: { label: brand, href: '#inicio' }, ctaLink: null });
+  // La frase al pie del menú mobile es el cierre de «Tu siguiente movimiento» (misma fuente que en el CMS).
+  const situationsFallback = useMemo(() => ({ closing: tagline }), [tagline]);
+  const { content: situations } = useClaudiaCmsSection('situations', situationsFallback);
+  const reduceMotion = useReducedMotion();
+  const panelMotion = {
+    hidden: { opacity: 0, y: reduceMotion ? 0 : -8 },
+    show: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.22, ease: EASE, staggerChildren: reduceMotion ? 0 : 0.045, delayChildren: reduceMotion ? 0 : 0.06 },
+    },
+  };
+  const itemMotion = {
+    hidden: { opacity: 0, y: reduceMotion ? 0 : 10 },
+    show: { opacity: 1, y: 0, transition: { duration: 0.32, ease: EASE } },
+  };
   const brandLink = resolveCmsLink(content.brandLink, { label: brand, href: '#inicio' });
   const ctaLink = resolveCmsLink(content.ctaLink, { label: 'Reservar', href: BOOKING_URL });
   const navLinks = useMemo(() => nav.map((item, index) => ({
@@ -20,6 +39,8 @@ export default function SiteHeader({ brand, nav }) {
   const [active, setActive] = useState('');
   const [scrolled, setScrolled] = useState(false);
   const toggle = useRef(null);
+  const pendingHash = useRef('');
+  const pendingTop = useRef(false);
   const isDesktop = useMediaQuery('(min-width: 960px)');
 
   useEffect(() => {
@@ -36,6 +57,31 @@ export default function SiteHeader({ brand, nav }) {
     };
     document.addEventListener('keydown', onKey);
     return () => document.removeEventListener('keydown', onKey);
+  }, [open]);
+
+  // Bloquea el scroll de la página con el menú abierto; al cerrar lo restaura y, si se eligió
+  // una sección (o volver arriba), navega recién entonces (con el scroll ya liberado).
+  // Solo se bloquea <html>: si también se bloquea <body>, este pasa a ser el contenedor del
+  // header sticky y el header (con la X) salta fuera de pantalla cuando la página está scrolleada.
+  useEffect(() => {
+    if (!open) return undefined;
+    const root = document.documentElement;
+    const previous = root.style.overflow;
+    root.style.overflow = 'hidden';
+    return () => {
+      root.style.overflow = previous;
+      if (pendingTop.current) {
+        pendingTop.current = false;
+        scrollToTop();
+        return;
+      }
+      const hash = pendingHash.current;
+      pendingHash.current = '';
+      const target = hash && document.getElementById(decodeURIComponent(hash.slice(1)));
+      if (!target) return;
+      target.scrollIntoView({ block: 'start' });
+      window.history.pushState(null, '', hash);
+    };
   }, [open]);
 
   useEffect(() => {
@@ -61,6 +107,18 @@ export default function SiteHeader({ brand, nav }) {
   }, []);
 
   const close = () => setOpen(false);
+  const navigate = (event, href) => {
+    if (open && href?.startsWith('#') && href.length > 1) {
+      event.preventDefault();
+      pendingHash.current = href;
+    }
+    close();
+  };
+  const goTop = (event) => {
+    event.preventDefault();
+    pendingTop.current = true;
+    close();
+  };
 
   return (
     <header
@@ -68,7 +126,7 @@ export default function SiteHeader({ brand, nav }) {
       data-scrolled={scrolled ? '' : undefined}
     >
       <div className={styles.bar}>
-        <ClaudiaEditable sectionKey="site-header" fieldPath="brandLink"><a className={styles.brand} href={brandLink.href} onClick={close} aria-label={`${brandLink.label}, ir al inicio`}>{brandLink.label}</a></ClaudiaEditable>
+        <ClaudiaEditable sectionKey="site-header" fieldPath="brandLink"><a className={styles.brand} href={brandLink.href} onClick={(event) => navigate(event, brandLink.href)} aria-label={`${brandLink.label}, ir al inicio`}>{brandLink.label}</a></ClaudiaEditable>
 
         <nav className={styles.nav} aria-label="Principal">
           <ul>
@@ -104,21 +162,30 @@ export default function SiteHeader({ brand, nav }) {
           <motion.div
             id="menu-movil"
             className={styles.panel}
-            initial={{ opacity: 0, y: -8 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -8 }}
-            transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
+            variants={panelMotion}
+            initial="hidden"
+            animate="show"
+            exit="hidden"
           >
-            <nav aria-label="Menú móvil">
+            <nav aria-labelledby="menu-movil-titulo">
+              <motion.p id="menu-movil-titulo" className={styles.panelEyebrow} variants={itemMotion}>Índice</motion.p>
               <ul>
+                <motion.li variants={itemMotion}>
+                  <a href="#inicio" onClick={goTop}>Inicio</a>
+                </motion.li>
                 {navLinks.map((link, index) => {
-                  return <li key={link.id}>
-                    <ClaudiaEditable sectionKey="site-header" fieldPath={`navLink${index}`}><a href={link.href} onClick={close} aria-current={active === link.id ? 'true' : undefined}>{link.label}</a></ClaudiaEditable>
-                  </li>
+                  return <motion.li key={link.id} variants={itemMotion}>
+                    <ClaudiaEditable sectionKey="site-header" fieldPath={`navLink${index}`}><a href={link.href} onClick={(event) => navigate(event, link.href)} aria-current={active === link.id ? 'true' : undefined}>{link.label}</a></ClaudiaEditable>
+                  </motion.li>
                 })}
               </ul>
             </nav>
-            <ClaudiaEditable sectionKey="site-header" fieldPath="ctaLink"><BookingCTA variant="gold" label={ctaLink.label} href={ctaLink.href} onClick={close} /></ClaudiaEditable>
+            <motion.div className={styles.panelCtaWrap} variants={itemMotion}>
+              <ClaudiaEditable sectionKey="site-header" fieldPath="ctaLink"><BookingCTA variant="gold" label={ctaLink.label} href={ctaLink.href} className={styles.panelCta} onClick={close} /></ClaudiaEditable>
+            </motion.div>
+            {situations.closing && (
+              <motion.p className={styles.panelTagline} variants={itemMotion}>{situations.closing}</motion.p>
+            )}
           </motion.div>
         )}
       </AnimatePresence>

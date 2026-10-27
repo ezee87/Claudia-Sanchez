@@ -13,7 +13,7 @@ export default function Seo({route,article,missing=false}) {
   const {pathname}=useLocation();
   useEffect(()=>{
     const created=[];
-    const title=article ? `${article.title} | Claudia Sanchez Urencio` : content.title;
+    const title=article ? `${article.title} | Claudia Sánchez Urencio` : content.title;
     const description=article ? (article.excerpt || plainText(article.content)).replace(/\s+/g,' ').trim().slice(0,160) : content.description;
     document.title=title;
     function meta(key,value,property=false) {
@@ -28,7 +28,7 @@ export default function Seo({route,article,missing=false}) {
     if(canonical && !missing){const el=document.createElement('link');el.rel='canonical';el.href=canonical;document.head.append(el);created.push(el);meta('og:url',canonical,true);}
     const cover=safeImage(articleMediaUrl(article?.cover_image));
     if(cover && (canonical || cover.startsWith('http'))){const url=new URL(cover,canonical).href;meta('og:image',url,true);meta('twitter:image',url);}
-    if(article){const el=document.createElement('script');el.type='application/ld+json';el.textContent=JSON.stringify({'@context':'https://schema.org','@type':'Article',headline:article.title,datePublished:article.original_published_at || article.published_at,author:{'@type':'Person',name:'Claudia Sanchez Urencio'},...(canonical?{mainEntityOfPage:canonical}:{}),...(cover && canonical?{image:new URL(cover,canonical).href}:{})});document.head.append(el);created.push(el);}
+    if(article){const el=document.createElement('script');el.type='application/ld+json';el.textContent=JSON.stringify({'@context':'https://schema.org','@type':'Article',headline:article.title,datePublished:article.original_published_at || article.published_at,author:{'@type':'Person',name:'Claudia Sánchez Urencio'},...(canonical?{mainEntityOfPage:canonical}:{}),...(cover && canonical?{image:new URL(cover,canonical).href}:{})});document.head.append(el);created.push(el);}
     return ()=>created.forEach(el=>el.remove());
   },[content,pathname,article,missing]);
   return null;

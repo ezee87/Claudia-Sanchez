@@ -9,14 +9,28 @@ try{
  const {resolveApproachSteps}=await server.ssrLoadModule('/src/pages/HomePage/HomePage.jsx');
  const {safeHref,publishedArticles,content}=await server.ssrLoadModule('/src/components/institutional/content.js');
  const {mergeCmsContent}=await server.ssrLoadModule('/src/integration/eze-cms/useCmsSection.ts');
+ const {resolveBusinessTestimonials,splitServiceDescription}=await server.ssrLoadModule('/src/pages/EmpresasPage/content.js');
  for(const route of ['/','/personas','/empresas','/comunidad-y-experiencias','/diseno-de-carrera','/contacto','/contacto?tipo=empresa&servicio=coaching-ejecutivo','/articulos','/articulos/no-disponible','/gracias','/no-existe']){
   const html=renderToStaticMarkup(React.createElement(MemoryRouter,{initialEntries:[route]},React.createElement(App)));
   assert.equal((html.match(/<h1[ >]/g)||[]).length,1,route);
-  assert.ok(html.includes('Claudia Sanchez Urencio'));
+  assert.ok(html.includes('Claudia Sánchez Urencio'));
   assert.ok(!html.includes('Página pendiente de desarrollo'));
   if(route==='/gracias')assert.ok(!html.includes('Tu reserva se realizó correctamente'));
   if(route.includes('tipo=empresa'))assert.ok(html.includes('id="contact-company"'));
   if(route==='/contacto')assert.ok(!html.includes('id="contact-company"'));
+  if(route==='/empresas'){
+   assert.ok(!html.includes('Testimonios pendientes de verificación'));
+   for(const item of content['/empresas'].testimonios.items){
+    assert.ok(html.includes(item.author));
+    assert.ok(html.includes(item.quote));
+   }
+   assert.ok(html.includes('lang="en"'));
+   assert.ok(html.includes('Extracto de recomendación'));
+   assert.ok(html.includes('aria-hidden="true">RS</span>'));
+   assert.ok(!html.includes('Cargo no disponible'));
+   for(const item of content['/empresas'].servicios.items)assert.ok(html.includes(`href="${item.href.replace(/&/g,"&amp;")}"`));
+   assert.ok(html.includes('href="#servicios"'));
+  }
   if(route==='/'){
    for(const text of ['Anticipación','Estrategia','Ecosistema','Leer el contexto, identificar tendencias','Transformar la reflexión en dirección','Conectar personas, ideas y recursos'])assert.ok(html.includes(text),`Falta etapa de enfoque en DOM: ${text}`);
    assert.equal((html.match(/class="[^\"]*pillarIcon[^\"]*"/g)||[]).length,3,'Deben renderizarse tres iconos de enfoque');
@@ -26,6 +40,15 @@ try{
  for(const url of ['javascript:alert(1)','data:text/html,hi','//evil.com','/\\evil.com','https:\n//evil.com',''])assert.equal(safeHref(url,'/contacto'),'/contacto');
  for(const url of ['/personas','#servicios','https://calendly.com/test','mailto:a@example.com','tel:+123'])assert.equal(safeHref(url),url);
  const fallback=content['/'].hero;
+ const business=content['/empresas'].testimonios;
+ assert.equal(resolveBusinessTestimonials({title:'Testimonios pendientes de verificación',items:[]},business),business);
+ assert.equal(resolveBusinessTestimonials({...business,paragraph1:'Se publicarán cuando estén disponibles sus textos completos.'},business),business);
+ const remoteBusiness=mergeCmsContent(business,{title:'Experiencias editadas',items:[{...business.items[2],quote:'Recomendación editada'}]});
+ assert.equal(resolveBusinessTestimonials(remoteBusiness,business),remoteBusiness,'Las ediciones válidas del CMS deben conservarse');
+ assert.deepEqual(resolveBusinessTestimonials(mergeCmsContent(business,{items:[]}),business).items,[],'Se respeta la baja intencional de la colección');
+ assert.equal(splitServiceDescription(content['/empresas'].servicios.items[0].description).included.length,6);
+ assert.equal(splitServiceDescription(content['/empresas'].servicios.items[1].description).included.length,8);
+ assert.deepEqual(splitServiceDescription('Contenido nuevo sin lista'),{audience:['Contenido nuevo sin lista'],included:[]});
  const updated=mergeCmsContent(fallback,{title:'Título editado',paragraph1:'Párrafo editado',cta:{label:'Consultar',href:'/contacto'},image:'/replacement.png',alt:'ALT editado'});
  assert.equal(updated.title,'Título editado');assert.equal(updated.paragraph1,'Párrafo editado');assert.equal(updated.cta.href,'/contacto');assert.equal(updated.cta.label,'Consultar');assert.equal(updated.image,'/replacement.png');assert.equal(updated.alt,'ALT editado');assert.equal(updated.paragraph2,fallback.paragraph2);
  assert.deepEqual(mergeCmsContent(fallback,{title:null,image:4}),fallback);

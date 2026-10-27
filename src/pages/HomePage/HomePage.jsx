@@ -4,16 +4,18 @@ import { ArticleCards } from '../../components/institutional/articles';
 import { CmsLink, Collection, Field, useSection } from '../../components/institutional/Cms';
 import { content as localContent, safeHref, safeImage, validItems } from '../../components/institutional/content';
 import Seo from '../../components/institutional/Seo';
+import TestimonialCard, { LINKEDIN_RECOMMENDATIONS_URL } from '../../components/institutional/TestimonialCard';
 import styles from './HomePage.module.css';
 
 const ROUTE = '/';
-const LINKEDIN_RECOMMENDATIONS_URL = 'https://www.linkedin.com/in/claudiasanchezurencio/details/recommendations/?detailScreenTabIndex=0';
+const HERO_DESCRIPTION = 'Acompaño a líderes, ejecutivos y organizaciones a reconocer nuevas posibilidades, tomar mejores decisiones y avanzar con claridad, combinando más de 20 años de experiencia corporativa con una mirada estratégica y humana.';
+const LEGACY_HERO_DESCRIPTION = 'Acompaño a líderes, ejecutivos y organizaciones en momentos de desarrollo, transformación y cambio.';
 const LEGACY_COMMUNITY_DESCRIPTION = 'Experiencias grupales e inmersivas para pensar la carrera y el liderazgo fuera de la operación.';
 const COMMUNITY_DESCRIPTION = 'Espacios de encuentro y experiencias grupales para ejecutivos y líderes que buscan ampliar su perspectiva, reflexionar sobre su siguiente etapa y explorar nuevas posibilidades. A través de conversaciones, aprendizaje compartido y experiencias inmersivas, propongo salir de la dinámica cotidiana para conectar con nuevas ideas, fortalecer relaciones y tomar decisiones con mayor claridad.';
 const TESTIMONIAL_PORTRAITS = {
-  'Lucía López Sarre': '/assets/claudia-sanchez/testimonials/lucia-lopez.jpg',
-  'Fabián Fuentes': '/assets/claudia-sanchez/testimonials/fabian-fuentes.jpg',
-  'Pedro Fondevila': '/assets/claudia-sanchez/testimonials/pedro-fondevila.jpg',
+  'Aldo Barrios': '/assets/claudia-sanchez/testimonials/aldo-barrios.jpg',
+  'Dulce Cano': '/assets/claudia-sanchez/testimonials/dulce-cano.jpg',
+  'Eduardo Díaz Cortazar': '/assets/claudia-sanchez/testimonials/eduardo-diaz.jpg',
 };
 
 function splitTitle(title = '') {
@@ -41,15 +43,15 @@ function SectionTitle({ section, eyebrow, title, id, className = '' }) {
 function Hero() {
   const { content } = useSection(ROUTE, 'hero');
   const [lead, middle, end] = splitTitle(content.title);
+  const description = content.paragraph2 || content.paragraph1 === LEGACY_HERO_DESCRIPTION ? HERO_DESCRIPTION : content.paragraph1;
   const cmsImage = safeImage(content.image, '/assets/claudia-sanchez/claudia-bg-hero.png');
   const image = cmsImage.endsWith('/claudia-hero.png') ? '/assets/claudia-sanchez/claudia-bg-hero.png' : cmsImage;
   return <section className={styles.hero} aria-labelledby="home-hero-title" data-home-hero>
-    <Field route={ROUTE} section="hero" path="image"><div className={styles.heroBackdrop} data-hero-backdrop role="img" aria-label={content.alt || 'Claudia Sanchez Urencio'} style={{ backgroundImage: `url("${image}")` }} /></Field>
+    <Field route={ROUTE} section="hero" path="image"><div className={styles.heroBackdrop} data-hero-backdrop role="img" aria-label={content.alt || 'Claudia Sánchez Urencio'} style={{ backgroundImage: `url("${image}")` }} /></Field>
     <div className={styles.heroCopy}>
       <Field route={ROUTE} section="hero" path="title"><h1 id="home-hero-title" data-hero-item><span>{lead}</span>{middle && <em>{middle}</em>}{end && <em>{end}</em>}</h1></Field>
       <div className={styles.heroIntro} data-hero-item>
-        <Field route={ROUTE} section="hero" path="paragraph1"><p>{content.paragraph1}</p></Field>
-        <Field route={ROUTE} section="hero" path="paragraph2"><p>{content.paragraph2}</p></Field>
+        <Field route={ROUTE} section="hero" path="paragraph1"><p>{description}</p></Field>
       </div>
       <div className={styles.heroAction} data-hero-item><CmsLink route={ROUTE} section="hero" path="cta" value={content.cta} className="editorial-button" /></div>
     </div>
@@ -60,13 +62,37 @@ function Trajectory() {
   const { content } = useSection(ROUTE, 'sobre-mi');
   return <section id="sobre-mi" className={`${styles.section} ${styles.trajectory}`} aria-labelledby="trajectory-title">
     <div className={`${styles.container} ${styles.trajectoryGrid}`} data-trajectory>
+      <div className={styles.mobileExperience} aria-label="Experiencia corporativa">
+        <div className={styles.mobileExperienceHead} data-trajectory-company>
+          <p>Experiencia corporativa</p>
+          <span aria-hidden="true" />
+        </div>
+        <ol className={styles.experiencePath}>
+          <li className={styles.pathStep} data-trajectory-metric aria-label="Más de veinte años de experiencia corporativa">
+            <span className={styles.pathNode} aria-hidden="true" />
+            <strong className={styles.pathMetric}>20<span>+</span></strong>
+            <p>Años de experiencia corporativa</p>
+          </li>
+          <li className={styles.pathStep} data-trajectory-company>
+            <span className={styles.pathNode} aria-hidden="true" />
+            <div className={styles.pathLogos}>
+              <img className={styles.diageoLogo} src="/assets/claudia-sanchez/testimonials/diageo-crop.png" alt="Diageo" />
+              <span className={styles.pathAmp} aria-hidden="true">&amp;</span>
+              <img className={styles.kraftLogo} src="/assets/claudia-sanchez/testimonials/kraft.png" alt="Kraft Foods" />
+            </div>
+            <p><span>Liderazgo en Recursos Humanos</span><span>Responsabilidades regionales en América Latina</span></p>
+          </li>
+        </ol>
+      </div>
       <aside className={styles.trajectoryVisual} aria-label="Trayectoria corporativa">
-        <div className={styles.metric} data-trajectory-metric aria-label="Más de veinte años de experiencia corporativa"><strong>20<span>+</span></strong><p>años de experiencia<br />corporativa</p></div>
+        <div className={styles.metric} data-trajectory-metric aria-label="Más de veinte años de experiencia corporativa"><strong>20<span>+</span></strong><p>años de experiencia<br className={styles.metricBreak} /><span>corporativa</span></p></div>
         <div className={styles.companyRail} aria-label="Experiencia en compañías internacionales">
-          <span data-trajectory-company>Experiencia corporativa</span>
-          <strong data-trajectory-company>Diageo</strong>
-          <strong data-trajectory-company>Kraft Foods</strong>
-          <small data-trajectory-company>Responsabilidades regionales · América Latina</small>
+          <div className={styles.desktopLogos}>
+            <img className={styles.diageoLogo} src="/assets/claudia-sanchez/testimonials/diageo-crop.png" alt="Diageo" />
+            <span className={styles.desktopAmp} aria-hidden="true">&amp;</span>
+            <img className={styles.kraftLogo} src="/assets/claudia-sanchez/testimonials/kraft.png" alt="Kraft Foods" />
+          </div>
+          <small data-trajectory-company><span className={styles.mobileRegionalLine}>Responsabilidades regionales</span><br className={styles.mobileBreak} /> <span className={styles.mobileRegionalLine}>América Latina</span></small>
         </div>
       </aside>
       <div className={styles.trajectoryNarrative}>
@@ -94,7 +120,12 @@ function Services() {
         <h3><a href={safeHref(item.href)}>{item.title}</a></h3><p className={styles.cardCopy}>{item._id === 'comunidad' && item.description === LEGACY_COMMUNITY_DESCRIPTION ? COMMUNITY_DESCRIPTION : item.description}</p>
         <a className={styles.cardLink} href={safeHref(item.href)} aria-label={`Conocer ${item.eyebrow || item.title}`}>Explorar <span aria-hidden="true">↗</span></a>
       </article></Collection>)}</div></Collection>
-      <div className={styles.servicesAction} data-reveal><CmsLink route={ROUTE} section="servicios" path="cta" value={content.cta} className="editorial-button" /></div>
+      <div className={styles.servicesAction} data-reveal>
+        <div className={styles.servicesCloseCopy}>
+          <p className={styles.servicesCloseTitle}>Cada desafío merece una conversación diferente.</p>
+          <p className={styles.servicesCloseText}>Conversemos sobre lo que necesitás y exploremos cómo puedo acompañarte.</p>
+        </div>
+        <CmsLink route={ROUTE} section="servicios" path="cta" value={content.cta} className="editorial-button" /></div>
     </div>
   </section>;
 }
@@ -148,15 +179,11 @@ function Testimonials() {
   const items = validItems(content.items);
   const closingUrl = linkedInUrl(content.closingLink?.href) || LINKEDIN_RECOMMENDATIONS_URL;
   return <section id="testimonios" className={`${styles.section} ${styles.testimonials}`} aria-labelledby="testimonials-title"><div className={styles.container}>
-    <div className={styles.testimonialsHead}><SectionTitle section="testimonios" eyebrow="Recomendaciones" title={content.title} id="testimonials-title" /><Field route={ROUTE} section="testimonios" path="paragraph1"><p data-reveal>{content.paragraph1}</p></Field></div>
+    <div className={styles.testimonialsHead}><SectionTitle section="testimonios" eyebrow="Recomendaciones" title={content.title} id="testimonials-title" /><Field route={ROUTE} section="testimonios" path="paragraph1"><p data-reveal>{content.paragraph1?.split(/(?<=\.)\s+/).map((sentence, index) => <span className={styles.recommendationSentence} key={index}>{index > 0 && ' '}{sentence}</span>)}</p></Field></div>
     <Collection route={ROUTE} section="testimonios" path="items"><div className={styles.testimonialGrid}>{items.map((item, index) => {
       const portrait = safeImage(item.image, TESTIMONIAL_PORTRAITS[item.author] || '');
       const source = linkedInUrl(item.linkedinUrl) || LINKEDIN_RECOMMENDATIONS_URL;
-      return <Collection key={item._id} route={ROUTE} section="testimonios" path="items" itemId={item._id}><figure className={`${styles.testimonialCard} ${index === 0 ? styles.featuredQuote : ''}`} data-reveal>
-        <div className={styles.person}>{portrait && <img src={portrait} alt={item.alt || `Retrato de ${item.author}`} width="112" height="112" loading="lazy" />}<figcaption><strong>{item.author}</strong>{item.role && <span>{item.role}</span>}</figcaption></div>
-        <blockquote>“{item.quote}”</blockquote>
-        <a className={styles.linkedinSource} href={source} target="_blank" rel="noopener noreferrer"><i aria-hidden="true">in</i><span>{item.sourceLabel || 'Recomendación pública en LinkedIn'}</span><b aria-hidden="true">↗</b><span className="sr-only"> (se abre en una pestaña nueva)</span></a>
-      </figure></Collection>;
+      return <TestimonialCard key={item._id} route={ROUTE} item={item} index={index} portrait={portrait} source={source} reveal />;
     })}</div></Collection>
     <div className={styles.testimonialClosing} data-reveal>
       <div className={styles.closingRule} aria-hidden="true" />
@@ -206,7 +233,7 @@ export default function HomePage() {
       q('[data-trajectory]').forEach(section => {
         const timeline = gsap.timeline({ scrollTrigger: { trigger: section, start: 'top 78%', once: true }, defaults: { ease: 'power3.out' } });
         timeline
-          .from(section.querySelector('[data-trajectory-metric]'), { opacity: 0, y: 34, duration: 1 })
+          .from(section.querySelectorAll('[data-trajectory-metric]'), { opacity: 0, y: 34, duration: 1 })
           .from(section.querySelectorAll('[data-trajectory-company]'), { opacity: 0, y: 15, duration: .62, stagger: .1 }, '-=.58')
           .from(section.querySelectorAll('[data-trajectory-story]'), { opacity: 0, y: 18, duration: .72, stagger: .09 }, '-=.46');
       });

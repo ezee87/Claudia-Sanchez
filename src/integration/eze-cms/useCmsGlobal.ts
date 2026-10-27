@@ -19,9 +19,15 @@ function isObject(value: unknown): value is JsonObject {
 export function useCmsGlobal<T extends JsonObject>({ config, groupKey, fallback, readGlobal }: Options<T>): CmsSectionState<T> {
   const signature = JSON.stringify(fallback)
   const stableFallback = useMemo(() => fallback, [signature]) // eslint-disable-line react-hooks/exhaustive-deps
-  const [state, setState] = useState<CmsSectionState<T>>({ content: stableFallback, loading: true, error: null, source: 'local' })
+  const localOnly = import.meta.env.DEV
+  const [state, setState] = useState<CmsSectionState<T>>({ content: stableFallback, loading: !localOnly, error: null, source: 'local' })
 
   useEffect(() => {
+    if (localOnly) {
+      setState({ content: stableFallback, loading: false, error: null, source: 'local' })
+      return undefined
+    }
+
     let active = true
     let receivedUpdate = false
     const receive = (event: MessageEvent) => {
@@ -44,7 +50,7 @@ export function useCmsGlobal<T extends JsonObject>({ config, groupKey, fallback,
       if (active && !receivedUpdate) setState({ content: stableFallback, loading: false, error: error instanceof Error ? error : new Error('No se pudo cargar el contenido global.'), source: 'local' })
     })
     return () => { active = false; window.removeEventListener('message', receive) }
-  }, [config.siteSlug, groupKey, readGlobal, stableFallback])
+  }, [config.siteSlug, groupKey, localOnly, readGlobal, stableFallback])
 
   return state
 }

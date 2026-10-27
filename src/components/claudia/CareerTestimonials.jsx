@@ -1,0 +1,74 @@
+import { useRef } from 'react';
+import { gsap, useGSAP, MQ } from '../../utils/gsap.js';
+import { LINKEDIN_RECOMMENDATIONS_URL, LINKEDIN_SOURCE_LABEL } from '../../data/claudia/careerTestimonials.js';
+import SectionHead from './SectionHead.jsx';
+import BookingCTA from './BookingCTA.jsx';
+import type from './type.module.css';
+import styles from './CareerTestimonials.module.css';
+
+/**
+ * 03 · Testimonios reales: prueba social principal. Una tarjeta destacada a todo el ancho y dos secundarias
+ * en paralelo (en mobile, una columna). Sin carrusel; las citas son textuales y todas enlazan a las recomendaciones de LinkedIn.
+ */
+export default function CareerTestimonials({ content }) {
+  const root = useRef(null);
+
+  useGSAP(
+    () => {
+      const mm = gsap.matchMedia();
+      mm.add(MQ.motion, () => {
+        const q = gsap.utils.selector(root.current);
+        q('[data-rv="card"]').forEach((card, index) => {
+          gsap.from(card, {
+            opacity: 0,
+            y: 26,
+            duration: 0.9,
+            delay: index === 2 ? 0.1 : 0,
+            ease: 'power3.out',
+            scrollTrigger: { trigger: card, start: 'top 90%', once: true },
+          });
+        });
+      });
+      return () => mm.revert();
+    },
+    { scope: root },
+  );
+
+  return (
+    <section id="testimonios" className={`${type.section} ${styles.section}`} aria-labelledby="testimonios-title" data-tone="light" ref={root}>
+      <div className={type.container}>
+        <div className={styles.head}>
+          <SectionHead eyebrow={content.eyebrow} title={content.title} id="testimonios-title" className={styles.headMain} />
+          <p className={`${type.lead} ${styles.subtitle}`}>{content.subtitle}</p>
+        </div>
+
+        <div className={styles.grid}>
+          {content.items.map((item, index) => (
+            <figure className={`${styles.card} ${index === 0 ? styles.featured : ''}`} key={item._id} data-rv="card">
+              <div className={styles.person}>
+                <img src={item.image} alt={item.alt} width="100" height="100" loading="lazy" decoding="async" />
+                <figcaption>
+                  <strong>{item.author}</strong>
+                  <span>{item.role}</span>
+                </figcaption>
+              </div>
+              <blockquote lang={item.lang}>“{item.quote}”</blockquote>
+              <a className={styles.source} href={LINKEDIN_RECOMMENDATIONS_URL} target="_blank" rel="noopener noreferrer">
+                <i aria-hidden="true">in</i>
+                <span>{LINKEDIN_SOURCE_LABEL}</span>
+                <b aria-hidden="true">↗</b>
+                <span className="sr-only"> (se abre en una pestaña nueva)</span>
+              </a>
+            </figure>
+          ))}
+        </div>
+
+        <div className={styles.action}>
+          <span className={styles.actionRule} aria-hidden="true" />
+          <p className={styles.actionText}>{content.closing}</p>
+          <BookingCTA size="lg" />
+        </div>
+      </div>
+    </section>
+  );
+}

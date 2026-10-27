@@ -1,37 +1,28 @@
 import { useRef, useState } from 'react';
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 import { gsap, useGSAP, MQ } from '../../utils/gsap.js';
-import { useMediaQuery } from '../../utils/useMediaQuery.js';
-import { BOOKING_LABEL, BOOKING_URL } from '../../data/claudia/booking.js';
 import { ClaudiaEditable, useClaudiaCmsSection } from '../../integration/eze-cms/ClaudiaCms.jsx';
-import { resolveCmsLink } from '../../integration/eze-cms/cmsLink.js';
-import SectionHead from './SectionHead.jsx';
 import LifeDiagram from './LifeDiagram.jsx';
-import LifeAccordion from './LifeAccordion.jsx';
-import BookingCTA from './BookingCTA.jsx';
 import type from './type.module.css';
 import styles from './LifeModel.module.css';
 
 const PANEL_ID = 'life-panel';
 
 /**
- * 04 · Modelo L.I.F.E. — segunda gran experiencia.
- * Desktop: diagrama SVG + seis botones DOM y un panel de texto estable. Mobile/tablet: acordeón.
+ * Modelo L.I.F.E. integrado en «Mi enfoque» (no es una sección propia).
+ * Un solo diagrama para todos los anchos: seis botones DOM reales, operables con toque, teclado o puntero.
+ * Al seleccionar una dimensión aparece su frase breve en un panel de altura estable.
  * GSAP dibuja las líneas al entrar (M03); Motion gestiona solo el estado de selección (M11).
  */
 export default function LifeModel({ content: fallback }) {
   const root = useRef(null);
-  const { content } = useClaudiaCmsSection('life', { ...fallback, instruction: 'Selecciona una dimensión para explorarla', hubLabel: 'L.I.F.E.', ctaLabel: BOOKING_LABEL, ctaLink: null });
-  const ctaLink = resolveCmsLink(content.ctaLink, { label: content.ctaLabel, href: BOOKING_URL });
+  const { content } = useClaudiaCmsSection('life', { ...fallback, instruction: 'Selecciona una dimensión para explorarla', hubLabel: 'L.I.F.E.' });
   const [selected, setSelected] = useState(null);
   const reduceMotion = useReducedMotion();
-  const isDiagram = useMediaQuery('(min-width: 960px)');
   const current = content.dimensions.find(({ id }) => id === selected) ?? null;
-  const [closingFirst, closingSecond] = content.closing.split('. ');
 
   useGSAP(
     () => {
-      if (!isDiagram) return undefined;
       const mm = gsap.matchMedia();
       mm.add(MQ.motion, () => {
         const q = gsap.utils.selector(root.current);
@@ -41,7 +32,7 @@ export default function LifeModel({ content: fallback }) {
         gsap
           .timeline({
             defaults: { ease: 'power2.inOut' },
-            scrollTrigger: { trigger: diagram, start: 'top 72%', once: true },
+            scrollTrigger: { trigger: diagram, start: 'top 80%', once: true },
           })
           .from(q('[data-life="draw"]'), { strokeDashoffset: 1, duration: 1.4, stagger: 0.2 }, 0)
           .from(q('[data-life="hub"]'), { opacity: 0, scale: 0.85, duration: 0.8, ease: 'power3.out' }, 0.2)
@@ -51,65 +42,60 @@ export default function LifeModel({ content: fallback }) {
       });
       return () => mm.revert();
     },
-    { scope: root, dependencies: [isDiagram], revertOnUpdate: true },
+    { scope: root },
   );
 
   const onKeyDown = (event) => {
-    if (event.key === 'Escape' && selected) {
-      setSelected(null);
-    }
+    if (event.key === 'Escape' && selected) setSelected(null);
   };
 
   return (
-    <section id="life" className={`${type.section} ${styles.section}`} aria-labelledby="life-title" data-tone="white" ref={root}>
+    <div className={styles.band} data-tone="white" ref={root}>
       <div className={type.container}>
         <div className={styles.layout} onKeyDown={onKeyDown}>
           <div className={styles.copy}>
-            <SectionHead eyebrow={content.eyebrow} title={content.title} id="life-title" className={styles.head} cmsSection="life">
-              <ClaudiaEditable sectionKey="life" fieldPath="intro"><p className={type.lead}>{content.intro}</p></ClaudiaEditable>
-            </SectionHead>
-
-            {isDiagram ? (
-              <div className={styles.panel} id={PANEL_ID} aria-live="polite">
-                <ClaudiaEditable sectionKey="life" fieldPath="instruction"><p className={styles.instruction}>{content.instruction}</p></ClaudiaEditable>
-                <AnimatePresence mode="wait" initial={false}>
-                  <motion.div
-                    key={current ? current.id : 'support'}
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -6 }}
-                    transition={{ duration: reduceMotion ? 0 : 0.22, ease: [0.22, 1, 0.36, 1] }}
-                  >
-                    {current ? (
-                      <>
-                        <ClaudiaEditable sectionKey="life" fieldPath={`dimensions.${content.dimensions.indexOf(current)}.label`}><h3 className={styles.panelTitle}>{current.label}</h3></ClaudiaEditable>
-                        <ClaudiaEditable sectionKey="life" fieldPath={`dimensions.${content.dimensions.indexOf(current)}.text`}><p className={styles.panelText}>{current.text}</p></ClaudiaEditable>
-                      </>
-                    ) : (
-                      <ClaudiaEditable sectionKey="life" fieldPath="support"><p className={styles.panelSupport}>{content.support}</p></ClaudiaEditable>
-                    )}
-                  </motion.div>
-                </AnimatePresence>
+            <ClaudiaEditable sectionKey="life" fieldPath="title"><h3 className={styles.title}>{content.title}</h3></ClaudiaEditable>
+            <ClaudiaEditable sectionKey="life" fieldPath="intro">
+              <div className={styles.intro}>
+                {content.intro.split('\n\n').map((paragraph) => <p className={type.lead} key={paragraph}>{paragraph}</p>)}
               </div>
-            ) : (
-              <ClaudiaEditable sectionKey="life" fieldPath="support"><p className={styles.support}>{content.support}</p></ClaudiaEditable>
-            )}
+            </ClaudiaEditable>
+          </div>
+
+          {/* Desktop: bajo el texto introductorio. Mobile: bajo el diagrama, donde ocurre el toque. */}
+          <div className={styles.panel} id={PANEL_ID} aria-live="polite" data-empty={current ? undefined : ''}>
+            <AnimatePresence mode="wait" initial={false}>
+              <motion.div
+                key={current ? current.id : 'hint'}
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -6 }}
+                transition={{ duration: reduceMotion ? 0 : 0.2, ease: [0.22, 1, 0.36, 1] }}
+              >
+                {current ? (
+                  <>
+                    <p className={styles.panelTitle}>{current.label}</p>
+                    <p className={styles.panelText}>{current.text}</p>
+                  </>
+                ) : (
+                  <ClaudiaEditable sectionKey="life" fieldPath="instruction"><p className={styles.instruction}>{content.instruction}</p></ClaudiaEditable>
+                )}
+              </motion.div>
+            </AnimatePresence>
           </div>
 
           <div className={styles.stage}>
-            {isDiagram ? (
-              <LifeDiagram dimensions={content.dimensions} selected={selected} onSelect={setSelected} panelId={PANEL_ID} cmsSection="life" hubLabel={content.hubLabel} />
-            ) : (
-              <LifeAccordion dimensions={content.dimensions} selected={selected} onSelect={setSelected} cmsSection="life" />
-            )}
+            <LifeDiagram dimensions={content.dimensions} selected={selected} onSelect={setSelected} panelId={PANEL_ID} cmsSection="life" hubLabel={content.hubLabel} />
           </div>
-        </div>
 
-        <ClaudiaEditable sectionKey="life" fieldPath="closing"><p className={styles.closing}>{closingFirst}.<br className={styles.desktopBreak} />{' '}{closingSecond}</p></ClaudiaEditable>
-        <div className={styles.action}>
-          <ClaudiaEditable sectionKey="life" fieldPath="ctaLink"><BookingCTA label={ctaLink.label} href={ctaLink.href} /></ClaudiaEditable>
+          {/* Desktop: en la columna del texto, justo bajo el panel. Cada "\n" del copy es una línea propia. */}
+          <ClaudiaEditable sectionKey="life" fieldPath="closing">
+            <p className={styles.closing}>
+              {content.closing.split('\n').map((line) => <span className={styles.closingLine} key={line}>{line}</span>)}
+            </p>
+          </ClaudiaEditable>
         </div>
       </div>
-    </section>
+    </div>
   );
 }

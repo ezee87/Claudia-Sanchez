@@ -1,6 +1,13 @@
 import content from '../../data/institutional/content.json';
 import { careerContent } from '../../data/institutional/careerContent';
-for (const [route, sections] of Object.entries(careerContent)) content[route] = { ...(content[route] || {}), ...sections };
+import { PERSONAS_WHATSAPP_HREFS } from '../../data/institutional/whatsapp';
+// Preserve the Personas editorial content requested in the redesign.
+for (const [route, sections] of Object.entries(careerContent)) {
+  if (route !== '/personas') content[route] = { ...(content[route] || {}), ...sections };
+}
+for (const item of content['/personas']?.servicios?.items || []) {
+  if (PERSONAS_WHATSAPP_HREFS[item._id]) item.href = PERSONAS_WHATSAPP_HREFS[item._id];
+}
 export { content };
 
 export function safeHref(value, fallback = '/contacto') {

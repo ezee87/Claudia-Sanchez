@@ -1,7 +1,6 @@
 ﻿import { useId } from 'react';
 import { motion } from 'motion/react';
 import { BOOKING_LABEL, BOOKING_URL } from '../../data/claudia/booking.js';
-import { useBookingModal } from './BookingModal.jsx';
 import styles from './BookingCTA.module.css';
 
 const arrow = {
@@ -11,17 +10,10 @@ const arrow = {
 
 /**
  * ÚNICO CTA comercial de la página de Claudia. Etiqueta y destino salen de las constantes
- * centrales; solo el header puede pasar una etiqueta visual breve.
- * variant: 'gold' | 'ivory' | 'outline' · size: 'md' | 'lg'
+ * centrales y Calendly siempre se abre en una pestaña nueva.
+ * variant: 'gold' | 'outline' · size: 'md' | 'lg'
  */
-export default function BookingCTA({ variant = 'gold', size = 'md', className = '', label = BOOKING_LABEL, href = BOOKING_URL, onClick, ...rest }) {
-  const { openBooking } = useBookingModal();
-  const handleClick = (event) => {
-    onClick?.(event);
-    if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
-    if (href !== BOOKING_URL) return;
-    openBooking(event);
-  };
+export default function BookingCTA({ variant = 'gold', size = 'md', className = '', label = BOOKING_LABEL, href = BOOKING_URL, ...rest }) {
   const descriptionId = useId();
 
   return (
@@ -38,7 +30,6 @@ export default function BookingCTA({ variant = 'gold', size = 'md', className = 
         whileHover="hover"
         whileFocus="hover"
         whileTap={{ scale: 0.985 }}
-        onClick={handleClick}
         {...rest}
       >
         <span>{label}</span>

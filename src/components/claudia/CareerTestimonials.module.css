@@ -1,0 +1,290 @@
+.section {
+  background: var(--lavender);
+  padding-block: var(--c-landing-pad) clamp(56px, 6vw, 84px);
+}
+
+/* Cabecera apilada y centrada: rompe el patrón título/párrafo en columnas de otras secciones. */
+.head {
+  display: grid;
+  justify-items: center;
+  gap: clamp(16px, 2vw, 22px);
+  max-width: 860px;
+  margin-inline: auto;
+  text-align: center;
+}
+
+.headMain {
+  display: grid;
+  justify-items: center;
+  gap: 16px;
+}
+
+.headMain h2 {
+  max-width: 30ch;
+}
+
+.subtitle {
+  max-width: 56ch;
+}
+
+.grid {
+  display: grid;
+  gap: 16px;
+  margin-top: clamp(32px, 4vw, 48px);
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  min-width: 0;
+  margin: 0;
+  padding: 24px 20px;
+  background: rgba(255, 255, 255, 0.62);
+  border: 1px solid rgba(27, 26, 68, 0.12);
+}
+
+.person {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.person img {
+  flex: none;
+  width: 64px;
+  height: 64px;
+  border: 1px solid var(--gold);
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center top;
+}
+
+.person figcaption {
+  min-width: 0;
+}
+
+.person strong,
+.person span {
+  display: block;
+}
+
+.person strong {
+  font-size: 0.92rem;
+  line-height: 1.3;
+  color: var(--navy);
+}
+
+.person span {
+  margin-top: 3px;
+  font-size: 0.78rem;
+  line-height: 1.4;
+  color: var(--fg-soft);
+}
+
+.card blockquote {
+  margin: 0;
+  font-family: var(--c-serif);
+  font-size: 1.2rem;
+  font-weight: 500;
+  line-height: 1.38;
+  color: var(--navy);
+  text-wrap: pretty;
+}
+
+.source {
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  gap: 9px;
+  min-height: 40px;
+  margin-top: auto;
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  line-height: 1.3;
+  text-decoration: none;
+  text-transform: uppercase;
+  color: var(--fg-soft);
+}
+
+.source i {
+  display: grid;
+  flex: none;
+  width: 20px;
+  height: 20px;
+  place-items: center;
+  background: var(--navy);
+  color: var(--ivory);
+  font-style: normal;
+  letter-spacing: 0;
+  text-transform: lowercase;
+}
+
+.source b {
+  font-size: 0.86rem;
+  font-weight: 500;
+  line-height: 1;
+  transition: transform 0.2s var(--c-ease);
+}
+
+.source:hover {
+  color: var(--navy);
+}
+
+.source:hover b {
+  transform: translate(2px, -2px);
+}
+
+.source:focus-visible {
+  outline: 2px solid var(--navy);
+  outline-offset: 4px;
+}
+
+/* Tarjeta destacada (Aldo): navy en todos los anchos para marcar la jerarquía. */
+.featured {
+  background: var(--navy);
+  border-color: var(--navy);
+}
+
+.featured .person strong {
+  color: var(--ivory);
+}
+
+.featured .person span {
+  color: rgba(247, 245, 240, 0.78);
+}
+
+.featured blockquote {
+  font-size: 1.35rem;
+  line-height: 1.32;
+  color: var(--ivory);
+}
+
+.featured .source {
+  color: rgba(247, 245, 240, 0.82);
+}
+
+.featured .source i {
+  background: var(--gold);
+  color: var(--navy);
+}
+
+.featured .source:hover {
+  color: var(--gold);
+}
+
+.featured .source:focus-visible {
+  outline-color: var(--gold);
+}
+
+/* Cierre centrado bajo las tarjetas: filete dorado, frase breve y CTA. */
+.action {
+  display: grid;
+  justify-items: center;
+  margin-top: clamp(44px, 5vw, 72px);
+  text-align: center;
+}
+
+.actionRule {
+  width: 48px;
+  height: 1px;
+  background: var(--gold);
+}
+
+.actionText {
+  max-width: 100%;
+  margin: clamp(18px, 2vw, 24px) 0 clamp(22px, 2.4vw, 30px);
+  font-family: var(--c-serif);
+  font-size: clamp(1.3rem, 1.1rem + 0.6vw, 1.6rem);
+  font-style: italic;
+  font-weight: 500;
+  line-height: 1.25;
+  color: var(--navy);
+  text-wrap: balance;
+}
+
+/* Mobile: cabecera alineada a la izquierda, como el resto de secciones. Tarjetas y cierre no cambian. */
+@media (max-width: 599.98px) {
+  .head,
+  .headMain {
+    justify-items: start;
+    text-align: left;
+  }
+}
+
+@media (min-width: 600px) {
+  .card {
+    padding: 28px;
+  }
+
+  .card blockquote {
+    font-size: 1.25rem;
+  }
+
+  .featured blockquote {
+    font-size: 1.5rem;
+  }
+}
+
+@media (min-width: 960px) {
+  .grid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 22px;
+  }
+
+  .card {
+    padding: clamp(26px, 2.6vw, 34px);
+  }
+
+  .card blockquote {
+    font-size: clamp(1.1rem, 0.75rem + 0.6vw, 1.25rem);
+  }
+
+  /* La destacada ocupa la fila superior completa: datos a la izquierda, cita a la derecha. */
+  .featured {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: minmax(300px, 0.3fr) minmax(0, 1fr);
+    grid-template-areas:
+      'person quote'
+      'source quote';
+    align-items: start;
+    gap: 20px clamp(32px, 5vw, 72px);
+    padding: clamp(32px, 3.6vw, 48px);
+  }
+
+  .featured .person {
+    grid-area: person;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+  }
+
+  .featured .person img {
+    width: 84px;
+    height: 84px;
+  }
+
+  .featured .person strong {
+    font-size: 1.05rem;
+  }
+
+  .featured .person span {
+    font-size: 0.85rem;
+  }
+
+  .featured blockquote {
+    grid-area: quote;
+    align-self: center;
+    font-size: clamp(1.5rem, 0.75rem + 1.25vw, 2rem);
+    line-height: 1.3;
+  }
+
+  .featured .source {
+    grid-area: source;
+    align-self: end;
+    justify-self: start;
+    white-space: nowrap;
+  }
+}

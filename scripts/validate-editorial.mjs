@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import assert from 'node:assert/strict';
 const content=JSON.parse(fs.readFileSync('src/data/institutional/content.json','utf8'));
 const { careerContent }=await import('../src/data/institutional/careerContent.js');
-for(const [route,sections] of Object.entries(careerContent))content[route]={...(content[route]||{}),...sections};
+for(const [route,sections] of Object.entries(careerContent))if(route!=='/personas')content[route]={...(content[route]||{}),...sections};
 const manifest=JSON.parse(fs.readFileSync('src/integration/eze-cms/claudia-sanchez.manifest.json','utf8'));
 assert.equal(manifest.version,1);assert.equal(manifest.site.key,'claudia-sanchez');
 const expectedGlobals={'institutional-navbar':content['/'].navbar,'institutional-footer':content['/'].footer};
@@ -30,7 +30,7 @@ for(const [route,sections] of Object.entries(content)){
 }
 assert.equal(content['/articulos'].listado.items.length,0,'No invented published articles');
 assert.equal(content['/personas'].servicios.items.length,3);assert.equal(content['/empresas'].servicios.items.length,2);
-assert.equal(content['/'].testimonios.items.length,3);assert.equal(content['/personas'].testimonios.items.length,0);assert.equal(content['/empresas'].testimonios.items.length,0);
-assert.equal(content['/personas'].situaciones.items.length,3);assert.equal(content['/empresas'].desafios.items.length,2);
+assert.equal(content['/'].testimonios.items.length,3);assert.equal(content['/personas'].testimonios.items.length,3);assert.equal(content['/empresas'].testimonios.items.length,3);
+assert.equal(content['/personas'].situaciones.items.length,4);assert.equal(content['/empresas'].desafios.items.length,2);
 assert.ok(content['/comunidad-y-experiencias']);
 console.log(`OK: ${Object.keys(content).length} páginas, ${manifest.globals.length} globales, ${count} campos, colecciones, copy y manifiesto.`);

@@ -1,0 +1,132 @@
+.community-page {
+  --community-space: clamp(56px, 6vw, 96px);
+  --community-gap: clamp(28px, 4vw, 64px);
+}
+.community-page .editorial-button { min-height: 52px; gap: 20px; }
+.community-page .editorial-button span { flex: none; }
+
+/* Short gold rule under the eyebrow, as in Empresas · Proceso. */
+.community-page .community-eyebrow { margin-bottom: 28px; }
+.community-page .community-eyebrow::after { content: ''; display: block; width: 70px; height: 1px; margin-top: 11px; background: var(--gold); }
+
+/* Hero */
+.community-page .community-hero { position: relative; isolation: isolate; overflow: hidden; padding-block: clamp(44px, 4.8vw, 72px) clamp(48px, 5vw, 76px); }
+.community-page .community-hero::before,
+.community-page .community-hero::after { content: ''; position: absolute; z-index: 0; border: 1px solid rgba(213, 166, 74, .14); border-radius: 50%; pointer-events: none; }
+.community-page .community-hero::before { width: 300px; height: 600px; right: -80px; bottom: -280px; }
+.community-page .community-hero::after { width: 200px; height: 400px; right: 90px; bottom: -190px; border-color: rgba(213, 166, 74, .1); }
+.community-hero-inner { position: relative; z-index: 1; }
+.community-page .community-hero h1 { max-width: 15ch; font-size: clamp(2.6rem, 4.9vw, 4.75rem); line-height: 1.04; letter-spacing: -.015em; text-wrap: balance; }
+.community-title-lead { color: var(--navy); }
+.community-title-rest { color: var(--violet); }
+.community-title-tail { white-space: nowrap; }
+.community-hero-detail { display: grid; gap: 28px; margin-top: clamp(24px, 2.6vw, 36px); }
+/* The shared hero rule places copy in a second column; keep it under the title here. */
+.community-page .community-hero .section-copy { grid-column: 1; max-width: 46ch; font-size: var(--c-intro); }
+.community-page .community-hero .section-copy p + p { margin-top: 12px; }
+.community-hero-action { justify-self: start; }
+@media (min-width: 1001px) {
+  /* Narrow enough to break after "para", wide enough to keep each line whole. */
+  .community-page .community-hero .section-copy p:first-child { max-width: 21.5em; }
+}
+/* Desktop: navbar sticky in flow (82px row + 1px border) + hero = 100dvh, content centred. */
+@media (min-width: 801px) {
+  .community-page { --community-header-h: 83px; }
+  .community-page .community-hero { display: flex; align-items: center; box-sizing: border-box; min-height: calc(100dvh - var(--community-header-h)); }
+  .community-page .community-hero .community-hero-inner { width: min(var(--c-content-max), calc(100% - var(--c-gutter) * 2)); }
+}
+@media (min-width: 601px) {
+  /* Each half of the title on its own line; the copy sits right under it. */
+  .community-page .community-hero h1 { max-width: none; }
+  .community-title-lead, .community-title-rest { display: block; }
+}
+
+/* Experiences */
+.community-page .community-experiences { padding-block: var(--community-space); background: var(--white); }
+.community-experiences-heading { margin-bottom: clamp(36px, 4.4vw, 64px); }
+.community-page .community-experiences h2 { max-width: 22ch; font-size: clamp(2.15rem, 3.6vw, 3.5rem); line-height: 1.08; }
+.community-experience-list { display: grid; gap: clamp(48px, 6vw, 96px); }
+.community-experience { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: var(--community-gap); align-items: stretch; }
+.community-experience:nth-child(even) { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); }
+.community-experience:nth-child(even) .community-experience-visual { order: 2; }
+
+/* Visual area: typographic composition on lavender, with the site's gold arcs. */
+.community-experience-visual { position: relative; isolation: isolate; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; gap: 48px; min-width: 0; padding: clamp(28px, 3.4vw, 52px); background: var(--lavender); }
+.community-experience-visual::before,
+.community-experience-visual::after { content: ''; position: absolute; z-index: -1; border: 1px solid rgba(213, 166, 74, .32); border-radius: 50%; pointer-events: none; }
+.community-experience-visual::before { width: 420px; aspect-ratio: 1; right: -210px; top: -210px; }
+.community-experience-visual::after { width: 300px; aspect-ratio: 1; right: -150px; top: -150px; border-color: rgba(213, 166, 74, .2); }
+.community-experience:nth-child(even) .community-experience-visual::before { right: auto; left: -210px; }
+.community-experience:nth-child(even) .community-experience-visual::after { right: auto; left: -150px; }
+.community-experience-number { color: var(--gold-deep); font-family: var(--c-serif); font-size: clamp(3.5rem, 6vw, 5.5rem); font-weight: 500; font-variant-numeric: lining-nums tabular-nums; line-height: 1; letter-spacing: -.04em; }
+.community-experience-name { padding-left: 22px; border-left: 1px solid var(--gold); }
+.community-page .community-experience h3 { font-size: clamp(2.2rem, 3.4vw, 3.4rem); line-height: 1.04; overflow-wrap: anywhere; }
+.community-experience-subtitle { max-width: 26ch; margin-top: 14px; color: var(--violet); font-family: var(--c-serif); font-size: clamp(1.25rem, 1.6vw, 1.55rem); line-height: 1.3; }
+
+/* Content area */
+.community-experience-body { display: flex; flex-direction: column; align-items: flex-start; gap: 28px; min-width: 0; padding-block: clamp(4px, 1vw, 16px); }
+.community-experience-lead { max-width: 40ch; color: var(--navy); font-size: clamp(1.08rem, 1.2vw, 1.22rem); font-weight: 500; line-height: 1.5; }
+.community-experience-group { width: 100%; padding-top: 20px; border-top: 1px solid var(--rule); }
+.community-experience-group h4 { margin-bottom: 22px; color: var(--gold-deep); font-size: .88rem; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; }
+.community-modalities { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px var(--community-gap); }
+.community-modality h5 { margin: 0 0 10px; font-size: .95rem; font-weight: 700; }
+.community-modality ul,
+.community-topics { display: grid; gap: 8px; max-width: 52ch; }
+.community-modality li,
+.community-topics li { position: relative; padding-left: 16px; color: var(--fg-soft); font-size: .94rem; line-height: 1.55; }
+.community-modality li::first-letter,
+.community-topics li::first-letter { text-transform: uppercase; }
+.community-modality li::before,
+.community-topics li::before { content: ''; position: absolute; top: .68em; left: 0; width: 5px; height: 5px; border-radius: 50%; background: var(--gold-deep); }
+.community-topics { grid-template-columns: minmax(0, 1fr); max-width: 52ch; }
+@media (min-width: 1001px) {
+  /* Same box width as before (5/12 of the free space); the content column gives up `pull` so the box sits closer. */
+  .community-experience:nth-child(even) {
+    --pull: clamp(32px, 4.5vw, 72px);
+    grid-template-columns: calc((100% - var(--community-gap)) * 7 / 12 - var(--pull)) calc((100% - var(--community-gap)) * 5 / 12);
+    justify-content: start;
+  }
+  /* Card 02 is taller than its text column: top edge fixed, only the bottom grows. */
+  .community-experience:nth-child(even) .community-experience-visual { align-self: start; aspect-ratio: 1; }
+  .community-experience:nth-child(even) .community-experience-body { align-self: start; }
+  .community-experience:nth-child(even) .community-experience-lead { max-width: 17em; }
+}
+.community-experience-note { max-width: 52ch; padding-left: 18px; border-left: 2px solid var(--gold); color: var(--fg-soft); font-family: var(--c-serif); font-size: clamp(1.15rem, 1.35vw, 1.3rem); line-height: 1.4; }
+.community-experience-body > .editorial-button { margin-top: auto; }
+
+/* Closing conversion: Inicio's warm backdrop with a gold rule beside the content. */
+.community-page .community-contact { padding-block: clamp(70px, 7vw, 101px); }
+.community-contact-inner { position: relative; z-index: 1; display: grid; justify-items: start; gap: 22px; padding-left: clamp(22px, 3vw, 44px); border-left: 1px solid var(--gold-deep); }
+.community-page .community-contact h2 { position: static; grid-column: auto; max-width: 22ch; font-size: clamp(2.2rem, 3.8vw, 3.6rem); line-height: 1.06; }
+.community-contact-copy { max-width: 22em; text-wrap: balance; color: var(--violet); line-height: 1.6; }
+.community-contact-inner > div { margin-top: 6px; }
+
+@media (max-width: 1000px) {
+  .community-experience,
+  .community-experience:nth-child(even) { grid-template-columns: minmax(0, 1fr); gap: 28px; }
+  .community-experience:nth-child(even) .community-experience-visual { order: 0; }
+  .community-experience-visual { gap: 36px; }
+  .community-page .community-hero .section-copy { max-width: 56ch; }
+}
+@media (max-width: 600px) {
+  .community-page { --community-space: 56px; }
+  .community-page .editorial-button { padding: 14px 18px; font-size: .8rem; }
+  .community-page .community-eyebrow { margin-bottom: 22px; }
+  .community-page .community-hero { padding-block: 36px 44px; }
+  /* Two-tone title on mobile: second phrase on its own line, moderately separated. */
+  .community-page .community-hero h1 { max-width: none; font-size: clamp(1.75rem, 9.1vw, 2.9rem); line-height: 1.06; text-wrap: pretty; }
+  .community-title-lead, .community-title-rest { display: block; }
+  .community-page .community-hero::before,
+  .community-page .community-hero::after { display: none; }
+  .community-page .community-experiences h2 { font-size: clamp(2rem, 9vw, 2.4rem); }
+  .community-experience-list { gap: 56px; }
+  .community-experience-visual { gap: 28px; padding: 24px 22px; }
+  .community-experience-visual::before { width: 300px; right: -150px; top: -150px; }
+  .community-experience-visual::after { width: 200px; right: -100px; top: -100px; }
+  .community-experience-name { padding-left: 16px; }
+  .community-modalities,
+  .community-topics { grid-template-columns: minmax(0, 1fr); }
+  .community-page .community-contact { padding-block: 78px; }
+  .community-contact-inner { padding-left: 16px; }
+  .community-page .community-contact h2 { font-size: clamp(1.6rem, 8.5vw, 2.5rem); line-height: 1.06; }
+}

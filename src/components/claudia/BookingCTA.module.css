@@ -43,16 +43,11 @@
   color: var(--gold);
 }
 
-.ivory {
-  background: var(--ivory);
-  border-color: var(--ivory);
-  color: var(--navy);
-}
-
-.ivory:hover,
-.ivory:focus-visible {
-  background: transparent;
-  color: var(--ivory);
+/* Sobre fondos claros el hover transparente necesita un dorado oscuro para mantener el contraste. */
+:global([data-tone='light']) .gold:hover,
+:global([data-tone='light']) .gold:focus-visible {
+  border-color: var(--gold-deep);
+  color: var(--gold-deep);
 }
 
 .outline {
@@ -67,10 +62,11 @@
   color: var(--navy);
 }
 
-@media (max-width: 479.98px) {
+/* Mobile: el botón se ajusta al contenido (sin superar el ancho disponible) y la flecha queda junto al texto. */
+@media (max-width: 599.98px) {
   .button {
-    width: 100%;
-    justify-content: space-between;
-    padding: 0 20px;
+    max-width: 100%;
+    gap: 10px;
+    padding: 0 22px;
   }
 }

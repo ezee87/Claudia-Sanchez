@@ -62,7 +62,7 @@ Texto completo original del artículo con párrafos, subtítulos, citas, listas 
 
 ### 03 — Firma y navegación (`pie-articulo`)
 
-**Firma:** Por Claudia Sanchez Urencio.
+**Firma:** Por Claudia Sánchez Urencio.
 
 **Enlace:** Volver a Artículos → `/articulos`.
 
@@ -74,6 +74,6 @@ Preparar modelo de artículo con `slug`, `title`, `publishedAt`, `cover`, `body`
 
 ## SEO
 
-- `/articulos`: title sugerido `Artículos | Claudia Sanchez Urencio`; description derivada del copy real.
-- `/articulos/:slug`: title del artículo + ` | Claudia Sanchez Urencio`; description solo si se puede obtener un extracto real sin inventar; canonical único; Open Graph con portada real si existe; `Article` JSON-LD con fechas y autor solo cuando los datos estén disponibles.
+- `/articulos`: title sugerido `Artículos | Claudia Sánchez Urencio`; description derivada del copy real.
+- `/articulos/:slug`: title del artículo + ` | Claudia Sánchez Urencio`; description solo si se puede obtener un extracto real sin inventar; canonical único; Open Graph con portada real si existe; `Article` JSON-LD con fechas y autor solo cuando los datos estén disponibles.
 - Redirecciones desde `/newsletter` y `/newsletter/:slug` conservando slugs.

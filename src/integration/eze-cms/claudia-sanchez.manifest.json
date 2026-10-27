@@ -2,7 +2,7 @@
   "version": 1,
   "site": {
     "key": "claudia-sanchez",
-    "name": "Claudia Sanchez Urencio"
+    "name": "Claudia Sánchez Urencio"
   },
   "globals": [
     {
@@ -11,7 +11,7 @@
       "published": true,
       "initialContent": {
         "brand": {
-          "label": "Claudia Sanchez Urencio",
+          "label": "Claudia Sánchez Urencio",
           "href": "/"
         },
         "home": {
@@ -131,7 +131,7 @@
       "name": "Pie institucional",
       "published": true,
       "initialContent": {
-        "brand": "Claudia Sanchez Urencio",
+        "brand": "Claudia Sánchez Urencio",
         "line": "Coaching ejecutivo, desarrollo de liderazgo y estrategia de carrera.",
         "linkedin": {
           "label": "LinkedIn",
@@ -175,16 +175,15 @@
           "name": "hero",
           "type": "hero",
           "initialContent": {
-            "eyebrow": "Claudia Sanchez Urencio",
+            "eyebrow": "Claudia Sánchez Urencio",
             "title": "Coaching ejecutivo, desarrollo de liderazgo y estrategia de carrera.",
-            "paragraph1": "Acompaño a líderes, ejecutivos y organizaciones en momentos de desarrollo, transformación y cambio.",
-            "paragraph2": "Combino más de 20 años de experiencia corporativa con una mirada estratégica y humana para ayudar a las personas y a las organizaciones a reconocer posibilidades, tomar mejores decisiones y avanzar con claridad.",
+            "paragraph1": "Acompaño a líderes, ejecutivos y organizaciones a reconocer nuevas posibilidades, tomar mejores decisiones y avanzar con claridad, combinando más de 20 años de experiencia corporativa con una mirada estratégica y humana.",
             "cta": {
               "label": "Conoce mi trabajo",
               "href": "#servicios"
             },
             "image": "/assets/claudia-sanchez/claudia-bg-hero.png",
-            "alt": "Claudia Sanchez Urencio"
+            "alt": "Claudia Sánchez Urencio"
           },
           "fields": [
             {
@@ -205,13 +204,6 @@
               "key": "paragraph1",
               "path": "paragraph1",
               "label": "paragraph1",
-              "type": "string",
-              "multiline": true
-            },
-            {
-              "key": "paragraph2",
-              "path": "paragraph2",
-              "label": "paragraph2",
               "type": "string",
               "multiline": true
             },
@@ -242,7 +234,7 @@
           "type": "sobre-mi",
           "initialContent": {
             "title": "Una trayectoria construida desde el liderazgo, las personas y la transformación.",
-            "paragraph1": "Soy Claudia Sanchez Urencio, coach ejecutiva y especialista en desarrollo de liderazgo y estrategia de carrera.",
+            "paragraph1": "Soy Claudia Sánchez Urencio, coach ejecutiva y especialista en desarrollo de liderazgo y estrategia de carrera.",
             "paragraph2": "Mi trayectoria profesional comenzó dentro de grandes organizaciones, donde durante más de 20 años trabajé de cerca con líderes, equipos y áreas de negocio, acompañando decisiones relacionadas con talento, desarrollo organizacional y transformación.",
             "paragraph3": "Ocupé posiciones de liderazgo en Recursos Humanos en compañías internacionales como Diageo y Kraft Foods, con responsabilidades regionales en América Latina.",
             "paragraph4": "Esa experiencia me permitió conocer de primera mano los desafíos que enfrentan quienes lideran organizaciones, desarrollan equipos o atraviesan decisiones importantes en su carrera.",
@@ -561,34 +553,34 @@
               {
                 "_id": "item-1",
                 "visible": 1,
-                "author": "Lucía López Sarre",
-                "role": "Marketing Director.",
-                "quote": "Su metodología también marca una diferencia: es clara, profunda y totalmente accionable. No se queda en la teoría; te impulsa, te estructura y te hace avanzar.",
-                "image": "/assets/claudia-sanchez/testimonials/lucia-lopez.jpg",
-                "alt": "Lucía López Sarre",
-                "sourceLabel": "Recomendación pública en LinkedIn",
+                "author": "Aldo Barrios",
+                "role": "Managing Director",
+                "quote": "I had the chance to work with Claudia, and she was a fantastic partner in clarifying my next career steps. Her blend of clarity and constructive challenge helped turn future thinking into action.",
+                "image": "/assets/claudia-sanchez/testimonials/aldo-barrios.jpg",
+                "alt": "Aldo Barrios",
+                "sourceLabel": "RECOMENDACIÓN PÚBLICA EN LINKEDIN",
                 "linkedinUrl": "https://www.linkedin.com/in/claudiasanchezurencio/details/recommendations/?detailScreenTabIndex=0"
               },
               {
                 "_id": "item-2",
                 "visible": 1,
-                "author": "Fabián Fuentes",
-                "role": "",
-                "quote": "Lo que distingue a Claudia no es solo su experiencia en desarrollo de talento y liderazgo — que es amplia — sino su capacidad de hacer las preguntas correctas en el momento correcto, y de acompañar sin imponer.",
-                "image": "/assets/claudia-sanchez/testimonials/fabian-fuentes.jpg",
-                "alt": "Fabián Fuentes",
-                "sourceLabel": "Recomendación pública en LinkedIn",
+                "author": "Dulce Cano",
+                "role": "Customer Marketing Director",
+                "quote": "During my recent career transition she played a key role to improve my empowerment, recognize my unique ser of talents, reconnect with my purpose and set my long term vision.",
+                "image": "/assets/claudia-sanchez/testimonials/dulce-cano.jpg",
+                "alt": "Dulce Cano",
+                "sourceLabel": "RECOMENDACIÓN PÚBLICA EN LINKEDIN",
                 "linkedinUrl": "https://www.linkedin.com/in/claudiasanchezurencio/details/recommendations/?detailScreenTabIndex=0"
               },
               {
                 "_id": "item-3",
                 "visible": 1,
-                "author": "Pedro Fondevila",
-                "role": "",
-                "quote": "Claudia me ha ayudado, aprovechando su experiencia profesional, a transformar mi equipo en un equipo de alto rendimiento.",
-                "image": "/assets/claudia-sanchez/testimonials/pedro-fondevila.jpg",
-                "alt": "Pedro Fondevila",
-                "sourceLabel": "Recomendación pública en LinkedIn",
+                "author": "Eduardo Díaz Cortazar",
+                "role": "Exlíder corporativo y emprendedor",
+                "quote": "Claudia es un gran coach con alta empatía y capacidad de escucha, pero sobre todo con un auténtico interés por ayudar a los demás en el logro de sus metas.",
+                "image": "/assets/claudia-sanchez/testimonials/eduardo-diaz.jpg",
+                "alt": "Eduardo Díaz Cortazar",
+                "sourceLabel": "RECOMENDACIÓN PÚBLICA EN LINKEDIN",
                 "linkedinUrl": "https://www.linkedin.com/in/claudiasanchezurencio/details/recommendations/?detailScreenTabIndex=0"
               }
             ]
@@ -808,7 +800,7 @@
           "type": "navbar",
           "initialContent": {
             "brand": {
-              "label": "Claudia Sanchez Urencio",
+              "label": "Claudia Sánchez Urencio",
               "href": "/"
             },
             "home": {
@@ -928,7 +920,7 @@
           "name": "footer",
           "type": "footer",
           "initialContent": {
-            "brand": "Claudia Sanchez Urencio",
+            "brand": "Claudia Sánchez Urencio",
             "line": "Coaching ejecutivo, desarrollo de liderazgo y estrategia de carrera.",
             "linkedin": {
               "label": "LinkedIn",
@@ -963,7 +955,7 @@
           "name": "seo",
           "type": "seo",
           "initialContent": {
-            "title": "Career Longevity | Claudia Sanchez Urencio",
+            "title": "Career Longevity | Claudia Sánchez Urencio",
             "description": "Estrategia de carrera para líderes senior que quieren anticipar y diseñar su siguiente etapa."
           },
           "fields": [
@@ -987,7 +979,7 @@
     },
     {
       "key": "personas",
-      "name": "Programas para personas",
+      "name": "Para personas",
       "route": "/personas",
       "slug": "personas",
       "sections": [
@@ -996,23 +988,16 @@
           "name": "hero",
           "type": "hero",
           "initialContent": {
-            "eyebrow": "Personas",
-            "title": "Tu siguiente etapa merece una estrategia propia.",
-            "paragraph1": "Programas para profesionales senior que quieren tomar decisiones con claridad, anticipar escenarios y ejecutar su siguiente movimiento con método.",
-            "paragraph2": "Identifica tu situación y elige el acompañamiento que corresponde a lo que necesitas construir hoy.",
+            "title": "Tu carrera puede seguir evolucionando. Hazlo con claridad y estrategia.",
+            "paragraph1": "Cada etapa profesional trae nuevos desafíos, decisiones y oportunidades.",
+            "paragraph2": "Acompaño a ejecutivos y profesionales con experiencia a fortalecer su liderazgo, explorar nuevas posibilidades y construir una trayectoria alineada con sus objetivos y prioridades.",
+            "eyebrow": "Para personas",
             "cta": {
-              "label": "Explora los programas",
+              "label": "Conoce mis servicios",
               "href": "#servicios"
             }
           },
           "fields": [
-            {
-              "key": "eyebrow",
-              "path": "eyebrow",
-              "label": "eyebrow",
-              "type": "string",
-              "multiline": true
-            },
             {
               "key": "title",
               "path": "title",
@@ -1035,6 +1020,13 @@
               "multiline": true
             },
             {
+              "key": "eyebrow",
+              "path": "eyebrow",
+              "label": "eyebrow",
+              "type": "string",
+              "multiline": true
+            },
+            {
               "key": "cta",
               "path": "cta",
               "label": "cta",
@@ -1048,25 +1040,31 @@
           "type": "situaciones",
           "initialContent": {
             "title": "¿En qué momento de tu carrera te encuentras?",
-            "paragraph1": "Una transición, una promoción o la planeación de los próximos años requieren preguntas y herramientas distintas.",
+            "paragraph1": "No todas las decisiones profesionales comienzan con la búsqueda de un nuevo empleo. A veces, el desafío está en crecer dentro de una organización, redefinir prioridades o descubrir qué queremos construir a partir de ahora.",
             "items": [
               {
-                "_id": "transicion",
+                "_id": "item-1",
                 "visible": 1,
-                "title": "Enfrentas una transición",
-                "description": "Una salida corporativa, reestructura, nueva oportunidad o reubicación exige claridad y una búsqueda estructurada."
+                "title": "Estás considerando un cambio profesional",
+                "description": "Quieres explorar nuevas oportunidades, cambiar de dirección o prepararte para una transición profesional después de una trayectoria consolidada."
               },
               {
-                "_id": "anticipacion",
+                "_id": "item-2",
                 "visible": 1,
-                "title": "Quieres anticipar tu siguiente etapa",
-                "description": "Buscas planear tus próximos años antes de que una transición sea obligada."
+                "title": "Quieres fortalecer tu liderazgo",
+                "description": "Buscas desarrollar nuevas capacidades, ampliar tu perspectiva y afrontar con mayor seguridad los desafíos y responsabilidades de tu rol profesional."
               },
               {
-                "_id": "liderazgo",
+                "_id": "item-3",
                 "visible": 1,
-                "title": "Estás listo para el siguiente nivel",
-                "description": "Quieres posicionarte para una promoción o consolidarte en una nueva responsabilidad de liderazgo."
+                "title": "Necesitas claridad para tomar decisiones",
+                "description": "Te encuentras frente a diferentes posibilidades profesionales y quieres evaluar tus opciones con mayor claridad, perspectiva y una mirada estratégica."
+              },
+              {
+                "_id": "item-4",
+                "visible": 1,
+                "title": "Estás pensando en tu siguiente etapa",
+                "description": "Has construido una carrera importante y quieres definir cómo seguir creciendo, contribuyendo y disfrutando de los próximos años de tu vida profesional."
               }
             ]
           },
@@ -1122,34 +1120,34 @@
           "name": "servicios",
           "type": "servicios",
           "initialContent": {
-            "title": "Elige el programa que corresponde a tu momento profesional",
+            "title": "Un acompañamiento adaptado a tu momento profesional",
             "items": [
               {
-                "_id": "transicion-de-carrera",
-                "visible": 1,
-                "title": "Transición de Carrera",
-                "subtitle": "Tu siguiente movimiento, decidido con estrategia y ejecutado con método.",
-                "description": "Para profesionales senior ante una salida corporativa, reestructura, nueva oportunidad o reubicación.\n\nIncluye de 6 a 8 sesiones de coaching y mentoría; 2 sesiones con Head Hunter internacional; Gallup CliftonStrengths interpretado por especialista; identidad profesional, narrativa y propuesta de valor; CV, LinkedIn y preparación de entrevistas; empresas objetivo, activación de contactos, estrategia de búsqueda de 90 días y One-Page Strategy.",
-                "href": "/contacto?servicio=transicion-de-carrera",
-                "label": "Solicitar información"
-              },
-              {
-                "_id": "diseno-de-carrera",
+                "_id": "item-3",
                 "visible": 1,
                 "title": "Diseño de Carrera",
+                "description": "Para ejecutivos con experiencia que quieren anticipar su siguiente etapa, explorar nuevas posibilidades y construir una carrera alineada con sus prioridades personales.\n\nIntegra la metodología LIFE, planeación estratégica y un ecosistema de especialistas para evaluar escenarios de futuro y diseñar una hoja de ruta de largo plazo.",
                 "subtitle": "Planeación estratégica de carrera para anticipar tus próximos años.",
-                "description": "Para profesionales que desean planear su siguiente etapa antes de enfrentar una transición obligada.\n\nIncluye un mínimo de 8 sesiones; Head Hunter internacional; asesoría financiera; coaching de bienestar; mentoría de emprendimiento; metodología LIFE y seis esferas: identidad, salud, finanzas, relaciones, carrera y legado; escenarios de futuro y One-Page Strategy.",
-                "href": "/diseno-de-carrera",
-                "label": "Conoce Diseño de Carrera"
+                "label": "Conocer Diseño de Carrera",
+                "href": "/diseno-de-carrera"
               },
               {
-                "_id": "next-level-leader",
+                "_id": "item-2",
+                "visible": 1,
+                "title": "Transición de Carrera",
+                "description": "Para ejecutivos con trayectoria que necesitan afrontar una salida laboral, evaluar nuevas oportunidades o reposicionarse en el mercado con claridad y estrategia.\n\nCombina coaching, mentoría, Head Hunter internacional y herramientas de posicionamiento profesional para construir una oferta de valor y una estrategia de búsqueda de 90 días.",
+                "subtitle": "Tu siguiente movimiento, decidido con estrategia y ejecutado con método.",
+                "label": "Consultar por Transición de Carrera",
+                "href": "/contacto?tipo=persona&servicio=transicion-carrera"
+              },
+              {
+                "_id": "item-1",
                 "visible": 1,
                 "title": "Next Level Leader",
+                "description": "Para ejecutivos que buscan avanzar hacia una posición de mayor liderazgo o consolidarse en un nuevo rol, fortaleciendo su posicionamiento y sus capacidades directivas.\n\nCombina mentoría individual, evaluación Leadership Circle Profile 360 y herramientas de integración y liderazgo para desarrollar un plan de acción de 90 días.",
                 "subtitle": "Eleva tu carrera: posiciónate para el siguiente nivel, o consolídate en él.",
-                "description": "Para ejecutivos que buscan una promoción, nuevas responsabilidades o consolidarse en un puesto de liderazgo. Puede contratarlo una persona o una empresa.\n\nIncluye un mínimo de 6 sesiones de mentoría y formación individual; evaluación 360 Leadership Circle Profile; New Leader Assimilation; posicionamiento ejecutivo; comunicación y gestión de stakeholders; plan de desarrollo y consolidación de 90 días.",
-                "href": "/contacto?servicio=next-level-leader",
-                "label": "Solicitar información"
+                "label": "Consultar por Next Level Leader",
+                "href": "/contacto?tipo=persona&servicio=coaching-ejecutivo"
               }
             ]
           },
@@ -1183,13 +1181,6 @@
                   "multiline": true
                 },
                 {
-                  "key": "subtitle",
-                  "path": "subtitle",
-                  "label": "subtitle",
-                  "type": "string",
-                  "multiline": true
-                },
-                {
                   "key": "description",
                   "path": "description",
                   "label": "description",
@@ -1197,9 +1188,9 @@
                   "multiline": true
                 },
                 {
-                  "key": "href",
-                  "path": "href",
-                  "label": "href",
+                  "key": "subtitle",
+                  "path": "subtitle",
+                  "label": "subtitle",
                   "type": "string",
                   "multiline": true
                 },
@@ -1207,6 +1198,13 @@
                   "key": "label",
                   "path": "label",
                   "label": "label",
+                  "type": "string",
+                  "multiline": true
+                },
+                {
+                  "key": "href",
+                  "path": "href",
+                  "label": "href",
                   "type": "string",
                   "multiline": true
                 }
@@ -1223,7 +1221,7 @@
             "paragraph1": "No existen dos trayectorias iguales. Por eso, el acompañamiento comienza por comprender tu situación, tus desafíos y aquello que quieres lograr.",
             "paragraph2": "A partir de esa conversación, trabajamos para identificar fortalezas, explorar nuevas perspectivas y construir una estrategia que puedas llevar a la práctica.",
             "paragraph3": "Mi enfoque combina experiencia corporativa, escucha, reflexión y herramientas de desarrollo profesional.",
-            "paragraph4": "El objetivo no es darte respuestas predeterminadas, sino ayudarte a tomar decisiones más conscientes y avanzar con mayor seguridad."
+            "paragraph4": "Transformamos tus reflexiones en decisiones y acciones concretas, para que avances con mayor claridad, confianza y seguridad."
           },
           "fields": [
             {
@@ -1268,9 +1266,37 @@
           "name": "testimonios",
           "type": "testimonios",
           "initialContent": {
-            "title": "Testimonios pendientes de verificación",
-            "paragraph1": "Dulce Cano, José Herrera y Eduardo Díaz Cortazar se publicarán cuando estén disponibles sus textos completos y cargos verificados.",
-            "items": []
+            "title": "Experiencias de quienes han dado el siguiente paso",
+            "paragraph1": "Cada trayectoria es diferente. Conoce cómo otros profesionales han encontrado claridad, fortalecido sus capacidades y avanzado hacia sus objetivos.",
+            "items": [
+              {
+                "_id": "item-1",
+                "visible": 1,
+                "author": "Manuel Mirabent",
+                "role": "Head of Marketing | Marketing Director",
+                "quote": "Claudia ha sido mi coach durante los últimos meses, y puedo recomendarla ampliamente en dos aspectos. Primero, si buscas orientación en tu desarrollo profesional dentro de tu empresa actual o en la exploración de nuevos retos y segundo, si deseas clarificar tu visión a futuro y definir lo que realmente necesitas para sentirte realizado.",
+                "image": "/assets/claudia-sanchez/testimonials/manuel-mirabent.jpg",
+                "alt": "Retrato de Manuel Mirabent"
+              },
+              {
+                "_id": "item-2",
+                "visible": 1,
+                "author": "Ovidio Uribe",
+                "role": "Sales Director / Trade Marketing / Operations Director",
+                "quote": "Gracias a su acompañamiento, recuperé la claridad, la confianza y la energía para reenfocar mis objetivos, fortalecer mis capacidades y reconectar con mi propósito.",
+                "image": "/assets/claudia-sanchez/testimonials/ovidio-urbe.jpg",
+                "alt": "Retrato de Ovidio Uribe"
+              },
+              {
+                "_id": "item-3",
+                "visible": 1,
+                "author": "Eduardo Díaz Cortazar",
+                "role": "Exlíder corporativo y emprendedor",
+                "quote": "Claudia es un gran coach con alta empatía y capacidad de escucha, pero sobre todo con un auténtico interés por ayudar a los demás en el logro de sus metas.",
+                "image": "/assets/claudia-sanchez/testimonials/eduardo-diaz.jpg",
+                "alt": "Retrato de Eduardo Díaz Cortazar"
+              }
+            ]
           },
           "fields": [
             {
@@ -1296,30 +1322,36 @@
               "maxItems": 200,
               "itemFields": [
                 {
-                  "key": "slug",
-                  "path": "slug",
-                  "label": "slug",
+                  "key": "visible",
+                  "path": "visible",
+                  "label": "visible",
+                  "type": "number"
+                },
+                {
+                  "key": "author",
+                  "path": "author",
+                  "label": "author",
                   "type": "string",
                   "multiline": true
                 },
                 {
-                  "key": "title",
-                  "path": "title",
-                  "label": "title",
+                  "key": "role",
+                  "path": "role",
+                  "label": "role",
                   "type": "string",
                   "multiline": true
                 },
                 {
-                  "key": "publishedAt",
-                  "path": "publishedAt",
-                  "label": "publishedAt",
+                  "key": "quote",
+                  "path": "quote",
+                  "label": "quote",
                   "type": "string",
                   "multiline": true
                 },
                 {
-                  "key": "cover",
-                  "path": "cover",
-                  "label": "cover",
+                  "key": "image",
+                  "path": "image",
+                  "label": "image",
                   "type": "image"
                 },
                 {
@@ -1328,26 +1360,6 @@
                   "label": "alt",
                   "type": "string",
                   "multiline": true
-                },
-                {
-                  "key": "body",
-                  "path": "body",
-                  "label": "body",
-                  "type": "string",
-                  "multiline": true
-                },
-                {
-                  "key": "status",
-                  "path": "status",
-                  "label": "status",
-                  "type": "string",
-                  "multiline": true
-                },
-                {
-                  "key": "visible",
-                  "path": "visible",
-                  "label": "visible",
-                  "type": "number"
                 }
               ]
             }
@@ -1358,11 +1370,12 @@
           "name": "contacto",
           "type": "contacto",
           "initialContent": {
-            "title": "Conversemos sobre tu siguiente etapa.",
-            "paragraph1": "Cuéntame en qué momento te encuentras para identificar el acompañamiento más adecuado.",
+            "title": "¿Qué te gustaría construir en tu siguiente etapa?",
+            "paragraph1": "Ya sea que estés considerando un cambio, buscando crecer como líder o necesites claridad para tomar una decisión importante, podemos comenzar con una conversación.",
+            "paragraph2": "Cuéntame dónde estás y qué te gustaría lograr.",
             "cta": {
-              "label": "Solicitar información",
-              "href": "/contacto"
+              "label": "Hablemos de tu carrera",
+              "href": "/contacto?tipo=persona"
             }
           },
           "fields": [
@@ -1381,6 +1394,13 @@
               "multiline": true
             },
             {
+              "key": "paragraph2",
+              "path": "paragraph2",
+              "label": "paragraph2",
+              "type": "string",
+              "multiline": true
+            },
+            {
               "key": "cta",
               "path": "cta",
               "label": "cta",
@@ -1393,8 +1413,8 @@
           "name": "seo",
           "type": "seo",
           "initialContent": {
-            "title": "Programas para personas | Claudia Sanchez Urencio",
-            "description": "Transición de Carrera, Diseño de Carrera y Next Level Leader para profesionales y líderes senior."
+            "title": "Para personas | Claudia Sánchez Urencio",
+            "description": "Cada etapa profesional trae nuevos desafíos, decisiones y oportunidades."
           },
           "fields": [
             {
@@ -1546,6 +1566,7 @@
           "name": "servicios",
           "type": "servicios",
           "initialContent": {
+            "eyebrow": "ACOMPAÑAMIENTO ORGANIZACIONAL",
             "title": "Soluciones para equipos y transiciones ejecutivas",
             "items": [
               {
@@ -1553,8 +1574,8 @@
                 "visible": 1,
                 "title": "Equipos y Culturas Fascinantes",
                 "subtitle": "Resolvemos la fricción y la convertimos en comunicación.",
-                "description": "Para equipos directivos, gerenciales y multifuncionales durante reorganizaciones, fusiones, crecimiento acelerado o cambios de liderazgo.\n\nIncluye Assessment How to Fascinate individual y de equipo; off-site de 4 u 8 horas; las fases Reconocernos, Destrabar y Converger; autoconocimiento, comunicación, feedback y relaciones; acuerdos y mecanismos de responsabilidad. Coaching ejecutivo opcional.",
-                "href": "/contacto?servicio=equipos-y-culturas-fascinantes",
+                "description": "Para equipos directivos, gerenciales y multifuncionales que atraviesan cambios, reorganizaciones o desafíos de integración. Transformamos la fricción en acuerdos que mejoran la comunicación y los resultados.\n\nIncluye Assessment How to Fascinate individual y de equipo; off-site de 4 u 8 horas; tres fases de alineación: Reconocernos, Destrabar y Converger; autoconocimiento, comunicación, feedback y relaciones; coaching ejecutivo opcional para integración y transferencia de conocimiento.",
+                "href": "https://api.whatsapp.com/send?phone=16892306889&text=Hola%20Claudia%2C%20estuve%20viendo%20tu%20programa%20Equipos%20y%20Culturas%20Fascinantes%20y%20me%20gustar%C3%ADa%20conocer%20m%C3%A1s%20sobre%20c%C3%B3mo%20podr%C3%ADamos%20trabajarlo%20en%20nuestra%20organizaci%C3%B3n.",
                 "label": "Solicitar información"
               },
               {
@@ -1562,13 +1583,20 @@
                 "visible": 1,
                 "title": "Executive Longevity Program",
                 "subtitle": "Outplacement integral: un rediseño, no una salida.",
-                "description": "Para organizaciones que acompañan la salida, retiro o transición de líderes senior.\n\nIncluye transición e identidad profesional; alternativas laborales o profesionales; CV, LinkedIn, narrativa y red de contactos; asesoría financiera; protocolo de Recursos Humanos y confidencialidad; transferencia de conocimiento; acompañamiento opcional a equipos; plan de 90 días y One-Page Strategy.",
-                "href": "/contacto?servicio=executive-longevity-program",
+                "description": "Para organizaciones que acompañan la salida, jubilación o retiro de líderes senior. Un proceso integral que aborda la identidad, las finanzas y el futuro profesional, protegiendo la reputación de la organización.\n\nIncluye acompañamiento en el duelo y la nueva identidad profesional; estrategia de futuro: empleo, consejos, consultoría, advisory o fractional; CV, LinkedIn, narrativa profesional y activación de red; revisión de finanzas personales con advisor; protocolo con RH, transferencia de conocimiento y apoyo opcional a equipos.",
+                "href": "https://api.whatsapp.com/send?phone=16892306889&text=Hola%20Claudia%2C%20me%20interesa%20conocer%20m%C3%A1s%20sobre%20Executive%20Longevity%20Program%20y%20c%C3%B3mo%20podr%C3%ADa%20implementarse%20en%20nuestra%20organizaci%C3%B3n.",
                 "label": "Solicitar información"
               }
             ]
           },
           "fields": [
+            {
+              "key": "eyebrow",
+              "path": "eyebrow",
+              "label": "eyebrow",
+              "type": "string",
+              "multiline": true
+            },
             {
               "key": "title",
               "path": "title",
@@ -1709,7 +1737,8 @@
                 "title": "Revisar los avances",
                 "description": "Generar espacios de reflexión y seguimiento para identificar aprendizajes, reconocer avances y ajustar el camino cuando sea necesario."
               }
-            ]
+            ],
+            "eyebrow": "CÓMO TRABAJAMOS"
           },
           "fields": [
             {
@@ -1748,6 +1777,13 @@
                   "multiline": true
                 }
               ]
+            },
+            {
+              "key": "eyebrow",
+              "path": "eyebrow",
+              "label": "eyebrow",
+              "type": "string",
+              "multiline": true
             }
           ]
         },
@@ -1756,9 +1792,37 @@
           "name": "testimonios",
           "type": "testimonios",
           "initialContent": {
-            "title": "Testimonios pendientes de verificación",
-            "paragraph1": "Pedro Fondevila, Ana Cristina del Ángel Nájera y Ricardo Schmidt se publicarán cuando estén disponibles sus textos completos y cargos verificados.",
-            "items": []
+            "title": "Experiencias de quienes han trabajado conmigo",
+            "paragraph1": "Conocé cómo el acompañamiento a líderes y equipos se traduce en nuevas perspectivas, desarrollo y cambios dentro de las organizaciones.",
+            "items": [
+              {
+                "_id": "ana-cristina",
+                "visible": 1,
+                "author": "Ana Cristina del Ángel Nájera",
+                "role": "Subdirector Comercial en Softys.",
+                "quote": "en Marzo 2025 tuvimos la oportunidad mi equipo y yo de tener un taller de Fascinated Groups liderado por Claudia, una experiencia única y 100% recomendable para equipos multifuncionales y diversos que requieren maximizar el talento de cada individuo y potenciar los resultados de los equipos, fue una sesión de verdad memorable para los equipos.",
+                "image": "/assets/claudia-sanchez/testimonials/ana-cristina.jpg",
+                "alt": "Retrato de Ana Cristina del Ángel Nájera"
+              },
+              {
+                "_id": "pedro-fondevila",
+                "visible": 1,
+                "author": "Pedro Fondevila",
+                "role": "",
+                "quote": "The transformation has been so visible and reflected in KPI improvements that we have decided to organize a second wave.",
+                "image": "/assets/claudia-sanchez/testimonials/pedro-fondevila.jpg",
+                "alt": "Retrato de Pedro Fondevila"
+              },
+              {
+                "_id": "ricardo-schmidt",
+                "visible": 1,
+                "author": "Ricardo Schmidt",
+                "role": "Gerente General at DON SATUR SRL.",
+                "quote": "Brinda soluciones muy profesionales, es muy prolija tanto en la planificación como en la ejecución, y realiza un seguimiento detallado durante los procesos en los que participa, y luego de los mismos para validar su correcta implementación.",
+                "image": "",
+                "alt": ""
+              }
+            ]
           },
           "fields": [
             {
@@ -1784,30 +1848,36 @@
               "maxItems": 200,
               "itemFields": [
                 {
-                  "key": "slug",
-                  "path": "slug",
-                  "label": "slug",
+                  "key": "visible",
+                  "path": "visible",
+                  "label": "visible",
+                  "type": "number"
+                },
+                {
+                  "key": "author",
+                  "path": "author",
+                  "label": "author",
                   "type": "string",
                   "multiline": true
                 },
                 {
-                  "key": "title",
-                  "path": "title",
-                  "label": "title",
+                  "key": "role",
+                  "path": "role",
+                  "label": "role",
                   "type": "string",
                   "multiline": true
                 },
                 {
-                  "key": "publishedAt",
-                  "path": "publishedAt",
-                  "label": "publishedAt",
+                  "key": "quote",
+                  "path": "quote",
+                  "label": "quote",
                   "type": "string",
                   "multiline": true
                 },
                 {
-                  "key": "cover",
-                  "path": "cover",
-                  "label": "cover",
+                  "key": "image",
+                  "path": "image",
+                  "label": "image",
                   "type": "image"
                 },
                 {
@@ -1816,26 +1886,6 @@
                   "label": "alt",
                   "type": "string",
                   "multiline": true
-                },
-                {
-                  "key": "body",
-                  "path": "body",
-                  "label": "body",
-                  "type": "string",
-                  "multiline": true
-                },
-                {
-                  "key": "status",
-                  "path": "status",
-                  "label": "status",
-                  "type": "string",
-                  "multiline": true
-                },
-                {
-                  "key": "visible",
-                  "path": "visible",
-                  "label": "visible",
-                  "type": "number"
                 }
               ]
             }
@@ -1881,7 +1931,7 @@
           "name": "seo",
           "type": "seo",
           "initialContent": {
-            "title": "Soluciones para empresas | Claudia Sanchez Urencio",
+            "title": "Soluciones para empresas | Claudia Sánchez Urencio",
             "description": "Equipos y Culturas Fascinantes y Executive Longevity Program para organizaciones y líderes senior."
           },
           "fields": [
@@ -2101,14 +2151,10 @@
           "type": "contacto-directo",
           "initialContent": {
             "title": "¿Prefieres escribir directamente?",
-            "paragraph1": "También puedes contactarme por correo electrónico o WhatsApp.",
+            "paragraph1": "También puedes contactarme por correo electrónico, WhatsApp o LinkedIn.",
             "email": {
               "label": "clausurencio@gmail.com",
               "href": "mailto:clausurencio@gmail.com"
-            },
-            "whatsapp": {
-              "label": "WhatsApp: +1 689 230 6889",
-              "href": "https://wa.me/16892306889"
             },
             "linkedin": {
               "label": "LinkedIn",
@@ -2137,12 +2183,6 @@
               "type": "link"
             },
             {
-              "key": "whatsapp",
-              "path": "whatsapp",
-              "label": "whatsapp",
-              "type": "link"
-            },
-            {
               "key": "linkedin",
               "path": "linkedin",
               "label": "linkedin",
@@ -2155,8 +2195,8 @@
           "name": "seo",
           "type": "seo",
           "initialContent": {
-            "title": "Contacto | Claudia Sanchez Urencio",
-            "description": "Contacta a Claudia Sanchez Urencio por formulario, correo electrónico o WhatsApp."
+            "title": "Contacto | Claudia Sánchez Urencio",
+            "description": "Contacta a Claudia Sánchez Urencio por formulario, correo electrónico o WhatsApp."
           },
           "fields": [
             {
@@ -2191,7 +2231,7 @@
           "visible": true,
           "lockedPosition": false,
           "initialContent": {
-            "eyebrow": "Claudia Sanchez Urencio · EXECUTIVE CAREER COACH & ADVISOR",
+            "eyebrow": "Claudia Sánchez Urencio · EXECUTIVE CAREER COACH & ADVISOR",
             "titleLines": [
               "Diseño de",
               "Carrera.",
@@ -2653,7 +2693,7 @@
             "eyebrow": "SOBRE MÍ",
             "title": "Conozco el mundo corporativo. También lo que viene después.",
             "paragraphs": [
-              "Soy Claudia Sanchez Urencio. Durante más de 20 años he trabajado con organizaciones y líderes en procesos de cambio y transformación.",
+              "Soy Claudia Sánchez Urencio. Durante más de 20 años he trabajado con organizaciones y líderes en procesos de cambio y transformación.",
               "Mi trayectoria incluye liderazgo en Recursos Humanos en compañías como Diageo y Kraft Foods, responsabilidades regionales en Latinoamérica y experiencias profesionales en distintos países.",
               "También he rediseñado mi propia carrera. Hoy acompaño a ejecutivos senior a tomar decisiones sobre lo que sigue, combinando experiencia corporativa, coaching y una mirada práctica y humana."
             ],
@@ -2772,7 +2812,7 @@
           "lockedPosition": false,
           "initialContent": {
             "brandLink": {
-              "label": "Claudia Sanchez Urencio",
+              "label": "Claudia Sánchez Urencio",
               "href": "#inicio"
             },
             "nav": [
@@ -2868,7 +2908,7 @@
           "visible": true,
           "lockedPosition": false,
           "initialContent": {
-            "brand": "Claudia Sanchez Urencio",
+            "brand": "Claudia Sánchez Urencio",
             "line": "Executive Career Coach & Advisor",
             "description": "Hoy acompaño a ejecutivos senior a tomar decisiones sobre lo que sigue, combinando experiencia corporativa, coaching y una mirada práctica y humana.",
             "copyright": "© 2026",
@@ -2894,6 +2934,10 @@
             "connectHeading": "Conectar",
             "linkedinLabel": "LinkedIn",
             "calendlyLabel": "Calendly",
+            "homeLink": {
+              "label": "Inicio",
+              "href": "/"
+            },
             "navLink0": {
               "label": "Enfoque",
               "href": "#enfoque"
@@ -2950,6 +2994,13 @@
               "path": "exploreHeading",
               "label": "Titulo de navegacion",
               "type": "string"
+            },
+            {
+              "key": "home-link",
+              "path": "homeLink",
+              "label": "Inicio",
+              "type": "link",
+              "required": true
             },
             {
               "key": "nav-0",
@@ -3055,7 +3106,7 @@
             "paragraph3": "Durante nuestra conversación podremos conocer tu situación actual, hablar sobre tus objetivos y explorar cómo puedo acompañarte.",
             "highlight": "Revisa tu correo electrónico: recibirás los detalles de la reunión y el enlace para conectarte.",
             "paragraph4": "Nos vemos pronto.",
-            "signature": "Claudia Sanchez Urencio"
+            "signature": "Claudia Sánchez Urencio"
           },
           "fields": [
             {
@@ -3192,7 +3243,7 @@
           "name": "seo",
           "type": "seo",
           "initialContent": {
-            "title": "Gracias | Claudia Sanchez Urencio",
+            "title": "Gracias | Claudia Sánchez Urencio",
             "description": "Esta página aparece después de completar una reserva. Si todavía no has agendado una conversación, puedes regresar al programa."
           },
           "fields": [
@@ -3356,7 +3407,7 @@
           "name": "seo",
           "type": "seo",
           "initialContent": {
-            "title": "Artículos | Claudia Sanchez Urencio",
+            "title": "Artículos | Claudia Sánchez Urencio",
             "description": "Reflexiones sobre liderazgo, desarrollo profesional, transiciones de carrera y las decisiones que nos permiten construir nuevas etapas con claridad y propósito."
           },
           "fields": [
@@ -3423,7 +3474,7 @@
           "name": "pie-articulo",
           "type": "pie-articulo",
           "initialContent": {
-            "signature": "Por Claudia Sanchez Urencio",
+            "signature": "Por Claudia Sánchez Urencio",
             "back": {
               "label": "Volver a Artículos",
               "href": "/articulos"
@@ -3450,7 +3501,7 @@
           "name": "seo",
           "type": "seo",
           "initialContent": {
-            "title": "Artículo | Claudia Sanchez Urencio",
+            "title": "Artículo | Claudia Sánchez Urencio",
             "description": ""
           },
           "fields": [
@@ -3526,7 +3577,7 @@
           "name": "seo",
           "type": "seo",
           "initialContent": {
-            "title": "Página no encontrada | Claudia Sanchez Urencio",
+            "title": "Página no encontrada | Claudia Sánchez Urencio",
             "description": "Puedes volver al inicio para continuar explorando."
           },
           "fields": [
@@ -3617,8 +3668,8 @@
                 "visible": 1,
                 "title": "LifePlacement",
                 "subtitle": "Tu carrera a largo plazo, decidida en comunidad.",
-                "description": "Para ejecutivos que quieren definir su siguiente etapa acompañados por pares.\n\nCohorte virtual: 6 encuentros grupales en vivo, sesión individual con Strategic Advisor, assessments, encuentro presencial de cierre y membresía permanente.\n\nOff-site de 3 días: 3 encuentros virtuales, inmersión presencial y encuentro de cierre.\n\nBusca aportar claridad sobre identidad, salud, patrimonio, relaciones y próximos pasos profesionales.",
-                "href": "/contacto?experiencia=lifeplacement",
+                "description": "Para ejecutivos que están cerrando una etapa profesional y necesitan claridad para decidir la siguiente, acompañados por pares que atraviesan desafíos similares.\n\nCohorte virtual: 6 encuentros grupales en vivo, sesión individual con Strategic Advisor, assessments, encuentro presencial de cierre y membresía permanente.\n\nOff-site de 3 días: 3 encuentros virtuales, inmersión presencial con 2 líderes estratégicos y encuentro de cierre.\n\nClaridad para decidir tu siguiente etapa, un plan de acción y una comunidad de hasta 15 ejecutivos. Sin apresurar decisiones: acompañamos el discernimiento.",
+                "href": "https://api.whatsapp.com/send?phone=16892306889&text=Hola%20Claudia%2C%20estuve%20viendo%20LifePlacement%20y%20me%20gustar%C3%ADa%20conocer%20m%C3%A1s%20sobre%20la%20experiencia%20y%20las%20modalidades%20de%20participaci%C3%B3n.",
                 "label": "Solicitar información"
               },
               {
@@ -3626,8 +3677,8 @@
                 "visible": 1,
                 "title": "Retiro Conscious Leadership",
                 "subtitle": "Sal de la operación para rediseñar cómo lideras.",
-                "description": "Experiencia inmersiva presencial para líderes y equipos directivos. Trabaja autoconocimiento, impacto del liderazgo en los demás, comunicación y responsabilidad, adaptación al cambio y prácticas aplicables a la organización.",
-                "href": "/contacto?experiencia=conscious-leadership",
+                "description": "Para líderes y equipos directivos que buscan replantear cómo lideran, deciden y colaboran frente a los cambios tecnológicos, generacionales y organizacionales.\n\nQué trabaja:\nAutoconocimiento y conciencia del propio impacto.\nLiderazgo consciente y responsabilidad.\nConversaciones, decisiones y colaboración.\nAdaptación al cambio y la incertidumbre.\nPrácticas aplicables al equipo y la organización.",
+                "href": "https://api.whatsapp.com/send?phone=16892306889&text=Hola%20Claudia%2C%20me%20interes%C3%B3%20el%20Retiro%20Conscious%20Leadership%20y%20quisiera%20conocer%20un%20poco%20m%C3%A1s%20sobre%20c%C3%B3mo%20funciona%20y%20c%C3%B3mo%20participar.",
                 "label": "Solicitar información"
               }
             ]
@@ -3733,7 +3784,7 @@
           "name": "seo",
           "type": "seo",
           "initialContent": {
-            "title": "Comunidad y Experiencias | Claudia Sanchez Urencio",
+            "title": "Comunidad y Experiencias | Claudia Sánchez Urencio",
             "description": "LifePlacement y Retiro Conscious Leadership para ejecutivos, líderes y equipos directivos."
           },
           "fields": [

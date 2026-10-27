@@ -15,7 +15,7 @@
 
 ## SEO y metadatos
 
-- Nombre público en toda metadata: `Claudia Sanchez Urencio`.
+- Nombre público en toda metadata: `Claudia Sánchez Urencio`.
 - Title/description únicos por página; canonical si hay dominio configurado; OG/Twitter; `lang="es"`.
 - Estructura semántica con un H1 por página y encabezados jerárquicos.
 - Sitemap/robots si el proyecto ya los tiene o se pueden generar sin inventar dominio.
@@ -41,7 +41,7 @@
 - Verificar que todas las secciones nuevas están en manifiesto y se pueden editar con el flujo existente o indicar claramente qué parte no puede probarse sin backend.
 - Comparar visualmente `/disena-tu-futuro` antes y después: sin regresiones ni cambios involuntarios.
 - Revisar mobile 375 px, tablet y desktop; verificar `prefers-reduced-motion`.
-- Buscar globalmente cadenas `Claudia Sánchez`, `Claudia Sanchez` como nombre truncado, `Newsletter` en navegación y rutas antiguas, sin alterar referencias técnicas o citas históricas.
+- Buscar globalmente cadenas `Claudia Sánchez`, `Claudia Sánchez` como nombre truncado, `Newsletter` en navegación y rutas antiguas, sin alterar referencias técnicas o citas históricas.
 
 ## Entrega
 

@@ -2,16 +2,18 @@ import { useRef } from 'react';
 import { gsap, ScrollTrigger, useGSAP, MQ } from '../../utils/gsap.js';
 import { ClaudiaEditable, useClaudiaCmsSection } from '../../integration/eze-cms/ClaudiaCms.jsx';
 import SectionHead from './SectionHead.jsx';
+import LifeModel from './LifeModel.jsx';
 import type from './type.module.css';
 import styles from './Approach.module.css';
 
 const NODE_THRESHOLDS = [1 / 6, 1 / 2, 5 / 6];
 
 /**
- * 03 · Enfoque. M03 Drawn Journey: un trazo SVG que se dibuja con el scroll (scrub, sin pin) y activa tres hitos.
+ * 04 · Mi enfoque: Cómo trabajo + Modelo L.I.F.E. en una única sección.
+ * M03 Drawn Journey: un trazo SVG que se dibuja con el scroll (scrub, sin pin) y activa tres hitos.
  * Mobile: riel vertical. Sin movimiento (o sin JS) el trazo y los tres hitos se ven completos.
  */
-export default function Approach({ content: fallback }) {
+export default function Approach({ content: fallback, life }) {
   const root = useRef(null);
   const { content } = useClaudiaCmsSection('approach', fallback);
 
@@ -45,8 +47,8 @@ export default function Approach({ content: fallback }) {
               ease: 'none',
               scrollTrigger: {
                 trigger: q('[data-rv="track"]')[0],
-                start: 'top 84%',
-                end: 'top 42%',
+                start: 'top 86%',
+                end: 'bottom 76%',
                 scrub: 0.6,
                 onUpdate: (self) => setActive(self.progress),
                 onRefresh: (self) => setActive(self.progress),
@@ -91,38 +93,47 @@ export default function Approach({ content: fallback }) {
   );
 
   return (
-    <section id="enfoque" className={`${type.section} ${styles.section}`} aria-labelledby="enfoque-title" data-tone="dark" ref={root}>
-      <div className={type.container}>
-        <div className={styles.head}>
-          <SectionHead eyebrow={content.eyebrow} title={content.title} id="enfoque-title" className={styles.headMain} cmsSection="approach" />
-          <ClaudiaEditable sectionKey="approach" fieldPath="intro"><p className={`${type.lead} ${styles.intro}`} data-rv="intro">{content.intro}</p></ClaudiaEditable>
-        </div>
+    <section id="enfoque" className={styles.section} aria-labelledby="enfoque-title" ref={root}>
+      {/* Banda azul oscuro «Cómo trabajo»; L.I.F.E. continúa debajo sobre fondo claro. */}
+      <div className={styles.how} data-tone="dark">
+        <div className={type.container}>
+          <div className={styles.head}>
+            <SectionHead eyebrow={content.eyebrow} title={content.title} id="enfoque-title" className={styles.headMain} cmsSection="approach" />
+            <ClaudiaEditable sectionKey="approach" fieldPath="intro">
+              <div className={styles.intro} data-rv="intro">
+                {content.intro.split('\n\n').map((paragraph) => <p className={type.lead} key={paragraph}>{paragraph}</p>)}
+              </div>
+            </ClaudiaEditable>
+          </div>
 
-        <div className={styles.track} data-rv="track">
-          <svg className={styles.path} viewBox="0 0 1000 60" preserveAspectRatio="none" aria-hidden="true" focusable="false">
-            <path className={styles.pathBase} d="M0 30 H166.7 C250 -2 416 62 500 30 S 750 62 833.3 30 H1000" />
-            <path
-              className={styles.pathDraw}
-              data-rv="path"
-              pathLength="1"
-              d="M0 30 H166.7 C250 -2 416 62 500 30 S 750 62 833.3 30 H1000"
-            />
-          </svg>
-          <span className={styles.rail} data-rv="rail" aria-hidden="true" />
-          <ol className={styles.steps}>
-            {content.steps.map((step, index) => (
-              <li className={styles.step} key={step.number} data-step>
-                <span className={styles.node} aria-hidden="true" />
-                <span className={styles.number} aria-hidden="true">
-                  {step.number}
-                </span>
-                <ClaudiaEditable sectionKey="approach" fieldPath={`steps.${index}.label`}><h3 className={styles.label}>{step.label}</h3></ClaudiaEditable>
-                <ClaudiaEditable sectionKey="approach" fieldPath={`steps.${index}.text`}><p className={styles.text}>{step.text}</p></ClaudiaEditable>
-              </li>
-            ))}
-          </ol>
+          <div className={styles.track} data-rv="track">
+            <svg className={styles.path} viewBox="0 0 1000 60" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+              <path className={styles.pathBase} d="M0 30 H166.7 C250 -2 416 62 500 30 S 750 62 833.3 30 H1000" />
+              <path
+                className={styles.pathDraw}
+                data-rv="path"
+                pathLength="1"
+                d="M0 30 H166.7 C250 -2 416 62 500 30 S 750 62 833.3 30 H1000"
+              />
+            </svg>
+            <span className={styles.rail} data-rv="rail" aria-hidden="true" />
+            <ol className={styles.steps}>
+              {content.steps.map((step, index) => (
+                <li className={styles.step} key={step.number} data-step>
+                  <span className={styles.node} aria-hidden="true" />
+                  <span className={styles.number} aria-hidden="true">
+                    {step.number}
+                  </span>
+                  <ClaudiaEditable sectionKey="approach" fieldPath={`steps.${index}.label`}><h3 className={styles.label}>{step.label}</h3></ClaudiaEditable>
+                  <ClaudiaEditable sectionKey="approach" fieldPath={`steps.${index}.text`}><p className={styles.text}>{step.text}</p></ClaudiaEditable>
+                </li>
+              ))}
+            </ol>
+          </div>
         </div>
       </div>
+
+      <LifeModel content={life} />
     </section>
   );
 }

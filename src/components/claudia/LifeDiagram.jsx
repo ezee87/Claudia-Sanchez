@@ -1,12 +1,14 @@
 import { motion } from 'motion/react';
+import { useMediaQuery } from '../../utils/useMediaQuery.js';
 import { ClaudiaEditable } from '../../integration/eze-cms/ClaudiaCms.jsx';
 import styles from './LifeDiagram.module.css';
 
-const RADIUS = 36; // % del lado del diagrama
-const NODE_SIZE = 19; // % del lado
+// Geometría en % del lado del diagrama. En pantallas estrechas los nodos crecen para que las etiquetas
+// (p. ej. RELACIONES) quepan y el área táctil siga siendo cómoda.
+const GEOMETRY = { regular: { radius: 36, node: 19 }, compact: { radius: 33, node: 27 } };
 const START = -90;
 
-function polar(index, count, radius = RADIUS) {
+function polar(index, count, radius) {
   const angle = ((START + (360 / count) * index) * Math.PI) / 180;
   return { x: 50 + radius * Math.cos(angle), y: 50 + radius * Math.sin(angle) };
 }
@@ -19,11 +21,13 @@ const NODE_ACTIVE = { scale: 1.07, backgroundColor: '#1b1a44', color: '#d5a64a',
  * Las dimensiones no son etapas: no hay numeración ni orden de lectura obligatorio.
  */
 export default function LifeDiagram({ dimensions, selected, onSelect, panelId, cmsSection, hubLabel }) {
-  const points = dimensions.map((_, index) => polar(index, dimensions.length));
+  const compact = useMediaQuery('(max-width: 599.98px)');
+  const { radius, node: nodeSize } = compact ? GEOMETRY.compact : GEOMETRY.regular;
+  const points = dimensions.map((_, index) => polar(index, dimensions.length, radius));
   const hexagon = points.map(({ x, y }) => `${x.toFixed(2)},${y.toFixed(2)}`);
 
   return (
-    <div className={styles.diagram} data-life="diagram">
+    <div className={styles.diagram} data-life="diagram" data-compact={compact ? '' : undefined}>
       <svg className={styles.svg} viewBox="0 0 100 100" aria-hidden="true" focusable="false">
         <polygon className={styles.hexagon} points={hexagon.join(' ')} />
         <circle className={styles.ring} data-life="draw" pathLength="1" cx="50" cy="50" r="47.5" />
@@ -69,7 +73,7 @@ export default function LifeDiagram({ dimensions, selected, onSelect, panelId, c
             className={styles.slot}
             data-life="node"
             key={dimension.id}
-            style={{ left: `${x - NODE_SIZE / 2}%`, top: `${y - NODE_SIZE / 2}%`, width: `${NODE_SIZE}%` }}
+            style={{ left: `${x - nodeSize / 2}%`, top: `${y - nodeSize / 2}%`, width: `${nodeSize}%` }}
           >
             <motion.button
               type="button"

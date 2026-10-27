@@ -1,6 +1,5 @@
 .header {
   --accent: var(--gold);
-  --rule: rgba(247, 245, 240, 0.2);
   position: sticky;
   top: 0;
   z-index: 50;
@@ -155,35 +154,102 @@
   transform: translateY(-7px) rotate(-45deg);
 }
 
+/* Ocupa todo el alto visible bajo el header: tapa la página (y su footer) y scrollea por dentro si no entra. */
 .panel {
   position: absolute;
   top: 100%;
   left: 0;
   right: 0;
-  display: grid;
+  display: flex;
+  flex-direction: column;
   gap: 28px;
-  max-height: calc(100svh - var(--hero-nav-height));
+  height: calc(100vh - var(--hero-nav-height) - 1px);
+  height: calc(100dvh - var(--hero-nav-height) - 1px);
   overflow-y: auto;
-  padding: 12px var(--c-gutter) 32px;
-  background: var(--navy);
-  border-bottom: 1px solid rgba(213, 166, 74, 0.22);
+  overscroll-behavior: contain;
+  padding: 24px var(--c-gutter) max(32px, env(safe-area-inset-bottom));
+  background: linear-gradient(180deg, var(--navy) 0%, var(--navy-deep) 100%);
+}
+
+/* Mismo eyebrow que las etiquetas de «Tu siguiente movimiento», en dorado. */
+.panelEyebrow {
+  margin: 0 0 12px;
+  font-size: 0.6875rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  line-height: 1.4;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+/* Índice numerado: los números salen de un contador CSS para no tocar el texto editable del enlace. */
+.panel ul {
+  counter-reset: menu-item;
+  border-top: 1px solid rgba(247, 245, 240, 0.12);
 }
 
 .panel li {
-  border-bottom: 1px solid var(--rule);
+  counter-increment: menu-item;
+  border-bottom: 1px solid rgba(247, 245, 240, 0.12);
 }
 
 .panel li a {
-  display: block;
-  padding: 16px 0;
+  display: grid;
+  grid-template-columns: 2.4rem minmax(0, 1fr);
+  align-items: baseline;
+  padding: 13px 0;
   font-family: var(--c-serif);
-  font-size: 1.75rem;
+  font-size: 1.5rem;
   font-weight: 500;
+  line-height: 1.2;
   letter-spacing: 0;
 }
 
+.panel li a::before {
+  content: counter(menu-item, decimal-leading-zero);
+  font-size: 1.05rem;
+  font-variant-numeric: lining-nums;
+  color: var(--gold);
+}
+
+/* Hover solo en dispositivos con puntero real: en táctil el :hover queda pegado tras el toque. */
+@media (hover: hover) {
+  .panel li a:hover {
+    color: var(--ivory);
+  }
+}
+
+/* La única marca es la sección actual, en dorado. */
 .panel li a[aria-current='true'] {
   color: var(--gold);
+}
+
+.panelCtaWrap {
+  align-self: flex-start;
+}
+
+/* Cierre editorial al pie: misma voz que la frase final de «Tu siguiente movimiento». */
+.panelTagline {
+  margin: auto 0 0;
+  max-width: 30ch;
+  padding-left: 18px;
+  border-left: 2px solid var(--gold);
+  font-family: var(--c-serif);
+  font-size: 1.2rem;
+  font-style: italic;
+  font-weight: 500;
+  line-height: 1.25;
+  color: rgba(247, 245, 240, 0.72);
+  text-wrap: balance;
+}
+
+/* Dorado ajustado al contenido, con la flecha junto al texto (anula el ancho completo de BookingCTA en mobile). */
+.panel .panelCta {
+  width: auto;
+  min-height: 48px;
+  justify-content: center;
+  gap: 8px;
+  padding-inline: 24px;
 }
 
 @media (min-width: 960px) {

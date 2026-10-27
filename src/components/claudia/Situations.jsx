@@ -69,7 +69,7 @@ export default function Situations({ content: fallback }) {
       <div className={type.container}>
         <div className={styles.head}>
           <SectionHead eyebrow={content.eyebrow} title={content.title} id="situaciones-title" className={styles.headMain} cmsSection="situations" />
-          <ClaudiaEditable sectionKey="situations" fieldPath="intro"><p className={`${type.lead} ${styles.intro}`} data-rv="intro">{content.intro}</p></ClaudiaEditable>
+          <ClaudiaEditable sectionKey="situations" fieldPath="intro"><p className={`${type.lead} ${styles.intro}`} data-rv="intro">{content.intro.split('\n').map((line) => <span className={styles.introLine} key={line}>{line}</span>)}</p></ClaudiaEditable>
         </div>
 
         <div className={styles.listWrap} data-rv="list">
@@ -89,7 +89,7 @@ export default function Situations({ content: fallback }) {
 
         <div className={styles.conclusion} data-rv="closing">
           <ClaudiaEditable sectionKey="situations" fieldPath="closing"><p className={styles.closing}>{content.closing}</p></ClaudiaEditable>
-          <ClaudiaEditable sectionKey="situations" fieldPath="ctaLink"><BookingCTA label={ctaLink.label} href={ctaLink.href} /></ClaudiaEditable>
+          <ClaudiaEditable sectionKey="situations" fieldPath="ctaLink"><BookingCTA size="lg" label={ctaLink.label} href={ctaLink.href} /></ClaudiaEditable>
         </div>
       </div>
     </section>

@@ -1,0 +1,8 @@
+/* Escala editorial propia de /diseno-de-carrera (recupera la jerarquía de la demo original).
+   Solo afecta a la landing: el sitio institucional también usa .claudia-root y conserva sus tokens. */
+.claudia-root.claudia-landing {
+  --c-section-title: clamp(2.25rem, 1.35rem + 2.65vw, 3.75rem);
+  --c-intro: clamp(1rem, 0.96rem + 0.2vw, 1.1875rem);
+  --c-quote: clamp(1.45rem, 1.1rem + 1.05vw, 2rem);
+  --c-landing-pad: clamp(64px, 7vw, 100px);
+}

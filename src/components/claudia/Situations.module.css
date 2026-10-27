@@ -1,12 +1,13 @@
 .section {
   background: var(--ivory);
-  padding-block: clamp(64px, 8vw, 84px);
+  padding-block: var(--c-landing-pad);
 }
 
+/* Composición vertical y amplia: eyebrow, título editorial ancho y un único párrafo debajo. */
 .head {
   display: grid;
-  gap: clamp(16px, 2vw, 24px);
-  max-width: 900px;
+  gap: clamp(18px, 2vw, 26px);
+  max-width: 960px;
 }
 
 .headMain {
@@ -14,13 +15,24 @@
   gap: 16px;
 }
 
+/* El copy trae un salto de línea explícito entre las dos oraciones (sin margen de párrafo). */
 .intro {
-  max-width: 68ch;
+  max-width: 62ch;
+}
+
+.introLine {
+  display: block;
+}
+
+/* Segunda oración: medida más corta y balanceada para repartirse en dos líneas de largo similar. */
+.introLine + .introLine {
+  max-width: 46ch;
+  text-wrap: balance;
 }
 
 .listWrap {
   position: relative;
-  margin-top: clamp(24px, 3vw, 36px);
+  margin-top: clamp(32px, 4vw, 52px);
 }
 
 .list {
@@ -73,8 +85,8 @@
 .conclusion {
   display: grid;
   justify-items: start;
-  gap: clamp(16px, 1.6vw, 22px);
-  margin-top: clamp(22px, 2.6vw, 32px);
+  gap: 24px;
+  margin-top: 32px;
 }
 
 .closing {
@@ -90,29 +102,7 @@
   text-wrap: balance;
 }
 
-@media (max-width: 959.98px) {
-  .conclusion {
-    gap: 24px;
-    margin-top: 32px;
-  }
-}
-
 @media (min-width: 960px) {
-  .section {
-    min-height: calc(100svh - var(--c-header));
-    display: grid;
-    align-items: center;
-    padding-block: clamp(100px, 8vw, 116px);
-  }
-
-  .head {
-    gap: clamp(14px, 2vw, 24px);
-  }
-
-  .headMain h2 {
-    max-width: 27ch;
-  }
-
   .list {
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: clamp(20px, 3vw, 48px);
@@ -129,19 +119,23 @@
   }
 
   .item {
-    padding: 18px 0 0;
+    padding: 22px 0 0;
     border-bottom: 0;
   }
 
   .text {
     max-width: 32ch;
-    font-size: clamp(1.02rem, 0.9rem + 0.42vw, 1.3rem);
+    font-size: clamp(1.1rem, 0.95rem + 0.45vw, 1.35rem);
     line-height: 1.28;
   }
 
+  .conclusion {
+    gap: clamp(22px, 2.4vw, 30px);
+    margin-top: clamp(40px, 4vw, 56px);
+  }
+
   .closing {
-    font-size: clamp(1.45rem, 1.05rem + 1vw, 1.8rem);
-    text-wrap: nowrap;
+    font-size: clamp(1.5rem, 1.05rem + 1vw, 1.95rem);
   }
 
   .item::before {
@@ -155,4 +149,3 @@
     background: var(--gold);
   }
 }
-

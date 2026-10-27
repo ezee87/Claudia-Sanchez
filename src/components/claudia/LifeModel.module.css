@@ -1,40 +1,56 @@
-.section {
+/* Banda clara de L.I.F.E. dentro de «Mi enfoque», diferenciada de «Cómo trabajo». */
+.band {
   background: var(--white);
+  padding-block: var(--c-landing-pad);
 }
 
 .layout {
   display: grid;
-  gap: clamp(28px, 4vw, 48px);
+  grid-template-areas:
+    'copy'
+    'stage'
+    'panel'
+    'closing';
+  gap: clamp(24px, 4vw, 36px);
 }
 
 .copy {
+  grid-area: copy;
   display: grid;
   align-content: start;
-  gap: clamp(22px, 2.4vw, 34px);
+  gap: clamp(16px, 2vw, 22px);
 }
 
-.head {
-  display: grid;
-  gap: 16px;
-}
-
-.support {
+.title {
+  max-width: 20ch;
   font-family: var(--c-serif);
-  font-size: clamp(1.3rem, 1.12rem + 0.55vw, 1.6rem);
-  font-style: italic;
+  font-size: var(--c-section-title);
   font-weight: 500;
-  line-height: 1.25;
+  line-height: 1.02;
   color: var(--navy);
+  text-wrap: balance;
 }
 
+.intro {
+  display: grid;
+  gap: 1em;
+  max-width: 50ch;
+}
+
+.stage {
+  grid-area: stage;
+  min-width: 0;
+}
+
+/* Área de descripción dinámica: altura estable para que la selección no desplace el contenido. */
 .panel {
-  min-height: 10rem;
-  padding-top: 22px;
+  grid-area: panel;
+  min-height: 7.5rem;
+  padding-top: 18px;
   border-top: 1px solid var(--rule);
 }
 
 .instruction {
-  margin-bottom: 14px;
   font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0.12em;
@@ -44,9 +60,9 @@
 }
 
 .panelTitle {
-  margin-bottom: 14px;
+  margin-bottom: 8px;
   font-family: var(--c-serif);
-  font-size: clamp(1.7rem, 1.3rem + 1.2vw, 2.35rem);
+  font-size: clamp(1.45rem, 1.2rem + 0.8vw, 1.9rem);
   font-weight: 500;
   letter-spacing: 0.1em;
   line-height: 1.05;
@@ -56,61 +72,140 @@
 .panelText {
   max-width: 36ch;
   font-family: var(--c-serif);
-  font-size: clamp(1.3rem, 1.12rem + 0.5vw, 1.6rem);
+  font-size: clamp(1.2rem, 1.05rem + 0.45vw, 1.45rem);
   font-weight: 500;
   line-height: 1.25;
   color: var(--navy);
-}
-
-.panelSupport {
-  max-width: 30ch;
-  font-family: var(--c-serif);
-  font-size: clamp(1.3rem, 1.12rem + 0.5vw, 1.6rem);
-  font-style: italic;
-  font-weight: 500;
-  line-height: 1.25;
-  color: var(--violet);
-}
-
-.closing {
-  max-width: 100%;
-  margin-top: clamp(32px, 4vw, 56px);
-  padding-left: 22px;
-  border-left: 2px solid var(--gold);
-  font-family: var(--c-serif);
-  font-size: clamp(1.45rem, 1.12rem + 1.1vw, 2.05rem);
-  font-style: italic;
-  font-weight: 500;
-  line-height: 1.12;
-  color: var(--navy);
+  /* Líneas de largo parejo: evita una palabra suelta en la segunda línea. */
   text-wrap: balance;
 }
 
-.desktopBreak {
-  display: none;
+.closing {
+  grid-area: closing;
+  max-width: 100%;
+  padding-left: 22px;
+  border-left: 2px solid var(--gold);
+  font-family: var(--c-serif);
+  font-size: var(--c-quote);
+  font-style: italic;
+  font-weight: 500;
+  line-height: 1.15;
+  color: #9a681d;
+  text-wrap: balance;
 }
 
-.action {
-  margin-top: clamp(24px, 3vw, 36px);
+/* Cada oración en su propia línea, sin margen entre ellas. */
+.closingLine {
+  display: block;
+}
+
+/* Mobile: composición centrada alrededor del diagrama. */
+@media (max-width: 599.98px) {
+  .copy {
+    justify-items: center;
+    text-align: center;
+  }
+
+  .title {
+    max-width: 17ch;
+  }
+
+  .intro {
+    max-width: 36ch;
+  }
+
+  .intro p {
+    text-wrap: balance;
+  }
+
+  /*
+   * Altura fija para título + dos líneas: la selección no desplaza la frase final.
+   * Sin filete superior y algo más cerca del diagrama, para que se lea como parte de él.
+   */
+  .panel {
+    display: grid;
+    min-height: 92px;
+    margin-top: -6px;
+    padding: 0 0 8px;
+    border-top: 0;
+    text-align: center;
+  }
+
+  /* Sin selección, la instrucción queda centrada en ese mismo espacio. */
+  .panel[data-empty] {
+    align-content: center;
+    padding-bottom: 0;
+  }
+
+  .panelTitle {
+    margin-bottom: 6px;
+  }
+
+  .panelText {
+    max-width: 34ch;
+    margin-inline: auto;
+  }
+
+  /* Sin filete lateral: en una composición centrada desplazaría la frase. */
+  .closing {
+    justify-self: center;
+    max-width: 100%;
+    padding-left: 0;
+    border-left: 0;
+    text-align: center;
+  }
+
+  /* Separador breve y centrado que introduce la frase final. */
+  .closing::before {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 1px;
+    margin: 0 auto 24px;
+    background: rgba(213, 166, 74, 0.7);
+  }
 }
 
 @media (min-width: 960px) {
-  .desktopBreak {
-    display: initial;
-  }
-
-  .closing {
-    font-size: clamp(1.45rem, 1.05rem + 0.9vw, 1.85rem);
-  }
-  .section {
-    min-height: calc(100svh - var(--c-header));
-    display: grid;
-    align-items: center;
-  }
-
+  /* La fila flexible final absorbe la altura sobrante del diagrama: la frase queda pegada al panel. */
   .layout {
     grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
-    align-items: center;
-    gap: clamp(36px, 5vw, 84px);
+    grid-template-rows: auto auto 1fr;
+    grid-template-areas:
+      'copy stage'
+      'panel stage'
+      'closing stage';
+    gap: clamp(22px, 2.4vw, 32px) clamp(36px, 5vw, 84px);
+  }
+
+  .copy {
+    align-self: end;
+  }
+
+  .panel {
+    align-self: start;
+  }
+
+  .stage {
+    align-self: center;
+  }
+
+  .stage :global([data-life='diagram']) {
+    max-width: 540px;
+  }
+
+  /*
+   * Tres líneas de largo similar: la primera oración no se corta y fija el ancho del bloque (min-content);
+   * la segunda se reparte en dos líneas equilibradas dentro de ese ancho.
+   */
+  .closing {
+    align-self: start;
+    width: min-content;
+    font-size: clamp(1.4rem, 0.95rem + 0.75vw, 1.75rem);
+  }
+
+  .closingLine:first-child {
+    padding-right: 0.6em;
+    white-space: nowrap;
   }
 }

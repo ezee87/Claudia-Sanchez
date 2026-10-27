@@ -1,7 +1,7 @@
-import { Fragment } from 'react';
+import { Fragment, useRef, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { CmsLink, Field, useSection } from './Cms';
-import { formatDate, safeHref, safeImage } from './content';
+import { CmsLink, Field, useGlobal, useSection } from './Cms';
+import { content, formatDate, safeHref, safeImage } from './content';
 import { articleMediaUrl } from '../../integration/eze-cms/cmsRuntime';
 import { useCmsArticles } from '../../integration/eze-cms/useCmsArticles';
 import Seo from './Seo';
@@ -12,22 +12,56 @@ function ArticleStatus({ children, kind = '' }) {
   return <div className={`article-status ${kind}`}>{children}</div>;
 }
 
-export function ArticleCards({ limit }) {
+function ArticleCard({ article }) {
+  const cover = articleMediaUrl(article.cover_image);
+  const date = editorialDate(article);
+  return <article className="article-card">
+    <Link to={`/articulos/${article.slug}`} aria-label={`Leer ${article.title}`}>
+      <div className="article-cover">{safeImage(cover) && <img src={cover} alt="" width="720" height="480" loading="lazy" />}</div>
+      <div className="article-card-copy"><div className="article-card-text"><time dateTime={date}>{formatDate(date)}</time><h3>{article.title}</h3>{article.excerpt && <p>{article.excerpt}</p>}</div><span className="article-read">Leer artículo <span aria-hidden="true">→</span></span></div>
+    </Link>
+  </article>;
+}
+
+// El CMS no expone categorías ni etiquetas: se toman los vecinos por fecha (anterior y siguiente), excluyendo el actual.
+function relatedArticles(all, current) {
+  const index = all.findIndex(a => a.id === current.id);
+  if (index < 0) return all.slice(0, 2);
+  const older = all.slice(index + 1);
+  const newer = all.slice(0, index).reverse();
+  const picks = [older[0], newer[0]].filter(Boolean);
+  return [...picks, ...older.slice(1), ...newer.slice(1)].slice(0, 2);
+}
+
+const PAGE_SIZE = 6;
+
+export function ArticleCards({ limit, paged = false }) {
   const { articles, loading, error } = useCmsArticles();
+  const [count, setCount] = useState(PAGE_SIZE);
+  const gridRef = useRef(null);
   if (loading) return <ArticleStatus>Cargando artículos…</ArticleStatus>;
   if (error) return <ArticleStatus kind="is-error"><strong>No pudimos cargar los artículos.</strong><span>{error.message}</span></ArticleStatus>;
-  const visible = articles.slice(0, limit);
+  const total = articles.length;
+  const visible = paged ? articles.slice(0, count) : articles.slice(0, limit);
   if (!visible.length) return <ArticleStatus>No hay artículos publicados por el momento.</ArticleStatus>;
-  return <div className="article-grid">{visible.map(article => {
-    const cover = articleMediaUrl(article.cover_image);
-    const date = editorialDate(article);
-    return <article className="article-card" key={article.id}>
-      <Link to={`/articulos/${article.slug}`} aria-label={`Leer ${article.title}`}>
-        <div className="article-cover">{safeImage(cover) && <img src={cover} alt="" width="720" height="480" loading="lazy" />}</div>
-        <div className="article-card-copy"><time dateTime={date}>{formatDate(date)}</time><h3>{article.title}</h3>{article.excerpt && <p>{article.excerpt}</p>}<span className="article-read">Leer artículo <span aria-hidden="true">→</span></span></div>
-      </Link>
-    </article>;
-  })}</div>;
+  const allShown = visible.length >= total;
+  const showLess = () => {
+    setCount(PAGE_SIZE);
+    // Evita quedar desplazado en una zona vacía tras colapsar la lista.
+    const top = gridRef.current?.getBoundingClientRect().top;
+    if (top !== undefined && top < 0) {
+      const smooth = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      window.scrollTo({ top: window.scrollY + top - 120, behavior: smooth ? 'smooth' : 'auto' });
+    }
+  };
+  const grid = <div className="article-grid" ref={gridRef}>{visible.map(article => <ArticleCard key={article.id} article={article} />)}</div>;
+  if (!paged) return grid;
+  return <>{grid}{total > PAGE_SIZE && <div className="article-pager">
+    <p className="article-count" role="status" aria-live="polite">Mostrando {visible.length} de {total} artículos</p>
+    {allShown
+      ? <button type="button" className="editorial-button article-more" onClick={showLess}>Mostrar menos</button>
+      : <button type="button" className="editorial-button article-more" onClick={() => setCount(c => Math.min(c + PAGE_SIZE, total))}>Mostrar más artículos</button>}
+  </div>}</>;
 }
 
 function renderMarks(node, content) {
@@ -69,16 +103,40 @@ export function ArticleDetail() {
   const { slug } = useParams();
   const { content: header } = useSection('/articulos/:slug', 'encabezado');
   const { content: footer } = useSection('/articulos/:slug', 'pie-articulo');
+  const { content: site } = useGlobal('institutional-footer', content['/'].footer);
   const { articles, loading, error } = useCmsArticles(slug);
+  const { articles: allArticles } = useCmsArticles();
   const article = articles[0];
   const date = article && editorialDate(article);
   const cover = article && articleMediaUrl(article.cover_image);
+  const related = article ? relatedArticles(allArticles, article) : [];
+  const author = footer.signature?.replace(/^Por\s+/i, '') || site.brand;
+  const sourceHref = article?.source_url ? safeHref(article.source_url, '') : '';
   return <><Seo route="/articulos/:slug" article={article} missing={!loading && !error && !article} /><main className="site-container article-detail">
-    <Field route="/articulos/:slug" section="encabezado" path="collection"><p className="eyebrow">{header.collection}</p></Field>
+    <Link className="article-back" to="/articulos"><span aria-hidden="true">←</span> Volver a artículos</Link>
     {loading && <ArticleStatus><h1>Cargando artículo…</h1></ArticleStatus>}
     {error && <ArticleStatus kind="is-error"><strong>No pudimos cargar el artículo.</strong><span>{error.message}</span></ArticleStatus>}
     {!loading && !error && !article && <ArticleStatus><h1>Artículo inexistente</h1><span>El artículo que buscás no está publicado o no existe.</span></ArticleStatus>}
-    {article && <article><header className="article-detail-header"><h1>{article.title}</h1><time dateTime={date}>{formatDate(date)}</time></header>{safeImage(cover) && <img className="article-hero" src={cover} alt="" width="1000" height="650" />}<ArticleBody content={article.content} />{article.source_url && <a className="article-source" href={safeHref(article.source_url, '')} target="_blank" rel="noopener noreferrer">Ver publicación original en LinkedIn <span aria-hidden="true">↗</span></a>}<Field route="/articulos/:slug" section="pie-articulo" path="signature"><p className="article-signature">{footer.signature}</p></Field></article>}
-    <CmsLink route="/articulos/:slug" section="pie-articulo" path="back" value={footer.back} className="editorial-button" />
+    {article && <article>
+      <header className="article-detail-header">
+        <Field route="/articulos/:slug" section="encabezado" path="collection"><p className="eyebrow">{header.collection}</p></Field>
+        <h1>{article.title}</h1>
+        <p className="article-meta"><time dateTime={date}>{formatDate(date)}</time><span aria-hidden="true">·</span><span>{author}</span></p>
+      </header>
+      {safeImage(cover) && <figure className="article-figure"><img className="article-hero" src={cover} alt="" width="1000" height="650" /></figure>}
+      <ArticleBody content={article.content} />
+      <footer className="article-end">
+        <div className="article-author">
+          <Field route="/articulos/:slug" section="pie-articulo" path="signature"><p className="article-signature">{footer.signature}</p></Field>
+          {site.line && <p className="article-author-line">{site.line}</p>}
+        </div>
+        {sourceHref && <a className="article-source" href={sourceHref} target="_blank" rel="noopener noreferrer">Ver publicación original en LinkedIn <span aria-hidden="true">↗</span></a>}
+      </footer>
+    </article>}
+    {article && related.length > 0 && <aside className="article-related" aria-labelledby="article-related-title">
+      <h2 id="article-related-title">Continuá leyendo</h2>
+      <div className="article-grid">{related.map(item => <ArticleCard key={item.id} article={item} />)}</div>
+    </aside>}
+    <CmsLink route="/articulos/:slug" section="pie-articulo" path="back" value={footer.back} className="article-back-all" />
   </main></>;
 }

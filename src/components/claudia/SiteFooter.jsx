@@ -1,6 +1,7 @@
 import { BOOKING_URL, LINKEDIN_URL } from '../../data/claudia/booking.js';
 import { ClaudiaEditable, useClaudiaCmsSection } from '../../integration/eze-cms/ClaudiaCms.jsx';
 import { resolveCmsLink } from '../../integration/eze-cms/cmsLink.js';
+import BackToTop from '../ui/BackToTop.jsx';
 import styles from './SiteFooter.module.css';
 
 export default function SiteFooter({ brand, content, nav }) {
@@ -11,9 +12,11 @@ export default function SiteFooter({ brand, content, nav }) {
     copyright: content.copyright,
     exploreHeading: 'Explorar',
     connectHeading: 'Conectar',
+    homeLink: null,
     linkedinLink: null,
     calendlyLink: null,
   });
+  const homeLink = resolveCmsLink(cmsContent.homeLink, { label: 'Inicio', href: '/' });
   const linkedinLink = resolveCmsLink(cmsContent.linkedinLink, { label: 'LinkedIn', href: LINKEDIN_URL });
   const calendlyLink = resolveCmsLink(cmsContent.calendlyLink, { label: 'Calendly', href: BOOKING_URL });
   const navLinks = nav.map((item, index) => ({
@@ -32,6 +35,7 @@ export default function SiteFooter({ brand, content, nav }) {
 
           <nav className={styles.nav} aria-label="Navegación del pie de página">
             <ClaudiaEditable sectionKey="site-footer" fieldPath="exploreHeading"><p className={styles.heading}>{cmsContent.exploreHeading}</p></ClaudiaEditable>
+            <ClaudiaEditable sectionKey="site-footer" fieldPath="homeLink"><a href={homeLink.href}>{homeLink.label}</a></ClaudiaEditable>
             {navLinks.map((link, index) => {
               return <ClaudiaEditable key={link.id} sectionKey="site-footer" fieldPath={`navLink${index}`}><a href={link.href}>{link.label}</a></ClaudiaEditable>;
             })}
@@ -51,6 +55,7 @@ export default function SiteFooter({ brand, content, nav }) {
         </div>
         <div className={styles.bottom}>
           <ClaudiaEditable sectionKey="site-footer" fieldPath="copyright"><p>{cmsContent.copyright} {cmsContent.brand}</p></ClaudiaEditable>
+          <BackToTop tone="light" />
         </div>
       </div>
     </footer>

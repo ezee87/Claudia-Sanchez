@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { Fragment, useRef } from 'react';
 import { gsap, useGSAP, MQ } from '../../utils/gsap.js';
 import { BOOKING_LABEL, BOOKING_URL } from '../../data/claudia/booking.js';
 import { resolveCmsLink } from '../../integration/eze-cms/cmsLink.js';
@@ -16,8 +16,8 @@ export default function Hero({ hero, portrait }) {
   const root = useRef(null);
   const localContent = {
     eyebrow: hero.eyebrow,
-    title: hero.titleLines.slice(0, hero.accentFrom).join(' '),
-    highlightedTitle: hero.titleLines.slice(hero.accentFrom).join(' '),
+    title: hero.title,
+    highlightedTitle: hero.highlightedTitle,
     description: hero.subtitle,
     ctaLabel: BOOKING_LABEL,
     ctaLink: null,
@@ -32,7 +32,6 @@ export default function Hero({ hero, portrait }) {
     readSection: readCmsSection,
   });
   const ctaLink = resolveCmsLink(content.ctaLink, { label: content.ctaLabel, href: BOOKING_URL });
-  const [accentLead, ...accentTail] = content.highlightedTitle.split(' ');
 
   useGSAP(
     () => {
@@ -62,19 +61,24 @@ export default function Hero({ hero, portrait }) {
 
       <div className={styles.copy}>
         <CmsEditable config={cmsRuntimeConfig} pageRoute={PAGE_ROUTE} sectionKey={SECTION_KEY} fieldPath="eyebrow">
-          <p className={styles.eyebrow} data-hero="eyebrow">{content.eyebrow}</p>
+          <p className={styles.eyebrow} data-hero="eyebrow">
+            {/* Desktop: una línea con « · ». Mobile: nombre y cargo en dos líneas, sin separador. */}
+            {content.eyebrow.split(' · ').map((part, index) => (
+              <Fragment key={index}>
+                {index > 0 && <span className={styles.eyebrowSep}> · </span>}
+                <span className={styles.eyebrowLine}>{part}</span>
+              </Fragment>
+            ))}
+          </p>
         </CmsEditable>
-        <CmsEditable config={cmsRuntimeConfig} pageRoute={PAGE_ROUTE} sectionKey={SECTION_KEY} fieldPath="title">
-          <p className={styles.introduction} data-hero="intro">{content.title}</p>
-        </CmsEditable>
-
-        <CmsEditable config={cmsRuntimeConfig} pageRoute={PAGE_ROUTE} sectionKey={SECTION_KEY} fieldPath="highlightedTitle">
-          <h1 className={styles.title} id="hero-title">
-            <span className={styles.titleLine} data-hero="title">
-              {accentLead}<span className={styles.titleTail}> {accentTail.join(' ')}</span>
-            </span>
-          </h1>
-        </CmsEditable>
+        <h1 className={styles.title} id="hero-title">
+          <CmsEditable config={cmsRuntimeConfig} pageRoute={PAGE_ROUTE} sectionKey={SECTION_KEY} fieldPath="title">
+            <span className={styles.titleLead} data-hero="intro">{content.title}</span>
+          </CmsEditable>{' '}
+          <CmsEditable config={cmsRuntimeConfig} pageRoute={PAGE_ROUTE} sectionKey={SECTION_KEY} fieldPath="highlightedTitle">
+            <span className={styles.titleAccent} data-hero="title">{content.highlightedTitle}</span>
+          </CmsEditable>
+        </h1>
 
         <CmsEditable config={cmsRuntimeConfig} pageRoute={PAGE_ROUTE} sectionKey={SECTION_KEY} fieldPath="description">
           <p className={styles.subtitle} data-hero="description">{content.description}</p>

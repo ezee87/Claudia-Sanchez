@@ -1,10 +1,10 @@
 # Copy exacto — Inicio `/`
 
-**Estado:** V2 editorial. Conservar la redacción. No resumir, reescribir ni completar con frases inventadas. Adaptar solo puntuación menor si es imprescindible. El nombre público es `Claudia Sanchez Urencio`.
+**Estado:** V2 editorial. Conservar la redacción. No resumir, reescribir ni completar con frases inventadas. Adaptar solo puntuación menor si es imprescindible. El nombre público es `Claudia Sánchez Urencio`.
 
 ## 01 — Hero (`hero`)
 
-**Nombre visible:** Claudia Sanchez Urencio
+**Nombre visible:** Claudia Sánchez Urencio
 
 **Título:** Coaching ejecutivo, desarrollo de liderazgo y estrategia de carrera.
 
@@ -24,7 +24,7 @@ Combino más de 20 años de experiencia corporativa con una mirada estratégica 
 
 **Texto:**
 
-Soy Claudia Sanchez Urencio, coach ejecutiva y especialista en desarrollo de liderazgo y estrategia de carrera.
+Soy Claudia Sánchez Urencio, coach ejecutiva y especialista en desarrollo de liderazgo y estrategia de carrera.
 
 Mi trayectoria profesional comenzó dentro de grandes organizaciones, donde durante más de 20 años trabajé de cerca con líderes, equipos y áreas de negocio, acompañando decisiones relacionadas con talento, desarrollo organizacional y transformación.
 

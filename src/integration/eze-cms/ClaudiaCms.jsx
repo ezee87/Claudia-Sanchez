@@ -7,7 +7,7 @@ import { useCmsSection } from './useCmsSection';
 export const CLAUDIA_PAGE_ROUTE = '/diseno-de-carrera';
 
 function publicName(value) {
-  if (typeof value === 'string') return value.replace(/Claudia (?:Sánchez|Sanchez)(?! Urencio)/g, 'Claudia Sanchez Urencio').replace(/CLAUDIA SÁNCHEZ/g, 'Claudia Sanchez Urencio');
+  if (typeof value === 'string') return value.replace(/Claudia (?:Sánchez|Sanchez)(?! Urencio)/g, 'Claudia Sánchez Urencio').replace(/CLAUDIA SÁNCHEZ/g, 'Claudia Sánchez Urencio');
   if (Array.isArray(value)) return value.map(publicName);
   if (value && typeof value === 'object') return Object.fromEntries(Object.entries(value).map(([key,entry])=>[key,publicName(entry)]));
   return value;

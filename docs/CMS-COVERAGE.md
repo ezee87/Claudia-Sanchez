@@ -7,7 +7,6 @@ Fuente: content.json = initialContent. Contrato soportado del kit; validación l
 | / | hero | eyebrow | string | fallback + RPC / validado localmente |
 | / | hero | title | string | fallback + RPC / validado localmente |
 | / | hero | paragraph1 | string | fallback + RPC / validado localmente |
-| / | hero | paragraph2 | string | fallback + RPC / validado localmente |
 | / | hero | cta | link | fallback + RPC / validado localmente |
 | / | hero | image | image | fallback + RPC / validado localmente |
 | / | hero | alt | string | fallback + RPC / validado localmente |
@@ -79,10 +78,10 @@ Fuente: content.json = initialContent. Contrato soportado del kit; validación l
 | / | footer | linkedin | link | fallback + RPC / validado localmente |
 | / | seo | title | string | fallback + RPC / validado localmente |
 | / | seo | description | string | fallback + RPC / validado localmente |
-| /personas | hero | eyebrow | string | fallback + RPC / validado localmente |
 | /personas | hero | title | string | fallback + RPC / validado localmente |
 | /personas | hero | paragraph1 | string | fallback + RPC / validado localmente |
 | /personas | hero | paragraph2 | string | fallback + RPC / validado localmente |
+| /personas | hero | eyebrow | string | fallback + RPC / validado localmente |
 | /personas | hero | cta | link | fallback + RPC / validado localmente |
 | /personas | situaciones | title | string | fallback + RPC / validado localmente |
 | /personas | situaciones | paragraph1 | string | fallback + RPC / validado localmente |
@@ -94,10 +93,10 @@ Fuente: content.json = initialContent. Contrato soportado del kit; validación l
 | /personas | servicios | items | collection | fallback + RPC / validado localmente |
 | /personas | servicios | items[] → visible | number | panel de colección / preparado |
 | /personas | servicios | items[] → title | string | panel de colección / preparado |
-| /personas | servicios | items[] → subtitle | string | panel de colección / preparado |
 | /personas | servicios | items[] → description | string | panel de colección / preparado |
-| /personas | servicios | items[] → href | string | panel de colección / preparado |
+| /personas | servicios | items[] → subtitle | string | panel de colección / preparado |
 | /personas | servicios | items[] → label | string | panel de colección / preparado |
+| /personas | servicios | items[] → href | string | panel de colección / preparado |
 | /personas | enfoque | title | string | fallback + RPC / validado localmente |
 | /personas | enfoque | paragraph1 | string | fallback + RPC / validado localmente |
 | /personas | enfoque | paragraph2 | string | fallback + RPC / validado localmente |
@@ -106,16 +105,15 @@ Fuente: content.json = initialContent. Contrato soportado del kit; validación l
 | /personas | testimonios | title | string | fallback + RPC / validado localmente |
 | /personas | testimonios | paragraph1 | string | fallback + RPC / validado localmente |
 | /personas | testimonios | items | collection | fallback + RPC / validado localmente |
-| /personas | testimonios | items[] → slug | string | panel de colección / preparado |
-| /personas | testimonios | items[] → title | string | panel de colección / preparado |
-| /personas | testimonios | items[] → publishedAt | string | panel de colección / preparado |
-| /personas | testimonios | items[] → cover | image | panel de colección / preparado |
-| /personas | testimonios | items[] → alt | string | panel de colección / preparado |
-| /personas | testimonios | items[] → body | string | panel de colección / preparado |
-| /personas | testimonios | items[] → status | string | panel de colección / preparado |
 | /personas | testimonios | items[] → visible | number | panel de colección / preparado |
+| /personas | testimonios | items[] → author | string | panel de colección / preparado |
+| /personas | testimonios | items[] → role | string | panel de colección / preparado |
+| /personas | testimonios | items[] → quote | string | panel de colección / preparado |
+| /personas | testimonios | items[] → image | image | panel de colección / preparado |
+| /personas | testimonios | items[] → alt | string | panel de colección / preparado |
 | /personas | contacto | title | string | fallback + RPC / validado localmente |
 | /personas | contacto | paragraph1 | string | fallback + RPC / validado localmente |
+| /personas | contacto | paragraph2 | string | fallback + RPC / validado localmente |
 | /personas | contacto | cta | link | fallback + RPC / validado localmente |
 | /personas | seo | title | string | fallback + RPC / validado localmente |
 | /personas | seo | description | string | fallback + RPC / validado localmente |
@@ -130,6 +128,7 @@ Fuente: content.json = initialContent. Contrato soportado del kit; validación l
 | /empresas | desafios | items[] → visible | number | panel de colección / preparado |
 | /empresas | desafios | items[] → title | string | panel de colección / preparado |
 | /empresas | desafios | items[] → description | string | panel de colección / preparado |
+| /empresas | servicios | eyebrow | string | fallback + RPC / validado localmente |
 | /empresas | servicios | title | string | fallback + RPC / validado localmente |
 | /empresas | servicios | items | collection | fallback + RPC / validado localmente |
 | /empresas | servicios | items[] → visible | number | panel de colección / preparado |
@@ -148,17 +147,16 @@ Fuente: content.json = initialContent. Contrato soportado del kit; validación l
 | /empresas | proceso | items[] → visible | number | panel de colección / preparado |
 | /empresas | proceso | items[] → title | string | panel de colección / preparado |
 | /empresas | proceso | items[] → description | string | panel de colección / preparado |
+| /empresas | proceso | eyebrow | string | fallback + RPC / validado localmente |
 | /empresas | testimonios | title | string | fallback + RPC / validado localmente |
 | /empresas | testimonios | paragraph1 | string | fallback + RPC / validado localmente |
 | /empresas | testimonios | items | collection | fallback + RPC / validado localmente |
-| /empresas | testimonios | items[] → slug | string | panel de colección / preparado |
-| /empresas | testimonios | items[] → title | string | panel de colección / preparado |
-| /empresas | testimonios | items[] → publishedAt | string | panel de colección / preparado |
-| /empresas | testimonios | items[] → cover | image | panel de colección / preparado |
-| /empresas | testimonios | items[] → alt | string | panel de colección / preparado |
-| /empresas | testimonios | items[] → body | string | panel de colección / preparado |
-| /empresas | testimonios | items[] → status | string | panel de colección / preparado |
 | /empresas | testimonios | items[] → visible | number | panel de colección / preparado |
+| /empresas | testimonios | items[] → author | string | panel de colección / preparado |
+| /empresas | testimonios | items[] → role | string | panel de colección / preparado |
+| /empresas | testimonios | items[] → quote | string | panel de colección / preparado |
+| /empresas | testimonios | items[] → image | image | panel de colección / preparado |
+| /empresas | testimonios | items[] → alt | string | panel de colección / preparado |
 | /empresas | contacto | title | string | fallback + RPC / validado localmente |
 | /empresas | contacto | paragraph1 | string | fallback + RPC / validado localmente |
 | /empresas | contacto | cta | link | fallback + RPC / validado localmente |
@@ -188,7 +186,6 @@ Fuente: content.json = initialContent. Contrato soportado del kit; validación l
 | /contacto | contacto-directo | title | string | fallback + RPC / validado localmente |
 | /contacto | contacto-directo | paragraph1 | string | fallback + RPC / validado localmente |
 | /contacto | contacto-directo | email | link | fallback + RPC / validado localmente |
-| /contacto | contacto-directo | whatsapp | link | fallback + RPC / validado localmente |
 | /contacto | contacto-directo | linkedin | link | fallback + RPC / validado localmente |
 | /contacto | seo | title | string | fallback + RPC / validado localmente |
 | /contacto | seo | description | string | fallback + RPC / validado localmente |

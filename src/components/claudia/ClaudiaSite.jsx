@@ -2,17 +2,16 @@ import { useEffect } from 'react';
 import { ScrollTrigger } from '../../utils/gsap.js';
 import { usePrivateDocument } from '../../utils/usePrivateDocument.js';
 import { site } from '../../data/claudia/site.js';
+import { careerTestimonials } from '../../data/claudia/careerTestimonials.js';
 import SiteHeader from './SiteHeader.jsx';
 import Hero from './Hero.jsx';
 import Situations from './Situations.jsx';
-import Impact from './Impact.jsx';
+import CareerTestimonials from './CareerTestimonials.jsx';
 import Approach from './Approach.jsx';
-import LifeModel from './LifeModel.jsx';
 import About from './About.jsx';
-import Closing from './Closing.jsx';
 import SiteFooter from './SiteFooter.jsx';
-import BookingModalProvider from './BookingModal.jsx';
 import './claudia.css';
+import './landing.css';
 
 function setMeta(name, content) {
   let el = document.head.querySelector(`meta[name="${name}"]`);
@@ -31,7 +30,8 @@ function setMeta(name, content) {
 }
 
 /**
- * Landing independiente de Claudia Sanchez Urencio: /diseno-de-carrera.
+ * Landing independiente de Claudia Sánchez Urencio: /diseno-de-carrera.
+ * Cinco secciones: hero, tu siguiente movimiento, testimonios, mi enfoque (+ L.I.F.E.) y sobre mí (+ reserva).
  */
 export default function ClaudiaSite() {
   usePrivateDocument(site.meta.title);
@@ -62,26 +62,22 @@ export default function ClaudiaSite() {
   }, []);
 
   return (
-    <div className="claudia-root">
-      <BookingModalProvider>
+    <div className="claudia-root claudia-landing">
       <a className="skip-link" href="#contenido" data-print="hide">
         Saltar al contenido
       </a>
 
-      <SiteHeader brand={site.brand} nav={site.nav} />
+      <SiteHeader brand={site.brand} nav={site.nav} tagline={site.situations.closing} />
 
       <main id="contenido">
         <Hero hero={site.hero} portrait={site.portrait} />
         <Situations content={site.situations} />
-        <Impact content={site.impact} />
-        <Approach content={site.approach} />
-        <LifeModel content={site.life} />
-        <About content={site.about} portrait={site.portrait} />
-        <Closing content={site.closing} />
+        <CareerTestimonials content={careerTestimonials} />
+        <Approach content={site.approach} life={site.life} />
+        <About content={site.about} closing={site.closing} portrait={site.portrait} />
       </main>
 
       <SiteFooter brand={site.brand} content={site.footer} nav={site.nav} />
-      </BookingModalProvider>
     </div>
   );
 }

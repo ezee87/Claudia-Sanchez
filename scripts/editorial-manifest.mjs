@@ -3,7 +3,7 @@ const path='src/integration/eze-cms/claudia-sanchez.manifest.json';
 const data=JSON.parse(fs.readFileSync('src/data/institutional/content.json','utf8'));
 const { careerContent }=await import('../src/data/institutional/careerContent.js');
 const { site }=await import('../src/data/claudia/site.js');
-for(const [route,sections] of Object.entries(careerContent))data[route]={...(data[route]||{}),...sections};
+for(const [route,sections] of Object.entries(careerContent))if(route!=='/personas')data[route]={...(data[route]||{}),...sections};
 const manifest=JSON.parse(fs.readFileSync(path,'utf8'));
 const article={slug:'',title:'',publishedAt:'',cover:'',alt:'',body:'',status:'draft',visible:1};
 function fields(content){return Object.entries(content).filter(([k])=>k!=='_id').flatMap(([key,value])=>{
@@ -36,7 +36,7 @@ if(landing){
     const target=landing.sections.find(s=>s.key===key);if(target&&site[key]){target.initialContent=site[key];target.fields=fields(site[key]);}
   }
 }
-manifest.site.name='Claudia Sanchez Urencio';
+manifest.site.name='Claudia Sánchez Urencio';
 for(const page of manifest.pages){
   const sectionKeys=new Set();
   for(const section of page.sections){
