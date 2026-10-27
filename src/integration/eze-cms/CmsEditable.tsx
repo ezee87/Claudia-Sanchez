@@ -16,12 +16,23 @@ type Props = {
   children: ReactElement<EditableElementProps>
 }
 
+/**
+ * Origen exacto del CMS que embebe la página, o null. Exige iframe, `?cmsPreview=true` y un referrer cuyo origen
+ * figure en la lista autorizada; ese mismo origen es el único `targetOrigin` y `event.origin` aceptados.
+ */
+export function authorizedPreviewOrigin(config: CmsSiteConfig): string | null {
+  const allowed = [...(config.cmsPreviewOrigins ?? []), ...(config.cmsPreviewOrigin ? [config.cmsPreviewOrigin] : [])]
+  if (typeof window === 'undefined' || window.parent === window || !allowed.length) return null
+  if (new URLSearchParams(window.location.search).get('cmsPreview') !== 'true') return null
+  if (!document.referrer) return null
+  try {
+    const origin = new URL(document.referrer).origin
+    return allowed.includes(origin) ? origin : null
+  } catch { return null }
+}
+
 export function previewIsAuthorized(config: CmsSiteConfig) {
-  if (typeof window === 'undefined' || window.parent === window || !config.cmsPreviewOrigin) return false
-  if (new URLSearchParams(window.location.search).get('cmsPreview') !== 'true') return false
-  if (!document.referrer) return false
-  try { return new URL(document.referrer).origin === config.cmsPreviewOrigin }
-  catch { return false }
+  return authorizedPreviewOrigin(config) !== null
 }
 
 function hasInteractiveSemantics(element: ReactElement<EditableElementProps>) {
@@ -31,7 +42,8 @@ function hasInteractiveSemantics(element: ReactElement<EditableElementProps>) {
 }
 
 export function CmsEditable({ config, pageRoute, sectionKey, fieldPath, children }: Props) {
-  if (!previewIsAuthorized(config)) return children
+  const targetOrigin = authorizedPreviewOrigin(config)
+  if (!targetOrigin) return children
 
   const select = () => window.parent.postMessage({
     type: 'EZE_CMS_SELECT_FIELD',
@@ -39,7 +51,7 @@ export function CmsEditable({ config, pageRoute, sectionKey, fieldPath, children
     pageRoute,
     sectionKey,
     fieldPath,
-  }, config.cmsPreviewOrigin!)
+  }, targetOrigin)
 
   const onClick = (event: MouseEvent<HTMLElement>) => {
     event.preventDefault()

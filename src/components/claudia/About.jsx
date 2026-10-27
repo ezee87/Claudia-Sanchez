@@ -1,6 +1,7 @@
 import { useRef } from 'react';
 import { gsap, useGSAP, MQ } from '../../utils/gsap.js';
-import { BOOKING_LABEL, BOOKING_URL } from '../../data/claudia/booking.js';
+import { BOOKING_URL } from '../../data/claudia/booking.js';
+import { closingFallback } from '../../data/claudia/landingCms.js';
 import { ClaudiaEditable, useClaudiaCmsSection } from '../../integration/eze-cms/ClaudiaCms.jsx';
 import { resolveCmsLink } from '../../integration/eze-cms/cmsLink.js';
 import SectionHead from './SectionHead.jsx';
@@ -16,7 +17,7 @@ import styles from './About.module.css';
 export default function About({ content: fallback, closing, portrait }) {
   const root = useRef(null);
   const { content } = useClaudiaCmsSection('about', fallback);
-  const { content: reserve } = useClaudiaCmsSection('closing', { ...closing, ctaLabel: BOOKING_LABEL, ctaLink: null });
+  const { content: reserve } = useClaudiaCmsSection('closing', closingFallback(closing));
   const { content: sharedImages } = useClaudiaCmsSection('hero', { portrait: portrait.src });
   const cmsPortrait = { ...portrait, src: sharedImages.portrait };
   const ctaLink = resolveCmsLink(reserve.ctaLink, { label: reserve.ctaLabel, href: BOOKING_URL });

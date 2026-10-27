@@ -1,7 +1,8 @@
 import { useEffect, useMemo, useState } from 'react'
 import type { CmsGlobalReader } from './cmsClient'
 import type { CmsSiteConfig } from './cmsConfig'
-import { previewIsAuthorized } from './CmsEditable'
+import { authorizedPreviewOrigin } from './CmsEditable'
+import { cmsLocalOnly } from './cmsMode'
 import { mergeCmsContent, type CmsSectionState } from './useCmsSection'
 
 type JsonObject = Record<string, unknown>
@@ -19,7 +20,7 @@ function isObject(value: unknown): value is JsonObject {
 export function useCmsGlobal<T extends JsonObject>({ config, groupKey, fallback, readGlobal }: Options<T>): CmsSectionState<T> {
   const signature = JSON.stringify(fallback)
   const stableFallback = useMemo(() => fallback, [signature]) // eslint-disable-line react-hooks/exhaustive-deps
-  const localOnly = import.meta.env.DEV
+  const localOnly = cmsLocalOnly
   const [state, setState] = useState<CmsSectionState<T>>({ content: stableFallback, loading: !localOnly, error: null, source: 'local' })
 
   useEffect(() => {
@@ -31,7 +32,7 @@ export function useCmsGlobal<T extends JsonObject>({ config, groupKey, fallback,
     let active = true
     let receivedUpdate = false
     const receive = (event: MessageEvent) => {
-      if (!active || !previewIsAuthorized(config) || event.source !== window.parent || event.origin !== config.cmsPreviewOrigin) return
+      if (!active || event.source !== window.parent || event.origin !== authorizedPreviewOrigin(config)) return
       const message = event.data
       if (!message || typeof message !== 'object' || message.type !== 'EZE_CMS_UPDATE_GLOBAL') return
       if (message.site !== config.siteSlug || message.groupKey !== groupKey || !isObject(message.content)) return

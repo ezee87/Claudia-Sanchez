@@ -3,6 +3,8 @@ import { ScrollTrigger } from '../../utils/gsap.js';
 import { usePrivateDocument } from '../../utils/usePrivateDocument.js';
 import { site } from '../../data/claudia/site.js';
 import { careerTestimonials } from '../../data/claudia/careerTestimonials.js';
+import { seoFallback } from '../../data/claudia/landingCms.js';
+import { useClaudiaCmsSection } from '../../integration/eze-cms/ClaudiaCms.jsx';
 import SiteHeader from './SiteHeader.jsx';
 import Hero from './Hero.jsx';
 import Situations from './Situations.jsx';
@@ -34,11 +36,13 @@ function setMeta(name, content) {
  * Cinco secciones: hero, tu siguiente movimiento, testimonios, mi enfoque (+ L.I.F.E.) y sobre mí (+ reserva).
  */
 export default function ClaudiaSite() {
-  usePrivateDocument(site.meta.title);
+  const { content: seo } = useClaudiaCmsSection('seo', seoFallback(site.meta));
+  usePrivateDocument(seo.title);
+
+  useEffect(() => setMeta('description', seo.description), [seo.description]);
 
   useEffect(() => {
     const restore = [
-      setMeta('description', site.meta.description),
       setMeta('theme-color', '#1b1a44'),
     ];
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;

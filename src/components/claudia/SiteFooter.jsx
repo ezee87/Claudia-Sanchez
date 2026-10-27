@@ -1,27 +1,17 @@
-import { BOOKING_URL, LINKEDIN_URL } from '../../data/claudia/booking.js';
+import { footerLinks, navLinkFallback, siteFooterFallback } from '../../data/claudia/landingCms.js';
 import { ClaudiaEditable, useClaudiaCmsSection } from '../../integration/eze-cms/ClaudiaCms.jsx';
 import { resolveCmsLink } from '../../integration/eze-cms/cmsLink.js';
 import BackToTop from '../ui/BackToTop.jsx';
 import styles from './SiteFooter.module.css';
 
 export default function SiteFooter({ brand, content, nav }) {
-  const { content: cmsContent } = useClaudiaCmsSection('site-footer', {
-    brand,
-    line: content.line.replace(`${brand} · `, ''),
-    description: content.description,
-    copyright: content.copyright,
-    exploreHeading: 'Explorar',
-    connectHeading: 'Conectar',
-    homeLink: null,
-    linkedinLink: null,
-    calendlyLink: null,
-  });
-  const homeLink = resolveCmsLink(cmsContent.homeLink, { label: 'Inicio', href: '/' });
-  const linkedinLink = resolveCmsLink(cmsContent.linkedinLink, { label: 'LinkedIn', href: LINKEDIN_URL });
-  const calendlyLink = resolveCmsLink(cmsContent.calendlyLink, { label: 'Calendly', href: BOOKING_URL });
+  const { content: cmsContent } = useClaudiaCmsSection('site-footer', siteFooterFallback(brand, content));
+  const homeLink = resolveCmsLink(cmsContent.homeLink, footerLinks.homeLink);
+  const linkedinLink = resolveCmsLink(cmsContent.linkedinLink, footerLinks.linkedinLink);
+  const calendlyLink = resolveCmsLink(cmsContent.calendlyLink, footerLinks.calendlyLink);
   const navLinks = nav.map((item, index) => ({
     id: item.id,
-    ...resolveCmsLink(cmsContent[`navLink${index}`], { label: item.label, href: `#${item.id}` }),
+    ...resolveCmsLink(cmsContent[`navLink${index}`], navLinkFallback(item)),
   }));
   return (
     <footer className={styles.footer}>

@@ -1,6 +1,7 @@
 import { Fragment, useRef } from 'react';
 import { gsap, useGSAP, MQ } from '../../utils/gsap.js';
-import { BOOKING_LABEL, BOOKING_URL } from '../../data/claudia/booking.js';
+import { BOOKING_URL } from '../../data/claudia/booking.js';
+import { LANDING_ROUTE, heroFallback } from '../../data/claudia/landingCms.js';
 import { resolveCmsLink } from '../../integration/eze-cms/cmsLink.js';
 import { CmsEditable } from '../../integration/eze-cms/CmsEditable';
 import { cmsRuntimeConfig, readCmsSection } from '../../integration/eze-cms/cmsRuntime';
@@ -8,22 +9,13 @@ import { useCmsSection } from '../../integration/eze-cms/useCmsSection';
 import BookingCTA from './BookingCTA.jsx';
 import styles from './Hero.module.css';
 
-const PAGE_ROUTE = '/diseno-de-carrera';
+const PAGE_ROUTE = LANDING_ROUTE;
 const SECTION_KEY = 'hero';
 
 /** Portada editorial de la demo; usa el recorte transparente original de Claudia. */
 export default function Hero({ hero, portrait }) {
   const root = useRef(null);
-  const localContent = {
-    eyebrow: hero.eyebrow,
-    title: hero.title,
-    highlightedTitle: hero.highlightedTitle,
-    description: hero.subtitle,
-    ctaLabel: BOOKING_LABEL,
-    ctaLink: null,
-    complement: hero.complement,
-    portrait: portrait.src,
-  };
+  const localContent = heroFallback(hero, portrait);
   const { content } = useCmsSection({
     config: cmsRuntimeConfig,
     pageRoute: PAGE_ROUTE,

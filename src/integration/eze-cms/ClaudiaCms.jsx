@@ -1,10 +1,11 @@
 import { useMemo } from 'react';
+import { LANDING_ROUTE } from '../../data/claudia/landingCms.js';
 import { CmsEditable } from './CmsEditable';
 import { CmsEditableCollection } from './CmsEditableCollection';
 import { cmsRuntimeConfig, readCmsSection } from './cmsRuntime';
 import { useCmsSection } from './useCmsSection';
 
-export const CLAUDIA_PAGE_ROUTE = '/diseno-de-carrera';
+export const CLAUDIA_PAGE_ROUTE = LANDING_ROUTE;
 
 function publicName(value) {
   if (typeof value === 'string') return value.replace(/Claudia (?:Sánchez|Sanchez)(?! Urencio)/g, 'Claudia Sánchez Urencio').replace(/CLAUDIA SÁNCHEZ/g, 'Claudia Sánchez Urencio');

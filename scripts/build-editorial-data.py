@@ -1,7 +1,10 @@
 ﻿"""One-time extraction of the supplied copy; no remote writes."""
-import json, re
+import json, re, sys
 from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
+# content.json now holds the approved copy; this extractor would restore the original drafts.
+if (ROOT/'src/data/institutional/content.json').exists() and '--overwrite-approved-content' not in sys.argv:
+    sys.exit('content.json ya contiene el contenido aprobado; este extractor lo reemplazaría por el copy original. No se escribió nada.')
 spec = ROOT / 'codex-spec/claudia-codex-spec'
 def sections(file):
     text = (spec / file).read_text(encoding='utf-8')

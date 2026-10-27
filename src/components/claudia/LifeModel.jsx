@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react';
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 import { gsap, useGSAP, MQ } from '../../utils/gsap.js';
+import { lifeFallback } from '../../data/claudia/landingCms.js';
 import { ClaudiaEditable, useClaudiaCmsSection } from '../../integration/eze-cms/ClaudiaCms.jsx';
 import LifeDiagram from './LifeDiagram.jsx';
 import type from './type.module.css';
@@ -16,7 +17,7 @@ const PANEL_ID = 'life-panel';
  */
 export default function LifeModel({ content: fallback }) {
   const root = useRef(null);
-  const { content } = useClaudiaCmsSection('life', { ...fallback, instruction: 'Selecciona una dimensión para explorarla', hubLabel: 'L.I.F.E.' });
+  const { content } = useClaudiaCmsSection('life', lifeFallback(fallback));
   const [selected, setSelected] = useState(null);
   const reduceMotion = useReducedMotion();
   const current = content.dimensions.find(({ id }) => id === selected) ?? null;

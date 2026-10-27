@@ -162,7 +162,7 @@ ejemplo aislado en `examples/collection.manifest.example.json`.
 1. Crear el cliente y `createPublicSectionReader` con la configuración del sitio.
 2. Sincronizar un manifiesto válido desde Eze CMS.
 3. Configurar `sites.preview_url` hacia la web.
-4. Configurar `VITE_EZE_CMS_ORIGIN` con el origen exacto del administrador.
+4. Configurar `VITE_EZE_CMS_ORIGIN` con el origen exacto del administrador (o varios, separados por coma).
 5. Abrir la página desde el preview del CMS; este agrega `cmsPreview=true`.
 6. Seleccionar título, descripción y botón, editar y confirmar que Supabase persista el campo.
 7. Abrir la web directamente, sin `cmsPreview=true`, y comprobar que enlaces y eventos se comporten normalmente.

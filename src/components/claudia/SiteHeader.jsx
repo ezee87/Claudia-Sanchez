@@ -3,7 +3,7 @@ import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 import { useMediaQuery } from '../../utils/useMediaQuery.js';
 import { ClaudiaEditable, useClaudiaCmsSection } from '../../integration/eze-cms/ClaudiaCms.jsx';
 import { resolveCmsLink } from '../../integration/eze-cms/cmsLink.js';
-import { BOOKING_URL } from '../../data/claudia/booking.js';
+import { headerCtaLink, navLinkFallback, siteHeaderFallback } from '../../data/claudia/landingCms.js';
 import BookingCTA from './BookingCTA.jsx';
 import { scrollToTop } from '../ui/BackToTop.jsx';
 import styles from './SiteHeader.module.css';
@@ -12,7 +12,7 @@ const EASE = [0.22, 1, 0.36, 1];
 
 /** Header: marca + anclas + CTA único. Menú mobile accesible (aria-expanded, Escape, foco). */
 export default function SiteHeader({ brand, nav, tagline }) {
-  const { content } = useClaudiaCmsSection('site-header', { brandLink: { label: brand, href: '#inicio' }, ctaLink: null });
+  const { content } = useClaudiaCmsSection('site-header', siteHeaderFallback(brand));
   // La frase al pie del menú mobile es el cierre de «Tu siguiente movimiento» (misma fuente que en el CMS).
   const situationsFallback = useMemo(() => ({ closing: tagline }), [tagline]);
   const { content: situations } = useClaudiaCmsSection('situations', situationsFallback);
@@ -30,10 +30,10 @@ export default function SiteHeader({ brand, nav, tagline }) {
     show: { opacity: 1, y: 0, transition: { duration: 0.32, ease: EASE } },
   };
   const brandLink = resolveCmsLink(content.brandLink, { label: brand, href: '#inicio' });
-  const ctaLink = resolveCmsLink(content.ctaLink, { label: 'Reservar', href: BOOKING_URL });
+  const ctaLink = resolveCmsLink(content.ctaLink, headerCtaLink);
   const navLinks = useMemo(() => nav.map((item, index) => ({
     id: item.id,
-    ...resolveCmsLink(content[`navLink${index}`], { label: item.label, href: `#${item.id}` }),
+    ...resolveCmsLink(content[`navLink${index}`], navLinkFallback(item)),
   })), [content, nav]);
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState('');

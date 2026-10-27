@@ -1,23 +1,18 @@
+import { normalizedHttpOrigin, parseCmsPreviewOrigins } from './cmsOrigins'
+
 export type CmsSiteConfig = {
   siteSlug: string
   supabaseUrl: string
   supabasePublishableKey: string
   cmsPreviewOrigin?: string
+  /** Orígenes exactos del CMS autorizados a embeber el sitio (p. ej. CMS local y CMS publicado). */
+  cmsPreviewOrigins?: readonly string[]
 }
 
 function required(value: string, name: string) {
   const normalized = value.trim()
   if (!normalized) throw new Error(`Falta la configuración pública ${name}.`)
   return normalized
-}
-
-function normalizedHttpOrigin(value: string | undefined) {
-  if (!value?.trim()) return undefined
-  const url = new URL(value)
-  if (!['http:', 'https:'].includes(url.protocol) || url.origin !== url.href.replace(/\/$/, '')) {
-    throw new Error('cmsPreviewOrigin debe ser un origen HTTP(S), sin ruta, query ni hash.')
-  }
-  return url.origin
 }
 
 export function defineCmsConfig(config: CmsSiteConfig): Readonly<CmsSiteConfig> {
@@ -30,6 +25,7 @@ export function defineCmsConfig(config: CmsSiteConfig): Readonly<CmsSiteConfig> 
     supabaseUrl,
     supabasePublishableKey: required(config.supabasePublishableKey, 'supabasePublishableKey'),
     cmsPreviewOrigin: normalizedHttpOrigin(config.cmsPreviewOrigin),
+    cmsPreviewOrigins: Object.freeze((config.cmsPreviewOrigins ?? []).map((origin) => normalizedHttpOrigin(origin)!)),
   })
 }
 
@@ -39,5 +35,5 @@ export const cmsConfig = defineCmsConfig({
   siteSlug: 'claudia-sanchez',
   supabaseUrl: import.meta.env.VITE_SUPABASE_URL ?? '',
   supabasePublishableKey: import.meta.env.VITE_SUPABASE_ANON_KEY ?? '',
-  cmsPreviewOrigin: import.meta.env.VITE_EZE_CMS_ORIGIN,
+  cmsPreviewOrigins: parseCmsPreviewOrigins(import.meta.env.VITE_EZE_CMS_ORIGIN),
 })

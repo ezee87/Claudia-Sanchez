@@ -1,7 +1,8 @@
 import { useEffect, useMemo, useState } from 'react'
 import type { CmsSectionReader } from './cmsClient'
 import type { CmsSiteConfig } from './cmsConfig'
-import { previewIsAuthorized } from './CmsEditable'
+import { authorizedPreviewOrigin } from './CmsEditable'
+import { cmsLocalOnly } from './cmsMode'
 
 type JsonObject = Record<string, unknown>
 
@@ -50,7 +51,7 @@ export function useCmsSection<T extends JsonObject>({
 }: UseCmsSectionOptions<T>): CmsSectionState<T> {
   const fallbackSignature = JSON.stringify(fallback)
   const stableFallback = useMemo(() => fallback, [fallbackSignature]) // eslint-disable-line react-hooks/exhaustive-deps
-  const localOnly = import.meta.env.DEV
+  const localOnly = cmsLocalOnly
   const [state, setState] = useState<CmsSectionState<T>>({ content: stableFallback, loading: !localOnly, error: null, source: 'local' })
 
   useEffect(() => {
@@ -62,7 +63,7 @@ export function useCmsSection<T extends JsonObject>({
     let active = true
     let receivedUpdate = false
     const receiveCmsUpdate = (event: MessageEvent) => {
-      if (!active || !previewIsAuthorized(config) || event.source !== window.parent || event.origin !== config.cmsPreviewOrigin) return
+      if (!active || event.source !== window.parent || event.origin !== authorizedPreviewOrigin(config)) return
       const message = event.data
       if (!message || typeof message !== 'object' || message.type !== 'EZE_CMS_UPDATE_SECTION') return
       if (message.site !== config.siteSlug || message.pageRoute !== pageRoute || message.sectionKey !== sectionKey || !isObject(message.content)) return

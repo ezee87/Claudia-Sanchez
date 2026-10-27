@@ -1,6 +1,6 @@
 import { cloneElement, type KeyboardEvent, type MouseEvent, type ReactElement } from 'react'
 import type { CmsSiteConfig } from './cmsConfig'
-import { previewIsAuthorized } from './CmsEditable'
+import { authorizedPreviewOrigin } from './CmsEditable'
 
 type EditableElementProps = Record<string, unknown> & {
   onClick?: (event: MouseEvent<HTMLElement>) => void
@@ -27,7 +27,8 @@ function hasInteractiveSemantics(element: ReactElement<EditableElementProps>) {
 }
 
 export function CmsEditableCollection({ config, pageRoute, sectionKey, collectionPath, itemId, children }: Props) {
-  if (!previewIsAuthorized(config)) return children
+  const targetOrigin = authorizedPreviewOrigin(config)
+  if (!targetOrigin) return children
 
   const select = () => window.parent.postMessage({
     type: 'EZE_CMS_SELECT_COLLECTION',
@@ -36,7 +37,7 @@ export function CmsEditableCollection({ config, pageRoute, sectionKey, collectio
     sectionKey,
     collectionPath,
     ...(itemId ? { itemId } : {}),
-  }, config.cmsPreviewOrigin!)
+  }, targetOrigin)
 
   const onClick = (event: MouseEvent<HTMLElement>) => {
     const target = event.target

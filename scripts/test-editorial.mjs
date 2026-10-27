@@ -46,8 +46,8 @@ try{
  const remoteBusiness=mergeCmsContent(business,{title:'Experiencias editadas',items:[{...business.items[2],quote:'Recomendación editada'}]});
  assert.equal(resolveBusinessTestimonials(remoteBusiness,business),remoteBusiness,'Las ediciones válidas del CMS deben conservarse');
  assert.deepEqual(resolveBusinessTestimonials(mergeCmsContent(business,{items:[]}),business).items,[],'Se respeta la baja intencional de la colección');
- assert.equal(splitServiceDescription(content['/empresas'].servicios.items[0].description).included.length,6);
- assert.equal(splitServiceDescription(content['/empresas'].servicios.items[1].description).included.length,8);
+ assert.equal(splitServiceDescription(content['/empresas'].servicios.items[0].description).included.length,5);
+ assert.equal(splitServiceDescription(content['/empresas'].servicios.items[1].description).included.length,5);
  assert.deepEqual(splitServiceDescription('Contenido nuevo sin lista'),{audience:['Contenido nuevo sin lista'],included:[]});
  const updated=mergeCmsContent(fallback,{title:'Título editado',paragraph1:'Párrafo editado',cta:{label:'Consultar',href:'/contacto'},image:'/replacement.png',alt:'ALT editado'});
  assert.equal(updated.title,'Título editado');assert.equal(updated.paragraph1,'Párrafo editado');assert.equal(updated.cta.href,'/contacto');assert.equal(updated.cta.label,'Consultar');assert.equal(updated.image,'/replacement.png');assert.equal(updated.alt,'ALT editado');assert.equal(updated.paragraph2,fallback.paragraph2);
@@ -87,7 +87,23 @@ try{
  globalLink.props.onClick({preventDefault(){},stopPropagation(){}});
  assert.deepEqual(sent[3],{message:{type:'EZE_CMS_SELECT_GLOBAL',site:'claudia-sanchez',groupKey:'institutional-navbar',fieldPath:'contact'},origin:'https://cms.example.test'});
  globalThis.document.referrer='https://untrusted.example.test';assert.equal(previewIsAuthorized(config),false);assert.equal(CmsEditable({config,pageRoute:'/',sectionKey:'hero',fieldPath:'cta',children:child}),child);
+ // Varios orígenes autorizados (CMS local y publicado): el targetOrigin es siempre el origen exacto que embebe la página.
+ const {parseCmsPreviewOrigins}=await server.ssrLoadModule('/src/integration/eze-cms/cmsOrigins.ts');
+ const {authorizedPreviewOrigin}=await server.ssrLoadModule('/src/integration/eze-cms/CmsEditable.tsx');
+ assert.deepEqual(parseCmsPreviewOrigins(' http://localhost:5173 , https://cms.example.test,https://cms.example.test/editor,javascript:alert(1),*,https://cms.example.test'),['http://localhost:5173','https://cms.example.test']);
+ assert.deepEqual(parseCmsPreviewOrigins(undefined),[]);
+ const multi={...config,cmsPreviewOrigin:undefined,cmsPreviewOrigins:parseCmsPreviewOrigins('http://localhost:5173,https://cms.example.test')};
+ globalThis.document.referrer='http://localhost:5173/';assert.equal(authorizedPreviewOrigin(multi),'http://localhost:5173');
+ sent.length=0;CmsEditable({config:multi,pageRoute:'/diseno-de-carrera',sectionKey:'hero',fieldPath:'title',children:child}).props.onClick({preventDefault(){},stopPropagation(){}});
+ assert.equal(sent[0].origin,'http://localhost:5173');
+ for(const referrer of ['https://cms.example.test.evil.test/','http://localhost:5174/','https://localhost:5173/','']){globalThis.document.referrer=referrer;assert.equal(authorizedPreviewOrigin(multi),null,referrer);}
+ globalThis.document.referrer='https://cms.example.test/';globalThis.window.location.search='';assert.equal(authorizedPreviewOrigin(multi),null,'Sin ?cmsPreview=true no hay modo preview');
+ globalThis.window.location.search='?cmsPreview=true';globalThis.window.parent=globalThis.window;assert.equal(authorizedPreviewOrigin(multi),null,'Fuera de un iframe no hay modo preview');
+ assert.equal(authorizedPreviewOrigin({...config,cmsPreviewOrigin:undefined,cmsPreviewOrigins:[]}),null,'Sin orígenes configurados no hay modo preview');
  delete globalThis.window;delete globalThis.document;delete globalThis.Element;
- console.log('OK: selección preview de campos, colecciones, items y globales; targetOrigin explícito y rechazo de origen no autorizado (simulación local).');
+ const {resolveCmsLocalOnly}=await server.ssrLoadModule('/src/integration/eze-cms/cmsMode.ts');
+ for(const [value,dev,expected] of [['true',false,true],[' TRUE ',false,true],['false',true,false],[undefined,true,true],[undefined,false,false],['',false,false],['1',false,false]])assert.equal(resolveCmsLocalOnly(value,dev),expected,`VITE_CMS_LOCAL_ONLY=${value} dev=${dev}`);
+ console.log('OK: VITE_CMS_LOCAL_ONLY fuerza contenido local (true), Eze CMS (false) o el modo por entorno (sin definir).');
+ console.log('OK: selección preview de campos, colecciones, items y globales; targetOrigin explícito, lista de orígenes exactos y rechazo de origen no autorizado (simulación local).');
 }finally{await server.close();}
 

@@ -1,6 +1,6 @@
 import { cloneElement, type KeyboardEvent, type MouseEvent, type ReactElement } from 'react'
 import type { CmsSiteConfig } from './cmsConfig'
-import { previewIsAuthorized } from './CmsEditable'
+import { authorizedPreviewOrigin } from './CmsEditable'
 
 type ElementProps = Record<string, unknown> & {
   onClick?: (event: MouseEvent<HTMLElement>) => void
@@ -17,10 +17,11 @@ type Props = {
 }
 
 export function CmsEditableGlobal({ config, groupKey, fieldPath, children }: Props) {
-  if (!previewIsAuthorized(config)) return children
+  const targetOrigin = authorizedPreviewOrigin(config)
+  if (!targetOrigin) return children
   const select = () => window.parent.postMessage({
     type: 'EZE_CMS_SELECT_GLOBAL', site: config.siteSlug, groupKey, fieldPath,
-  }, config.cmsPreviewOrigin!)
+  }, targetOrigin)
   const onClick = (event: MouseEvent<HTMLElement>) => {
     event.preventDefault(); event.stopPropagation(); select()
   }

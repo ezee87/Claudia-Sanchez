@@ -1,5 +1,6 @@
 import type { CmsArticlesReader, CmsGlobalReader, CmsSectionReader, CmsSectionRequest } from './cmsClient'
 import type { CmsSiteConfig } from './cmsConfig'
+import { parseCmsPreviewOrigins } from './cmsOrigins'
 
 export type CmsIntegration = {
   config: Readonly<CmsSiteConfig>
@@ -18,7 +19,7 @@ export const cmsRuntimeConfig: Readonly<CmsSiteConfig> = Object.freeze({
   siteSlug: 'claudia-sanchez',
   supabaseUrl: import.meta.env.VITE_SUPABASE_URL ?? '',
   supabasePublishableKey: import.meta.env.VITE_SUPABASE_ANON_KEY ?? '',
-  cmsPreviewOrigin: import.meta.env.VITE_EZE_CMS_ORIGIN?.trim() || undefined,
+  cmsPreviewOrigins: Object.freeze(parseCmsPreviewOrigins(import.meta.env.VITE_EZE_CMS_ORIGIN)),
 })
 
 /** Inicializacion opcional y unica, fuera de los componentes React. */

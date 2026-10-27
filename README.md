@@ -51,7 +51,7 @@ La infraestructura reutilizable se encuentra en `src/integration/eze-cms/` y usa
 
 - `VITE_SUPABASE_URL`
 - `VITE_SUPABASE_ANON_KEY` (solo clave pública publishable/anon)
-- `VITE_EZE_CMS_ORIGIN` (origen exacto del administrador CMS)
+- `VITE_EZE_CMS_ORIGIN` (origen exacto del administrador CMS; varios, separados por coma, p. ej. `http://localhost:5173,https://cms.example.com`)
 
 Sin las dos variables de Supabase, la inicialización se omite y el sitio sigue
 funcionando con contenido local. El manifiesto inicial de referencia está en

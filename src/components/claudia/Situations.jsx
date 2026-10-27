@@ -1,6 +1,7 @@
 import { useRef } from 'react';
 import { gsap, useGSAP, MQ } from '../../utils/gsap.js';
-import { BOOKING_LABEL, BOOKING_URL } from '../../data/claudia/booking.js';
+import { BOOKING_URL } from '../../data/claudia/booking.js';
+import { situationsFallback } from '../../data/claudia/landingCms.js';
 import { ClaudiaEditable, useClaudiaCmsSection } from '../../integration/eze-cms/ClaudiaCms.jsx';
 import { resolveCmsLink } from '../../integration/eze-cms/cmsLink.js';
 import SectionHead from './SectionHead.jsx';
@@ -11,7 +12,7 @@ import styles from './Situations.module.css';
 /** 02 · Identificación. M01 progresivo + línea conectora M03 (sin pin; en mobile, lista vertical natural). */
 export default function Situations({ content: fallback }) {
   const root = useRef(null);
-  const { content } = useClaudiaCmsSection('situations', { ...fallback, ctaLabel: BOOKING_LABEL, ctaLink: null });
+  const { content } = useClaudiaCmsSection('situations', situationsFallback(fallback));
   const ctaLink = resolveCmsLink(content.ctaLink, { label: content.ctaLabel, href: BOOKING_URL });
 
   useGSAP(
