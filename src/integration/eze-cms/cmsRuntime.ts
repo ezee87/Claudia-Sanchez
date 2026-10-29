@@ -1,4 +1,4 @@
-import type { CmsArticlesReader, CmsGlobalReader, CmsSectionIndex, CmsSectionIndexReader, CmsSectionReader, CmsSectionRequest } from './cmsClient'
+import type { CmsArticlesReader, CmsGlobalReader, CmsPageSeoReader, CmsSectionIndex, CmsSectionIndexReader, CmsSectionReader, CmsSectionRequest } from './cmsClient'
 import type { CmsSiteConfig } from './cmsConfig'
 import { authorizedPreviewOrigin } from './CmsEditable'
 import { cmsLocalOnly } from './cmsMode'
@@ -13,6 +13,7 @@ export type CmsIntegration = {
   readGlobal: CmsGlobalReader
   readArticles: CmsArticlesReader
   readSectionIndex: CmsSectionIndexReader
+  readPageSeo: CmsPageSeoReader
 }
 
 const hasRequiredEnvironment = Boolean(
@@ -38,6 +39,7 @@ export const cmsIntegration: Promise<CmsIntegration | null> = hasRequiredEnviron
         readGlobal: clientModule.createPublicGlobalReader(client),
         readArticles: clientModule.createPublicArticlesReader(client),
         readSectionIndex: clientModule.createPublicSectionIndexReader(client),
+        readPageSeo: clientModule.createPublicPageSeoReader(client),
       }
     }).catch((error: unknown) => {
       if (import.meta.env.DEV) {
@@ -180,6 +182,14 @@ export const readCmsArticles: CmsArticlesReader = async (request) => {
   if (!integration) return { articles: [], error: new Error('No se pudo inicializar la conexión con Eze CMS.') }
   return integration.readArticles(request)
 }
+
+/** SEO de una página (get_public_page_seo). En modo local o sin Supabase no consulta y devuelve null sin error. */
+export const readCmsPageSeo: CmsPageSeoReader = (request) => deliverTogether((async () => {
+  if (cmsLocalOnly) return { pageSeo: null, error: null }
+  const integration = await cmsIntegration
+  if (!integration) return { pageSeo: null, error: null }
+  return integration.readPageSeo(request)
+})())
 
 export function articleMediaUrl(path: unknown): string {
   return articleMediaUrlFrom(cmsRuntimeConfig.supabaseUrl, path)

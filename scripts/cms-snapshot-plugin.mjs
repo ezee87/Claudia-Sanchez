@@ -116,11 +116,31 @@ export async function fetchCmsSnapshot({ url, key, manifest, fetchImpl = fetch, 
   return snapshot;
 }
 
+/** Fila de get_public_page_seo, o null si la ruta no está registrada. Más de una fila o datos no válidos son un error. */
+export function parsePageSeo(data) {
+  if (!Array.isArray(data) || data.length > 1) throw new Error(`se esperaba 0 o 1 fila y llegaron ${Array.isArray(data) ? data.length : 'datos no válidos'}`);
+  if (data.length && !isObject(data[0])) throw new Error('la fila de SEO no es un objeto');
+  return data[0] ?? null;
+}
+
+/** { ruta: fila de get_public_page_seo | null } de las páginas del manifiesto (sin /articulos/:slug: cada artículo trae el suyo). */
+export async function fetchPageSeoSnapshot({ url, key, manifest, fetchImpl = fetch, timeoutMs = 15000, attempts = 3 }) {
+  const options = { url: url.trim().replace(/\/$/, ''), key: key.trim(), fetchImpl, timeoutMs, attempts };
+  const routes = manifest.pages.map((page) => page.route).filter((route) => route !== '/articulos/:slug');
+  const rows = await Promise.all(routes.map(async (route) => {
+    try { return [route, await callRpc(options, 'get_public_page_seo', { p_site_slug: manifest.site.key, p_page_route: route }, parsePageSeo)]; }
+    catch (error) { throw new Error(`SEO de ${route}: ${error.message}`); }
+  }));
+  return Object.fromEntries(rows);
+}
+
 export function cmsSnapshotPlugin() {
   let snapshot = null;
   let config;
   return {
     name: 'eze-cms-snapshot',
+    // Lo lee scripts/seo-prerender-plugin.mjs para escribir los metadatos de cada ruta con los mismos datos del build.
+    api: { getSnapshot: () => snapshot },
     configResolved(resolved) { config = resolved; },
     async buildStart() {
       snapshot = null;
@@ -131,11 +151,13 @@ export function cmsSnapshotPlugin() {
       }
       const manifest = JSON.parse(fs.readFileSync(path.resolve(config.root, MANIFEST), 'utf8'));
       try {
-        snapshot = await fetchCmsSnapshot({ url: config.env.VITE_SUPABASE_URL, key: config.env.VITE_SUPABASE_ANON_KEY, manifest });
+        const source = { url: config.env.VITE_SUPABASE_URL, key: config.env.VITE_SUPABASE_ANON_KEY, manifest };
+        snapshot = await fetchCmsSnapshot(source);
+        snapshot.pageSeo = await fetchPageSeoSnapshot(source);
       } catch (error) {
         this.error(`[eze-cms] Build detenido: el modo CMS necesita el contenido de Supabase. ${error.message}`);
       }
-      config.logger.info(`[eze-cms] Contenido CMS incluido: ${Object.keys(snapshot.sections).length} secciones visibles, ${snapshot.hidden.length} ocultas y ${Object.keys(snapshot.globals).length} globales.`);
+      config.logger.info(`[eze-cms] Contenido CMS incluido: ${Object.keys(snapshot.sections).length} secciones visibles, ${snapshot.hidden.length} ocultas, ${Object.keys(snapshot.globals).length} globales y SEO de ${Object.keys(snapshot.pageSeo).length} páginas.`);
     },
     resolveId(id) { return id === VIRTUAL_ID ? RESOLVED_ID : null; },
     load(id) { return id === RESOLVED_ID ? `export default ${JSON.stringify(snapshot)};` : null; },

@@ -1,5 +1,5 @@
-// Reglas de presentación de artículos compartidas por React y por la función de Vercel que los renderiza en el servidor
-// (api/articulo.js). Sin dependencias de navegador ni de import.meta.env.
+// Reglas de presentación de artículos compartidas por React y por la función que los renderiza en el servidor
+// (api/articulo.js). Sin dependencias de navegador ni de import.meta.env. Reglas de indexación: seoShared.js.
 
 export const ARTICLE_AUTHOR = 'Claudia Sánchez Urencio';
 
@@ -7,15 +7,22 @@ export const editorialDate = article => article.original_published_at || article
 
 export const formatDate = value => new Intl.DateTimeFormat('es', {dateStyle:'long',timeZone:'UTC'}).format(new Date(value));
 
-export const articleTitle = article => `${article.title} | ${ARTICLE_AUTHOR}`;
+const text = value => typeof value === 'string' ? value.trim() : '';
+
+/** `seo_title` del CMS tal cual (lo redacta el editor completo); si falta, el título editorial con la firma del sitio. */
+export const articleTitle = article => text(article.seo_title) || `${article.title} | ${ARTICLE_AUTHOR}`;
 
 export function plainText(node) {
   if (!node || typeof node !== 'object') return '';
   return [typeof node.text === 'string' ? node.text : '', ...(Array.isArray(node.content) ? node.content.map(plainText) : [])].join(' ');
 }
 
-/** Descripción provisional: el extracto si existe; si no, el comienzo del cuerpo. */
-export const articleDescription = article => (article.excerpt || plainText(article.content)).replace(/\s+/g,' ').trim().slice(0,160);
+/** `meta_description` del CMS completa; si falta, el extracto o el comienzo del cuerpo, recortados a 160 caracteres. */
+export const articleDescription = article => text(article.meta_description)
+  || (article.excerpt || plainText(article.content)).replace(/\s+/g,' ').trim().slice(0,160);
+
+/** Texto alternativo de la portada; vacío (decorativa) si el CMS no lo define. */
+export const articleCoverAlt = article => text(article.cover_image_alt);
 
 /** Ruta del bucket público `article-media` o URL https absoluta; cualquier otro valor se descarta. */
 export function articleMediaUrlFrom(supabaseUrl, path) {

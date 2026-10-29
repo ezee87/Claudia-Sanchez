@@ -6,6 +6,6 @@
   ],
   "rewrites": [
     { "source": "/articulos/:slug", "destination": "/api/articulo?slug=:slug" },
-    { "source": "/(.*)", "destination": "/index.html" }
+    { "source": "/(.*)", "destination": "/404.html" }
   ]
 }

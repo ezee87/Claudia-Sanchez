@@ -4,6 +4,7 @@ import { CmsLink, Field, useGlobal, useSection } from './Cms';
 import { content, formatDate, safeHref, safeImage } from './content';
 import { articleMediaUrl } from '../../integration/eze-cms/cmsRuntime';
 import { useCmsArticles } from '../../integration/eze-cms/useCmsArticles';
+import { articleCoverAlt } from '../../integration/eze-cms/articleShared.js';
 import Seo from './Seo';
 
 const editorialDate = article => article.original_published_at || article.published_at;
@@ -134,7 +135,7 @@ export function ArticleDetail() {
         <h1>{article.title}</h1>
         <p className="article-meta"><time dateTime={date}>{formatDate(date)}</time><span aria-hidden="true">·</span><span>{author}</span></p>
       </header>
-      {safeImage(cover) && <figure className="article-figure"><img className="article-hero" src={cover} alt="" width="1000" height="650" /></figure>}
+      {safeImage(cover) && <figure className="article-figure"><img className="article-hero" src={cover} alt={articleCoverAlt(article)} width="1000" height="650" /></figure>}
       <ArticleBody content={article.content} />
       <footer className="article-end">
         <div className="article-author">

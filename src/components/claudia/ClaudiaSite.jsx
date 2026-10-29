@@ -4,7 +4,9 @@ import { usePrivateDocument } from '../../utils/usePrivateDocument.js';
 import { site } from '../../data/claudia/site.js';
 import { careerTestimonials } from '../../data/claudia/careerTestimonials.js';
 import { seoFallback, siteHeaderFallback } from '../../data/claudia/landingCms.js';
-import { ClaudiaEditable, ClaudiaSection, useClaudiaCmsSection } from '../../integration/eze-cms/ClaudiaCms.jsx';
+import { CLAUDIA_PAGE_ROUTE, ClaudiaEditable, ClaudiaSection, useClaudiaCmsSection } from '../../integration/eze-cms/ClaudiaCms.jsx';
+import { resolvePageSeo, resolveRobots } from '../../integration/eze-cms/seoShared.js';
+import { seoIndexing, usePageSeo } from '../../integration/eze-cms/pageSeo.js';
 import SiteHeader from './SiteHeader.jsx';
 import Hero from './Hero.jsx';
 import Situations from './Situations.jsx';
@@ -38,10 +40,11 @@ function setMeta(name, content) {
 export default function ClaudiaSite() {
   const { content: seo, hidden: seoHidden } = useClaudiaCmsSection('seo', seoFallback(site.meta));
   const { content: header } = useClaudiaCmsSection('site-header', siteHeaderFallback(site.brand));
-  // Con la sección seo oculta en Eze CMS no se aplica su título ni su descripción (tampoco los locales).
-  usePrivateDocument(seoHidden ? undefined : seo.title);
+  // SEO de la página en Eze CMS y, si falta, la sección seo (que, oculta, no aplica título ni descripción, tampoco locales).
+  const pageSeo = resolvePageSeo({ pageSeo: usePageSeo(CLAUDIA_PAGE_ROUTE), section: seo, hidden: seoHidden });
+  usePrivateDocument(pageSeo.title, resolveRobots({ indexing: seoIndexing(), noindex: pageSeo.noindex, route: CLAUDIA_PAGE_ROUTE }));
 
-  useEffect(() => (seoHidden ? undefined : setMeta('description', seo.description)), [seo.description, seoHidden]);
+  useEffect(() => (pageSeo.description === undefined ? undefined : setMeta('description', pageSeo.description)), [pageSeo.description]);
 
   useEffect(() => {
     const restore = [

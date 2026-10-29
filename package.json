@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "test": "node scripts/editorial-manifest.mjs --check && node scripts/validate-editorial.mjs && node scripts/test-editorial.mjs && node scripts/test-cms-visibility.mjs && node scripts/test-article-ssr.mjs",
+    "test": "node scripts/editorial-manifest.mjs --check && node scripts/validate-editorial.mjs && node scripts/test-editorial.mjs && node scripts/test-cms-visibility.mjs && node scripts/test-article-ssr.mjs && node scripts/test-seo-cms.mjs",
     "typecheck": "tsc --noEmit",
     "cms:manifest": "node scripts/editorial-manifest.mjs",
     "cms:backup": "node scripts/cms-backup.mjs",

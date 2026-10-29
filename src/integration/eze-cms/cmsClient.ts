@@ -33,7 +33,26 @@ export type CmsArticle = {
   source_url: string | null
   created_at: string
   updated_at: string
+  seo_title: string | null
+  meta_description: string | null
+  cover_image_alt: string | null
+  canonical_url: string | null
+  noindex: boolean
 }
+
+/** Fila de get_public_page_seo: metadatos SEO de una página del sitio. */
+export type CmsPageSeo = {
+  page_key: string
+  name: string
+  route: string
+  slug: string
+  seo_title: string | null
+  meta_description: string | null
+  canonical_url: string | null
+  noindex: boolean
+}
+export type CmsPageSeoResult = { pageSeo: CmsPageSeo | null; error: Error | null }
+export type CmsPageSeoReader = (request: { siteSlug: string; pageRoute: string }) => Promise<CmsPageSeoResult>
 
 export type CmsArticlesResult = { articles: CmsArticle[]; error: Error | null }
 export type CmsArticlesReader = (request: { siteSlug: string; articleSlug?: string }) => Promise<CmsArticlesResult>
@@ -127,6 +146,20 @@ export function createPublicSectionIndexReader(client: SupabaseClient): CmsSecti
       return { index: parseSectionIndex(data), error: null }
     } catch (error) {
       return { index: null, error: error instanceof Error ? error : new Error('No se pudo leer el índice de secciones.') }
+    }
+  }
+}
+
+/** SEO público de una página; sin fila (ruta no registrada en el CMS) devuelve null. */
+export function createPublicPageSeoReader(client: SupabaseClient): CmsPageSeoReader {
+  return async ({ siteSlug, pageRoute }) => {
+    try {
+      const { data, error } = await client.rpc('get_public_page_seo', { p_site_slug: siteSlug, p_page_route: pageRoute })
+      if (error) return { pageSeo: null, error: new Error(error.message) }
+      if (!Array.isArray(data)) return { pageSeo: null, error: new Error('Respuesta inesperada de get_public_page_seo.') }
+      return { pageSeo: (data[0] as CmsPageSeo | undefined) ?? null, error: null }
+    } catch (error) {
+      return { pageSeo: null, error: error instanceof Error ? error : new Error('No se pudo leer el SEO de la página.') }
     }
   }
 }

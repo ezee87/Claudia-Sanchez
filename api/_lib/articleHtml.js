@@ -1,7 +1,7 @@
 // HTML estático del artículo para api/articulo.js. El cuerpo replica RichNode/renderMarks de
 // src/components/institutional/articles.jsx (scripts/test-article-ssr.mjs verifica que el resultado sea idéntico).
 import { safeHref, safeImage } from '../../src/utils/safeUrl.js';
-import { ARTICLE_AUTHOR, articleMediaUrlFrom, editorialDate, formatDate } from '../../src/integration/eze-cms/articleShared.js';
+import { ARTICLE_AUTHOR, articleCoverAlt, articleMediaUrlFrom, editorialDate, formatDate } from '../../src/integration/eze-cms/articleShared.js';
 
 const ESCAPES = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#x27;' };
 /** Mismo escape que React para texto y atributos. */
@@ -71,7 +71,7 @@ export function renderArticleMain(article, { labels, mediaBase }) {
     + '<p class="article-meta">'
     + (validDate ? `<time datetime="${escapeHtml(date)}">${escapeHtml(formatDate(date))}</time><span aria-hidden="true">·</span>` : '')
     + `<span>${escapeHtml(author)}</span></p></header>`
-    + (cover ? `<figure class="article-figure"><img class="article-hero" src="${escapeHtml(cover)}" alt="" width="1000" height="650"/></figure>` : '')
+    + (cover ? `<figure class="article-figure"><img class="article-hero" src="${escapeHtml(cover)}" alt="${escapeHtml(articleCoverAlt(article))}" width="1000" height="650"/></figure>` : '')
     + renderArticleBody(article.content, mediaBase)
     + '<footer class="article-end"><div class="article-author">'
     + (footer.signature ? `<p class="article-signature">${escapeHtml(footer.signature)}</p>` : '')

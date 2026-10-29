@@ -98,13 +98,14 @@ assert.equal(policy({}).origin, null, 'Sin dominio configurado no hay canonical'
 for (const url of ['https://claudia-sanchez.vercel.app', 'http://localhost:5174', 'https://localhost', 'http://claudiasanchez.example', 'https://127.0.0.1', 'no-es-url']) {
   assert.equal(policy({ VITE_SITE_URL: url }).origin, null, `Canonical rechazado: ${url}`);
 }
-const finalSite = { VITE_SITE_URL: 'https://claudiasanchez.example/', SEO_ALLOW_INDEXING: 'true', VERCEL_ENV: 'production' };
-assert.equal(policy(finalSite).indexable, true);
-assert.equal(policy(finalSite).robots, 'index, follow, max-image-preview:large');
-assert.equal(policy({ ...finalSite, SEO_ALLOW_INDEXING: undefined }).indexable, false, 'Indexar requiere autorización explícita');
-assert.equal(policy({ ...finalSite, VERCEL_ENV: 'preview' }).indexable, false, 'Preview nunca indexa');
-assert.equal(policy(finalSite, 'claudia-sanchez.vercel.app').indexable, false, 'El dominio temporal nunca indexa');
-assert.equal(policy(finalSite, 'www.claudiasanchez.example').indexable, false, 'Solo el host exacto del dominio final');
+const finalSite = { VITE_SITE_URL: 'https://claudiasanchez.example/', VITE_SEO_ALLOW_INDEXING: 'true', VERCEL_ENV: 'production' };
+assert.equal(policy(finalSite).indexing, true);
+assert.equal(policy({ ...finalSite, VERCEL_ENV: undefined }).indexing, true, 'Sin VERCEL_ENV (otro hosting) decide el dominio');
+assert.equal(policy({ ...finalSite, VITE_SEO_ALLOW_INDEXING: undefined }).indexing, false, 'Indexar requiere autorización explícita');
+assert.equal(policy({ ...finalSite, VERCEL_ENV: 'preview' }).indexing, false, 'Preview nunca indexa');
+assert.equal(policy(finalSite, 'claudia-sanchez.vercel.app').indexing, false, 'El dominio temporal nunca indexa');
+assert.equal(policy(finalSite, 'www.claudiasanchez.example').indexing, false, 'Solo el host exacto del dominio final');
+assert.equal(policy(finalSite, '').indexing, false, 'Sin host conocido no se indexa');
 const indexed = articleResponse({ status: 'found', article: ARTICLE }, { template: TEMPLATE, policy: policy(finalSite), labels: LABELS, mediaBase: MEDIA });
 assert.equal(indexed.headers['X-Robots-Tag'], undefined);
 assert.ok(indexed.body.includes('content="index, follow, max-image-preview:large"'));
@@ -124,7 +125,7 @@ const unavailable = articleResponse({ status: 'unavailable', error: new Error('x
 assert.equal(unavailable.status, 503);
 assert.equal(unavailable.headers['Retry-After'], '30');
 assert.equal(unavailable.headers['Cache-Control'], 'no-store');
-assert.ok(unavailable.body.includes('<title>Claudia Sánchez Urencio · Executive Career Coach &amp; Advisor</title>'), 'Título de la plantilla sin escapar dos veces');
+assert.ok(unavailable.body.includes('<title>Claudia Sánchez Urencio</title>'), 'Título neutro, no el de la plantilla');
 assert.equal(articleResponse({ status: 'misconfigured', error: new Error('x') }, { template: TEMPLATE, policy: preview, labels: LABELS, mediaBase: MEDIA }).status, 500);
 assert.throws(() => assertTemplate('<html><head></head><body></body></html>'));
 assertTemplate(TEMPLATE);

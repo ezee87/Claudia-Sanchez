@@ -1,41 +1,18 @@
 // Documento HTML y respuesta HTTP de /articulos/:slug (api/articulo.js), a partir de dist/index.html del mismo build.
 import { safeImage } from '../../src/utils/safeUrl.js';
-import { ARTICLE_AUTHOR, articleDescription, articleJsonLd, articleMediaUrlFrom, articleTitle } from '../../src/integration/eze-cms/articleShared.js';
-import { escapeHtml, jsonForScript, renderArticleMain } from './articleHtml.js';
+import { ARTICLE_AUTHOR, articleCoverAlt, articleDescription, articleJsonLd, articleMediaUrlFrom, articleTitle } from '../../src/integration/eze-cms/articleShared.js';
+import { NOINDEX, globalIndexing, resolveCanonical, resolveRobots, siteOrigin } from '../../src/integration/eze-cms/seoShared.js';
+import { jsonForScript, renderArticleMain } from './articleHtml.js';
+import { fillTemplate, seoHeadTags, stripSeoTags } from './seoDocument.js';
 
-const NOINDEX = 'noindex, nofollow, noarchive';
-const ROOT = '<div id="root"></div>';
+export { assertTemplate } from './seoDocument.js';
 
-/**
- * Canonical: solo con VITE_SITE_URL https y un dominio que no sea localhost, una IP ni *.vercel.app.
- * Indexable: además, despliegue de producción, SEO_ALLOW_INDEXING=true y la petición llega por ese mismo dominio.
- */
+/** Dominio definitivo (canonical) y bloqueo global de indexación para esta petición. Reglas: seoShared.js. */
 export function seoPolicy(env, requestHost) {
-  let origin = null;
-  try {
-    const url = new URL(env.VITE_SITE_URL);
-    const host = url.hostname;
-    const temporary = host === 'localhost' || host.endsWith('.localhost') || host.endsWith('.vercel.app')
-      || /^[\d.]+$/.test(host) || host.startsWith('[');
-    if (url.protocol === 'https:' && !temporary) origin = url.origin;
-  } catch { /* sin dominio definitivo configurado */ }
-  const indexable = Boolean(origin) && env.VERCEL_ENV === 'production' && env.SEO_ALLOW_INDEXING === 'true'
-    && String(requestHost || '').toLowerCase() === new URL(origin).host;
-  return { origin, indexable, robots: indexable ? 'index, follow, max-image-preview:large' : NOINDEX };
-}
-
-export function assertTemplate(template) {
-  if (typeof template !== 'string' || !template.includes(ROOT) || !/<title>[\s\S]*?<\/title>/.test(template) || !template.includes('</head>')) {
-    throw new Error('dist/index.html no tiene la estructura esperada (<title>, </head> y <div id="root"></div>).');
-  }
-}
-
-/** Sin `title`, se conserva el de la plantilla. */
-function fillTemplate(template, { title, head, root = '', body = '' }) {
-  return template
-    .replace(/<title>[\s\S]*?<\/title>/, match => title ? `<title>${escapeHtml(title)}</title>` : match)
-    .replace('</head>', () => `${head}</head>`)
-    .replace(ROOT, () => `<div id="root">${root}</div>${body}`);
+  return {
+    origin: siteOrigin(env.VITE_SITE_URL),
+    indexing: globalIndexing({ allow: env.VITE_SEO_ALLOW_INDEXING, siteUrl: env.VITE_SITE_URL, host: requestHost || '', deployEnv: env.VERCEL_ENV }),
+  };
 }
 
 // Misma estructura que Layout (.claudia-root.institutional define variables, anchos y tipografías) y una cabecera vacía
@@ -45,34 +22,34 @@ const layoutShell = main => '<div class="claudia-root institutional">'
   + '<header class="institutional-header" aria-hidden="true"><div class="site-container header-row"></div></header>'
   + `<main id="contenido" tabindex="-1">${main}</main></div>`;
 
-export function renderArticleDocument(template, { article, policy, labels, mediaBase }) {
+/** Metadatos del artículo: CMS (seo_title, meta_description, canonical_url, noindex, cover_image_alt) con sus fallbacks. */
+export function articleSeo(article, { policy, mediaBase }) {
   const path = `/articulos/${encodeURIComponent(article.slug)}`;
-  const canonical = policy.origin ? `${policy.origin}${path}` : '';
-  const title = articleTitle(article);
-  const description = articleDescription(article);
+  const canonical = resolveCanonical({ cmsCanonical: article.canonical_url, origin: policy.origin, path });
   const cover = safeImage(articleMediaUrlFrom(mediaBase, article.cover_image));
   const image = cover && (canonical || cover.startsWith('http')) ? new URL(cover, canonical || undefined).href : '';
-  // data-ssr-seo: Seo.jsx conserva estas etiquetas mientras la URL no cambie y las retira al navegar.
-  const mark = ` data-ssr-seo="${escapeHtml(path)}"`;
-  const meta = (attr, key, value) => value ? `<meta ${attr}="${key}" content="${escapeHtml(value)}"${mark}>` : '';
-  const head = [
-    meta('name', 'robots', policy.robots),
-    meta('name', 'description', description),
-    canonical ? `<link rel="canonical" href="${escapeHtml(canonical)}"${mark}>` : '',
-    meta('property', 'og:type', 'article'),
-    meta('property', 'og:site_name', ARTICLE_AUTHOR),
-    meta('property', 'og:title', title),
-    meta('property', 'og:description', description),
-    meta('property', 'og:url', canonical),
-    meta('property', 'og:image', image),
-    meta('name', 'twitter:card', image ? 'summary_large_image' : 'summary'),
-    meta('name', 'twitter:title', title),
-    meta('name', 'twitter:description', description),
-    meta('name', 'twitter:image', image),
-    `<script type="application/ld+json"${mark}>${jsonForScript(articleJsonLd(article, { canonical, image, description }))}</script>`,
-  ].filter(Boolean).join('');
-  return fillTemplate(template, {
-    title,
+  const description = articleDescription(article);
+  return {
+    path,
+    canonical,
+    image,
+    description,
+    title: articleTitle(article),
+    robots: resolveRobots({ indexing: policy.indexing, noindex: article.noindex, route: '/articulos/:slug' }),
+  };
+}
+
+export function renderArticleDocument(template, { article, policy, labels, mediaBase }) {
+  const seo = articleSeo(article, { policy, mediaBase });
+  const head = seoHeadTags({
+    ...seo,
+    type: 'article',
+    siteName: ARTICLE_AUTHOR,
+    imageAlt: articleCoverAlt(article),
+    jsonLd: articleJsonLd(article, seo),
+  });
+  return fillTemplate(stripSeoTags(template), {
+    title: seo.title,
     head,
     root: layoutShell(renderArticleMain(article, { labels, mediaBase })),
     // useCmsArticles lo toma como estado inicial: React monta el artículo sin pasar por "Cargando".
@@ -83,8 +60,8 @@ export function renderArticleDocument(template, { article, policy, labels, media
 /** 404 y errores: la SPA de siempre (React muestra su vista de inexistente o reintenta), con el estado HTTP correcto. */
 export function renderStatusDocument(template, { status, labels }) {
   const missingTitle = labels.contenido?.missingTitle;
-  const title = status === 404 && missingTitle ? `${missingTitle} | ${ARTICLE_AUTHOR}` : '';
-  return fillTemplate(template, { title, head: `<meta name="robots" content="${NOINDEX}">` });
+  const title = status === 404 && missingTitle ? `${missingTitle} | ${ARTICLE_AUTHOR}` : ARTICLE_AUTHOR;
+  return fillTemplate(stripSeoTags(template), { title, head: `<meta name="robots" content="${NOINDEX}">` });
 }
 
 const CACHE = {
@@ -97,9 +74,10 @@ const CACHE = {
 export function articleResponse(result, { template, policy, labels, mediaBase }) {
   const html = { 'Content-Type': 'text/html; charset=utf-8' };
   if (result.status === 'found') {
+    const indexable = articleSeo(result.article, { policy, mediaBase }).robots !== NOINDEX;
     return {
       status: 200,
-      headers: { ...html, 'Cache-Control': CACHE.found, ...(policy.indexable ? {} : { 'X-Robots-Tag': NOINDEX }) },
+      headers: { ...html, 'Cache-Control': CACHE.found, ...(indexable ? {} : { 'X-Robots-Tag': NOINDEX }) },
       body: renderArticleDocument(template, { article: result.article, policy, labels, mediaBase }),
     };
   }

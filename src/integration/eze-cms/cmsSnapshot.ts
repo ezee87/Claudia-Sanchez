@@ -1,4 +1,5 @@
 import snapshot from 'virtual:eze-cms-snapshot'
+import type { CmsPageSeo } from './cmsClient'
 
 /** Contenido CMS leído durante el build (scripts/cms-snapshot-plugin.mjs). Vale null en modo local y en desarrollo. */
 export type CmsSnapshot = {
@@ -7,6 +8,8 @@ export type CmsSnapshot = {
   /** Secciones ocultas ('ruta::clave'): existen en Supabase, pero el build no tiene ni debe tener su contenido. */
   hidden?: string[]
   globals: Record<string, unknown>
+  /** get_public_page_seo por ruta del manifiesto (null si la ruta no tiene fila). */
+  pageSeo?: Record<string, CmsPageSeo | null>
 }
 
 const buildSnapshot: CmsSnapshot | null = snapshot
@@ -26,6 +29,10 @@ export function rememberRevealedSection(siteSlug: string, pageRoute: string, sec
 
 export function snapshotHiddenSections(siteSlug: string): string[] {
   return buildSnapshot?.site === siteSlug ? buildSnapshot.hidden ?? [] : []
+}
+
+export function snapshotPageSeo(siteSlug: string, pageRoute: string): CmsPageSeo | null {
+  return buildSnapshot?.site === siteSlug ? buildSnapshot.pageSeo?.[pageRoute] ?? null : null
 }
 
 export function snapshotGlobal(siteSlug: string, groupKey: string): unknown | null {
