@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import type { CmsSectionReader } from './cmsClient'
 import type { CmsSiteConfig } from './cmsConfig'
 import { authorizedPreviewOrigin } from './CmsEditable'
@@ -119,6 +119,16 @@ export function useCmsSection<T extends JsonObject>({
       if (typeof window !== 'undefined') window.removeEventListener('message', receiveCmsUpdate)
     }
   }, [config.siteSlug, initial, localOnly, pageRoute, sectionKey, readSection, stableFallback])
+
+  // Si la sección vuelve a mostrarse con este hook montado, toma el contenido con el que se reveló (nunca el fallback local).
+  const wasHidden = useRef(hidden)
+  useEffect(() => {
+    const revealed = wasHidden.current && !hidden
+    wasHidden.current = hidden
+    if (!revealed || localOnly) return
+    const revealedContent = snapshotSection(config.siteSlug, pageRoute, sectionKey)
+    if (isObject(revealedContent)) setState((previous) => applyRemoteContent(previous, mergeCmsContent(stableFallback, revealedContent)))
+  }, [config.siteSlug, hidden, localOnly, pageRoute, sectionKey, stableFallback])
 
   return useMemo(() => ({ ...state, hidden }), [state, hidden])
 }

@@ -152,4 +152,32 @@ try {
   assert.deepEqual([...client.parseSectionIndex(sample)], [...snap.parseSectionIndex(sample)]);
   assert.deepEqual([...client.parseSectionIndex(sample)].filter(([, v]) => v).map(([id]) => id), ['/::a']);
   console.log('OK navegador: ocultar y volver a mostrar con la página abierta, sin fallback local; Supabase no disponible sin cambios.');
+
+  // Aviso de visibilidad del preview de Eze CMS (EZE_CMS_UPDATE_SECTION_VISIBILITY).
+  const notify = (data, read = async () => ({ content: null, error: null })) => runtime.applyPreviewSectionVisibility(site, data, read);
+  const msg = (extra) => ({ type: 'EZE_CMS_UPDATE_SECTION_VISIBILITY', site, pageRoute: '/', sectionKey: 'enfoque', ...extra });
+  assert.equal(await notify(msg({ visible: false })), true);
+  assert.ok(!render('/').includes('id="enfoque"'), 'Ocultar desmonta la sección');
+  assert.equal(await notify(msg({ visible: true, content: { title: 'Enfoque desde el preview' } })), true);
+  home = render('/');
+  assert.ok(home.includes('Enfoque desde el preview') && !home.includes(content['/'].enfoque.title), 'Mostrar usa el contenido del CMS, no el local');
+  assert.ok(increasing(order(home, ['sobre-mi', 'servicios', 'enfoque', 'testimonios', 'articulos'])), 'Vuelve a su posición');
+  // Sin contenido en el aviso: se lee el público; si no hay, sigue oculta.
+  await notify(msg({ sectionKey: 'servicios', visible: false }));
+  assert.equal(await notify(msg({ sectionKey: 'servicios', visible: true }), async () => ({ content: null, error: new Error('red caída') })), false);
+  assert.ok(visibility.isCmsSectionHidden(site, '/', 'servicios'), 'Sin contenido disponible no se muestra el fallback');
+  assert.equal(await notify(msg({ sectionKey: 'servicios', visible: true }), async () => ({ content: { title: 'Servicios públicos' }, error: null })), true);
+  assert.ok(render('/').includes('Servicios públicos'));
+  // Avisos consecutivos: si llega «ocultar» mientras «mostrar» espera su contenido, gana el último.
+  let release; const slow = new Promise((resolve) => { release = resolve; });
+  const showing = notify(msg({ sectionKey: 'contacto', visible: true }), () => slow);
+  await notify(msg({ sectionKey: 'contacto', visible: false }));
+  release({ content: { title: 'tarde' }, error: null });
+  assert.equal(await showing, false); assert.ok(visibility.isCmsSectionHidden(site, '/', 'contacto'));
+  await notify(msg({ sectionKey: 'contacto', visible: true, content: { title: 'Contacto' } }));
+  // Mensajes inválidos u otro sitio: se ignoran.
+  const snapshotBefore = render('/');
+  for (const bad of [null, 'texto', msg({ visible: 'false' }), msg({ site: 'otro-sitio', visible: false }), msg({ type: 'EZE_CMS_UPDATE_SECTION', visible: false }), msg({ sectionKey: 7, visible: false })]) assert.equal(await notify(bad), false);
+  assert.equal(render('/'), snapshotBefore);
+  console.log('OK preview: ocultar y mostrar al instante con el contenido del CMS, avisos consecutivos y mensajes inválidos ignorados.');
 } finally { await server.close(); }

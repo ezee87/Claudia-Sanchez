@@ -1,5 +1,6 @@
 import type { CmsArticlesReader, CmsGlobalReader, CmsSectionIndex, CmsSectionIndexReader, CmsSectionReader, CmsSectionRequest } from './cmsClient'
 import type { CmsSiteConfig } from './cmsConfig'
+import { authorizedPreviewOrigin } from './CmsEditable'
 import { cmsLocalOnly } from './cmsMode'
 import { parseCmsPreviewOrigins } from './cmsOrigins'
 import { rememberRevealedSection } from './cmsSnapshot'
@@ -70,6 +71,8 @@ export function deliverTogether<T>(read: Promise<T>): Promise<T> {
 
 const isObject = (value: unknown) => value !== null && typeof value === 'object' && !Array.isArray(value)
 let indexRead: Promise<void> | null = null
+// Cambia con cada aviso de visibilidad del preview: una lectura del índice iniciada antes no lo pisa con datos viejos.
+let previewVisibilityGeneration = 0
 
 /**
  * Aplica el índice público: oculta las secciones con visible distinto de true y revela las que estaban ocultas solo después de
@@ -100,16 +103,56 @@ export function refreshCmsSectionVisibility(): Promise<void> {
   if (cmsLocalOnly || !hasRequiredEnvironment) return Promise.resolve()
   if (indexRead) return indexRead
   const siteSlug = cmsRuntimeConfig.siteSlug
+  const generation = previewVisibilityGeneration
   const read = deliverTogether((async () => {
     const integration = await cmsIntegration
     if (!integration) return
     const { index, error } = await integration.readSectionIndex({ siteSlug })
-    if (error || !index) return
+    if (error || !index || generation !== previewVisibilityGeneration) return
     await applyCmsSectionIndex(siteSlug, index, integration.readSection)
   })().catch(() => undefined))
   indexRead = read
   setTimeout(() => { if (indexRead === read) indexRead = null }, 0)
   return read
+}
+
+/**
+ * Aviso de Eze CMS tras guardar la visibilidad de una sección (solo en la vista previa autorizada). Ocultar desmonta la
+ * sección de inmediato; mostrarla exige su contenido (el que envía el CMS o, si falta, el de la lectura pública), para no
+ * pintar el fallback local. Devuelve false si el mensaje no es válido o no se pudo aplicar.
+ */
+export async function applyPreviewSectionVisibility(siteSlug: string, data: unknown, readSection: CmsSectionReader): Promise<boolean> {
+  if (!isObject(data)) return false
+  const message = data as Record<string, unknown>
+  if (message.type !== 'EZE_CMS_UPDATE_SECTION_VISIBILITY' || message.site !== siteSlug || typeof message.pageRoute !== 'string'
+    || typeof message.sectionKey !== 'string' || typeof message.visible !== 'boolean') return false
+  const { pageRoute, sectionKey } = message
+  const generation = ++previewVisibilityGeneration
+  if (!message.visible) {
+    updateCmsSectionVisibility(siteSlug, new Map([[`${pageRoute}::${sectionKey}`, false]]))
+    return true
+  }
+  let content = isObject(message.content) ? message.content : null
+  if (!content) {
+    const result = await readSection({ siteSlug, pageRoute, sectionKey })
+    content = !result.error && isObject(result.content) ? result.content : null
+  }
+  // Si mientras tanto llegó otro aviso, manda el más reciente.
+  if (!content || generation !== previewVisibilityGeneration) return false
+  rememberRevealedSection(siteSlug, pageRoute, sectionKey, content)
+  updateCmsSectionVisibility(siteSlug, new Map([[`${pageRoute}::${sectionKey}`, true]]))
+  return true
+}
+
+// Solo dentro del iframe de Eze CMS con ?cmsPreview=true y un origen autorizado: los visitantes nunca reciben estos avisos.
+if (typeof window !== 'undefined' && window.parent !== window && !cmsLocalOnly) {
+  window.addEventListener('message', (event: MessageEvent) => {
+    if (event.source !== window.parent || event.origin !== authorizedPreviewOrigin(cmsRuntimeConfig)) return
+    void applyPreviewSectionVisibility(cmsRuntimeConfig.siteSlug, event.data, async (request) => {
+      const integration = await cmsIntegration
+      return integration ? integration.readSection(request) : { content: null, error: null }
+    })
+  })
 }
 
 /** Reader estable para futuras paginas; nunca rompe los fallbacks locales. Cada lectura refresca también la visibilidad. */
