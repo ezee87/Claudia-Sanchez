@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { Field, useSection } from './Cms';
-import { safeHref } from './content';
+import { content, safeHref } from './content';
 import { WHATSAPP_URLS } from '../../data/institutional/whatsapp';
 
 const TYPES = [['persona', 'personLabel'], ['empresa', 'companyLabel'], ['otro', 'otherLabel']];
@@ -47,13 +47,17 @@ export default function ContactForm({ sendInquiry }) {
     } catch { setStatus('error'); } finally { busy.current = false; }
   }
 
+  const directFallback = content['/contacto']['contacto-directo'];
   const emailHref = safeHref(direct.email?.href, '');
   const showEmail = direct.email?.label && emailHref.startsWith('mailto:');
-  const whatsappHref = WHATSAPP_URLS.contacto;
+  const whatsappHref = safeHref(direct.whatsapp?.href, WHATSAPP_URLS.contacto);
+  const whatsappLabel = direct.whatsapp?.label || directFallback.whatsapp.label;
   const linkedinHref = safeHref(direct.linkedin?.href, '');
+  const linkedinLabel = direct.linkedin?.label || directFallback.linkedin.label;
 
   const ext = { target: '_blank', rel: 'noopener noreferrer' };
-  const channelBody = (icon, label, sub) => <><Icon name={icon}/><span className="cc-text"><span className="cc-name">{label}</span>{sub&&<span className="cc-sub">{sub}</span>}</span><Arrow/></>;
+  const directField = (path, child) => <Field route="/contacto" section="contacto-directo" path={path}>{child}</Field>;
+  const channelBody = (icon, label, sub, labelPath) => <><Icon name={icon}/><span className="cc-text">{labelPath ? directField(labelPath, <span className="cc-name">{label}</span>) : <span className="cc-name">{label}</span>}{sub&&<span className="cc-sub">{sub}</span>}</span><Arrow/></>;
 
   return <section className="contact-section"><div className="site-container">
     <div className="contact-card">
@@ -72,7 +76,7 @@ export default function ContactForm({ sendInquiry }) {
         <div className="cf-field">{field('messageLabel', <label htmlFor="contact-message">{c.messageLabel}</label>)}{field('messagePlaceholder', <textarea id="contact-message" name="message" placeholder={c.messagePlaceholder} required rows={5} maxLength={5000}/>)}</div>
         {field('submitLabel', <button type="submit" className="cf-submit" disabled={status === 'loading'}><span>{status === 'loading' ? c.loading : c.submitLabel}</span><svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false"><path d="M4 10h11M11 5l5 5-5 5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/></svg></button>)}
         <div id="contact-status" role={status === 'error' ? 'alert' : 'status'} aria-live="polite">
-          {status === 'unavailable' && <p className="cf-unavailable">El envío todavía no está disponible. Tus datos se conservan; mientras tanto puedes escribirme por correo electrónico o LinkedIn.</p>}
+          {status === 'unavailable' && field('pending', <p className="cf-unavailable">{c.pending}</p>)}
           {status === 'error' && field('error', <p className="cf-error">{c.error}</p>)}
           {status === 'success' && <>{field('successTitle', <h2>{c.successTitle}</h2>)}{field('successText', <p>{c.successText}</p>)}</>}
         </div>
@@ -81,11 +85,11 @@ export default function ContactForm({ sendInquiry }) {
         <Field route="/contacto" section="contacto-directo" path="title"><h2 id="contact-alt-title">{direct.title}</h2></Field>
         <Field route="/contacto" section="contacto-directo" path="paragraph1"><p className="contact-alt-intro">{direct.paragraph1}</p></Field>
         <ul className="contact-channels">
-          {showEmail && <li><a className="contact-channel" href={emailHref}>{channelBody('mail', 'Correo electrónico', direct.email.label)}</a></li>}
+          {showEmail && <li>{directField('email', <a className="contact-channel" href={emailHref}>{channelBody('mail', direct.emailChannelLabel, direct.email.label, 'emailChannelLabel')}</a>)}</li>}
           <li>{whatsappHref
-            ? <a className="contact-channel" href={whatsappHref} {...ext}>{channelBody('whatsapp', 'Escribirme por WhatsApp')}</a>
-            : <button type="button" className="contact-channel" onClick={() => {}}>{channelBody('whatsapp', 'Escribirme por WhatsApp')}</button>}</li>
-          {linkedinHref && <li><a className="contact-channel" href={linkedinHref} {...ext}>{channelBody('linkedin', 'LinkedIn')}<span className="sr-only"> (se abre en una pestaña nueva)</span></a></li>}
+            ? directField('whatsapp', <a className="contact-channel" href={whatsappHref} {...ext}>{channelBody('whatsapp', whatsappLabel)}</a>)
+            : <button type="button" className="contact-channel" onClick={() => {}}>{channelBody('whatsapp', whatsappLabel)}</button>}</li>
+          {linkedinHref && <li>{directField('linkedin', <a className="contact-channel" href={linkedinHref} {...ext}>{channelBody('linkedin', linkedinLabel)}<span className="sr-only"> (se abre en una pestaña nueva)</span></a>)}</li>}
         </ul>
       </aside>
     </div>

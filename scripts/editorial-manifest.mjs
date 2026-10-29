@@ -25,14 +25,14 @@ const GLOBAL_SECTIONS = { '/': ['navbar', 'footer'] };
 
 const COMMON_LABELS = { eyebrow: 'Antetítulo', title: 'Título', closing: 'Cierre', ctaLink: 'Botón de reserva' };
 const LANDING_SCHEMA = {
-  hero: { name: 'Hero', type: 'hero', labels: { highlightedTitle: 'Título destacado', description: 'Descripción', complement: 'Complemento', portrait: 'Retrato (también en Sobre mí)' }, required: ['ctaLink'] },
+  hero: { name: 'Hero', type: 'hero', labels: { highlightedTitle: 'Título destacado', description: 'Descripción', complement: 'Complemento', portrait: 'Retrato (también en Sobre mí)', portraitAlt: 'Texto alternativo del retrato' }, required: ['ctaLink'] },
   situations: { name: 'El siguiente movimiento', type: 'content', labels: { intro: 'Introducción (cada línea se muestra por separado)', items: 'Situaciones', number: 'Número', label: 'Etiqueta', text: 'Texto', closing: 'Cierre (también al pie del menú móvil)' }, required: ['ctaLink'] },
   'career-testimonials': { name: 'Testimonios', type: 'testimonials', labels: { subtitle: 'Subtítulo', items: 'Testimonios', author: 'Autor', role: 'Cargo', quote: 'Cita textual', image: 'Foto', alt: 'Texto alternativo', lang: 'Idioma de la cita (es/en)', sourceLabel: 'Etiqueta de la fuente', linkedinUrl: 'Enlace de la recomendación' }, required: ['ctaLink'] },
   approach: { name: 'Cómo trabajo', type: 'process', labels: { intro: 'Introducción (línea en blanco = párrafo nuevo)', steps: 'Etapas', number: 'Número', label: 'Etiqueta', text: 'Texto' } },
   life: { name: 'Modelo L.I.F.E.', type: 'method', labels: { intro: 'Introducción', instruction: 'Instrucción', hubLabel: 'Centro del diagrama', dimensions: 'Dimensiones', id: 'Identificador técnico (no modificar)', label: 'Etiqueta', text: 'Texto', closing: 'Cierre (cada línea se muestra por separado)' } },
   about: { name: 'Sobre mí', type: 'about', labels: { 'paragraphs.0': 'Párrafo 1', 'paragraphs.1': 'Párrafo 2', 'paragraphs.2': 'Párrafo 3', facts: 'Datos', value: 'Valor', label: 'Etiqueta' } },
   closing: { name: 'Cierre y reserva', type: 'cta', labels: { text: 'Texto' }, required: ['ctaLink'] },
-  'site-header': { name: 'Navegación principal', type: 'header', labels: { brandLink: 'Marca', navLink0: 'Enlace 1', navLink1: 'Enlace 2', navLink2: 'Enlace 3', navLink3: 'Enlace 4', ctaLink: 'Botón de reserva' }, keys: { brandLink: 'brand-link', navLink0: 'nav-0', navLink1: 'nav-1', navLink2: 'nav-2', navLink3: 'nav-3', ctaLink: 'cta-link' }, required: ['brandLink', 'navLink0', 'navLink1', 'navLink2', 'navLink3', 'ctaLink'] },
+  'site-header': { name: 'Navegación principal', type: 'header', labels: { skipLabel: 'Enlace «Saltar al contenido»', menuEyebrow: 'Título del menú móvil', menuHomeLabel: 'Enlace «Inicio» del menú móvil', brandLink: 'Marca', navLink0: 'Enlace 1', navLink1: 'Enlace 2', navLink2: 'Enlace 3', navLink3: 'Enlace 4', ctaLink: 'Botón de reserva' }, keys: { brandLink: 'brand-link', navLink0: 'nav-0', navLink1: 'nav-1', navLink2: 'nav-2', navLink3: 'nav-3', ctaLink: 'cta-link' }, required: ['brandLink', 'navLink0', 'navLink1', 'navLink2', 'navLink3', 'ctaLink'] },
   'site-footer': { name: 'Pie de página', type: 'footer', labels: { brand: 'Marca', line: 'Especialidad', description: 'Descripción', copyright: 'Copyright', exploreHeading: 'Título de navegación', connectHeading: 'Título de contacto', homeLink: 'Inicio', navLink0: 'Enlace 1', navLink1: 'Enlace 2', navLink2: 'Enlace 3', navLink3: 'Enlace 4', linkedinLink: 'LinkedIn', calendlyLink: 'Calendly' }, keys: { homeLink: 'home-link', navLink0: 'nav-0', navLink1: 'nav-1', navLink2: 'nav-2', navLink3: 'nav-3', linkedinLink: 'linkedin-link', calendlyLink: 'calendly-link' }, required: ['homeLink', 'navLink0', 'navLink1', 'navLink2', 'navLink3', 'linkedinLink', 'calendlyLink'] },
   seo: { name: 'SEO', type: 'seo', labels: { title: 'Título de la pestaña', description: 'Meta descripción' } },
 };
@@ -52,7 +52,7 @@ function fields(content, schema = {}) {
     if (Array.isArray(value) && value.length && value.every(item => item === null || typeof item !== 'object')) {
       return value.map((item, index) => ({ key: `${key}-${index}`, path: `${key}.${index}`, label: schema.labels ? label(`${key}.${index}`) : `${key} ${index + 1}`, type: typeof item === 'number' ? 'number' : 'string', ...(typeof item === 'string' ? { multiline: true } : {}) }));
     }
-    const type = Array.isArray(value) ? 'collection' : typeof value === 'number' ? 'number' : value && typeof value === 'object' ? 'link' : ['image', 'cover', 'portrait'].includes(key) ? 'image' : 'string';
+    const type = Array.isArray(value) ? 'collection' : typeof value === 'number' ? 'number' : value && typeof value === 'object' ? 'link' : /^(image|cover|portrait)$|Logo$/.test(key) ? 'image' : 'string';
     return {
       key: schema.keys?.[key] ?? key, path: key, label: label(key), type,
       ...(schema.required?.includes(key) ? { required: true } : {}),
@@ -101,6 +101,8 @@ try {
         { key: 'brand', path: 'brand', label: 'Marca', type: 'string', required: true },
         { key: 'line', path: 'line', label: 'Descripción', type: 'string', required: true },
         { key: 'linkedin', path: 'linkedin', label: 'LinkedIn', type: 'link', required: true },
+        { key: 'menuLabel', path: 'menuLabel', label: 'Botón «Menú»', type: 'string' },
+        { key: 'rightsText', path: 'rightsText', label: 'Derechos reservados', type: 'string' },
       ] },
     ],
     pages,

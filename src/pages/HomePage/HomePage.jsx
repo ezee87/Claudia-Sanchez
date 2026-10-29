@@ -4,7 +4,7 @@ import { ArticleCards } from '../../components/institutional/articles';
 import { CmsLink, Collection, Field, useSection } from '../../components/institutional/Cms';
 import { content as localContent, safeHref, safeImage, validItems } from '../../components/institutional/content';
 import Seo from '../../components/institutional/Seo';
-import TestimonialCard, { LINKEDIN_RECOMMENDATIONS_URL } from '../../components/institutional/TestimonialCard';
+import TestimonialCard, { LINKEDIN_RECOMMENDATIONS_URL, linkedInUrl } from '../../components/institutional/TestimonialCard';
 import styles from './HomePage.module.css';
 
 const ROUTE = '/';
@@ -35,7 +35,7 @@ function splitTitle(title = '') {
 
 function SectionTitle({ section, eyebrow, title, id, className = '' }) {
   return <header className={`${styles.sectionTitle} ${className}`} data-reveal>
-    {eyebrow && <p className={styles.kicker}>{eyebrow}</p>}
+    {eyebrow && <Field route={ROUTE} section={section} path="eyebrow"><p className={styles.kicker}>{eyebrow}</p></Field>}
     <Field route={ROUTE} section={section} path="title"><h2 id={id}>{title}</h2></Field>
   </header>;
 }
@@ -60,39 +60,42 @@ function Hero() {
 
 function Trajectory() {
   const { content } = useSection(ROUTE, 'sobre-mi');
+  const local = localContent[ROUTE]['sobre-mi'];
+  const field = (path, child) => <Field route={ROUTE} section="sobre-mi" path={path}>{child}</Field>;
+  const metric = field('metricValue', <strong className={styles.pathMetric}>{content.metricValue}{field('metricSuffix', <span>{content.metricSuffix}</span>)}</strong>);
+  // `\n` separa las dos líneas que el diseño de escritorio muestra en la cifra y en la línea regional.
+  const [metricLead, metricTail] = content.metricLabel.split('\n');
+  const [regionLead, regionTail] = content.regionLineDesktop.split('\n');
+  const logos = (ampClass) => <>
+    {field('primaryLogo', <img className={styles.diageoLogo} src={safeImage(content.primaryLogo, local.primaryLogo)} alt={content.primaryLogoAlt} />)}
+    <span className={ampClass} aria-hidden="true">&amp;</span>
+    {field('secondaryLogo', <img className={styles.kraftLogo} src={safeImage(content.secondaryLogo, local.secondaryLogo)} alt={content.secondaryLogoAlt} />)}
+  </>;
   return <section id="sobre-mi" className={`${styles.section} ${styles.trajectory}`} aria-labelledby="trajectory-title">
     <div className={`${styles.container} ${styles.trajectoryGrid}`} data-trajectory>
       <div className={styles.mobileExperience} aria-label="Experiencia corporativa">
         <div className={styles.mobileExperienceHead} data-trajectory-company>
-          <p>Experiencia corporativa</p>
+          {field('experienceHeading', <p>{content.experienceHeading}</p>)}
           <span aria-hidden="true" />
         </div>
         <ol className={styles.experiencePath}>
           <li className={styles.pathStep} data-trajectory-metric aria-label="Más de veinte años de experiencia corporativa">
             <span className={styles.pathNode} aria-hidden="true" />
-            <strong className={styles.pathMetric}>20<span>+</span></strong>
-            <p>Años de experiencia corporativa</p>
+            {metric}
+            {field('metricLabelMobile', <p>{content.metricLabelMobile}</p>)}
           </li>
           <li className={styles.pathStep} data-trajectory-company>
             <span className={styles.pathNode} aria-hidden="true" />
-            <div className={styles.pathLogos}>
-              <img className={styles.diageoLogo} src="/assets/claudia-sanchez/testimonials/diageo-crop.png" alt="Diageo" />
-              <span className={styles.pathAmp} aria-hidden="true">&amp;</span>
-              <img className={styles.kraftLogo} src="/assets/claudia-sanchez/testimonials/kraft.png" alt="Kraft Foods" />
-            </div>
-            <p><span>Liderazgo en Recursos Humanos</span><span>Responsabilidades regionales en América Latina</span></p>
+            <div className={styles.pathLogos}>{logos(styles.pathAmp)}</div>
+            <p>{field('roleLine', <span>{content.roleLine}</span>)}{field('regionLine', <span>{content.regionLine}</span>)}</p>
           </li>
         </ol>
       </div>
       <aside className={styles.trajectoryVisual} aria-label="Trayectoria corporativa">
-        <div className={styles.metric} data-trajectory-metric aria-label="Más de veinte años de experiencia corporativa"><strong>20<span>+</span></strong><p>años de experiencia<br className={styles.metricBreak} /><span>corporativa</span></p></div>
+        <div className={styles.metric} data-trajectory-metric aria-label="Más de veinte años de experiencia corporativa">{field('metricValue', <strong>{content.metricValue}{field('metricSuffix', <span>{content.metricSuffix}</span>)}</strong>)}{field('metricLabel', <p>{metricLead}{metricTail !== undefined && <><br className={styles.metricBreak} /><span>{metricTail}</span></>}</p>)}</div>
         <div className={styles.companyRail} aria-label="Experiencia en compañías internacionales">
-          <div className={styles.desktopLogos}>
-            <img className={styles.diageoLogo} src="/assets/claudia-sanchez/testimonials/diageo-crop.png" alt="Diageo" />
-            <span className={styles.desktopAmp} aria-hidden="true">&amp;</span>
-            <img className={styles.kraftLogo} src="/assets/claudia-sanchez/testimonials/kraft.png" alt="Kraft Foods" />
-          </div>
-          <small data-trajectory-company><span className={styles.mobileRegionalLine}>Responsabilidades regionales</span><br className={styles.mobileBreak} /> <span className={styles.mobileRegionalLine}>América Latina</span></small>
+          <div className={styles.desktopLogos}>{logos(styles.desktopAmp)}</div>
+          {field('regionLineDesktop', <small data-trajectory-company><span className={styles.mobileRegionalLine}>{regionLead}</span>{regionTail !== undefined && <><br className={styles.mobileBreak} /> <span className={styles.mobileRegionalLine}>{regionTail}</span></>}</small>)}
         </div>
       </aside>
       <div className={styles.trajectoryNarrative}>
@@ -114,16 +117,16 @@ function Services() {
   const title = remoteItems.length >= 3 ? content.title : localContent[ROUTE].servicios.title;
   return <section id="servicios" className={`${styles.section} ${styles.services}`} aria-labelledby="services-title">
     <div className={styles.container}>
-      <div className={styles.servicesHead}><SectionTitle section="servicios" eyebrow="Áreas de trabajo" title={title} id="services-title" /></div>
+      <div className={styles.servicesHead}><SectionTitle section="servicios" eyebrow={content.eyebrow} title={title} id="services-title" /></div>
       <Collection route={ROUTE} section="servicios" path="items"><div className={styles.serviceGrid}>{items.map((item, index) => <Collection key={item._id} route={ROUTE} section="servicios" path="items" itemId={item._id}><article className={styles.serviceCard} data-reveal>
         <span className={styles.cardNumber} aria-hidden="true">{String(index + 1).padStart(2, '0')}</span><p className={styles.cardEyebrow}>{item.eyebrow}</p>
         <h3><a href={safeHref(item.href)}>{item.title}</a></h3><p className={styles.cardCopy}>{item._id === 'comunidad' && item.description === LEGACY_COMMUNITY_DESCRIPTION ? COMMUNITY_DESCRIPTION : item.description}</p>
-        <a className={styles.cardLink} href={safeHref(item.href)} aria-label={`Conocer ${item.eyebrow || item.title}`}>Explorar <span aria-hidden="true">↗</span></a>
+        <Field route={ROUTE} section="servicios" path="cardLinkLabel"><a className={styles.cardLink} href={safeHref(item.href)} aria-label={`Conocer ${item.eyebrow || item.title}`}>{content.cardLinkLabel} <span aria-hidden="true">↗</span></a></Field>
       </article></Collection>)}</div></Collection>
       <div className={styles.servicesAction} data-reveal>
         <div className={styles.servicesCloseCopy}>
-          <p className={styles.servicesCloseTitle}>Cada desafío merece una conversación diferente.</p>
-          <p className={styles.servicesCloseText}>Conversemos sobre lo que necesitás y exploremos cómo puedo acompañarte.</p>
+          <Field route={ROUTE} section="servicios" path="closingTitle"><p className={styles.servicesCloseTitle}>{content.closingTitle}</p></Field>
+          <Field route={ROUTE} section="servicios" path="closingText"><p className={styles.servicesCloseText}>{content.closingText}</p></Field>
         </div>
         <CmsLink route={ROUTE} section="servicios" path="cta" value={content.cta} className="editorial-button" /></div>
     </div>
@@ -159,7 +162,7 @@ function Approach() {
     <div className={`${styles.approachArcs} ${styles.approachArcsRight}`} aria-hidden="true" />
     <div className={`${styles.container} ${styles.approachGrid}`}>
       <div className={styles.approachHeading}>
-        <p className={styles.darkKicker} data-reveal>Career Longevity · Mi enfoque</p>
+        <Field route={ROUTE} section="enfoque" path="eyebrow"><p className={styles.darkKicker} data-reveal>{content.eyebrow}</p></Field>
         <Field route={ROUTE} section="enfoque" path="title"><h2 id="approach-title" data-reveal>{titleLines.map((line, index) => <span key={`${line}-${index}`}>{line}</span>)}</h2></Field>
         <Collection route={ROUTE} section="enfoque" path="steps"><ol className={styles.pillars} aria-label="Pilares de Career Longevity" data-reveal>{steps.map((step, index) => <Collection key={step._id} route={ROUTE} section="enfoque" path="steps" itemId={step._id}><li><div className={styles.pillarIcon}>{APPROACH_ICONS[index]}</div><div className={styles.pillarCopy}><span>0{index + 1}</span><h3>{step.title}</h3><p>{step.description}</p></div></li></Collection>)}</ol></Collection>
       </div>
@@ -169,17 +172,12 @@ function Approach() {
   </section>;
 }
 
-function linkedInUrl(value) {
-  if (typeof value !== 'string') return '';
-  try { const url = new URL(value); return url.protocol === 'https:' && /(^|\.)linkedin\.com$/i.test(url.hostname) ? url.href : ''; } catch { return ''; }
-}
-
 function Testimonials() {
   const { content } = useSection(ROUTE, 'testimonios');
   const items = validItems(content.items);
   const closingUrl = linkedInUrl(content.closingLink?.href) || LINKEDIN_RECOMMENDATIONS_URL;
   return <section id="testimonios" className={`${styles.section} ${styles.testimonials}`} aria-labelledby="testimonials-title"><div className={styles.container}>
-    <div className={styles.testimonialsHead}><SectionTitle section="testimonios" eyebrow="Recomendaciones" title={content.title} id="testimonials-title" /><Field route={ROUTE} section="testimonios" path="paragraph1"><p data-reveal>{content.paragraph1?.split(/(?<=\.)\s+/).map((sentence, index) => <span className={styles.recommendationSentence} key={index}>{index > 0 && ' '}{sentence}</span>)}</p></Field></div>
+    <div className={styles.testimonialsHead}><SectionTitle section="testimonios" eyebrow={content.eyebrow} title={content.title} id="testimonials-title" /><Field route={ROUTE} section="testimonios" path="paragraph1"><p data-reveal>{content.paragraph1?.split(/(?<=\.)\s+/).map((sentence, index) => <span className={styles.recommendationSentence} key={index}>{index > 0 && ' '}{sentence}</span>)}</p></Field></div>
     <Collection route={ROUTE} section="testimonios" path="items"><div className={styles.testimonialGrid}>{items.map((item, index) => {
       const portrait = safeImage(item.image, TESTIMONIAL_PORTRAITS[item.author] || '');
       const source = linkedInUrl(item.linkedinUrl) || LINKEDIN_RECOMMENDATIONS_URL;
@@ -200,7 +198,7 @@ function Testimonials() {
 function Articles() {
   const { content } = useSection(ROUTE, 'articulos');
   return <section id="articulos" className={`${styles.section} ${styles.articles}`} aria-labelledby="articles-title"><div className={styles.container}>
-    <div className={styles.articlesIntro}><SectionTitle section="articulos" eyebrow="Ideas y perspectivas" title={content.title} id="articles-title" /><div className={styles.articlesCopy} data-reveal><Field route={ROUTE} section="articulos" path="paragraph1"><p>{content.paragraph1}</p></Field><Field route={ROUTE} section="articulos" path="paragraph2"><p>{content.paragraph2}</p></Field></div></div>
+    <div className={styles.articlesIntro}><SectionTitle section="articulos" eyebrow={content.eyebrow} title={content.title} id="articles-title" /><div className={styles.articlesCopy} data-reveal><Field route={ROUTE} section="articulos" path="paragraph1"><p>{content.paragraph1}</p></Field><Field route={ROUTE} section="articulos" path="paragraph2"><p>{content.paragraph2}</p></Field></div></div>
     <div className={styles.articleFeed} data-reveal><ArticleCards limit={3} /></div><div className={styles.articlesAction} data-reveal><CmsLink route={ROUTE} section="articulos" path="cta" value={content.cta} className="editorial-button" /></div>
   </div></section>;
 }

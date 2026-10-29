@@ -136,7 +136,9 @@
         "linkedin": {
           "label": "LinkedIn",
           "href": "https://www.linkedin.com/in/careertransitioncoachclau/"
-        }
+        },
+        "menuLabel": "Menú",
+        "rightsText": "Todos los derechos reservados."
       },
       "fields": [
         {
@@ -159,6 +161,18 @@
           "label": "LinkedIn",
           "type": "link",
           "required": true
+        },
+        {
+          "key": "menuLabel",
+          "path": "menuLabel",
+          "label": "Botón «Menú»",
+          "type": "string"
+        },
+        {
+          "key": "rightsText",
+          "path": "rightsText",
+          "label": "Derechos reservados",
+          "type": "string"
         }
       ]
     }
@@ -239,6 +253,18 @@
             "paragraph3": "Ocupé posiciones de liderazgo en Recursos Humanos en compañías internacionales como Diageo y Kraft Foods, con responsabilidades regionales en América Latina.",
             "paragraph4": "Esa experiencia me permitió conocer de primera mano los desafíos que enfrentan quienes lideran organizaciones, desarrollan equipos o atraviesan decisiones importantes en su carrera.",
             "paragraph5": "Hoy combino esa perspectiva corporativa con mi formación en coaching para acompañar tanto a ejecutivos que buscan construir su siguiente etapa como a empresas que quieren fortalecer su liderazgo y desarrollar su talento.",
+            "experienceHeading": "Experiencia corporativa",
+            "metricValue": "20",
+            "metricSuffix": "+",
+            "metricLabelMobile": "Años de experiencia corporativa",
+            "metricLabel": "años de experiencia\ncorporativa",
+            "primaryLogo": "/assets/claudia-sanchez/testimonials/diageo-crop.png",
+            "primaryLogoAlt": "Diageo",
+            "secondaryLogo": "/assets/claudia-sanchez/testimonials/kraft.png",
+            "secondaryLogoAlt": "Kraft Foods",
+            "roleLine": "Liderazgo en Recursos Humanos",
+            "regionLine": "Responsabilidades regionales en América Latina",
+            "regionLineDesktop": "Responsabilidades regionales\nAmérica Latina",
             "credentials": [
               {
                 "_id": "item-1",
@@ -316,6 +342,88 @@
               "multiline": true
             },
             {
+              "key": "experienceHeading",
+              "path": "experienceHeading",
+              "label": "experienceHeading",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "metricValue",
+              "path": "metricValue",
+              "label": "metricValue",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "metricSuffix",
+              "path": "metricSuffix",
+              "label": "metricSuffix",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "metricLabelMobile",
+              "path": "metricLabelMobile",
+              "label": "metricLabelMobile",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "metricLabel",
+              "path": "metricLabel",
+              "label": "metricLabel",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "primaryLogo",
+              "path": "primaryLogo",
+              "label": "primaryLogo",
+              "type": "image"
+            },
+            {
+              "key": "primaryLogoAlt",
+              "path": "primaryLogoAlt",
+              "label": "primaryLogoAlt",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "secondaryLogo",
+              "path": "secondaryLogo",
+              "label": "secondaryLogo",
+              "type": "image"
+            },
+            {
+              "key": "secondaryLogoAlt",
+              "path": "secondaryLogoAlt",
+              "label": "secondaryLogoAlt",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "roleLine",
+              "path": "roleLine",
+              "label": "roleLine",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "regionLine",
+              "path": "regionLine",
+              "label": "regionLine",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "regionLineDesktop",
+              "path": "regionLineDesktop",
+              "label": "regionLineDesktop",
+              "type": "string",
+              "multiline": true
+            },
+            {
               "key": "credentials",
               "path": "credentials",
               "label": "credentials",
@@ -352,7 +460,9 @@
           "name": "servicios",
           "type": "servicios",
           "initialContent": {
+            "eyebrow": "Áreas de trabajo",
             "title": "Tres formas de construir la siguiente etapa con estrategia.",
+            "cardLinkLabel": "Explorar",
             "items": [
               {
                 "_id": "personas",
@@ -379,6 +489,8 @@
                 "href": "/comunidad-y-experiencias"
               }
             ],
+            "closingTitle": "Cada desafío merece una conversación diferente.",
+            "closingText": "Conversemos sobre lo que necesitás y exploremos cómo puedo acompañarte.",
             "cta": {
               "label": "Conversemos sobre tus necesidades",
               "href": "/contacto"
@@ -386,9 +498,23 @@
           },
           "fields": [
             {
+              "key": "eyebrow",
+              "path": "eyebrow",
+              "label": "eyebrow",
+              "type": "string",
+              "multiline": true
+            },
+            {
               "key": "title",
               "path": "title",
               "label": "title",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "cardLinkLabel",
+              "path": "cardLinkLabel",
+              "label": "cardLinkLabel",
               "type": "string",
               "multiline": true
             },
@@ -437,6 +563,20 @@
               ]
             },
             {
+              "key": "closingTitle",
+              "path": "closingTitle",
+              "label": "closingTitle",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "closingText",
+              "path": "closingText",
+              "label": "closingText",
+              "type": "string",
+              "multiline": true
+            },
+            {
               "key": "cta",
               "path": "cta",
               "label": "cta",
@@ -449,6 +589,7 @@
           "name": "enfoque",
           "type": "enfoque",
           "initialContent": {
+            "eyebrow": "Career Longevity · Mi enfoque",
             "title": "Anticipar. Diseñar. Ejecutar.",
             "paragraph1": "Career Longevity parte de una idea sencilla: las decisiones importantes de carrera no deberían comenzar cuando las opciones ya se redujeron.",
             "paragraph2": "Trabajamos con claridad, escenarios de futuro y un ecosistema de especialistas para construir una One-Page Strategy y un plan de ejecución.",
@@ -475,6 +616,13 @@
             "highlight": "No se trata de improvisar el siguiente movimiento, sino de prepararlo con perspectiva y método."
           },
           "fields": [
+            {
+              "key": "eyebrow",
+              "path": "eyebrow",
+              "label": "eyebrow",
+              "type": "string",
+              "multiline": true
+            },
             {
               "key": "title",
               "path": "title",
@@ -540,6 +688,7 @@
           "name": "testimonios",
           "type": "testimonios",
           "initialContent": {
+            "eyebrow": "Recomendaciones",
             "title": "La experiencia de quienes han trabajado conmigo",
             "paragraph1": "Cada proceso tiene sus propios desafíos. Estas son algunas de las experiencias de profesionales y organizaciones a los que he acompañado.",
             "closingEyebrow": "MÁS EXPERIENCIAS COMPARTIDAS",
@@ -586,6 +735,13 @@
             ]
           },
           "fields": [
+            {
+              "key": "eyebrow",
+              "path": "eyebrow",
+              "label": "eyebrow",
+              "type": "string",
+              "multiline": true
+            },
             {
               "key": "title",
               "path": "title",
@@ -698,6 +854,7 @@
           "name": "articulos",
           "type": "articulos",
           "initialContent": {
+            "eyebrow": "Ideas y perspectivas",
             "title": "Reflexiones sobre liderazgo, carrera y transformación.",
             "paragraph1": "Comparto ideas, experiencias y perspectivas sobre los desafíos que enfrentan los líderes, las organizaciones y los profesionales a lo largo de su trayectoria.",
             "paragraph2": "Un espacio para explorar nuevas formas de pensar el desarrollo profesional, el liderazgo y el futuro del trabajo.",
@@ -707,6 +864,13 @@
             }
           },
           "fields": [
+            {
+              "key": "eyebrow",
+              "path": "eyebrow",
+              "label": "eyebrow",
+              "type": "string",
+              "multiline": true
+            },
             {
               "key": "title",
               "path": "title",
@@ -965,6 +1129,7 @@
           "type": "servicios",
           "initialContent": {
             "title": "Un acompañamiento adaptado a tu momento profesional",
+            "programLabel": "Programa",
             "items": [
               {
                 "_id": "item-3",
@@ -1000,6 +1165,13 @@
               "key": "title",
               "path": "title",
               "label": "title",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "programLabel",
+              "path": "programLabel",
+              "label": "programLabel",
               "type": "string",
               "multiline": true
             },
@@ -1061,13 +1233,24 @@
           "name": "enfoque",
           "type": "enfoque",
           "initialContent": {
+            "eyebrow": "CÓMO TRABAJAMOS",
             "title": "Un proceso que parte de ti y se convierte en acción",
             "paragraph1": "No existen dos trayectorias iguales. Por eso, el acompañamiento comienza por comprender tu situación, tus desafíos y aquello que quieres lograr.",
             "paragraph2": "A partir de esa conversación, trabajamos para identificar fortalezas, explorar nuevas perspectivas y construir una estrategia que puedas llevar a la práctica.",
             "paragraph3": "Mi enfoque combina experiencia corporativa, escucha, reflexión y herramientas de desarrollo profesional.",
-            "paragraph4": "Transformamos tus reflexiones en decisiones y acciones concretas, para que avances con mayor claridad, confianza y seguridad."
+            "paragraph4": "Transformamos tus reflexiones en decisiones y acciones concretas, para que avances con mayor claridad, confianza y seguridad.",
+            "step1Title": "Comprender tu momento",
+            "step2Title": "Explorar nuevas perspectivas",
+            "step3Title": "Construir una estrategia"
           },
           "fields": [
+            {
+              "key": "eyebrow",
+              "path": "eyebrow",
+              "label": "eyebrow",
+              "type": "string",
+              "multiline": true
+            },
             {
               "key": "title",
               "path": "title",
@@ -1102,6 +1285,27 @@
               "label": "paragraph4",
               "type": "string",
               "multiline": true
+            },
+            {
+              "key": "step1Title",
+              "path": "step1Title",
+              "label": "step1Title",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "step2Title",
+              "path": "step2Title",
+              "label": "step2Title",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "step3Title",
+              "path": "step3Title",
+              "label": "step3Title",
+              "type": "string",
+              "multiline": true
             }
           ]
         },
@@ -1110,6 +1314,7 @@
           "name": "testimonios",
           "type": "testimonios",
           "initialContent": {
+            "eyebrow": "TESTIMONIOS",
             "title": "Experiencias de quienes han dado el siguiente paso",
             "paragraph1": "Cada trayectoria es diferente. Conoce cómo otros profesionales han encontrado claridad, fortalecido sus capacidades y avanzado hacia sus objetivos.",
             "items": [
@@ -1120,7 +1325,9 @@
                 "role": "Head of Marketing | Marketing Director",
                 "quote": "Claudia ha sido mi coach durante los últimos meses, y puedo recomendarla ampliamente en dos aspectos. Primero, si buscas orientación en tu desarrollo profesional dentro de tu empresa actual o en la exploración de nuevos retos y segundo, si deseas clarificar tu visión a futuro y definir lo que realmente necesitas para sentirte realizado.",
                 "image": "/assets/claudia-sanchez/testimonials/manuel-mirabent.jpg",
-                "alt": "Retrato de Manuel Mirabent"
+                "alt": "Retrato de Manuel Mirabent",
+                "sourceLabel": "RECOMENDACIÓN PÚBLICA EN LINKEDIN",
+                "linkedinUrl": "https://www.linkedin.com/in/claudiasanchezurencio/details/recommendations/?detailScreenTabIndex=0"
               },
               {
                 "_id": "item-2",
@@ -1129,7 +1336,9 @@
                 "role": "Sales Director / Trade Marketing / Operations Director",
                 "quote": "Gracias a su acompañamiento, recuperé la claridad, la confianza y la energía para reenfocar mis objetivos, fortalecer mis capacidades y reconectar con mi propósito.",
                 "image": "/assets/claudia-sanchez/testimonials/ovidio-urbe.jpg",
-                "alt": "Retrato de Ovidio Uribe"
+                "alt": "Retrato de Ovidio Uribe",
+                "sourceLabel": "RECOMENDACIÓN PÚBLICA EN LINKEDIN",
+                "linkedinUrl": "https://www.linkedin.com/in/claudiasanchezurencio/details/recommendations/?detailScreenTabIndex=0"
               },
               {
                 "_id": "item-3",
@@ -1138,11 +1347,20 @@
                 "role": "Exlíder corporativo y emprendedor",
                 "quote": "Claudia es un gran coach con alta empatía y capacidad de escucha, pero sobre todo con un auténtico interés por ayudar a los demás en el logro de sus metas.",
                 "image": "/assets/claudia-sanchez/testimonials/eduardo-diaz.jpg",
-                "alt": "Retrato de Eduardo Díaz Cortazar"
+                "alt": "Retrato de Eduardo Díaz Cortazar",
+                "sourceLabel": "RECOMENDACIÓN PÚBLICA EN LINKEDIN",
+                "linkedinUrl": "https://www.linkedin.com/in/claudiasanchezurencio/details/recommendations/?detailScreenTabIndex=0"
               }
             ]
           },
           "fields": [
+            {
+              "key": "eyebrow",
+              "path": "eyebrow",
+              "label": "eyebrow",
+              "type": "string",
+              "multiline": true
+            },
             {
               "key": "title",
               "path": "title",
@@ -1204,6 +1422,20 @@
                   "label": "alt",
                   "type": "string",
                   "multiline": true
+                },
+                {
+                  "key": "sourceLabel",
+                  "path": "sourceLabel",
+                  "label": "sourceLabel",
+                  "type": "string",
+                  "multiline": true
+                },
+                {
+                  "key": "linkedinUrl",
+                  "path": "linkedinUrl",
+                  "label": "linkedinUrl",
+                  "type": "string",
+                  "multiline": true
                 }
               ]
             }
@@ -1214,6 +1446,7 @@
           "name": "contacto",
           "type": "contacto",
           "initialContent": {
+            "eyebrow": "CHARLEMOS",
             "title": "¿Qué te gustaría construir en tu siguiente etapa?",
             "paragraph1": "Ya sea que estés considerando un cambio, buscando crecer como líder o necesites claridad para tomar una decisión importante, podemos comenzar con una conversación.",
             "paragraph2": "Cuéntame dónde estás y qué te gustaría lograr.",
@@ -1223,6 +1456,13 @@
             }
           },
           "fields": [
+            {
+              "key": "eyebrow",
+              "path": "eyebrow",
+              "label": "eyebrow",
+              "type": "string",
+              "multiline": true
+            },
             {
               "key": "title",
               "path": "title",
@@ -1412,6 +1652,7 @@
           "initialContent": {
             "eyebrow": "ACOMPAÑAMIENTO ORGANIZACIONAL",
             "title": "Soluciones para equipos y transiciones ejecutivas",
+            "includedHeading": "Qué incluye",
             "items": [
               {
                 "_id": "equipos-culturas",
@@ -1420,7 +1661,8 @@
                 "subtitle": "Resolvemos la fricción y la convertimos en comunicación.",
                 "description": "Para equipos directivos, gerenciales y multifuncionales que atraviesan cambios, reorganizaciones o desafíos de integración. Transformamos la fricción en acuerdos que mejoran la comunicación y los resultados.\n\nIncluye Assessment How to Fascinate individual y de equipo; off-site de 4 u 8 horas; tres fases de alineación: Reconocernos, Destrabar y Converger; autoconocimiento, comunicación, feedback y relaciones; coaching ejecutivo opcional para integración y transferencia de conocimiento.",
                 "href": "https://api.whatsapp.com/send?phone=16892306889&text=Hola%20Claudia%2C%20estuve%20viendo%20tu%20programa%20Equipos%20y%20Culturas%20Fascinantes%20y%20me%20gustar%C3%ADa%20conocer%20m%C3%A1s%20sobre%20c%C3%B3mo%20podr%C3%ADamos%20trabajarlo%20en%20nuestra%20organizaci%C3%B3n.",
-                "label": "Solicitar información"
+                "label": "Solicitar información",
+                "tag": "EQUIPOS"
               },
               {
                 "_id": "executive-longevity",
@@ -1429,7 +1671,8 @@
                 "subtitle": "Outplacement integral: un rediseño, no una salida.",
                 "description": "Para organizaciones que acompañan la salida, jubilación o retiro de líderes senior. Un proceso integral que aborda la identidad, las finanzas y el futuro profesional, protegiendo la reputación de la organización.\n\nIncluye acompañamiento en el duelo y la nueva identidad profesional; estrategia de futuro: empleo, consejos, consultoría, advisory o fractional; CV, LinkedIn, narrativa profesional y activación de red; revisión de finanzas personales con advisor; protocolo con RH, transferencia de conocimiento y apoyo opcional a equipos.",
                 "href": "https://api.whatsapp.com/send?phone=16892306889&text=Hola%20Claudia%2C%20me%20interesa%20conocer%20m%C3%A1s%20sobre%20Executive%20Longevity%20Program%20y%20c%C3%B3mo%20podr%C3%ADa%20implementarse%20en%20nuestra%20organizaci%C3%B3n.",
-                "label": "Solicitar información"
+                "label": "Solicitar información",
+                "tag": "TRANSICIONES"
               }
             ]
           },
@@ -1445,6 +1688,13 @@
               "key": "title",
               "path": "title",
               "label": "title",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "includedHeading",
+              "path": "includedHeading",
+              "label": "includedHeading",
               "type": "string",
               "multiline": true
             },
@@ -1494,6 +1744,13 @@
                   "key": "label",
                   "path": "label",
                   "label": "label",
+                  "type": "string",
+                  "multiline": true
+                },
+                {
+                  "key": "tag",
+                  "path": "tag",
+                  "label": "tag",
                   "type": "string",
                   "multiline": true
                 }
@@ -1636,6 +1893,7 @@
           "name": "testimonios",
           "type": "testimonios",
           "initialContent": {
+            "eyebrow": "TESTIMONIOS",
             "title": "Experiencias de quienes han trabajado conmigo",
             "paragraph1": "Conocé cómo el acompañamiento a líderes y equipos se traduce en nuevas perspectivas, desarrollo y cambios dentro de las organizaciones.",
             "items": [
@@ -1646,7 +1904,11 @@
                 "role": "Subdirector Comercial en Softys.",
                 "quote": "en Marzo 2025 tuvimos la oportunidad mi equipo y yo de tener un taller de Fascinated Groups liderado por Claudia, una experiencia única y 100% recomendable para equipos multifuncionales y diversos que requieren maximizar el talento de cada individuo y potenciar los resultados de los equipos, fue una sesión de verdad memorable para los equipos.",
                 "image": "/assets/claudia-sanchez/testimonials/ana-cristina.jpg",
-                "alt": "Retrato de Ana Cristina del Ángel Nájera"
+                "alt": "Retrato de Ana Cristina del Ángel Nájera",
+                "note": "Extracto de recomendación",
+                "lang": "es",
+                "sourceLabel": "RECOMENDACIÓN PÚBLICA EN LINKEDIN",
+                "linkedinUrl": "https://www.linkedin.com/in/claudiasanchezurencio/details/recommendations/?detailScreenTabIndex=0"
               },
               {
                 "_id": "pedro-fondevila",
@@ -1655,7 +1917,10 @@
                 "role": "",
                 "quote": "The transformation has been so visible and reflected in KPI improvements that we have decided to organize a second wave.",
                 "image": "/assets/claudia-sanchez/testimonials/pedro-fondevila.jpg",
-                "alt": "Retrato de Pedro Fondevila"
+                "alt": "Retrato de Pedro Fondevila",
+                "lang": "en",
+                "sourceLabel": "RECOMENDACIÓN PÚBLICA EN LINKEDIN",
+                "linkedinUrl": "https://www.linkedin.com/in/claudiasanchezurencio/details/recommendations/?detailScreenTabIndex=0"
               },
               {
                 "_id": "ricardo-schmidt",
@@ -1664,11 +1929,22 @@
                 "role": "Gerente General at DON SATUR SRL.",
                 "quote": "Brinda soluciones muy profesionales, es muy prolija tanto en la planificación como en la ejecución, y realiza un seguimiento detallado durante los procesos en los que participa, y luego de los mismos para validar su correcta implementación.",
                 "image": "",
-                "alt": ""
+                "alt": "",
+                "initials": "RS",
+                "lang": "es",
+                "sourceLabel": "RECOMENDACIÓN PÚBLICA EN LINKEDIN",
+                "linkedinUrl": "https://www.linkedin.com/in/claudiasanchezurencio/details/recommendations/?detailScreenTabIndex=0"
               }
             ]
           },
           "fields": [
+            {
+              "key": "eyebrow",
+              "path": "eyebrow",
+              "label": "eyebrow",
+              "type": "string",
+              "multiline": true
+            },
             {
               "key": "title",
               "path": "title",
@@ -1728,6 +2004,41 @@
                   "key": "alt",
                   "path": "alt",
                   "label": "alt",
+                  "type": "string",
+                  "multiline": true
+                },
+                {
+                  "key": "note",
+                  "path": "note",
+                  "label": "note",
+                  "type": "string",
+                  "multiline": true
+                },
+                {
+                  "key": "lang",
+                  "path": "lang",
+                  "label": "lang",
+                  "type": "string",
+                  "multiline": true
+                },
+                {
+                  "key": "sourceLabel",
+                  "path": "sourceLabel",
+                  "label": "sourceLabel",
+                  "type": "string",
+                  "multiline": true
+                },
+                {
+                  "key": "linkedinUrl",
+                  "path": "linkedinUrl",
+                  "label": "linkedinUrl",
+                  "type": "string",
+                  "multiline": true
+                },
+                {
+                  "key": "initials",
+                  "path": "initials",
+                  "label": "initials",
                   "type": "string",
                   "multiline": true
                 }
@@ -1808,11 +2119,19 @@
           "name": "intro",
           "type": "intro",
           "initialContent": {
+            "eyebrow": "Contacto",
             "title": "Conversemos sobre lo que necesitas.",
             "paragraph1": "Cada persona y cada organización enfrenta desafíos diferentes. Me gustaría conocer tu situación y explorar cómo puedo acompañarte.",
             "paragraph2": "Completa el formulario y cuéntame brevemente qué estás buscando. Me pondré en contacto contigo para continuar la conversación."
           },
           "fields": [
+            {
+              "key": "eyebrow",
+              "path": "eyebrow",
+              "label": "eyebrow",
+              "type": "string",
+              "multiline": true
+            },
             {
               "key": "title",
               "path": "title",
@@ -1854,7 +2173,7 @@
             "messageLabel": "¿En qué puedo ayudarte? *",
             "messagePlaceholder": "Cuéntame brevemente qué necesitas...",
             "submitLabel": "Enviar consulta",
-            "pending": "El formulario todavía no está operativo. Puedes contactarme a través de LinkedIn.",
+            "pending": "El envío todavía no está disponible. Tus datos se conservan; mientras tanto puedes escribirme por correo electrónico o LinkedIn.",
             "error": "No fue posible enviar tu mensaje. Inténtalo nuevamente en unos momentos.",
             "loading": "Enviando consulta…",
             "successTitle": "¡Gracias por escribirme!",
@@ -1996,9 +2315,14 @@
           "initialContent": {
             "title": "¿Prefieres escribir directamente?",
             "paragraph1": "También puedes contactarme por correo electrónico, WhatsApp o LinkedIn.",
+            "emailChannelLabel": "Correo electrónico",
             "email": {
               "label": "clausurencio@gmail.com",
               "href": "mailto:clausurencio@gmail.com"
+            },
+            "whatsapp": {
+              "label": "Escribirme por WhatsApp",
+              "href": "https://api.whatsapp.com/send?phone=16892306889&text=Hola%20Claudia%2C%20estuve%20recorriendo%20tu%20p%C3%A1gina%20web%20y%20me%20gustar%C3%ADa%20conversar%20con%20vos%20para%20conocer%20m%C3%A1s%20sobre%20tus%20servicios."
             },
             "linkedin": {
               "label": "LinkedIn",
@@ -2021,9 +2345,22 @@
               "multiline": true
             },
             {
+              "key": "emailChannelLabel",
+              "path": "emailChannelLabel",
+              "label": "emailChannelLabel",
+              "type": "string",
+              "multiline": true
+            },
+            {
               "key": "email",
               "path": "email",
               "label": "email",
+              "type": "link"
+            },
+            {
+              "key": "whatsapp",
+              "path": "whatsapp",
+              "label": "whatsapp",
               "type": "link"
             },
             {
@@ -2295,7 +2632,8 @@
               "href": "https://calendly.com/claudiasanchezurencio/45min"
             },
             "complement": "CAREER LONGEVITY · ESTRATEGIA DE CARRERA EJECUTIVA",
-            "portrait": "/assets/claudia-sanchez/claudia-hero.png"
+            "portrait": "/assets/claudia-sanchez/claudia-hero.png",
+            "portraitAlt": "Retrato de Claudia Sánchez Urencio"
           },
           "fields": [
             {
@@ -2345,6 +2683,13 @@
               "path": "portrait",
               "label": "Retrato (también en Sobre mí)",
               "type": "image"
+            },
+            {
+              "key": "portraitAlt",
+              "path": "portraitAlt",
+              "label": "Texto alternativo del retrato",
+              "type": "string",
+              "multiline": true
             }
           ]
         },
@@ -2962,6 +3307,7 @@
           "visible": true,
           "lockedPosition": false,
           "initialContent": {
+            "skipLabel": "Saltar al contenido",
             "brandLink": {
               "label": "Claudia Sánchez Urencio",
               "href": "#inicio"
@@ -2970,6 +3316,8 @@
               "label": "Reservar",
               "href": "https://calendly.com/claudiasanchezurencio/45min"
             },
+            "menuEyebrow": "Índice",
+            "menuHomeLabel": "Inicio",
             "navLink0": {
               "label": "Tu siguiente movimiento",
               "href": "#situaciones"
@@ -2989,6 +3337,13 @@
           },
           "fields": [
             {
+              "key": "skipLabel",
+              "path": "skipLabel",
+              "label": "Enlace «Saltar al contenido»",
+              "type": "string",
+              "multiline": true
+            },
+            {
               "key": "brand-link",
               "path": "brandLink",
               "label": "Marca",
@@ -3001,6 +3356,20 @@
               "label": "Botón de reserva",
               "type": "link",
               "required": true
+            },
+            {
+              "key": "menuEyebrow",
+              "path": "menuEyebrow",
+              "label": "Título del menú móvil",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "menuHomeLabel",
+              "path": "menuHomeLabel",
+              "label": "Enlace «Inicio» del menú móvil",
+              "type": "string",
+              "multiline": true
             },
             {
               "key": "nav-0",
@@ -3251,11 +3620,30 @@
           "name": "listado",
           "type": "listado",
           "initialContent": {
-            "empty": "Los artículos estarán disponibles próximamente.",
+            "loading": "Cargando artículos…",
+            "error": "No pudimos cargar los artículos.",
+            "empty": "No hay artículos publicados por el momento.",
             "readLabel": "Leer artículo",
+            "countTemplate": "Mostrando {n} de {total} artículos",
+            "moreLabel": "Mostrar más artículos",
+            "lessLabel": "Mostrar menos",
             "items": []
           },
           "fields": [
+            {
+              "key": "loading",
+              "path": "loading",
+              "label": "loading",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "error",
+              "path": "error",
+              "label": "error",
+              "type": "string",
+              "multiline": true
+            },
             {
               "key": "empty",
               "path": "empty",
@@ -3267,6 +3655,27 @@
               "key": "readLabel",
               "path": "readLabel",
               "label": "readLabel",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "countTemplate",
+              "path": "countTemplate",
+              "label": "countTemplate",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "moreLabel",
+              "path": "moreLabel",
+              "label": "moreLabel",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "lessLabel",
+              "path": "lessLabel",
+              "label": "lessLabel",
               "type": "string",
               "multiline": true
             },
@@ -3374,13 +3783,21 @@
           "name": "encabezado",
           "type": "encabezado",
           "initialContent": {
-            "collection": "How to Thrive Beyond 40"
+            "collection": "How to Thrive Beyond 40",
+            "backLabel": "Volver a artículos"
           },
           "fields": [
             {
               "key": "collection",
               "path": "collection",
               "label": "collection",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "backLabel",
+              "path": "backLabel",
+              "label": "backLabel",
               "type": "string",
               "multiline": true
             }
@@ -3391,9 +3808,33 @@
           "name": "contenido",
           "type": "contenido",
           "initialContent": {
-            "unavailable": "Este artículo todavía no está disponible."
+            "loading": "Cargando artículo…",
+            "error": "No pudimos cargar el artículo.",
+            "missingTitle": "Artículo inexistente",
+            "unavailable": "El artículo que buscás no está publicado o no existe."
           },
           "fields": [
+            {
+              "key": "loading",
+              "path": "loading",
+              "label": "loading",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "error",
+              "path": "error",
+              "label": "error",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "missingTitle",
+              "path": "missingTitle",
+              "label": "missingTitle",
+              "type": "string",
+              "multiline": true
+            },
             {
               "key": "unavailable",
               "path": "unavailable",
@@ -3409,6 +3850,8 @@
           "type": "pie-articulo",
           "initialContent": {
             "signature": "Por Claudia Sánchez Urencio",
+            "sourceLabel": "Ver publicación original en LinkedIn",
+            "relatedTitle": "Continuá leyendo",
             "back": {
               "label": "Volver a Artículos",
               "href": "/articulos"
@@ -3419,6 +3862,20 @@
               "key": "signature",
               "path": "signature",
               "label": "signature",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "sourceLabel",
+              "path": "sourceLabel",
+              "label": "sourceLabel",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "relatedTitle",
+              "path": "relatedTitle",
+              "label": "relatedTitle",
               "type": "string",
               "multiline": true
             },
@@ -3595,7 +4052,10 @@
           "name": "experiencias",
           "type": "experiencias",
           "initialContent": {
+            "eyebrow": "LAS EXPERIENCIAS",
             "title": "Dos experiencias para salir de la inercia",
+            "modalitiesHeading": "Modalidades",
+            "topicsHeading": "Qué trabaja",
             "items": [
               {
                 "_id": "lifeplacement",
@@ -3619,9 +4079,30 @@
           },
           "fields": [
             {
+              "key": "eyebrow",
+              "path": "eyebrow",
+              "label": "eyebrow",
+              "type": "string",
+              "multiline": true
+            },
+            {
               "key": "title",
               "path": "title",
               "label": "title",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "modalitiesHeading",
+              "path": "modalitiesHeading",
+              "label": "modalitiesHeading",
+              "type": "string",
+              "multiline": true
+            },
+            {
+              "key": "topicsHeading",
+              "path": "topicsHeading",
+              "label": "topicsHeading",
               "type": "string",
               "multiline": true
             },

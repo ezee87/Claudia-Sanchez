@@ -19,6 +19,17 @@ type Props = {
 }
 
 const INTERACTIVE_SELECTOR = 'a,button,input,select,textarea,summary,details,[role="button"],[role="link"]'
+// Los enlaces nunca navegan desde un elemento editable: el clic selecciona el elemento.
+// Incluye tarjetas que son enlaces y enlaces estirados con ::after sobre toda la tarjeta.
+const LINK_SELECTOR = 'a[href],area[href],[role="link"]'
+
+/** Controles propios de la vista previa (botones, formularios, acordeones) que deben seguir funcionando. */
+function isPreviewControl(target: Element, root: HTMLElement) {
+  const link = target.closest(LINK_SELECTOR)
+  if (link && (link === root || root.contains(link) || link.contains(root))) return false
+  const interactive = target.closest(INTERACTIVE_SELECTOR)
+  return Boolean(interactive && interactive !== root && root.contains(interactive))
+}
 
 function hasInteractiveSemantics(element: ReactElement<EditableElementProps>) {
   if (element.props.role) return true
@@ -40,11 +51,7 @@ export function CmsEditableCollection({ config, pageRoute, sectionKey, collectio
   }, targetOrigin)
 
   const onClick = (event: MouseEvent<HTMLElement>) => {
-    const target = event.target
-    if (target instanceof Element) {
-      const interactive = target.closest(INTERACTIVE_SELECTOR)
-      if (interactive && interactive !== event.currentTarget) return
-    }
+    if (event.target instanceof Element && isPreviewControl(event.target, event.currentTarget)) return
     event.preventDefault()
     event.stopPropagation()
     select()

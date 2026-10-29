@@ -1,4 +1,5 @@
 ﻿import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
 import { createServer } from 'vite';
 const server=await createServer({server:{middlewareMode:true},appType:'custom'});
 try{
@@ -104,6 +105,39 @@ try{
  const {resolveCmsLocalOnly}=await server.ssrLoadModule('/src/integration/eze-cms/cmsMode.ts');
  for(const [value,dev,expected] of [['true',false,true],[' TRUE ',false,true],['false',true,false],[undefined,true,true],[undefined,false,false],['',false,false],['1',false,false]])assert.equal(resolveCmsLocalOnly(value,dev),expected,`VITE_CMS_LOCAL_ONLY=${value} dev=${dev}`);
  console.log('OK: VITE_CMS_LOCAL_ONLY fuerza contenido local (true), Eze CMS (false) o el modo por entorno (sin definir).');
+ const snap=await import('./cms-snapshot-plugin.mjs');
+ for(const [value,dev] of [['true',false],[' TRUE ',false],['false',true],[undefined,true],[undefined,false],['',false],['1',false]])assert.equal(snap.resolveCmsLocalOnly(value,dev),resolveCmsLocalOnly(value,dev),'El plugin y cmsMode.ts deben decidir el mismo modo');
+ const jwt=(role)=>`x.${Buffer.from(JSON.stringify({role})).toString('base64url')}.y`;
+ snap.assertPublicKey('sb_publishable_abc');snap.assertPublicKey(jwt('anon'));
+ for(const key of ['sb_secret_abc',jwt('service_role'),'','otra'])assert.throws(()=>snap.assertPublicKey(key),undefined,`Clave rechazada: ${key.slice(0,12)}`);
+ const manifest=JSON.parse(readFileSync('src/integration/eze-cms/claudia-sanchez.manifest.json','utf8'));
+ const row=(content)=>({ok:true,status:200,json:async()=>[{content,settings:{}}]});
+ const calls=[];const okFetch=async(url,init)=>{const args=JSON.parse(init.body);calls.push([url.split('/rpc/')[1],args]);assert.equal(init.method,'POST');return row({route:args.page_route??null,key:args.section_key??args.global_key});};
+ const built=await snap.fetchCmsSnapshot({url:'https://demo.supabase.co/',key:'sb_publishable_abc',manifest,fetchImpl:okFetch});
+ const sectionCount=manifest.pages.reduce((n,p)=>n+p.sections.length,0);
+ assert.equal(Object.keys(built.sections).length,sectionCount);assert.equal(Object.keys(built.globals).length,manifest.globals.length);assert.equal(built.site,'claudia-sanchez');
+ assert.ok(calls.every(([fn])=>['get_public_section','get_public_site_global'].includes(fn)),'Solo RPC públicas de lectura');
+ assert.ok(!Object.keys(built.sections).some(k=>k.startsWith('/disena-tu-futuro')||k.startsWith('/newsletter')),'Sin páginas antiguas');
+ assert.deepEqual(built.sections['/diseno-de-carrera::hero'],{route:'/diseno-de-carrera',key:'hero'});
+ const fails=async(fetchImpl,pattern,extra={})=>assert.rejects(snap.fetchCmsSnapshot({url:'https://demo.supabase.co',key:'sb_publishable_abc',manifest,fetchImpl,attempts:2,...extra}),pattern);
+ await fails(async()=>{throw new TypeError('fetch failed');},/fetch failed/);
+ let serverErrors=0;await fails(async()=>{serverErrors++;return {ok:false,status:503,json:async()=>({})};},/HTTP 503/);assert.equal(serverErrors,(sectionCount+manifest.globals.length)*2,'Reintenta los 5xx');
+ await fails(async(url,init)=>JSON.parse(init.body).section_key==='hero'?{ok:true,status:200,json:async()=>[]}:okFetch(url,init),/se esperaba 1 fila y llegaron 0/);
+ await fails(async(url,init)=>JSON.parse(init.body).global_key?{ok:true,status:200,json:async()=>[{content:null}]}:okFetch(url,init),/global institutional-/);
+ await fails(okFetch,/HTTPS/,{url:'http://demo.supabase.co'});await fails(okFetch,/clave secreta/,{key:'sb_secret_abc'});
+ const {initialCmsState,applyRemoteContent}=await server.ssrLoadModule('/src/integration/eze-cms/useCmsSection.ts');
+ const local={title:'Local',cta:{label:'Ir',href:'/x'},extra:'solo local'};
+ const fromBuild=initialCmsState(local,{title:'Build',cta:{label:'Ir build'}},false);
+ assert.deepEqual(fromBuild.content,{title:'Build',cta:{label:'Ir build',href:'/x'},extra:'solo local'});assert.equal(fromBuild.source,'build');
+ assert.equal(initialCmsState(local,{title:'Build'},true).content,local,'En modo local se ignora el contenido del build');
+ assert.equal(initialCmsState(local,null,false).content,local);assert.equal(initialCmsState(local,null,false).source,'local');
+ assert.equal(applyRemoteContent(fromBuild,{...fromBuild.content,cta:{...fromBuild.content.cta}}).content,fromBuild.content,'Sin cambios se conserva el mismo objeto');
+ assert.equal(applyRemoteContent(fromBuild,{...fromBuild.content,title:'Nuevo'}).content.title,'Nuevo');
+ const {deliverTogether}=await server.ssrLoadModule('/src/integration/eze-cms/cmsRuntime.ts');
+ const done=[];const later=(ms,v)=>new Promise(r=>setTimeout(()=>r(v),ms));
+ await Promise.all([deliverTogether(later(5,'rápida')).then(v=>done.push([v,Date.now()])),deliverTogether(later(120,'lenta')).then(v=>done.push([v,Date.now()]))]);
+ assert.ok(Math.abs(done[0][1]-done[1][1])<30,'Las lecturas del mismo render se entregan juntas');
+ console.log('OK: contenido CMS del build (lectura pública, validación, fallo explícito, sin claves secretas), prioridad remoto > build > local y entrega conjunta.');
  console.log('OK: selección preview de campos, colecciones, items y globales; targetOrigin explícito, lista de orígenes exactos y rechazo de origen no autorizado (simulación local).');
 }finally{await server.close();}
 

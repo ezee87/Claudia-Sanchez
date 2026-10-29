@@ -168,10 +168,10 @@ export default function SiteHeader({ brand, nav, tagline }) {
             exit="hidden"
           >
             <nav aria-labelledby="menu-movil-titulo">
-              <motion.p id="menu-movil-titulo" className={styles.panelEyebrow} variants={itemMotion}>Índice</motion.p>
+              <ClaudiaEditable sectionKey="site-header" fieldPath="menuEyebrow"><motion.p id="menu-movil-titulo" className={styles.panelEyebrow} variants={itemMotion}>{content.menuEyebrow}</motion.p></ClaudiaEditable>
               <ul>
                 <motion.li variants={itemMotion}>
-                  <a href="#inicio" onClick={goTop}>Inicio</a>
+                  <ClaudiaEditable sectionKey="site-header" fieldPath="menuHomeLabel"><a href="#inicio" onClick={goTop}>{content.menuHomeLabel}</a></ClaudiaEditable>
                 </motion.li>
                 {navLinks.map((link, index) => {
                   return <motion.li key={link.id} variants={itemMotion}>

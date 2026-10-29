@@ -10,17 +10,8 @@ for (const item of content['/personas']?.servicios?.items || []) {
 }
 export { content };
 
-export function safeHref(value, fallback = '/contacto') {
-  if (typeof value !== 'string' || !value.trim() || /[\u0000-\u0020\\]/.test(value)) return fallback;
-  if (value.startsWith('/') && !value.startsWith('//')) return value;
-  if (/^#[\w-]+$/.test(value)) return value;
-  try { if (['https:', 'http:', 'mailto:', 'tel:'].includes(new URL(value).protocol)) return value; } catch { /* use safe local destination */ }
-  return fallback;
-}
-export function safeImage(value, fallback = '') {
-  const url = safeHref(value, fallback);
-  return /^(https?:\/\/|\/(?!\/))/.test(url) ? url : fallback;
-}
+export { safeHref, safeImage } from '../../utils/safeUrl.js';
+export { formatDate } from '../../integration/eze-cms/articleShared.js';
 export function validItems(value) {
   const seen = new Set();
   return (Array.isArray(value) ? value : []).filter(item => {
@@ -37,4 +28,3 @@ export function publishedArticles(items) {
   }).sort((a,b) => b.publishedAt.localeCompare(a.publishedAt));
 }
 export const articleFields = { slug:'', title:'', publishedAt:'', cover:'', alt:'', body:'', status:'draft', visible:1 };
-export const formatDate = value => new Intl.DateTimeFormat('es', {dateStyle:'long',timeZone:'UTC'}).format(new Date(value));

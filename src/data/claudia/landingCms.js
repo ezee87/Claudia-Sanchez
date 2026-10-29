@@ -25,11 +25,18 @@ export const heroFallback = (hero, portrait) => ({
   ctaLink: null,
   complement: hero.complement,
   portrait: portrait.src,
+  portraitAlt: portrait.alt,
 });
 export const situationsFallback = (content) => ({ ...content, ctaLabel: BOOKING_LABEL, ctaLink: null });
 export const lifeFallback = (content) => ({ ...content, instruction: 'Selecciona una dimensión para explorarla', hubLabel: 'L.I.F.E.' });
 export const closingFallback = (closing) => ({ ...closing, ctaLabel: BOOKING_LABEL, ctaLink: null });
-export const siteHeaderFallback = (brand) => ({ brandLink: { label: brand, href: '#inicio' }, ctaLink: null });
+export const siteHeaderFallback = (brand) => ({
+  skipLabel: 'Saltar al contenido',
+  brandLink: { label: brand, href: '#inicio' },
+  ctaLink: null,
+  menuEyebrow: 'Índice',
+  menuHomeLabel: 'Inicio',
+});
 export const siteFooterFallback = (brand, content) => ({
   brand,
   line: content.line.replace(`${brand} · `, ''),

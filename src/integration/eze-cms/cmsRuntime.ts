@@ -1,6 +1,7 @@
 import type { CmsArticlesReader, CmsGlobalReader, CmsSectionReader, CmsSectionRequest } from './cmsClient'
 import type { CmsSiteConfig } from './cmsConfig'
 import { parseCmsPreviewOrigins } from './cmsOrigins'
+import { articleMediaUrlFrom } from './articleShared.js'
 
 export type CmsIntegration = {
   config: Readonly<CmsSiteConfig>
@@ -41,19 +42,40 @@ export const cmsIntegration: Promise<CmsIntegration | null> = hasRequiredEnviron
     })
   : Promise.resolve(null)
 
+/** Espera máxima por las demás lecturas del grupo antes de entregar la propia. */
+export const CMS_READ_GROUP_WAIT_MS = 2500
+let readGroup: Promise<unknown>[] | null = null
+
+/**
+ * Las lecturas iniciadas en la misma tarea (los efectos de un mismo render de React) se entregan juntas, para que la página
+ * se actualice de una vez y no sección por sección. Una lectura lenta retrasa al grupo como máximo CMS_READ_GROUP_WAIT_MS.
+ */
+export function deliverTogether<T>(read: Promise<T>): Promise<T> {
+  if (!readGroup) {
+    readGroup = []
+    setTimeout(() => { readGroup = null }, 0)
+  }
+  const group = readGroup
+  group.push(read)
+  return read.then(async (result) => {
+    await Promise.race([Promise.allSettled(group), new Promise((resolve) => setTimeout(resolve, CMS_READ_GROUP_WAIT_MS))])
+    return result
+  })
+}
+
 /** Reader estable para futuras paginas; nunca rompe los fallbacks locales. */
-export const readCmsSection: CmsSectionReader = async (request: CmsSectionRequest) => {
+export const readCmsSection: CmsSectionReader = (request: CmsSectionRequest) => deliverTogether((async () => {
   const integration = await cmsIntegration
   if (!integration) return { content: null, error: null }
   return integration.readSection(request)
-}
+})())
 
 /** Reader estable para contenido compartido; conserva el fallback si el grupo aun no fue publicado. */
-export const readCmsGlobal: CmsGlobalReader = async (request) => {
+export const readCmsGlobal: CmsGlobalReader = (request) => deliverTogether((async () => {
   const integration = await cmsIntegration
   if (!integration) return { content: null, error: null }
   return integration.readGlobal(request)
-}
+})())
 
 export const readCmsArticles: CmsArticlesReader = async (request) => {
   if (!hasRequiredEnvironment) {
@@ -65,9 +87,5 @@ export const readCmsArticles: CmsArticlesReader = async (request) => {
 }
 
 export function articleMediaUrl(path: unknown): string {
-  if (typeof path !== 'string' || !path.trim()) return ''
-  if (/^https:\/\//i.test(path)) return path
-  if (!/^[a-zA-Z0-9/_\-.]+$/.test(path)) return ''
-  const base = cmsRuntimeConfig.supabaseUrl.replace(/\/$/, '')
-  return base ? `${base}/storage/v1/object/public/article-media/${path.split('/').map(encodeURIComponent).join('/')}` : ''
+  return articleMediaUrlFrom(cmsRuntimeConfig.supabaseUrl, path)
 }

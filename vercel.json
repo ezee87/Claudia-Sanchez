@@ -1,8 +1,11 @@
 {
   "redirects": [
-    { "source": "/disena-tu-futuro", "destination": "/diseno-de-carrera", "permanent": true }
+    { "source": "/disena-tu-futuro", "destination": "/diseno-de-carrera", "permanent": true },
+    { "source": "/newsletter", "destination": "/articulos", "permanent": true },
+    { "source": "/articulos/:slug/", "destination": "/articulos/:slug", "permanent": true }
   ],
   "rewrites": [
+    { "source": "/articulos/:slug", "destination": "/api/articulo?slug=:slug" },
     { "source": "/(.*)", "destination": "/index.html" }
   ]
 }

@@ -8,17 +8,21 @@ import Seo from './Seo';
 
 const editorialDate = article => article.original_published_at || article.published_at;
 
-function ArticleStatus({ children, kind = '' }) {
-  return <div className={`article-status ${kind}`}>{children}</div>;
+// `rest` receives the CMS preview handlers when the status text is wrapped in <Field>.
+function ArticleStatus({ children, kind = '', ...rest }) {
+  return <div className={`article-status ${kind}`} {...rest}>{children}</div>;
 }
 
-function ArticleCard({ article }) {
+const listingField = (path, child) => <Field route="/articulos" section="listado" path={path}>{child}</Field>;
+const detailField = (section, path, child) => <Field route="/articulos/:slug" section={section} path={path}>{child}</Field>;
+
+function ArticleCard({ article, readLabel }) {
   const cover = articleMediaUrl(article.cover_image);
   const date = editorialDate(article);
   return <article className="article-card">
     <Link to={`/articulos/${article.slug}`} aria-label={`Leer ${article.title}`}>
       <div className="article-cover">{safeImage(cover) && <img src={cover} alt="" width="720" height="480" loading="lazy" />}</div>
-      <div className="article-card-copy"><div className="article-card-text"><time dateTime={date}>{formatDate(date)}</time><h3>{article.title}</h3>{article.excerpt && <p>{article.excerpt}</p>}</div><span className="article-read">Leer artículo <span aria-hidden="true">→</span></span></div>
+      <div className="article-card-copy"><div className="article-card-text"><time dateTime={date}>{formatDate(date)}</time><h3>{article.title}</h3>{article.excerpt && <p>{article.excerpt}</p>}</div>{listingField('readLabel', <span className="article-read">{readLabel} <span aria-hidden="true">→</span></span>)}</div>
     </Link>
   </article>;
 }
@@ -37,13 +41,14 @@ const PAGE_SIZE = 6;
 
 export function ArticleCards({ limit, paged = false }) {
   const { articles, loading, error } = useCmsArticles();
+  const { content: labels } = useSection('/articulos', 'listado');
   const [count, setCount] = useState(PAGE_SIZE);
   const gridRef = useRef(null);
-  if (loading) return <ArticleStatus>Cargando artículos…</ArticleStatus>;
-  if (error) return <ArticleStatus kind="is-error"><strong>No pudimos cargar los artículos.</strong><span>{error.message}</span></ArticleStatus>;
+  if (loading) return listingField('loading', <ArticleStatus>{labels.loading}</ArticleStatus>);
+  if (error) return <ArticleStatus kind="is-error">{listingField('error', <strong>{labels.error}</strong>)}<span>{error.message}</span></ArticleStatus>;
   const total = articles.length;
   const visible = paged ? articles.slice(0, count) : articles.slice(0, limit);
-  if (!visible.length) return <ArticleStatus>No hay artículos publicados por el momento.</ArticleStatus>;
+  if (!visible.length) return listingField('empty', <ArticleStatus>{labels.empty}</ArticleStatus>);
   const allShown = visible.length >= total;
   const showLess = () => {
     setCount(PAGE_SIZE);
@@ -54,13 +59,16 @@ export function ArticleCards({ limit, paged = false }) {
       window.scrollTo({ top: window.scrollY + top - 120, behavior: smooth ? 'smooth' : 'auto' });
     }
   };
-  const grid = <div className="article-grid" ref={gridRef}>{visible.map(article => <ArticleCard key={article.id} article={article} />)}</div>;
+  const grid = <div className="article-grid" ref={gridRef}>{visible.map(article => <ArticleCard key={article.id} article={article} readLabel={labels.readLabel} />)}</div>;
   if (!paged) return grid;
+  // Separate text nodes per placeholder, as the original JSX produced: a single joined string renders with different kerning.
+  const countText = labels.countTemplate.split(/(\{n\}|\{total\})/).filter(Boolean)
+    .map(part => part === '{n}' ? visible.length : part === '{total}' ? total : part);
   return <>{grid}{total > PAGE_SIZE && <div className="article-pager">
-    <p className="article-count" role="status" aria-live="polite">Mostrando {visible.length} de {total} artículos</p>
+    {listingField('countTemplate', <p className="article-count" role="status" aria-live="polite">{countText}</p>)}
     {allShown
-      ? <button type="button" className="editorial-button article-more" onClick={showLess}>Mostrar menos</button>
-      : <button type="button" className="editorial-button article-more" onClick={() => setCount(c => Math.min(c + PAGE_SIZE, total))}>Mostrar más artículos</button>}
+      ? listingField('lessLabel', <button type="button" className="editorial-button article-more" onClick={showLess}>{labels.lessLabel}</button>)
+      : listingField('moreLabel', <button type="button" className="editorial-button article-more" onClick={() => setCount(c => Math.min(c + PAGE_SIZE, total))}>{labels.moreLabel}</button>)}
   </div>}</>;
 }
 
@@ -102,7 +110,9 @@ export function ArticleBody({ content }) {
 export function ArticleDetail() {
   const { slug } = useParams();
   const { content: header } = useSection('/articulos/:slug', 'encabezado');
+  const { content: body } = useSection('/articulos/:slug', 'contenido');
   const { content: footer } = useSection('/articulos/:slug', 'pie-articulo');
+  const { content: labels } = useSection('/articulos', 'listado');
   const { content: site } = useGlobal('institutional-footer', content['/'].footer);
   const { articles, loading, error } = useCmsArticles(slug);
   const { articles: allArticles } = useCmsArticles();
@@ -113,10 +123,10 @@ export function ArticleDetail() {
   const author = footer.signature?.replace(/^Por\s+/i, '') || site.brand;
   const sourceHref = article?.source_url ? safeHref(article.source_url, '') : '';
   return <><Seo route="/articulos/:slug" article={article} missing={!loading && !error && !article} /><main className="site-container article-detail">
-    <Link className="article-back" to="/articulos"><span aria-hidden="true">←</span> Volver a artículos</Link>
-    {loading && <ArticleStatus><h1>Cargando artículo…</h1></ArticleStatus>}
-    {error && <ArticleStatus kind="is-error"><strong>No pudimos cargar el artículo.</strong><span>{error.message}</span></ArticleStatus>}
-    {!loading && !error && !article && <ArticleStatus><h1>Artículo inexistente</h1><span>El artículo que buscás no está publicado o no existe.</span></ArticleStatus>}
+    {detailField('encabezado', 'backLabel', <Link className="article-back" to="/articulos"><span aria-hidden="true">←</span> {header.backLabel}</Link>)}
+    {loading && <ArticleStatus>{detailField('contenido', 'loading', <h1>{body.loading}</h1>)}</ArticleStatus>}
+    {error && <ArticleStatus kind="is-error">{detailField('contenido', 'error', <strong>{body.error}</strong>)}<span>{error.message}</span></ArticleStatus>}
+    {!loading && !error && !article && <ArticleStatus>{detailField('contenido', 'missingTitle', <h1>{body.missingTitle}</h1>)}{detailField('contenido', 'unavailable', <span>{body.unavailable}</span>)}</ArticleStatus>}
     {article && <article>
       <header className="article-detail-header">
         <Field route="/articulos/:slug" section="encabezado" path="collection"><p className="eyebrow">{header.collection}</p></Field>
@@ -130,12 +140,12 @@ export function ArticleDetail() {
           <Field route="/articulos/:slug" section="pie-articulo" path="signature"><p className="article-signature">{footer.signature}</p></Field>
           {site.line && <p className="article-author-line">{site.line}</p>}
         </div>
-        {sourceHref && <a className="article-source" href={sourceHref} target="_blank" rel="noopener noreferrer">Ver publicación original en LinkedIn <span aria-hidden="true">↗</span></a>}
+        {sourceHref && detailField('pie-articulo', 'sourceLabel', <a className="article-source" href={sourceHref} target="_blank" rel="noopener noreferrer">{footer.sourceLabel} <span aria-hidden="true">↗</span></a>)}
       </footer>
     </article>}
     {article && related.length > 0 && <aside className="article-related" aria-labelledby="article-related-title">
-      <h2 id="article-related-title">Continuá leyendo</h2>
-      <div className="article-grid">{related.map(item => <ArticleCard key={item.id} article={item} />)}</div>
+      {detailField('pie-articulo', 'relatedTitle', <h2 id="article-related-title">{footer.relatedTitle}</h2>)}
+      <div className="article-grid">{related.map(item => <ArticleCard key={item.id} article={item} readLabel={labels.readLabel} />)}</div>
     </aside>}
     <CmsLink route="/articulos/:slug" section="pie-articulo" path="back" value={footer.back} className="article-back-all" />
   </main></>;

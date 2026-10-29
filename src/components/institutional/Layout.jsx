@@ -57,12 +57,12 @@ export default function Layout({children}) {
                 <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5.1 3.5a1.6 1.6 0 1 0 0 3.2 1.6 1.6 0 0 0 0-3.2ZM3.7 8h2.8v12H3.7V8Zm5 0h2.7v1.6c.5-1 1.6-1.9 3.5-1.9 3 0 4.1 1.8 4.1 4.7V20h-2.9v-6.3c0-1.5 0-3.4-2.1-3.4-2.1 0-2.4 1.6-2.4 3.3V20H8.7V8Z" /></svg>
               </a></GlobalField>
               <button ref={footerMenuBtn} type="button" className="footer-menu-link" aria-label="Abrir menú" aria-expanded={open} aria-controls="institutional-nav" onClick={footerMenu}>
-                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 9h16M4 15h16" /></svg><span>Menú</span>
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 9h16M4 15h16" /></svg><GlobalField groupKey="institutional-footer" path="menuLabel"><span>{footer.menuLabel}</span></GlobalField>
               </button>
             </div>
           </div>
         </div>
-        <div className="footer-bottom"><p>© {currentYear} {footer.brand}.<br />Todos los derechos reservados.</p>
+        <div className="footer-bottom"><GlobalField groupKey="institutional-footer" path="rightsText"><p>© {currentYear} {footer.brand}.<br />{footer.rightsText}</p></GlobalField>
           <BackToTop/>
         </div>
       </div>

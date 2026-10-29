@@ -53,7 +53,7 @@ function Hero() {
   </section>;
 }
 
-function Experience({ item, index }) {
+function Experience({ item, index, headings }) {
   const { lead, modalities, topics, notes } = groupDescription(item.description);
   return <Collection route={route} section="experiencias" path="items" itemId={item._id}>
     <article className="community-experience" aria-labelledby={`experience-${item._id}`}>
@@ -67,14 +67,14 @@ function Experience({ item, index }) {
       <div className="community-experience-body">
         {lead && <p className="community-experience-lead">{lead}</p>}
         {modalities.length > 0 && <div className="community-experience-group">
-          <h4>Modalidades</h4>
+          {field('experiencias', 'modalitiesHeading', <h4>{headings.modalitiesHeading}</h4>)}
           <div className="community-modalities">{modalities.map(m => <div key={m.name} className="community-modality">
             <h5>{m.name}</h5>
             <ul>{m.items.map(text => <li key={text}>{text}</li>)}</ul>
           </div>)}</div>
         </div>}
         {topics.length > 0 && <div className="community-experience-group">
-          <h4>Qué trabaja</h4>
+          {field('experiencias', 'topicsHeading', <h4>{headings.topicsHeading}</h4>)}
           <ul className="community-topics">{topics.map(text => <li key={text}>{text}</li>)}</ul>
         </div>}
         {notes.map((text, n) => <p key={n} className="community-experience-note">{text}</p>)}
@@ -89,11 +89,11 @@ function Experiences() {
   return <section id="experiencias" className="editorial-section community-experiences" aria-labelledby="community-experiences-title">
     <div className="site-container">
       <header className="community-experiences-heading">
-        <p className="eyebrow community-eyebrow">LAS EXPERIENCIAS</p>
+        {field('experiencias', 'eyebrow', <p className="eyebrow community-eyebrow">{c.eyebrow}</p>)}
         {field('experiencias', 'title', <h2 id="community-experiences-title">{c.title}</h2>)}
       </header>
       <Collection route={route} section="experiencias" path="items"><div className="community-experience-list">
-        {validItems(c.items).map((item, index) => <Experience key={item._id} item={item} index={index}/>)}
+        {validItems(c.items).map((item, index) => <Experience key={item._id} item={item} index={index} headings={c}/>)}
       </div></Collection>
     </div>
   </section>;

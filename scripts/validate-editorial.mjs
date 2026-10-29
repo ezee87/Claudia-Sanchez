@@ -103,6 +103,42 @@ try {
     }
   }
 
+  // Lo mismo para las páginas institucionales y los globales: cada `Field`/`GlobalField` con ruta literal debe existir.
+  const pageOf = route => manifest.pages.find(p => p.route === route);
+  const institutionalFiles = {
+    'src/pages/HomePage/HomePage.jsx': { route: '/', single: 'sobre-mi' },
+    'src/pages/PersonasPage/PersonasPage.jsx': { route: '/personas' },
+    'src/pages/EmpresasPage/EmpresasPage.jsx': { route: '/empresas' },
+    'src/pages/ComunidadPage/ComunidadPage.jsx': { route: '/comunidad-y-experiencias' },
+    'src/pages/ContactoPage/ContactoPage.jsx': { route: '/contacto', single: 'intro' },
+    'src/components/institutional/ContactForm.jsx': { route: '/contacto', single: 'formulario', helpers: { directField: 'contacto-directo' } },
+    'src/components/institutional/articles.jsx': { route: '/articulos/:slug', helpers: { listingField: ['/articulos', 'listado'] }, pair: 'detailField' },
+    'src/components/institutional/Layout.jsx': {},
+  };
+  let institutionalEditables = 0;
+  for (const [file, rule] of Object.entries(institutionalFiles)) {
+    const source = fs.readFileSync(file, 'utf8');
+    const targets = [];
+    for (const m of source.matchAll(/<Field route=(?:"([^"]+)"|\{(?:ROUTE|route)\}) section="([^"]+)" path="([^"]+)"/g)) targets.push([m[1] ?? rule.route, m[2], m[3]]);
+    for (const m of source.matchAll(new RegExp(`\\b${rule.pair ?? 'field'}\\('([^']+)',\\s*'([^']+)'`, 'g'))) targets.push([rule.route, m[1], m[2]]);
+    if (rule.single) for (const m of source.matchAll(/\bfield\('([^']+)',\s*</g)) targets.push([rule.route, rule.single, m[1]]);
+    for (const [helper, where] of Object.entries(rule.helpers || {})) for (const m of source.matchAll(new RegExp(`\\b${helper}\\('([^']+)',\\s*<`, 'g'))) targets.push(Array.isArray(where) ? [...where, m[1]] : [rule.route, where, m[1]]);
+    for (const [route, sectionKey, fieldPath] of targets) {
+      const section = pageOf(route)?.sections.find(s => s.key === sectionKey);
+      assert.ok(section, `${file}: sección ${route} › ${sectionKey} no declarada`);
+      assert.notEqual(valueAt(section.initialContent, fieldPath), undefined, `${file}: ${route} › ${sectionKey}/${fieldPath} no existe en el manifiesto`);
+      assert.ok(section.fields.some(f => f.path === fieldPath || fieldPath.startsWith(`${f.path}.`)), `${file}: ${route} › ${sectionKey}/${fieldPath} sin declarar`);
+      institutionalEditables++;
+    }
+    for (const m of source.matchAll(/<GlobalField groupKey="([^"]+)" path="([^"]+)"/g)) {
+      const group = manifest.globals.find(g => g.key === m[1]);
+      assert.ok(group?.fields.some(f => f.path === m[2]), `${file}: global ${m[1]}/${m[2]} no declarado`);
+      institutionalEditables++;
+    }
+  }
+  assert.ok(institutionalEditables > 80, `Se esperaban más editables institucionales detectados (${institutionalEditables})`);
+  editables += institutionalEditables;
+
   // Validador real del CMS (mismo código que usa «Sincronizar manifiesto»), si el proyecto está disponible.
   if (fs.existsSync(CMS_VALIDATOR)) {
     const { validateSiteManifest } = await server.ssrLoadModule(CMS_VALIDATOR);

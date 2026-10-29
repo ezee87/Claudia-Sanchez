@@ -18,6 +18,18 @@
       "paragraph3": "Ocupé posiciones de liderazgo en Recursos Humanos en compañías internacionales como Diageo y Kraft Foods, con responsabilidades regionales en América Latina.",
       "paragraph4": "Esa experiencia me permitió conocer de primera mano los desafíos que enfrentan quienes lideran organizaciones, desarrollan equipos o atraviesan decisiones importantes en su carrera.",
       "paragraph5": "Hoy combino esa perspectiva corporativa con mi formación en coaching para acompañar tanto a ejecutivos que buscan construir su siguiente etapa como a empresas que quieren fortalecer su liderazgo y desarrollar su talento.",
+      "experienceHeading": "Experiencia corporativa",
+      "metricValue": "20",
+      "metricSuffix": "+",
+      "metricLabelMobile": "Años de experiencia corporativa",
+      "metricLabel": "años de experiencia\ncorporativa",
+      "primaryLogo": "/assets/claudia-sanchez/testimonials/diageo-crop.png",
+      "primaryLogoAlt": "Diageo",
+      "secondaryLogo": "/assets/claudia-sanchez/testimonials/kraft.png",
+      "secondaryLogoAlt": "Kraft Foods",
+      "roleLine": "Liderazgo en Recursos Humanos",
+      "regionLine": "Responsabilidades regionales en América Latina",
+      "regionLineDesktop": "Responsabilidades regionales\nAmérica Latina",
       "credentials": [
         {
           "_id": "item-1",
@@ -113,6 +125,7 @@
       "highlight": "Porque el desarrollo y la transformación requieren algo más que buenas ideas: necesitan claridad, compromiso y acción."
     },
     "testimonios": {
+      "eyebrow": "Recomendaciones",
       "title": "La experiencia de quienes han trabajado conmigo",
       "paragraph1": "Cada proceso tiene sus propios desafíos. Estas son algunas de las experiencias de profesionales y organizaciones a los que he acompañado.",
       "closingEyebrow": "MÁS EXPERIENCIAS COMPARTIDAS",
@@ -159,6 +172,7 @@
       ]
     },
     "articulos": {
+      "eyebrow": "Ideas y perspectivas",
       "title": "Reflexiones sobre liderazgo, carrera y transformación.",
       "paragraph1": "Comparto ideas, experiencias y perspectivas sobre los desafíos que enfrentan los líderes, las organizaciones y los profesionales a lo largo de su trayectoria.",
       "paragraph2": "Un espacio para explorar nuevas formas de pensar el desarrollo profesional, el liderazgo y el futuro del trabajo.",
@@ -218,7 +232,9 @@
       "linkedin": {
         "label": "LinkedIn",
         "href": "https://www.linkedin.com/in/careertransitioncoachclau/"
-      }
+      },
+      "menuLabel": "Menú",
+      "rightsText": "Todos los derechos reservados."
     },
     "seo": {
       "title": "Inicio | Claudia Sánchez Urencio",
@@ -268,6 +284,7 @@
     },
     "servicios": {
       "title": "Un acompañamiento adaptado a tu momento profesional",
+      "programLabel": "Programa",
       "items": [
         {
           "_id": "item-3",
@@ -299,13 +316,18 @@
       ]
     },
     "enfoque": {
+      "eyebrow": "CÓMO TRABAJAMOS",
       "title": "Un proceso que parte de ti y se convierte en acción",
       "paragraph1": "No existen dos trayectorias iguales. Por eso, el acompañamiento comienza por comprender tu situación, tus desafíos y aquello que quieres lograr.",
       "paragraph2": "A partir de esa conversación, trabajamos para identificar fortalezas, explorar nuevas perspectivas y construir una estrategia que puedas llevar a la práctica.",
       "paragraph3": "Mi enfoque combina experiencia corporativa, escucha, reflexión y herramientas de desarrollo profesional.",
-      "paragraph4": "Transformamos tus reflexiones en decisiones y acciones concretas, para que avances con mayor claridad, confianza y seguridad."
+      "paragraph4": "Transformamos tus reflexiones en decisiones y acciones concretas, para que avances con mayor claridad, confianza y seguridad.",
+      "step1Title": "Comprender tu momento",
+      "step2Title": "Explorar nuevas perspectivas",
+      "step3Title": "Construir una estrategia"
     },
     "testimonios": {
+      "eyebrow": "TESTIMONIOS",
       "title": "Experiencias de quienes han dado el siguiente paso",
       "paragraph1": "Cada trayectoria es diferente. Conoce cómo otros profesionales han encontrado claridad, fortalecido sus capacidades y avanzado hacia sus objetivos.",
       "items": [
@@ -316,7 +338,9 @@
           "role": "Head of Marketing | Marketing Director",
           "quote": "Claudia ha sido mi coach durante los últimos meses, y puedo recomendarla ampliamente en dos aspectos. Primero, si buscas orientación en tu desarrollo profesional dentro de tu empresa actual o en la exploración de nuevos retos y segundo, si deseas clarificar tu visión a futuro y definir lo que realmente necesitas para sentirte realizado.",
           "image": "/assets/claudia-sanchez/testimonials/manuel-mirabent.jpg",
-          "alt": "Retrato de Manuel Mirabent"
+          "alt": "Retrato de Manuel Mirabent",
+          "sourceLabel": "RECOMENDACIÓN PÚBLICA EN LINKEDIN",
+          "linkedinUrl": "https://www.linkedin.com/in/claudiasanchezurencio/details/recommendations/?detailScreenTabIndex=0"
         },
         {
           "_id": "item-2",
@@ -325,7 +349,9 @@
           "role": "Sales Director / Trade Marketing / Operations Director",
           "quote": "Gracias a su acompañamiento, recuperé la claridad, la confianza y la energía para reenfocar mis objetivos, fortalecer mis capacidades y reconectar con mi propósito.",
           "image": "/assets/claudia-sanchez/testimonials/ovidio-urbe.jpg",
-          "alt": "Retrato de Ovidio Uribe"
+          "alt": "Retrato de Ovidio Uribe",
+          "sourceLabel": "RECOMENDACIÓN PÚBLICA EN LINKEDIN",
+          "linkedinUrl": "https://www.linkedin.com/in/claudiasanchezurencio/details/recommendations/?detailScreenTabIndex=0"
         },
         {
           "_id": "item-3",
@@ -334,11 +360,14 @@
           "role": "Exlíder corporativo y emprendedor",
           "quote": "Claudia es un gran coach con alta empatía y capacidad de escucha, pero sobre todo con un auténtico interés por ayudar a los demás en el logro de sus metas.",
           "image": "/assets/claudia-sanchez/testimonials/eduardo-diaz.jpg",
-          "alt": "Retrato de Eduardo Díaz Cortazar"
+          "alt": "Retrato de Eduardo Díaz Cortazar",
+          "sourceLabel": "RECOMENDACIÓN PÚBLICA EN LINKEDIN",
+          "linkedinUrl": "https://www.linkedin.com/in/claudiasanchezurencio/details/recommendations/?detailScreenTabIndex=0"
         }
       ]
     },
     "contacto": {
+      "eyebrow": "CHARLEMOS",
       "title": "¿Qué te gustaría construir en tu siguiente etapa?",
       "paragraph1": "Ya sea que estés considerando un cambio, buscando crecer como líder o necesites claridad para tomar una decisión importante, podemos comenzar con una conversación.",
       "paragraph2": "Cuéntame dónde estás y qué te gustaría lograr.",
@@ -511,6 +540,7 @@
   },
   "/contacto": {
     "intro": {
+      "eyebrow": "Contacto",
       "title": "Conversemos sobre lo que necesitas.",
       "paragraph1": "Cada persona y cada organización enfrenta desafíos diferentes. Me gustaría conocer tu situación y explorar cómo puedo acompañarte.",
       "paragraph2": "Completa el formulario y cuéntame brevemente qué estás buscando. Me pondré en contacto contigo para continuar la conversación."
@@ -529,7 +559,7 @@
       "messageLabel": "¿En qué puedo ayudarte? *",
       "messagePlaceholder": "Cuéntame brevemente qué necesitas...",
       "submitLabel": "Enviar consulta",
-      "pending": "El formulario todavía no está operativo. Puedes contactarme a través de LinkedIn.",
+      "pending": "El envío todavía no está disponible. Tus datos se conservan; mientras tanto puedes escribirme por correo electrónico o LinkedIn.",
       "error": "No fue posible enviar tu mensaje. Inténtalo nuevamente en unos momentos.",
       "loading": "Enviando consulta…",
       "successTitle": "¡Gracias por escribirme!",
@@ -607,8 +637,13 @@
       "paragraph1": "Reflexiones sobre liderazgo, desarrollo profesional, transiciones de carrera y las decisiones que nos permiten construir nuevas etapas con claridad y propósito."
     },
     "listado": {
-      "empty": "Los artículos estarán disponibles próximamente.",
+      "loading": "Cargando artículos…",
+      "error": "No pudimos cargar los artículos.",
+      "empty": "No hay artículos publicados por el momento.",
       "readLabel": "Leer artículo",
+      "countTemplate": "Mostrando {n} de {total} artículos",
+      "moreLabel": "Mostrar más artículos",
+      "lessLabel": "Mostrar menos",
       "items": []
     },
     "seo": {
@@ -618,13 +653,19 @@
   },
   "/articulos/:slug": {
     "encabezado": {
-      "collection": "How to Thrive Beyond 40"
+      "collection": "How to Thrive Beyond 40",
+      "backLabel": "Volver a artículos"
     },
     "contenido": {
-      "unavailable": "Este artículo todavía no está disponible."
+      "loading": "Cargando artículo…",
+      "error": "No pudimos cargar el artículo.",
+      "missingTitle": "Artículo inexistente",
+      "unavailable": "El artículo que buscás no está publicado o no existe."
     },
     "pie-articulo": {
       "signature": "Por Claudia Sánchez Urencio",
+      "sourceLabel": "Ver publicación original en LinkedIn",
+      "relatedTitle": "Continuá leyendo",
       "back": {
         "label": "Volver a Artículos",
         "href": "/articulos"

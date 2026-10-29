@@ -3,7 +3,7 @@ import Seo from '../../components/institutional/Seo';
 import { CmsLink, Collection, Field, useSection } from '../../components/institutional/Cms';
 import { content as localContent, safeHref, safeImage, validItems } from '../../components/institutional/content';
 import './PersonasPage.css';
-import TestimonialCard, { LINKEDIN_RECOMMENDATIONS_URL } from '../../components/institutional/TestimonialCard';
+import TestimonialCard, { LINKEDIN_RECOMMENDATIONS_URL, linkedInUrl } from '../../components/institutional/TestimonialCard';
 import { whatsappLinkProps } from '../../data/institutional/whatsapp';
 import styles from '../HomePage/HomePage.module.css';
 
@@ -54,7 +54,7 @@ function Services() {
               <article className={program ? 'people-program' : 'people-service'} data-tone={program ? 'dark' : undefined}>
                 <div className="people-service-heading">
                   <p className="eyebrow people-program-label">
-                    <span className="item-number">{String(i + 1).padStart(2, '0')}</span><span aria-hidden="true">·</span><span>Programa</span>
+                    <span className="item-number">{String(i + 1).padStart(2, '0')}</span><span aria-hidden="true">·</span>{field('servicios', 'programLabel', <span>{c.programLabel}</span>)}
                   </p>
                   <h3>{item.title}</h3>
                   {item.subtitle && <p className="people-service-subtitle">{item.subtitle}</p>}
@@ -77,18 +77,18 @@ function Approach() {
   return <section id="enfoque" className="editorial-section people-approach" data-tone="dark">
     <div className="site-container">
       <div className="people-approach-heading">
-        <p className="eyebrow people-approach-label">CÓMO TRABAJAMOS</p>
+        {field('enfoque', 'eyebrow', <p className="eyebrow people-approach-label">{c.eyebrow}</p>)}
         {field('enfoque', 'title', <h2>{c.title}</h2>)}
         {field('enfoque', 'paragraph3', <p>{c.paragraph3}</p>)}
       </div>
       <ol className="people-steps">
-        <li><span className="item-number" aria-hidden="true"><span>01</span></span><div className="people-step-content"><h3>Comprender tu momento</h3>
+        <li><span className="item-number" aria-hidden="true"><span>01</span></span><div className="people-step-content">{field('enfoque', 'step1Title', <h3>{c.step1Title}</h3>)}
           {field('enfoque', 'paragraph1', <p>{c.paragraph1}</p>)}
         </div></li>
-        <li><span className="item-number" aria-hidden="true"><span>02</span></span><div className="people-step-content"><h3>Explorar nuevas perspectivas</h3>
+        <li><span className="item-number" aria-hidden="true"><span>02</span></span><div className="people-step-content">{field('enfoque', 'step2Title', <h3>{c.step2Title}</h3>)}
           {field('enfoque', 'paragraph2', <p>{c.paragraph2}</p>)}
         </div></li>
-        <li><span className="item-number" aria-hidden="true"><span>03</span></span><div className="people-step-content"><h3>Construir una estrategia</h3>
+        <li><span className="item-number" aria-hidden="true"><span>03</span></span><div className="people-step-content">{field('enfoque', 'step3Title', <h3>{c.step3Title}</h3>)}
           {field('enfoque', 'paragraph4', <p>{c.paragraph4}</p>)}
         </div></li>
       </ol>
@@ -101,11 +101,11 @@ function Testimonials() {
   const portraits = Object.fromEntries(localContent[route].testimonios.items.map(item => [item.author, item.image]));
   return <section id="testimonios" className="editorial-section people-testimonials" aria-labelledby="people-testimonials-title"><div className="site-container">
     <div className={styles.testimonialsHead}><div className={styles.sectionTitle}>
-      <p className={styles.kicker}>TESTIMONIOS</p>
+      {field('testimonios', 'eyebrow', <p className={styles.kicker}>{c.eyebrow}</p>)}
       {field('testimonios', 'title', <h2 id="people-testimonials-title">{c.title}</h2>)}
     </div>{field('testimonios', 'paragraph1', <p>{c.paragraph1.replace(/^(Cada trayectoria es diferente\.)\s*/, '$1\n')}</p>)}</div>
     <Collection route={route} section="testimonios" path="items"><div className={styles.testimonialGrid}>
-      {validItems(c.items).map((item, index) => <TestimonialCard key={item._id} route={route} item={item} index={index} portrait={safeImage(item.image, portraits[item.author] || '')} source={LINKEDIN_RECOMMENDATIONS_URL} className="people-testimonial-card" />)}
+      {validItems(c.items).map((item, index) => <TestimonialCard key={item._id} route={route} item={item} index={index} portrait={safeImage(item.image, portraits[item.author] || '')} source={linkedInUrl(item.linkedinUrl) || LINKEDIN_RECOMMENDATIONS_URL} className="people-testimonial-card" />)}
     </div></Collection>
   </div></section>;
 }
@@ -119,7 +119,7 @@ function Contact() {
   return <section id="contacto" className={`${styles.section} ${styles.contact} people-contact`} aria-labelledby="people-contact-title">
     <div className={styles.contactBackdrop} aria-hidden="true" style={{ backgroundImage: `url("${background}")` }} />
     <div className={`site-container ${styles.contactInner}`}>
-      <div className={styles.contactMark} aria-hidden="true"><span>CHARLEMOS</span></div>
+      {field('contacto', 'eyebrow', <div className={styles.contactMark} aria-hidden="true"><span>{c.eyebrow}</span></div>)}
       <div className={`${styles.contactContent} people-contact-content`}>
         {field('contacto', 'title', <h2 id="people-contact-title">{titleLines ? <><span className="people-contact-title-line">{titleLines[1]}</span>{' '}<span className="people-contact-title-line">{titleLines[2]}</span></> : c.title}</h2>)}
         <div className={`${styles.contactCopy} people-contact-copy`}>

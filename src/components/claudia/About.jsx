@@ -18,8 +18,8 @@ export default function About({ content: fallback, closing, portrait }) {
   const root = useRef(null);
   const { content } = useClaudiaCmsSection('about', fallback);
   const { content: reserve } = useClaudiaCmsSection('closing', closingFallback(closing));
-  const { content: sharedImages } = useClaudiaCmsSection('hero', { portrait: portrait.src });
-  const cmsPortrait = { ...portrait, src: sharedImages.portrait };
+  const { content: sharedImages } = useClaudiaCmsSection('hero', { portrait: portrait.src, portraitAlt: portrait.alt });
+  const cmsPortrait = { ...portrait, src: sharedImages.portrait, alt: sharedImages.portraitAlt };
   const ctaLink = resolveCmsLink(reserve.ctaLink, { label: reserve.ctaLabel, href: BOOKING_URL });
 
   useGSAP(

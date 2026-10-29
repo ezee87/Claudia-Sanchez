@@ -90,7 +90,7 @@ export default function Hero({ hero, portrait }) {
           <img
             className={styles.portrait}
             src={content.portrait}
-            alt={portrait.alt}
+            alt={content.portraitAlt}
             width="1198"
             height="1313"
             decoding="async"

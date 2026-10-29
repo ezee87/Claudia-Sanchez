@@ -12,7 +12,7 @@ function Hero() {
   return <section id="intro" className="contact-hero">
     <div className="contact-hero-lines" aria-hidden="true"/>
     <div className="site-container contact-hero-inner">
-      <p className="eyebrow">{c.eyebrow || 'Contacto'}</p>
+      {field('eyebrow', <p className="eyebrow">{c.eyebrow}</p>)}
       {field('title', <h1>{c.title}</h1>)}
       {field('paragraph1', <p className="contact-hero-lead">{breakSentences(c.paragraph1)}</p>)}
       {c.paragraph2 && field('paragraph2', <p className="contact-hero-note">{breakSentences(c.paragraph2)}</p>)}

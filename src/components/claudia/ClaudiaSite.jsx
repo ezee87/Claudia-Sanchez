@@ -3,8 +3,8 @@ import { ScrollTrigger } from '../../utils/gsap.js';
 import { usePrivateDocument } from '../../utils/usePrivateDocument.js';
 import { site } from '../../data/claudia/site.js';
 import { careerTestimonials } from '../../data/claudia/careerTestimonials.js';
-import { seoFallback } from '../../data/claudia/landingCms.js';
-import { useClaudiaCmsSection } from '../../integration/eze-cms/ClaudiaCms.jsx';
+import { seoFallback, siteHeaderFallback } from '../../data/claudia/landingCms.js';
+import { ClaudiaEditable, useClaudiaCmsSection } from '../../integration/eze-cms/ClaudiaCms.jsx';
 import SiteHeader from './SiteHeader.jsx';
 import Hero from './Hero.jsx';
 import Situations from './Situations.jsx';
@@ -37,6 +37,7 @@ function setMeta(name, content) {
  */
 export default function ClaudiaSite() {
   const { content: seo } = useClaudiaCmsSection('seo', seoFallback(site.meta));
+  const { content: header } = useClaudiaCmsSection('site-header', siteHeaderFallback(site.brand));
   usePrivateDocument(seo.title);
 
   useEffect(() => setMeta('description', seo.description), [seo.description]);
@@ -67,9 +68,9 @@ export default function ClaudiaSite() {
 
   return (
     <div className="claudia-root claudia-landing">
-      <a className="skip-link" href="#contenido" data-print="hide">
-        Saltar al contenido
-      </a>
+      <ClaudiaEditable sectionKey="site-header" fieldPath="skipLabel"><a className="skip-link" href="#contenido" data-print="hide">
+        {header.skipLabel}
+      </a></ClaudiaEditable>
 
       <SiteHeader brand={site.brand} nav={site.nav} tagline={site.situations.closing} />
 

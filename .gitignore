@@ -6,3 +6,10 @@ dist/
 *.local
 .DS_Store
 npm-debug.log*
+
+# Respaldos de Supabase exportados desde el SQL Editor (nunca versionar)
+claudia-cms-backup-*.json
+
+# Salida y vinculación local de la CLI de Vercel (puede contener variables del proyecto) y configuración local del asistente
+.vercel/
+.claude/

@@ -3,6 +3,12 @@ import styles from '../../pages/HomePage/HomePage.module.css';
 
 export const LINKEDIN_RECOMMENDATIONS_URL = 'https://www.linkedin.com/in/claudiasanchezurencio/details/recommendations/?detailScreenTabIndex=0';
 
+// Only HTTPS LinkedIn URLs are accepted as recommendation sources; anything else falls back to the caller's default.
+export function linkedInUrl(value) {
+  if (typeof value !== 'string') return '';
+  try { const url = new URL(value); return url.protocol === 'https:' && /(^|\.)linkedin\.com$/i.test(url.hostname) ? url.href : ''; } catch { return ''; }
+}
+
 export default function TestimonialCard({ route, item, index, portrait, source, reveal, initials, note, quoteLang, className = '' }) {
   return <Collection route={route} section="testimonios" path="items" itemId={item._id}><figure className={`${styles.testimonialCard} ${index === 0 ? styles.featuredQuote : ''} ${className}`} data-reveal={reveal || undefined}>
       <div className={styles.testimonialContent}>

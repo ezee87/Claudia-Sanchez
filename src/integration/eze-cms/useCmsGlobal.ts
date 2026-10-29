@@ -3,7 +3,8 @@ import type { CmsGlobalReader } from './cmsClient'
 import type { CmsSiteConfig } from './cmsConfig'
 import { authorizedPreviewOrigin } from './CmsEditable'
 import { cmsLocalOnly } from './cmsMode'
-import { mergeCmsContent, type CmsSectionState } from './useCmsSection'
+import { snapshotGlobal } from './cmsSnapshot'
+import { applyRemoteContent, initialCmsState, mergeCmsContent, type CmsSectionState } from './useCmsSection'
 
 type JsonObject = Record<string, unknown>
 type Options<T extends JsonObject> = {
@@ -21,7 +22,11 @@ export function useCmsGlobal<T extends JsonObject>({ config, groupKey, fallback,
   const signature = JSON.stringify(fallback)
   const stableFallback = useMemo(() => fallback, [signature]) // eslint-disable-line react-hooks/exhaustive-deps
   const localOnly = cmsLocalOnly
-  const [state, setState] = useState<CmsSectionState<T>>({ content: stableFallback, loading: !localOnly, error: null, source: 'local' })
+  const initial = useMemo(
+    () => initialCmsState(stableFallback, snapshotGlobal(config.siteSlug, groupKey), localOnly),
+    [config.siteSlug, groupKey, localOnly, stableFallback],
+  )
+  const [state, setState] = useState<CmsSectionState<T>>(initial)
 
   useEffect(() => {
     if (localOnly) {
@@ -40,18 +45,19 @@ export function useCmsGlobal<T extends JsonObject>({ config, groupKey, fallback,
       setState({ content: mergeCmsContent(stableFallback, message.content), loading: false, error: null, source: 'remote' })
     }
     window.addEventListener('message', receive)
-    setState({ content: stableFallback, loading: true, error: null, source: 'local' })
+    setState(initial)
     void readGlobal({ siteSlug: config.siteSlug, groupKey }).then((result) => {
       if (!active || receivedUpdate) return
       if (result.error || !isObject(result.content)) {
-        setState({ content: stableFallback, loading: false, error: result.error, source: 'local' }); return
+        setState({ ...initial, loading: false, error: result.error }); return
       }
-      setState({ content: mergeCmsContent(stableFallback, result.content), loading: false, error: null, source: 'remote' })
+      const remote = mergeCmsContent(stableFallback, result.content)
+      setState((previous) => applyRemoteContent(previous, remote))
     }).catch((error: unknown) => {
-      if (active && !receivedUpdate) setState({ content: stableFallback, loading: false, error: error instanceof Error ? error : new Error('No se pudo cargar el contenido global.'), source: 'local' })
+      if (active && !receivedUpdate) setState({ ...initial, loading: false, error: error instanceof Error ? error : new Error('No se pudo cargar el contenido global.') })
     })
     return () => { active = false; window.removeEventListener('message', receive) }
-  }, [config.siteSlug, groupKey, localOnly, readGlobal, stableFallback])
+  }, [config.siteSlug, groupKey, initial, localOnly, readGlobal, stableFallback])
 
   return state
 }

@@ -19,6 +19,8 @@ Generada por `npm run cms:manifest` desde los fallbacks efectivos de React (src/
 | GLOBAL | institutional-footer | brand | string |
 | GLOBAL | institutional-footer | line | string |
 | GLOBAL | institutional-footer | linkedin | link |
+| GLOBAL | institutional-footer | menuLabel | string |
+| GLOBAL | institutional-footer | rightsText | string |
 | / | hero | eyebrow | string |
 | / | hero | title | string |
 | / | hero | paragraph1 | string |
@@ -31,18 +33,35 @@ Generada por `npm run cms:manifest` desde los fallbacks efectivos de React (src/
 | / | sobre-mi | paragraph3 | string |
 | / | sobre-mi | paragraph4 | string |
 | / | sobre-mi | paragraph5 | string |
+| / | sobre-mi | experienceHeading | string |
+| / | sobre-mi | metricValue | string |
+| / | sobre-mi | metricSuffix | string |
+| / | sobre-mi | metricLabelMobile | string |
+| / | sobre-mi | metricLabel | string |
+| / | sobre-mi | primaryLogo | image |
+| / | sobre-mi | primaryLogoAlt | string |
+| / | sobre-mi | secondaryLogo | image |
+| / | sobre-mi | secondaryLogoAlt | string |
+| / | sobre-mi | roleLine | string |
+| / | sobre-mi | regionLine | string |
+| / | sobre-mi | regionLineDesktop | string |
 | / | sobre-mi | credentials | collection |
 | / | sobre-mi | credentials[] → visible | number |
 | / | sobre-mi | credentials[] → title | string |
 | / | sobre-mi | credentials[] → status | string |
+| / | servicios | eyebrow | string |
 | / | servicios | title | string |
+| / | servicios | cardLinkLabel | string |
 | / | servicios | items | collection |
 | / | servicios | items[] → visible | number |
 | / | servicios | items[] → eyebrow | string |
 | / | servicios | items[] → title | string |
 | / | servicios | items[] → description | string |
 | / | servicios | items[] → href | string |
+| / | servicios | closingTitle | string |
+| / | servicios | closingText | string |
 | / | servicios | cta | link |
+| / | enfoque | eyebrow | string |
 | / | enfoque | title | string |
 | / | enfoque | paragraph1 | string |
 | / | enfoque | paragraph2 | string |
@@ -51,6 +70,7 @@ Generada por `npm run cms:manifest` desde los fallbacks efectivos de React (src/
 | / | enfoque | steps[] → title | string |
 | / | enfoque | steps[] → description | string |
 | / | enfoque | highlight | string |
+| / | testimonios | eyebrow | string |
 | / | testimonios | title | string |
 | / | testimonios | paragraph1 | string |
 | / | testimonios | closingEyebrow | string |
@@ -66,6 +86,7 @@ Generada por `npm run cms:manifest` desde los fallbacks efectivos de React (src/
 | / | testimonios | items[] → alt | string |
 | / | testimonios | items[] → sourceLabel | string |
 | / | testimonios | items[] → linkedinUrl | string |
+| / | articulos | eyebrow | string |
 | / | articulos | title | string |
 | / | articulos | paragraph1 | string |
 | / | articulos | paragraph2 | string |
@@ -90,6 +111,7 @@ Generada por `npm run cms:manifest` desde los fallbacks efectivos de React (src/
 | /personas | situaciones | items[] → title | string |
 | /personas | situaciones | items[] → description | string |
 | /personas | servicios | title | string |
+| /personas | servicios | programLabel | string |
 | /personas | servicios | items | collection |
 | /personas | servicios | items[] → visible | number |
 | /personas | servicios | items[] → title | string |
@@ -97,11 +119,16 @@ Generada por `npm run cms:manifest` desde los fallbacks efectivos de React (src/
 | /personas | servicios | items[] → subtitle | string |
 | /personas | servicios | items[] → label | string |
 | /personas | servicios | items[] → href | string |
+| /personas | enfoque | eyebrow | string |
 | /personas | enfoque | title | string |
 | /personas | enfoque | paragraph1 | string |
 | /personas | enfoque | paragraph2 | string |
 | /personas | enfoque | paragraph3 | string |
 | /personas | enfoque | paragraph4 | string |
+| /personas | enfoque | step1Title | string |
+| /personas | enfoque | step2Title | string |
+| /personas | enfoque | step3Title | string |
+| /personas | testimonios | eyebrow | string |
 | /personas | testimonios | title | string |
 | /personas | testimonios | paragraph1 | string |
 | /personas | testimonios | items | collection |
@@ -111,6 +138,9 @@ Generada por `npm run cms:manifest` desde los fallbacks efectivos de React (src/
 | /personas | testimonios | items[] → quote | string |
 | /personas | testimonios | items[] → image | image |
 | /personas | testimonios | items[] → alt | string |
+| /personas | testimonios | items[] → sourceLabel | string |
+| /personas | testimonios | items[] → linkedinUrl | string |
+| /personas | contacto | eyebrow | string |
 | /personas | contacto | title | string |
 | /personas | contacto | paragraph1 | string |
 | /personas | contacto | paragraph2 | string |
@@ -130,6 +160,7 @@ Generada por `npm run cms:manifest` desde los fallbacks efectivos de React (src/
 | /empresas | desafios | items[] → description | string |
 | /empresas | servicios | eyebrow | string |
 | /empresas | servicios | title | string |
+| /empresas | servicios | includedHeading | string |
 | /empresas | servicios | items | collection |
 | /empresas | servicios | items[] → visible | number |
 | /empresas | servicios | items[] → title | string |
@@ -137,6 +168,7 @@ Generada por `npm run cms:manifest` desde los fallbacks efectivos de React (src/
 | /empresas | servicios | items[] → description | string |
 | /empresas | servicios | items[] → href | string |
 | /empresas | servicios | items[] → label | string |
+| /empresas | servicios | items[] → tag | string |
 | /empresas | experiencia | title | string |
 | /empresas | experiencia | paragraph1 | string |
 | /empresas | experiencia | paragraph2 | string |
@@ -148,6 +180,7 @@ Generada por `npm run cms:manifest` desde los fallbacks efectivos de React (src/
 | /empresas | proceso | items[] → title | string |
 | /empresas | proceso | items[] → description | string |
 | /empresas | proceso | eyebrow | string |
+| /empresas | testimonios | eyebrow | string |
 | /empresas | testimonios | title | string |
 | /empresas | testimonios | paragraph1 | string |
 | /empresas | testimonios | items | collection |
@@ -157,11 +190,17 @@ Generada por `npm run cms:manifest` desde los fallbacks efectivos de React (src/
 | /empresas | testimonios | items[] → quote | string |
 | /empresas | testimonios | items[] → image | image |
 | /empresas | testimonios | items[] → alt | string |
+| /empresas | testimonios | items[] → note | string |
+| /empresas | testimonios | items[] → lang | string |
+| /empresas | testimonios | items[] → sourceLabel | string |
+| /empresas | testimonios | items[] → linkedinUrl | string |
+| /empresas | testimonios | items[] → initials | string |
 | /empresas | contacto | title | string |
 | /empresas | contacto | paragraph1 | string |
 | /empresas | contacto | cta | link |
 | /empresas | seo | title | string |
 | /empresas | seo | description | string |
+| /contacto | intro | eyebrow | string |
 | /contacto | intro | title | string |
 | /contacto | intro | paragraph1 | string |
 | /contacto | intro | paragraph2 | string |
@@ -185,7 +224,9 @@ Generada por `npm run cms:manifest` desde los fallbacks efectivos de React (src/
 | /contacto | formulario | successText | string |
 | /contacto | contacto-directo | title | string |
 | /contacto | contacto-directo | paragraph1 | string |
+| /contacto | contacto-directo | emailChannelLabel | string |
 | /contacto | contacto-directo | email | link |
+| /contacto | contacto-directo | whatsapp | link |
 | /contacto | contacto-directo | linkedin | link |
 | /contacto | seo | title | string |
 | /contacto | seo | description | string |
@@ -213,6 +254,7 @@ Generada por `npm run cms:manifest` desde los fallbacks efectivos de React (src/
 | /diseno-de-carrera | hero | ctaLink | link |
 | /diseno-de-carrera | hero | complement | string |
 | /diseno-de-carrera | hero | portrait | image |
+| /diseno-de-carrera | hero | portraitAlt | string |
 | /diseno-de-carrera | situations | eyebrow | string |
 | /diseno-de-carrera | situations | title | string |
 | /diseno-de-carrera | situations | intro | string |
@@ -264,8 +306,11 @@ Generada por `npm run cms:manifest` desde los fallbacks efectivos de React (src/
 | /diseno-de-carrera | closing | title | string |
 | /diseno-de-carrera | closing | text | string |
 | /diseno-de-carrera | closing | ctaLink | link |
+| /diseno-de-carrera | site-header | skipLabel | string |
 | /diseno-de-carrera | site-header | brandLink | link |
 | /diseno-de-carrera | site-header | ctaLink | link |
+| /diseno-de-carrera | site-header | menuEyebrow | string |
+| /diseno-de-carrera | site-header | menuHomeLabel | string |
 | /diseno-de-carrera | site-header | navLink0 | link |
 | /diseno-de-carrera | site-header | navLink1 | link |
 | /diseno-de-carrera | site-header | navLink2 | link |
@@ -289,8 +334,13 @@ Generada por `npm run cms:manifest` desde los fallbacks efectivos de React (src/
 | /articulos | intro | eyebrow | string |
 | /articulos | intro | subtitle | string |
 | /articulos | intro | paragraph1 | string |
+| /articulos | listado | loading | string |
+| /articulos | listado | error | string |
 | /articulos | listado | empty | string |
 | /articulos | listado | readLabel | string |
+| /articulos | listado | countTemplate | string |
+| /articulos | listado | moreLabel | string |
+| /articulos | listado | lessLabel | string |
 | /articulos | listado | items | collection |
 | /articulos | listado | items[] → slug | string |
 | /articulos | listado | items[] → title | string |
@@ -303,8 +353,14 @@ Generada por `npm run cms:manifest` desde los fallbacks efectivos de React (src/
 | /articulos | seo | title | string |
 | /articulos | seo | description | string |
 | /articulos/:slug | encabezado | collection | string |
+| /articulos/:slug | encabezado | backLabel | string |
+| /articulos/:slug | contenido | loading | string |
+| /articulos/:slug | contenido | error | string |
+| /articulos/:slug | contenido | missingTitle | string |
 | /articulos/:slug | contenido | unavailable | string |
 | /articulos/:slug | pie-articulo | signature | string |
+| /articulos/:slug | pie-articulo | sourceLabel | string |
+| /articulos/:slug | pie-articulo | relatedTitle | string |
 | /articulos/:slug | pie-articulo | back | link |
 | /articulos/:slug | seo | title | string |
 | /articulos/:slug | seo | description | string |
@@ -319,7 +375,10 @@ Generada por `npm run cms:manifest` desde los fallbacks efectivos de React (src/
 | /comunidad-y-experiencias | hero | paragraph1 | string |
 | /comunidad-y-experiencias | hero | paragraph2 | string |
 | /comunidad-y-experiencias | hero | cta | link |
+| /comunidad-y-experiencias | experiencias | eyebrow | string |
 | /comunidad-y-experiencias | experiencias | title | string |
+| /comunidad-y-experiencias | experiencias | modalitiesHeading | string |
+| /comunidad-y-experiencias | experiencias | topicsHeading | string |
 | /comunidad-y-experiencias | experiencias | items | collection |
 | /comunidad-y-experiencias | experiencias | items[] → visible | number |
 | /comunidad-y-experiencias | experiencias | items[] → title | string |
