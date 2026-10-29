@@ -1,5 +1,6 @@
 import { cloneElement, type KeyboardEvent, type MouseEvent, type ReactElement } from 'react'
 import type { CmsSiteConfig } from './cmsConfig'
+import { isCmsSectionHidden } from './cmsVisibility'
 
 type EditableElementProps = Record<string, unknown> & {
   onClick?: (event: MouseEvent<HTMLElement>) => void
@@ -42,6 +43,8 @@ function hasInteractiveSemantics(element: ReactElement<EditableElementProps>) {
 }
 
 export function CmsEditable({ config, pageRoute, sectionKey, fieldPath, children }: Props) {
+  // Un campo de una sección oculta no se muestra en ningún lugar, ni con su valor local.
+  if (isCmsSectionHidden(config.siteSlug, pageRoute, sectionKey)) return null
   const targetOrigin = authorizedPreviewOrigin(config)
   if (!targetOrigin) return children
 

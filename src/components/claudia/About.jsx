@@ -2,7 +2,7 @@ import { useRef } from 'react';
 import { gsap, useGSAP, MQ } from '../../utils/gsap.js';
 import { BOOKING_URL } from '../../data/claudia/booking.js';
 import { closingFallback } from '../../data/claudia/landingCms.js';
-import { ClaudiaEditable, useClaudiaCmsSection } from '../../integration/eze-cms/ClaudiaCms.jsx';
+import { ClaudiaEditable, ClaudiaSection, useClaudiaCmsSection } from '../../integration/eze-cms/ClaudiaCms.jsx';
 import { resolveCmsLink } from '../../integration/eze-cms/cmsLink.js';
 import SectionHead from './SectionHead.jsx';
 import Portrait from './Portrait.jsx';
@@ -50,7 +50,10 @@ export default function About({ content: fallback, closing, portrait }) {
           scrollTrigger: { trigger: q('[data-rv="text"]')[0], start: 'top 88%', once: true },
         });
 
-        const reserveTrigger = { trigger: q('[data-rv="reserve"]')[0], start: 'top 75%', once: true };
+        // El cierre (sección closing) puede estar oculto en Eze CMS: sin él no hay animación de reserva.
+        const reserve = q('[data-rv="reserve"]')[0];
+        if (!reserve) return;
+        const reserveTrigger = { trigger: reserve, start: 'top 75%', once: true };
         gsap.from(q('[data-rv="curve"]'), { strokeDashoffset: 1, duration: 2.2, ease: 'power2.inOut', scrollTrigger: reserveTrigger });
         gsap.from(q('[data-rv="fade"]'), {
           opacity: 0,
@@ -102,7 +105,7 @@ export default function About({ content: fallback, closing, portrait }) {
         </div>
       </div>
 
-      <div className={`${type.section} ${styles.reserve}`} data-tone="dark" data-rv="reserve">
+      <ClaudiaSection sectionKey="closing"><div className={`${type.section} ${styles.reserve}`} data-tone="dark" data-rv="reserve">
         <svg className={styles.curve} viewBox="0 0 1440 600" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
           <path data-rv="curve" pathLength="1" d="M-40 560 C 360 660, 760 460, 1020 280 S 1320 40, 1480 70" />
         </svg>
@@ -115,7 +118,7 @@ export default function About({ content: fallback, closing, portrait }) {
             </div>
           </div>
         </div>
-      </div>
+      </div></ClaudiaSection>
     </section>
   );
 }

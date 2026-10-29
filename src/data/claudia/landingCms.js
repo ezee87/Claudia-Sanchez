@@ -14,6 +14,8 @@ export const footerLinks = {
   calendlyLink: { label: 'Calendly', href: BOOKING_URL },
 };
 export const navLinkFallback = (item) => ({ label: item.label, href: `#${item.id}` });
+/** Sección del CMS que contiene el ancla de cada enlace de navegación: si está oculta, el enlace no se muestra. */
+export const navSectionKeys = { situaciones: 'situations', testimonios: 'career-testimonials', enfoque: 'approach', 'sobre-mi': 'about' };
 
 // Los campos link se inicializan en null: el componente resuelve el destino con resolveCmsLink y el valor por defecto.
 export const heroFallback = (hero, portrait) => ({

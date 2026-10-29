@@ -1,9 +1,13 @@
-import { CmsLink, Collection, Field, useSection } from './Cms';
+import { CmsLink, Collection, Field, SectionBlock, useSection } from './Cms';
 import { content, safeHref, safeImage, validItems } from './content';
 import { ArticleCards } from './articles';
 import { whatsappLinkProps } from '../../data/institutional/whatsapp';
 
-export default function Section({route,section,hero=false}) {
+export default function Section(props) {
+  return <SectionBlock route={props.route} section={props.section}><SectionContent {...props}/></SectionBlock>;
+}
+
+function SectionContent({route,section,hero=false}) {
   const {content:c}=useSection(route,section);
   const field=(path,child)=><Field route={route} section={section} path={path}>{child}</Field>;
   const dark=section==='contacto'||section==='enfoque'||(hero&&route==='/empresas');

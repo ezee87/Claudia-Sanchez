@@ -1,7 +1,7 @@
 import Section from '../../components/institutional/Section';
 import Seo from '../../components/institutional/Seo';
 import TestimonialCard, { LINKEDIN_RECOMMENDATIONS_URL, linkedInUrl } from '../../components/institutional/TestimonialCard';
-import { Collection, Field, useSection } from '../../components/institutional/Cms';
+import { Collection, Field, SectionBlock, useSection } from '../../components/institutional/Cms';
 import { content, safeHref, safeImage, validItems } from '../../components/institutional/content';
 import { bindArticles, resolveBusinessTestimonials, splitServiceDescription } from './content';
 import { whatsappLinkProps } from '../../data/institutional/whatsapp';
@@ -77,10 +77,10 @@ export default function EmpresasPage() {
     <Seo route={route}/>
     <Section route={route} section="hero" hero/>
     <Section route={route} section="desafios"/>
-    <Services/>
+    <SectionBlock route={route} section="servicios"><Services/></SectionBlock>
     <Section route={route} section="experiencia"/>
     <Section route={route} section="proceso"/>
-    <Testimonials/>
+    <SectionBlock route={route} section="testimonios"><Testimonials/></SectionBlock>
     <Section route={route} section="contacto"/>
   </div>;
 }

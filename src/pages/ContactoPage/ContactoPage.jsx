@@ -1,6 +1,6 @@
 import Seo from '../../components/institutional/Seo';
 import ContactForm from '../../components/institutional/ContactForm';
-import { Field, useSection } from '../../components/institutional/Cms';
+import { Field, SectionBlock, useSection } from '../../components/institutional/Cms';
 import './ContactoPage.css';
 
 // Cada oración empieza en una línea nueva dentro del mismo párrafo (white-space: pre-line).
@@ -21,5 +21,5 @@ function Hero() {
 }
 
 export default function ContactoPage() {
-  return <><Seo route="/contacto"/><Hero/><ContactForm/></>;
+  return <><Seo route="/contacto"/><SectionBlock route="/contacto" section="intro"><Hero/></SectionBlock><ContactForm/></>;
 }

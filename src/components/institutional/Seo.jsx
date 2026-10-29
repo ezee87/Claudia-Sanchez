@@ -6,7 +6,7 @@ import { articleMediaUrl } from '../../integration/eze-cms/cmsRuntime';
 import { articleDescription, articleJsonLd, articleTitle } from '../../integration/eze-cms/articleShared.js';
 
 export default function Seo({route,article,missing=false}) {
-  const {content}=useSection(route,'seo');
+  const {content,hidden}=useSection(route,'seo');
   const {pathname}=useLocation();
   useEffect(()=>{
     // api/articulo.js ya escribió en el HTML las etiquetas de esta URL (data-ssr-seo): se conservan hasta que se navega a otra.
@@ -14,10 +14,12 @@ export default function Seo({route,article,missing=false}) {
     if(ssr.length && ssr.every(el=>el.getAttribute('data-ssr-seo')===pathname)) return;
     ssr.forEach(el=>el.remove());
     const created=[];
-    const title=article ? articleTitle(article) : content.title;
-    const description=article ? articleDescription(article) : content.description;
-    document.title=title;
+    // Con la sección seo oculta en Eze CMS no se aplica su título ni su descripción (tampoco los locales).
+    const title=article ? articleTitle(article) : hidden ? undefined : content.title;
+    const description=article ? articleDescription(article) : hidden ? undefined : content.description;
+    if(title!==undefined)document.title=title;
     function meta(key,value,property=false) {
+      if(value===undefined)return;
       const el=document.createElement('meta');el.setAttribute(property?'property':'name',key);el.content=value;document.head.append(el);created.push(el);
     }
     document.head.querySelectorAll('meta[name="robots"]').forEach(el=>el.remove());
@@ -32,6 +34,6 @@ export default function Seo({route,article,missing=false}) {
     if(image){meta('og:image',image,true);meta('twitter:image',image);}
     if(article){const el=document.createElement('script');el.type='application/ld+json';el.textContent=JSON.stringify(articleJsonLd(article,{canonical,image,description}));document.head.append(el);created.push(el);}
     return ()=>created.forEach(el=>el.remove());
-  },[content,pathname,article,missing]);
+  },[content,hidden,pathname,article,missing]);
   return null;
 }

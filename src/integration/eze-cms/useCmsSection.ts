@@ -4,6 +4,7 @@ import type { CmsSiteConfig } from './cmsConfig'
 import { authorizedPreviewOrigin } from './CmsEditable'
 import { cmsLocalOnly } from './cmsMode'
 import { snapshotSection } from './cmsSnapshot'
+import { useCmsSectionHidden } from './cmsVisibility'
 
 type JsonObject = Record<string, unknown>
 
@@ -22,6 +23,12 @@ export type CmsSectionState<T> = {
   /** local: fallback del repositorio · build: contenido CMS incluido en el build · remote: lectura de Supabase o preview. */
   source: 'local' | 'build' | 'remote'
 }
+
+/**
+ * hidden: la sección existe en Supabase pero está oculta. `content` sigue siendo un objeto válido para no romper a quien lo lea,
+ * pero no debe mostrarse: los bloques se desmontan (CmsSection) y los campos editables no se renderizan (CmsEditable).
+ */
+export type CmsSectionView<T> = CmsSectionState<T> & { hidden: boolean }
 
 function isObject(value: unknown): value is JsonObject {
   return value !== null && typeof value === 'object' && !Array.isArray(value)
@@ -62,7 +69,7 @@ export function applyRemoteContent<T extends JsonObject>(previous: CmsSectionSta
 
 export function useCmsSection<T extends JsonObject>({
   config, pageRoute, sectionKey, fallback, readSection,
-}: UseCmsSectionOptions<T>): CmsSectionState<T> {
+}: UseCmsSectionOptions<T>): CmsSectionView<T> {
   const fallbackSignature = JSON.stringify(fallback)
   const stableFallback = useMemo(() => fallback, [fallbackSignature]) // eslint-disable-line react-hooks/exhaustive-deps
   const localOnly = cmsLocalOnly
@@ -71,6 +78,7 @@ export function useCmsSection<T extends JsonObject>({
     [config.siteSlug, localOnly, pageRoute, sectionKey, stableFallback],
   )
   const [state, setState] = useState<CmsSectionState<T>>(initial)
+  const hidden = useCmsSectionHidden(config.siteSlug, pageRoute, sectionKey)
 
   useEffect(() => {
     if (localOnly) {
@@ -112,5 +120,5 @@ export function useCmsSection<T extends JsonObject>({
     }
   }, [config.siteSlug, initial, localOnly, pageRoute, sectionKey, readSection, stableFallback])
 
-  return state
+  return useMemo(() => ({ ...state, hidden }), [state, hidden])
 }

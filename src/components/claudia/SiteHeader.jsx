@@ -1,9 +1,9 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 import { useMediaQuery } from '../../utils/useMediaQuery.js';
-import { ClaudiaEditable, useClaudiaCmsSection } from '../../integration/eze-cms/ClaudiaCms.jsx';
+import { ClaudiaEditable, useClaudiaCmsSection, useClaudiaHiddenSections } from '../../integration/eze-cms/ClaudiaCms.jsx';
 import { resolveCmsLink } from '../../integration/eze-cms/cmsLink.js';
-import { headerCtaLink, navLinkFallback, siteHeaderFallback } from '../../data/claudia/landingCms.js';
+import { headerCtaLink, navLinkFallback, navSectionKeys, siteHeaderFallback } from '../../data/claudia/landingCms.js';
 import BookingCTA from './BookingCTA.jsx';
 import { scrollToTop } from '../ui/BackToTop.jsx';
 import styles from './SiteHeader.module.css';
@@ -15,7 +15,8 @@ export default function SiteHeader({ brand, nav, tagline }) {
   const { content } = useClaudiaCmsSection('site-header', siteHeaderFallback(brand));
   // La frase al pie del menú mobile es el cierre de «Tu siguiente movimiento» (misma fuente que en el CMS).
   const situationsFallback = useMemo(() => ({ closing: tagline }), [tagline]);
-  const { content: situations } = useClaudiaCmsSection('situations', situationsFallback);
+  const { content: situations, hidden: situationsHidden } = useClaudiaCmsSection('situations', situationsFallback);
+  const hiddenSections = useClaudiaHiddenSections();
   const reduceMotion = useReducedMotion();
   const panelMotion = {
     hidden: { opacity: 0, y: reduceMotion ? 0 : -8 },
@@ -31,10 +32,12 @@ export default function SiteHeader({ brand, nav, tagline }) {
   };
   const brandLink = resolveCmsLink(content.brandLink, { label: brand, href: '#inicio' });
   const ctaLink = resolveCmsLink(content.ctaLink, headerCtaLink);
+  // `index` conserva el campo navLinkN del CMS aunque se omitan los enlaces a secciones ocultas.
   const navLinks = useMemo(() => nav.map((item, index) => ({
     id: item.id,
+    index,
     ...resolveCmsLink(content[`navLink${index}`], navLinkFallback(item)),
-  })), [content, nav]);
+  })).filter((link) => !hiddenSections.has(navSectionKeys[link.id])), [content, nav, hiddenSections]);
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState('');
   const [scrolled, setScrolled] = useState(false);
@@ -130,7 +133,7 @@ export default function SiteHeader({ brand, nav, tagline }) {
 
         <nav className={styles.nav} aria-label="Principal">
           <ul>
-            {navLinks.map((link, index) => {
+            {navLinks.map(({ index, ...link }) => {
               return <li key={link.id}>
                 <ClaudiaEditable sectionKey="site-header" fieldPath={`navLink${index}`}>
                   <a href={link.href} aria-current={active === link.id ? 'true' : undefined}>{link.label}</a>
@@ -173,7 +176,7 @@ export default function SiteHeader({ brand, nav, tagline }) {
                 <motion.li variants={itemMotion}>
                   <ClaudiaEditable sectionKey="site-header" fieldPath="menuHomeLabel"><a href="#inicio" onClick={goTop}>{content.menuHomeLabel}</a></ClaudiaEditable>
                 </motion.li>
-                {navLinks.map((link, index) => {
+                {navLinks.map(({ index, ...link }) => {
                   return <motion.li key={link.id} variants={itemMotion}>
                     <ClaudiaEditable sectionKey="site-header" fieldPath={`navLink${index}`}><a href={link.href} onClick={(event) => navigate(event, link.href)} aria-current={active === link.id ? 'true' : undefined}>{link.label}</a></ClaudiaEditable>
                   </motion.li>
@@ -183,7 +186,7 @@ export default function SiteHeader({ brand, nav, tagline }) {
             <motion.div className={styles.panelCtaWrap} variants={itemMotion}>
               <ClaudiaEditable sectionKey="site-header" fieldPath="ctaLink"><BookingCTA variant="gold" label={ctaLink.label} href={ctaLink.href} className={styles.panelCta} onClick={close} /></ClaudiaEditable>
             </motion.div>
-            {situations.closing && (
+            {!situationsHidden && situations.closing && (
               <motion.p className={styles.panelTagline} variants={itemMotion}>{situations.closing}</motion.p>
             )}
           </motion.div>

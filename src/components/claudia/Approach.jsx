@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 import { gsap, ScrollTrigger, useGSAP, MQ } from '../../utils/gsap.js';
-import { ClaudiaEditable, useClaudiaCmsSection } from '../../integration/eze-cms/ClaudiaCms.jsx';
+import { ClaudiaEditable, ClaudiaSection, useClaudiaCmsSection } from '../../integration/eze-cms/ClaudiaCms.jsx';
 import SectionHead from './SectionHead.jsx';
 import LifeModel from './LifeModel.jsx';
 import type from './type.module.css';
@@ -133,7 +133,7 @@ export default function Approach({ content: fallback, life }) {
         </div>
       </div>
 
-      <LifeModel content={life} />
+      <ClaudiaSection sectionKey="life"><LifeModel content={life} /></ClaudiaSection>
     </section>
   );
 }

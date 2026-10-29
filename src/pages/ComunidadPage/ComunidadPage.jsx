@@ -1,5 +1,5 @@
 import Seo from '../../components/institutional/Seo';
-import { CmsLink, Collection, Field, useSection } from '../../components/institutional/Cms';
+import { CmsLink, Collection, Field, SectionBlock, useSection } from '../../components/institutional/Cms';
 import { content as localContent, safeHref, safeImage, validItems } from '../../components/institutional/content';
 import { whatsappLinkProps } from '../../data/institutional/whatsapp';
 import styles from '../HomePage/HomePage.module.css';
@@ -116,8 +116,8 @@ function Contact() {
 export default function ComunidadPage() {
   return <div className="community-page">
     <Seo route={route}/>
-    <Hero/>
-    <Experiences/>
-    <Contact/>
+    <SectionBlock route={route} section="hero"><Hero/></SectionBlock>
+    <SectionBlock route={route} section="experiencias"><Experiences/></SectionBlock>
+    <SectionBlock route={route} section="contacto"><Contact/></SectionBlock>
   </div>;
 }

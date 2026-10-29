@@ -111,7 +111,7 @@ export function ArticleDetail() {
   const { slug } = useParams();
   const { content: header } = useSection('/articulos/:slug', 'encabezado');
   const { content: body } = useSection('/articulos/:slug', 'contenido');
-  const { content: footer } = useSection('/articulos/:slug', 'pie-articulo');
+  const { content: footer, hidden: footerHidden } = useSection('/articulos/:slug', 'pie-articulo');
   const { content: labels } = useSection('/articulos', 'listado');
   const { content: site } = useGlobal('institutional-footer', content['/'].footer);
   const { articles, loading, error } = useCmsArticles(slug);
@@ -120,7 +120,8 @@ export function ArticleDetail() {
   const date = article && editorialDate(article);
   const cover = article && articleMediaUrl(article.cover_image);
   const related = article ? relatedArticles(allArticles, article) : [];
-  const author = footer.signature?.replace(/^Por\s+/i, '') || site.brand;
+  // La firma pertenece a pie-articulo: si esa sección está oculta, el autor sale del global del pie.
+  const author = (!footerHidden && footer.signature?.replace(/^Por\s+/i, '')) || site.brand;
   const sourceHref = article?.source_url ? safeHref(article.source_url, '') : '';
   return <><Seo route="/articulos/:slug" article={article} missing={!loading && !error && !article} /><main className="site-container article-detail">
     {detailField('encabezado', 'backLabel', <Link className="article-back" to="/articulos"><span aria-hidden="true">←</span> {header.backLabel}</Link>)}

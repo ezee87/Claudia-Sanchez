@@ -20,8 +20,8 @@ function Icon({ name }) {
 
 // Inject a verified transport only after backend integration is supplied.
 export default function ContactForm({ sendInquiry }) {
-  const { content: c } = useSection('/contacto', 'formulario');
-  const { content: direct } = useSection('/contacto', 'contacto-directo');
+  const { content: c, hidden: formHidden } = useSection('/contacto', 'formulario');
+  const { content: direct, hidden: directHidden } = useSection('/contacto', 'contacto-directo');
   const [query] = useSearchParams();
   const queryType = query.get('tipo');
   const [type, setType] = useState(queryType === 'empresa' ? 'empresa' : 'persona');
@@ -59,9 +59,11 @@ export default function ContactForm({ sendInquiry }) {
   const directField = (path, child) => <Field route="/contacto" section="contacto-directo" path={path}>{child}</Field>;
   const channelBody = (icon, label, sub, labelPath) => <><Icon name={icon}/><span className="cc-text">{labelPath ? directField(labelPath, <span className="cc-name">{label}</span>) : <span className="cc-name">{label}</span>}{sub&&<span className="cc-sub">{sub}</span>}</span><Arrow/></>;
 
+  // El formulario y el contacto directo son dos secciones del CMS: cada una se oculta por separado.
+  if (formHidden && directHidden) return null;
   return <section className="contact-section"><div className="site-container">
     <div className="contact-card">
-      <form className="contact-form" onSubmit={submit} aria-busy={status === 'loading'}>
+      {!formHidden && <form className="contact-form" onSubmit={submit} aria-busy={status === 'loading'}>
         <div className="form-pair">
           <div className="cf-field">{field('nameLabel', <label htmlFor="contact-name">{c.nameLabel}</label>)}{field('namePlaceholder', <input id="contact-name" name="name" autoComplete="name" placeholder={c.namePlaceholder} required maxLength={150}/>)}</div>
           <div className="cf-field">{field('emailLabel', <label htmlFor="contact-email">{c.emailLabel}</label>)}{field('emailPlaceholder', <input id="contact-email" name="email" type="email" autoComplete="email" placeholder={c.emailPlaceholder} required maxLength={254}/>)}</div>
@@ -80,8 +82,8 @@ export default function ContactForm({ sendInquiry }) {
           {status === 'error' && field('error', <p className="cf-error">{c.error}</p>)}
           {status === 'success' && <>{field('successTitle', <h2>{c.successTitle}</h2>)}{field('successText', <p>{c.successText}</p>)}</>}
         </div>
-      </form>
-      <aside className="contact-alt" aria-labelledby="contact-alt-title">
+      </form>}
+      {!directHidden && <aside className="contact-alt" aria-labelledby="contact-alt-title">
         <Field route="/contacto" section="contacto-directo" path="title"><h2 id="contact-alt-title">{direct.title}</h2></Field>
         <Field route="/contacto" section="contacto-directo" path="paragraph1"><p className="contact-alt-intro">{direct.paragraph1}</p></Field>
         <ul className="contact-channels">
@@ -91,7 +93,7 @@ export default function ContactForm({ sendInquiry }) {
             : <button type="button" className="contact-channel" onClick={() => {}}>{channelBody('whatsapp', whatsappLabel)}</button>}</li>
           {linkedinHref && <li>{directField('linkedin', <a className="contact-channel" href={linkedinHref} {...ext}>{channelBody('linkedin', linkedinLabel)}<span className="sr-only"> (se abre en una pestaña nueva)</span></a>)}</li>}
         </ul>
-      </aside>
+      </aside>}
     </div>
   </div></section>;
 }

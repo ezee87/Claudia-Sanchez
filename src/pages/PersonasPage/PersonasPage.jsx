@@ -1,6 +1,6 @@
 import Section from '../../components/institutional/Section';
 import Seo from '../../components/institutional/Seo';
-import { CmsLink, Collection, Field, useSection } from '../../components/institutional/Cms';
+import { CmsLink, Collection, Field, SectionBlock, useSection } from '../../components/institutional/Cms';
 import { content as localContent, safeHref, safeImage, validItems } from '../../components/institutional/content';
 import './PersonasPage.css';
 import TestimonialCard, { LINKEDIN_RECOMMENDATIONS_URL, linkedInUrl } from '../../components/institutional/TestimonialCard';
@@ -135,11 +135,11 @@ function Contact() {
 export default function PersonasPage() {
   return <div className="people-page">
     <Seo route={route}/>
-    <Hero/>
+    <SectionBlock route={route} section="hero"><Hero/></SectionBlock>
     <Section route={route} section="situaciones"/>
-    <Services/>
-    <Approach/>
-    <Testimonials/>
-    <Contact/>
+    <SectionBlock route={route} section="servicios"><Services/></SectionBlock>
+    <SectionBlock route={route} section="enfoque"><Approach/></SectionBlock>
+    <SectionBlock route={route} section="testimonios"><Testimonials/></SectionBlock>
+    <SectionBlock route={route} section="contacto"><Contact/></SectionBlock>
   </div>;
 }

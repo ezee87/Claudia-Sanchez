@@ -1,7 +1,7 @@
 import { useRef } from 'react';
 import { gsap, MQ, useGSAP } from '../../utils/gsap';
 import { ArticleCards } from '../../components/institutional/articles';
-import { CmsLink, Collection, Field, useSection } from '../../components/institutional/Cms';
+import { CmsLink, Collection, Field, SectionBlock, useSection } from '../../components/institutional/Cms';
 import { content as localContent, safeHref, safeImage, validItems } from '../../components/institutional/content';
 import Seo from '../../components/institutional/Seo';
 import TestimonialCard, { LINKEDIN_RECOMMENDATIONS_URL, linkedInUrl } from '../../components/institutional/TestimonialCard';
@@ -235,9 +235,12 @@ export default function HomePage() {
           .from(section.querySelectorAll('[data-trajectory-company]'), { opacity: 0, y: 15, duration: .62, stagger: .1 }, '-=.58')
           .from(section.querySelectorAll('[data-trajectory-story]'), { opacity: 0, y: 18, duration: .72, stagger: .09 }, '-=.46');
       });
-      gsap.to(q('[data-hero-backdrop]'), { backgroundPositionY: '52%', ease: 'none', scrollTrigger: { trigger: q('[data-home-hero]')[0], start: 'top top', end: 'bottom top', scrub: .5 } });
+      // El hero puede estar oculto en Eze CMS: sin él no hay parallax.
+      const hero = q('[data-home-hero]')[0];
+      if (hero) gsap.to(q('[data-hero-backdrop]'), { backgroundPositionY: '52%', ease: 'none', scrollTrigger: { trigger: hero, start: 'top top', end: 'bottom top', scrub: .5 } });
     });
     return () => mm.revert();
   }, { scope: root });
-  return <div className={styles.home} ref={root}><Seo route={ROUTE} /><Hero /><Trajectory /><Services /><Approach /><Testimonials /><Articles /><Contact /></div>;
+  const block = (section, node) => <SectionBlock route={ROUTE} section={section}>{node}</SectionBlock>;
+  return <div className={styles.home} ref={root}><Seo route={ROUTE} />{block('hero', <Hero />)}{block('sobre-mi', <Trajectory />)}{block('servicios', <Services />)}{block('enfoque', <Approach />)}{block('testimonios', <Testimonials />)}{block('articulos', <Articles />)}{block('contacto', <Contact />)}</div>;
 }

@@ -4,7 +4,7 @@ import { usePrivateDocument } from '../../utils/usePrivateDocument.js';
 import { site } from '../../data/claudia/site.js';
 import { careerTestimonials } from '../../data/claudia/careerTestimonials.js';
 import { seoFallback, siteHeaderFallback } from '../../data/claudia/landingCms.js';
-import { ClaudiaEditable, useClaudiaCmsSection } from '../../integration/eze-cms/ClaudiaCms.jsx';
+import { ClaudiaEditable, ClaudiaSection, useClaudiaCmsSection } from '../../integration/eze-cms/ClaudiaCms.jsx';
 import SiteHeader from './SiteHeader.jsx';
 import Hero from './Hero.jsx';
 import Situations from './Situations.jsx';
@@ -36,11 +36,12 @@ function setMeta(name, content) {
  * Cinco secciones: hero, tu siguiente movimiento, testimonios, mi enfoque (+ L.I.F.E.) y sobre mí (+ reserva).
  */
 export default function ClaudiaSite() {
-  const { content: seo } = useClaudiaCmsSection('seo', seoFallback(site.meta));
+  const { content: seo, hidden: seoHidden } = useClaudiaCmsSection('seo', seoFallback(site.meta));
   const { content: header } = useClaudiaCmsSection('site-header', siteHeaderFallback(site.brand));
-  usePrivateDocument(seo.title);
+  // Con la sección seo oculta en Eze CMS no se aplica su título ni su descripción (tampoco los locales).
+  usePrivateDocument(seoHidden ? undefined : seo.title);
 
-  useEffect(() => setMeta('description', seo.description), [seo.description]);
+  useEffect(() => (seoHidden ? undefined : setMeta('description', seo.description)), [seo.description, seoHidden]);
 
   useEffect(() => {
     const restore = [
@@ -72,17 +73,17 @@ export default function ClaudiaSite() {
         {header.skipLabel}
       </a></ClaudiaEditable>
 
-      <SiteHeader brand={site.brand} nav={site.nav} tagline={site.situations.closing} />
+      <ClaudiaSection sectionKey="site-header"><SiteHeader brand={site.brand} nav={site.nav} tagline={site.situations.closing} /></ClaudiaSection>
 
       <main id="contenido">
-        <Hero hero={site.hero} portrait={site.portrait} />
-        <Situations content={site.situations} />
-        <CareerTestimonials content={careerTestimonials} />
-        <Approach content={site.approach} life={site.life} />
-        <About content={site.about} closing={site.closing} portrait={site.portrait} />
+        <ClaudiaSection sectionKey="hero"><Hero hero={site.hero} portrait={site.portrait} /></ClaudiaSection>
+        <ClaudiaSection sectionKey="situations"><Situations content={site.situations} /></ClaudiaSection>
+        <ClaudiaSection sectionKey="career-testimonials"><CareerTestimonials content={careerTestimonials} /></ClaudiaSection>
+        <ClaudiaSection sectionKey="approach"><Approach content={site.approach} life={site.life} /></ClaudiaSection>
+        <ClaudiaSection sectionKey="about"><About content={site.about} closing={site.closing} portrait={site.portrait} /></ClaudiaSection>
       </main>
 
-      <SiteFooter brand={site.brand} content={site.footer} nav={site.nav} />
+      <ClaudiaSection sectionKey="site-footer"><SiteFooter brand={site.brand} content={site.footer} nav={site.nav} /></ClaudiaSection>
     </div>
   );
 }

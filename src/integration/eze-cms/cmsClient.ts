@@ -15,6 +15,11 @@ export type CmsSectionResult = {
 export type CmsSectionReader = (request: CmsSectionRequest) => Promise<CmsSectionResult>
 export type CmsGlobalReader = (request: { siteSlug: string; groupKey: string }) => Promise<CmsSectionResult>
 
+/** 'ruta::clave' → visible. Solo metadatos estructurales: nunca contenido. */
+export type CmsSectionIndex = ReadonlyMap<string, boolean>
+export type CmsSectionIndexResult = { index: CmsSectionIndex | null; error: Error | null }
+export type CmsSectionIndexReader = (request: { siteSlug: string }) => Promise<CmsSectionIndexResult>
+
 export type CmsArticle = {
   id: string
   site_id: string
@@ -91,6 +96,37 @@ export function createPublicGlobalReader(client: SupabaseClient): CmsGlobalReade
         : { content: null, error: null }
     } catch (error) {
       return { content: null, error: error instanceof Error ? error : new Error('No se pudo leer el contenido global.') }
+    }
+  }
+}
+
+/**
+ * Misma regla que `parseSectionIndex` de scripts/cms-snapshot-plugin.mjs: solo `visible === true` es visible; false, null o
+ * cualquier otro valor cuenta como oculta. Una respuesta mal formada es un error, nunca una sección oculta.
+ */
+export function parseSectionIndex(data: unknown): CmsSectionIndex {
+  if (!Array.isArray(data)) throw new Error('el índice de secciones no es una lista')
+  const index = new Map<string, boolean>()
+  for (const row of data as unknown[]) {
+    const entry = row as { page_route?: unknown; section_key?: unknown; visible?: unknown } | null
+    if (entry === null || typeof entry !== 'object' || Array.isArray(entry) || typeof entry.page_route !== 'string' || typeof entry.section_key !== 'string') {
+      throw new Error('fila del índice de secciones no válida')
+    }
+    const id = `${entry.page_route}::${entry.section_key}`
+    if (index.has(id)) throw new Error(`el índice de secciones repite ${id}`)
+    index.set(id, entry.visible === true)
+  }
+  return index
+}
+
+export function createPublicSectionIndexReader(client: SupabaseClient): CmsSectionIndexReader {
+  return async ({ siteSlug }) => {
+    try {
+      const { data, error } = await client.rpc('get_public_section_index', { site_slug: siteSlug })
+      if (error) return { index: null, error: new Error(error.message) }
+      return { index: parseSectionIndex(data), error: null }
+    } catch (error) {
+      return { index: null, error: error instanceof Error ? error : new Error('No se pudo leer el índice de secciones.') }
     }
   }
 }

@@ -1,6 +1,9 @@
-import type { CmsArticlesReader, CmsGlobalReader, CmsSectionReader, CmsSectionRequest } from './cmsClient'
+import type { CmsArticlesReader, CmsGlobalReader, CmsSectionIndex, CmsSectionIndexReader, CmsSectionReader, CmsSectionRequest } from './cmsClient'
 import type { CmsSiteConfig } from './cmsConfig'
+import { cmsLocalOnly } from './cmsMode'
 import { parseCmsPreviewOrigins } from './cmsOrigins'
+import { rememberRevealedSection } from './cmsSnapshot'
+import { isCmsSectionHidden, updateCmsSectionVisibility } from './cmsVisibility'
 import { articleMediaUrlFrom } from './articleShared.js'
 
 export type CmsIntegration = {
@@ -8,6 +11,7 @@ export type CmsIntegration = {
   readSection: CmsSectionReader
   readGlobal: CmsGlobalReader
   readArticles: CmsArticlesReader
+  readSectionIndex: CmsSectionIndexReader
 }
 
 const hasRequiredEnvironment = Boolean(
@@ -32,6 +36,7 @@ export const cmsIntegration: Promise<CmsIntegration | null> = hasRequiredEnviron
         readSection: clientModule.createPublicSectionReader(client),
         readGlobal: clientModule.createPublicGlobalReader(client),
         readArticles: clientModule.createPublicArticlesReader(client),
+        readSectionIndex: clientModule.createPublicSectionIndexReader(client),
       }
     }).catch((error: unknown) => {
       if (import.meta.env.DEV) {
@@ -63,12 +68,59 @@ export function deliverTogether<T>(read: Promise<T>): Promise<T> {
   })
 }
 
-/** Reader estable para futuras paginas; nunca rompe los fallbacks locales. */
-export const readCmsSection: CmsSectionReader = (request: CmsSectionRequest) => deliverTogether((async () => {
-  const integration = await cmsIntegration
-  if (!integration) return { content: null, error: null }
-  return integration.readSection(request)
-})())
+const isObject = (value: unknown) => value !== null && typeof value === 'object' && !Array.isArray(value)
+let indexRead: Promise<void> | null = null
+
+/**
+ * Aplica el índice público: oculta las secciones con visible distinto de true y revela las que estaban ocultas solo después de
+ * leer su contenido, para no pintar el fallback local. Una sección ausente del índice, o cuyo contenido no se pudo leer, no cambia.
+ */
+export async function applyCmsSectionIndex(siteSlug: string, index: CmsSectionIndex, readSection: CmsSectionReader) {
+  const changes = new Map<string, boolean>()
+  await Promise.all([...index].map(async ([id, visible]) => {
+    const separator = id.lastIndexOf('::')
+    const pageRoute = id.slice(0, separator)
+    const sectionKey = id.slice(separator + 2)
+    if (!visible) { changes.set(id, false); return }
+    if (!isCmsSectionHidden(siteSlug, pageRoute, sectionKey)) return
+    const result = await readSection({ siteSlug, pageRoute, sectionKey })
+    if (result.error || !isObject(result.content)) return
+    rememberRevealedSection(siteSlug, pageRoute, sectionKey, result.content)
+    changes.set(id, true)
+  }))
+  updateCmsSectionVisibility(siteSlug, changes)
+}
+
+/**
+ * Lee el índice público una vez por render (todas las secciones que se montan juntas comparten la lectura) y aplica los
+ * cambios de visibilidad junto con el contenido del mismo grupo. Ante cualquier error se conserva la visibilidad del build:
+ * un error nunca oculta ni muestra una sección.
+ */
+export function refreshCmsSectionVisibility(): Promise<void> {
+  if (cmsLocalOnly || !hasRequiredEnvironment) return Promise.resolve()
+  if (indexRead) return indexRead
+  const siteSlug = cmsRuntimeConfig.siteSlug
+  const read = deliverTogether((async () => {
+    const integration = await cmsIntegration
+    if (!integration) return
+    const { index, error } = await integration.readSectionIndex({ siteSlug })
+    if (error || !index) return
+    await applyCmsSectionIndex(siteSlug, index, integration.readSection)
+  })().catch(() => undefined))
+  indexRead = read
+  setTimeout(() => { if (indexRead === read) indexRead = null }, 0)
+  return read
+}
+
+/** Reader estable para futuras paginas; nunca rompe los fallbacks locales. Cada lectura refresca también la visibilidad. */
+export const readCmsSection: CmsSectionReader = (request: CmsSectionRequest) => {
+  void refreshCmsSectionVisibility()
+  return deliverTogether((async () => {
+    const integration = await cmsIntegration
+    if (!integration) return { content: null, error: null }
+    return integration.readSection(request)
+  })())
+}
 
 /** Reader estable para contenido compartido; conserva el fallback si el grupo aun no fue publicado. */
 export const readCmsGlobal: CmsGlobalReader = (request) => deliverTogether((async () => {

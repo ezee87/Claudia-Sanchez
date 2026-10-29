@@ -1,12 +1,17 @@
 import { CmsEditable } from '../../integration/eze-cms/CmsEditable';
 import { CmsEditableCollection } from '../../integration/eze-cms/CmsEditableCollection';
 import { CmsEditableGlobal } from '../../integration/eze-cms/CmsEditableGlobal';
+import { CmsSection } from '../../integration/eze-cms/CmsSection';
 import { useCmsGlobal } from '../../integration/eze-cms/useCmsGlobal';
 import { useCmsSection } from '../../integration/eze-cms/useCmsSection';
 import { cmsRuntimeConfig, readCmsGlobal, readCmsSection } from '../../integration/eze-cms/cmsRuntime';
 import { content, safeHref } from './content';
 export function useSection(route, section) {
   return useCmsSection({config:cmsRuntimeConfig,pageRoute:route,sectionKey:section,fallback:content[route][section],readSection:readCmsSection});
+}
+// Bloque que se desmonta si la sección está oculta en Eze CMS.
+export function SectionBlock({route, section, children}) {
+  return <CmsSection config={cmsRuntimeConfig} pageRoute={route} sectionKey={section}>{children}</CmsSection>;
 }
 export function useGlobal(groupKey, fallback) {
   return useCmsGlobal({config:cmsRuntimeConfig,groupKey,fallback,readGlobal:readCmsGlobal});

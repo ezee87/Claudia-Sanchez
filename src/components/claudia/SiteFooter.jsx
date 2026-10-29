@@ -1,5 +1,5 @@
-import { footerLinks, navLinkFallback, siteFooterFallback } from '../../data/claudia/landingCms.js';
-import { ClaudiaEditable, useClaudiaCmsSection } from '../../integration/eze-cms/ClaudiaCms.jsx';
+import { footerLinks, navLinkFallback, navSectionKeys, siteFooterFallback } from '../../data/claudia/landingCms.js';
+import { ClaudiaEditable, useClaudiaCmsSection, useClaudiaHiddenSections } from '../../integration/eze-cms/ClaudiaCms.jsx';
 import { resolveCmsLink } from '../../integration/eze-cms/cmsLink.js';
 import BackToTop from '../ui/BackToTop.jsx';
 import styles from './SiteFooter.module.css';
@@ -9,10 +9,13 @@ export default function SiteFooter({ brand, content, nav }) {
   const homeLink = resolveCmsLink(cmsContent.homeLink, footerLinks.homeLink);
   const linkedinLink = resolveCmsLink(cmsContent.linkedinLink, footerLinks.linkedinLink);
   const calendlyLink = resolveCmsLink(cmsContent.calendlyLink, footerLinks.calendlyLink);
+  const hiddenSections = useClaudiaHiddenSections();
+  // `index` conserva el campo navLinkN del CMS aunque se omitan los enlaces a secciones ocultas.
   const navLinks = nav.map((item, index) => ({
     id: item.id,
+    index,
     ...resolveCmsLink(cmsContent[`navLink${index}`], navLinkFallback(item)),
-  }));
+  })).filter((link) => !hiddenSections.has(navSectionKeys[link.id]));
   return (
     <footer className={styles.footer}>
       <div className={styles.inner}>
@@ -26,7 +29,7 @@ export default function SiteFooter({ brand, content, nav }) {
           <nav className={styles.nav} aria-label="Navegación del pie de página">
             <ClaudiaEditable sectionKey="site-footer" fieldPath="exploreHeading"><p className={styles.heading}>{cmsContent.exploreHeading}</p></ClaudiaEditable>
             <ClaudiaEditable sectionKey="site-footer" fieldPath="homeLink"><a href={homeLink.href}>{homeLink.label}</a></ClaudiaEditable>
-            {navLinks.map((link, index) => {
+            {navLinks.map(({ index, ...link }) => {
               return <ClaudiaEditable key={link.id} sectionKey="site-footer" fieldPath={`navLink${index}`}><a href={link.href}>{link.label}</a></ClaudiaEditable>;
             })}
           </nav>
