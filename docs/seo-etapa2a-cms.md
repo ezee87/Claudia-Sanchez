@@ -49,12 +49,41 @@ El SEO genérico de `/articulos/:slug` nunca se aplica a un artículo: no se con
 Los archivos son estáticos y funcionan en cualquier hosting. Cada uno debe configurarse así:
 
 1. **URL → archivo:** `/personas` → `personas/index.html` (índice de directorio, como `try_files $uri $uri/index.html` en nginx). Vercel, Netlify y Cloudflare Pages lo hacen por defecto.
-2. **Fallback de la SPA:** `/404.html`, no `/index.html`, que ahora tiene los metadatos de Inicio. En `vercel.json` ya está cambiado. En otro hosting hay que hacer el cambio equivalente.
+2. **Rutas inexistentes: `404.html` con estado 404, sin fallback de SPA.** Cada ruta de React tiene su archivo, la función de artículos o una redirección del servidor, así que ya no hace falta un comodín que sirva la SPA. Un rewrite comodín hacia `404.html` (o `index.html`) responde 200 y convierte los 404 en "soft 404". Ver [Rutas inexistentes](#rutas-inexistentes-http-404-real).
 3. **Artículos:** necesitan ejecutar `api/articulo.js` (función Node).
    - En Vercel ya está resuelto.
    - En otro hosting hay que adaptar el handler (por ejemplo, a una función de Netlify o Cloudflare, o a un servidor Node) y el rewrite `/articulos/:slug` → función, más el 308 de la barra final.
    - Sin función, los artículos siguen funcionando como SPA, pero sin metadatos en el HTML inicial.
 4. **Indexación:** al publicar, configurar `VITE_SITE_URL` (dominio definitivo) y `VITE_SEO_ALLOW_INDEXING=true` en el build de producción. El HTML del build no conoce el host. Si el mismo build se sirve también desde un dominio secundario o temporal, el navegador vuelve a bloquear la indexación, pero un rastreador sin JS vería `index`. Para evitarlo, el hosting debe enviar `X-Robots-Tag: noindex` en esos hosts o redirigirlos al definitivo. `robots.txt` (`Disallow: /`) sigue sin cambios: es de la Etapa 2.
+
+## Rutas inexistentes: HTTP 404 real
+
+**Problema (publicado en `418d731`):** el rewrite `{ "source": "/(.*)", "destination": "/404.html" }` servía la página 404 con **200**, porque un rewrite responde con el estado del archivo destino. Afectaba a `/ruta-inexistente` y a `/newsletter/algo`. Los artículos ya respondían 404, porque los atiende la función.
+
+**Corrección** (`vercel.json`):
+- Se elimina el rewrite comodín. Sin él, Vercel sirve `404.html` (que el build ya genera, con `noindex`) con estado **404** a toda ruta sin archivo, función ni redirección. Así lo muestra la configuración que compila `vercel build`: `{"handle":"error"}` → `{"status":404,"dest":"/404.html"}`.
+- `/newsletter/:slug` → `/articulos/:slug` pasa a ser una redirección 308 del servidor. Antes solo la hacía React, y sin el comodín esa URL legacy habría quedado en 404. Ahora termina en 200 si el artículo existe o en 404 si no.
+
+Las páginas existentes siguen en 200, con su HTML prerenderizado. La página 404 y su contenido no cambian: React monta en `404.html` y muestra `NotFoundPage`, como antes.
+
+**Prueba:** `scripts/test-http-status.mjs`, incluida en `npm test`.
+- Sirve un `dist` generado con el mismo prerenderizado del build, mediante un servidor HTTP que aplica `vercel.json` con el orden de Vercel: redirects → archivos (con índice de directorio) → rewrites → `404.html` con 404.
+- Comprueba con `fetch` el **estado HTTP**:
+  - 200 y su HTML en las 8 páginas;
+  - 404 con la página 404 y `noindex` en 6 rutas inexistentes;
+  - artículos 200/404;
+  - 308 en la barra final, `/newsletter`, `/newsletter/:slug` y `/disena-tu-futuro`.
+- Con el `vercel.json` de `418d731` falla (`/ruta-inexistente debe responder 404`). Para repetirlo: `VERCEL_CONFIG=<archivo> node scripts/test-http-status.mjs`.
+
+**Otros proveedores** (`dist/` es igual en todos). Hace falta: índice de directorio, `404.html` con estado 404, ningún fallback de SPA y las mismas redirecciones 308. La función de artículos se adapta aparte (punto 3).
+
+| Proveedor | Configuración |
+|---|---|
+| Netlify | Sirve `404.html` con 404 automáticamente. En `_redirects`: `/newsletter/:slug /articulos/:slug 308` (y las demás redirecciones). **No** agregar `/* /index.html 200`. |
+| Cloudflare Pages | Con `404.html` en la raíz responde 404 automáticamente; sin él asume SPA y responde 200 con `index.html`. Redirecciones en `_redirects`, igual que Netlify. |
+| nginx | `try_files $uri $uri/index.html =404;` y `error_page 404 /404.html;`, más `location ~ ^/newsletter/([^/]+)$ { return 308 /articulos/$1; }`. |
+| Apache | `DirectoryIndex index.html`, `ErrorDocument 404 /404.html`, `RedirectMatch 308 ^/newsletter/([^/]+)$ /articulos/$1`. Sin `FallbackResource`. |
+| GitHub Pages / S3 + CloudFront | GitHub Pages sirve `404.html` con 404. En CloudFront, la respuesta de error personalizada debe conservar el código **404** (no cambiarlo a 200). |
 
 ## Validación (local, sin despliegue)
 

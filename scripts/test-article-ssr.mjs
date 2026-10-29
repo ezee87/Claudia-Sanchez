@@ -177,6 +177,5 @@ assert.ok(html.includes('<div id="root"><div class="claudia-root institutional">
 const { readFileSync } = await import('node:fs');
 const vercel = JSON.parse(readFileSync(new URL('../vercel.json', import.meta.url), 'utf8'));
 assert.deepEqual(vercel.redirects.find(r => r.source === '/articulos/:slug/'), { source: '/articulos/:slug/', destination: '/articulos/:slug', permanent: true }, 'Barra final: 308 a la URL sin barra');
-const rewrites = vercel.rewrites.map(r => r.source);
-assert.ok(rewrites.indexOf('/articulos/:slug') >= 0 && rewrites.indexOf('/articulos/:slug') < rewrites.indexOf('/(.*)'), 'El rewrite de artículos va antes del fallback de la SPA');
-console.log('SSR artículos OK: layout reservado, barra final 308 y orden de rewrites');
+assert.deepEqual(vercel.rewrites.map(r => r.source), ['/articulos/:slug'], 'Solo el rewrite de artículos: sin fallback que convierta los 404 en 200 (estados HTTP en test-http-status.mjs)');
+console.log('SSR artículos OK: layout reservado, barra final 308 y rewrite de artículos');

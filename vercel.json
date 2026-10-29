@@ -2,10 +2,10 @@
   "redirects": [
     { "source": "/disena-tu-futuro", "destination": "/diseno-de-carrera", "permanent": true },
     { "source": "/newsletter", "destination": "/articulos", "permanent": true },
+    { "source": "/newsletter/:slug", "destination": "/articulos/:slug", "permanent": true },
     { "source": "/articulos/:slug/", "destination": "/articulos/:slug", "permanent": true }
   ],
   "rewrites": [
-    { "source": "/articulos/:slug", "destination": "/api/articulo?slug=:slug" },
-    { "source": "/(.*)", "destination": "/404.html" }
+    { "source": "/articulos/:slug", "destination": "/api/articulo?slug=:slug" }
   ]
 }
